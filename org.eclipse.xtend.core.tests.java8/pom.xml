@@ -10,6 +10,5 @@
 	<packaging>eclipse-test-plugin</packaging>
 
 	<groupId>org.eclipse.xtend</groupId>
-	<artifactId>org.eclipse.xtend.core.tests</artifactId>
-
+	<artifactId>org.eclipse.xtend.core.tests.java8</artifactId>
 </project>
