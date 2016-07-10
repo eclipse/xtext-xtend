@@ -13,6 +13,7 @@ import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.After;
@@ -42,6 +43,7 @@ public abstract class AbstractXtendUITestCase extends Assert {
 
 	@BeforeClass
 	public static void setUpProject() throws Exception {
+		TargetPlatformUtil.setTargetPlatform();
 		IResourcesSetupUtil.cleanWorkspace();
 		WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME);
 	}
