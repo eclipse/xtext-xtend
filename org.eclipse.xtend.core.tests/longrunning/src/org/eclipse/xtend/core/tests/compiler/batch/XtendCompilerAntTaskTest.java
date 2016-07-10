@@ -29,7 +29,6 @@ import org.junit.Test;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
-@Ignore("https://github.com/eclipse/xtext-xtend/issues/5")
 public class XtendCompilerAntTaskTest {
 	protected Project project;
 	private StringBuffer outBuffer;
@@ -120,8 +119,8 @@ public class XtendCompilerAntTaskTest {
 		project = new Project();
 		project.init();
 		File antFile = new File(System.getProperty("root"), filename);
-		File pluginsFolder = new File(new File(TargetPlatform.getLocation()), "plugins");
-		project.setUserProperty("deps.dir", pluginsFolder.getAbsolutePath());
+		File depsFolder = new File(System.getProperty("root"), "target/antDeps");
+		project.setUserProperty("deps.dir", depsFolder.getAbsolutePath());
 		project.setUserProperty("ant.file", antFile.getAbsolutePath());
 		antTestListener = new AntTestListener(Project.MSG_ERR);
 		project.addBuildListener(antTestListener);
