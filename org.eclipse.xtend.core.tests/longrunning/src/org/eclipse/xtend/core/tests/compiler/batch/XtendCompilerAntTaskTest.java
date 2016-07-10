@@ -18,20 +18,29 @@ import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 import org.apache.tools.ant.types.selectors.FilenameSelector;
 import org.eclipse.pde.core.plugin.TargetPlatform;
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
+@Ignore("https://github.com/eclipse/xtext-xtend/issues/5")
 public class XtendCompilerAntTaskTest {
 	protected Project project;
 	private StringBuffer outBuffer;
 	private StringBuffer errBuffer;
 	private BuildException buildException;
 	private AntTestListener antTestListener;
+	
+	@BeforeClass
+	public static void setupTargetPlaform() throws Exception {
+		TargetPlatformUtil.setTargetPlatform();
+	}
 
 	@Before
 	public void setUp() {
