@@ -73,8 +73,8 @@ public class ShowWhitespaceCharactersActionContributor implements IActionContrib
 		action.setDisabledImageDescriptor(imageHelper
 				.getImageDescriptor("full/dtool16/show_whitespace_chars.gif"));
 		if(toolBarManager.find(action.getId())==null) {
-//			toolBarManager.add(new ActionContributionItemExtension(action));				
-			toolBarManager.add(action);				
+			toolBarManager.add(new ActionContributionItemExtension(action));				
+//			toolBarManager.add(action);				
 		}
 	}
 	
