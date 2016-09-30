@@ -534,7 +534,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
     IDocumentProvider _documentProvider = editor.getDocumentProvider();
     IEditorInput _editorInput = editor.getEditorInput();
     IAnnotationModel _annotationModel = _documentProvider.getAnnotationModel(_editorInput);
-    Iterator _annotationIterator = _annotationModel.getAnnotationIterator();
+    Iterator<Annotation> _annotationIterator = _annotationModel.getAnnotationIterator();
     Iterator<Annotation> _filter = Iterators.<Annotation>filter(_annotationIterator, Annotation.class);
     final Function1<Annotation, Boolean> _function = (Annotation it) -> {
       String _type = it.getType();
