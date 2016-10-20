@@ -19,6 +19,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -28,6 +29,7 @@ import org.junit.runners.Parameterized;
  */
 @RunWith(ParameterizedSWTBotRunner.class)
 @SuppressWarnings("all")
+@Ignore
 public class RenameXtendClassSwtBotTest extends AbstractRefactoringSwtBotTest {
   @Parameterized.Parameters(name = "{0}")
   public static Collection<Object[]> data() {
