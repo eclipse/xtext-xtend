@@ -8,6 +8,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
+		<upstreamVersion>2.11.0.beta1</upstreamVersion>
 		<mavenVersion>3.2.5</mavenVersion>
 		<tycho-version>0.25.0</tycho-version>
 		<emf.version>(2.8,3.0)</emf.version>
@@ -49,15 +50,15 @@
 	<repositories>
 		<repository>
 			<id>xtext-lib-from-jenkins</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/milestone_2.11.0.beta1/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
 			<id>xtext-core-from-jenkins</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/milestone_2.11.0.beta1/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
 			<id>xtext-extras-from-jenkins</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/milestone_2.11.0.beta1/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 	</repositories>
 
@@ -65,17 +66,35 @@
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
 			<artifactId>org.eclipse.xtend.lib.gwt</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.lib.gwt</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.lib.gwt</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.lib.gwt</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.java</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.java</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 
 	</dependencies>
