@@ -1,8 +1,8 @@
 // tell Jenkins how to build projects from this repository
 node {
 	try {
-		stage 'Checkout'
 		sh "${mvnHome}/bin/mvn --batch-mode -Dmaven.repo.local=local-maven-repository/ clean"
+		stage 'Checkout'
 		checkout scm
 		
 		dir('build') {
