@@ -12,10 +12,12 @@ import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.io.FileUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Objects;
 
+@Ignore
 public class XtendCompilerMojoIT {
 
 	private static String ROOT = "/it/compile";
