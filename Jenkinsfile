@@ -2,12 +2,12 @@
 node {
 	try {
 		stage 'Checkout'
+		sh "${mvnHome}/bin/mvn --batch-mode -Dmaven.repo.local=local-maven-repository/ clean"
 		checkout scm
 		
 		dir('build') {
     		deleteDir()
 		}
-		sh "${mvnHome}/bin/mvn --batch-mode -Dmaven.repo.local=local-maven-repository/ clean"
 		
 		stage 'Gradle Build'
 		sh "./gradlew -PuseJenkinsSnapshots=true cleanLocalMavenRepo clean build createLocalMavenRepo --refresh-dependencies --continue"
