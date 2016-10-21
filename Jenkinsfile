@@ -7,7 +7,8 @@ node {
 		dir('build') {
     		deleteDir()
 		}
-			
+		sh "${mvnHome}/bin/mvn --batch-mode -Dmaven.repo.local=local-maven-repository/ clean"
+		
 		stage 'Gradle Build'
 		sh "./gradlew -PuseJenkinsSnapshots=true cleanLocalMavenRepo clean build createLocalMavenRepo --refresh-dependencies --continue"
 		archive 'build/maven-repository/**/*.*'
@@ -17,7 +18,7 @@ node {
 		def mvnHome = tool 'M3'
 		env.M2_HOME = "${mvnHome}"
 		wrap([$class:'Xvnc', useXauthority: true]) {
-			sh "${mvnHome}/bin/mvn --batch-mode --update-snapshots -fae -Dmaven.repo.local=local-maven-repository/ clean deploy"
+			sh "${mvnHome}/bin/mvn --batch-mode --update-snapshots -fae -Dmaven.repo.local=local-maven-repository/ deploy"
 		}
 		archive 'build/**/*.*'
 				
