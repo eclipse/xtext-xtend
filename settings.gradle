@@ -3,5 +3,7 @@ rootProject.name = 'xtext-xtend'
 include 'org.eclipse.xtend.core'
 include 'org.eclipse.xtend.ide.common'
 include 'org.eclipse.xtend.core.tests'
-include 'org.eclipse.xtend.idea'
-include 'org.eclipse.xtend.idea.tests'
+
+// IDEA is not published for 2.11.0.beta1
+// include 'org.eclipse.xtend.idea'
+// include 'org.eclipse.xtend.idea.tests'
