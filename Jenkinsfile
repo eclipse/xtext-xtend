@@ -17,6 +17,7 @@ node {
             //step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
         }
         
+        def workspace = pwd()
         def mvnHome = tool 'M3'
         env.M2_HOME = "${mvnHome}"
         try {
@@ -25,7 +26,7 @@ node {
 	        
 	        stage 'Maven Tycho Build'
             wrap([$class:'Xvnc', useXauthority: true]) {
-                sh "${mvnHome}/bin/mvn -f tycho-pom.xml --batch-mode -fae -Dmaven.test.failure.ignore=true -Dmaven.repo.local=.m2/repository clean install"
+                sh "${mvnHome}/bin/mvn -f tycho-pom.xml --batch-mode -fae -Dmaven.test.failure.ignore=true -Dmaven.repo.local=${workspace}/.m2/repository clean install"
             }
             
             archive 'build/**'
