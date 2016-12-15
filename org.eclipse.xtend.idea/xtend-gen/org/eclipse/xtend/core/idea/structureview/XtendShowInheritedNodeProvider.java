@@ -7,25 +7,19 @@
  */
 package org.eclipse.xtend.core.idea.structureview;
 
-import com.intellij.icons.AllIcons;
-import com.intellij.ide.IdeBundle;
-import com.intellij.ide.util.treeView.smartTree.ActionPresentation;
-import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
-import com.intellij.ide.util.treeView.smartTree.NodeProvider;
-import com.intellij.ide.util.treeView.smartTree.TreeElement;
-import java.util.Collection;
+import java.util.List;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class XtendShowInheritedNodeProvider implements NodeProvider<TreeElement> {
+public class XtendShowInheritedNodeProvider /* implements NodeProvider<TreeElement>  */{
   public final static String ID = "XTEND_SHOW_INHERITED";
   
   @Override
-  public Collection<TreeElement> provideNodes(final TreeElement node) {
-    return CollectionLiterals.<TreeElement>emptyList();
+  public List<Object> provideNodes(final /* TreeElement */Object node) {
+    return CollectionLiterals.<Object>emptyList();
   }
   
   @Override
@@ -34,8 +28,13 @@ public class XtendShowInheritedNodeProvider implements NodeProvider<TreeElement>
   }
   
   @Override
-  public ActionPresentation getPresentation() {
-    String _message = IdeBundle.message("action.structureview.show.inherited");
-    return new ActionPresentationData(_message, null, AllIcons.Hierarchy.Supertypes);
+  public Object getPresentation() {
+    throw new Error("Unresolved compilation problems:"
+      + "\nActionPresentationData cannot be resolved."
+      + "\nThe method or field IdeBundle is undefined"
+      + "\nThe method or field AllIcons is undefined"
+      + "\nmessage cannot be resolved"
+      + "\nHierarchy cannot be resolved"
+      + "\nSupertypes cannot be resolved");
   }
 }
