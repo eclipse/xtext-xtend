@@ -1,10 +1,11 @@
 package org.eclipse.xtend.maven;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
@@ -15,6 +16,7 @@ import org.apache.maven.shared.utils.io.FileUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import com.google.common.base.Objects;
 
@@ -50,159 +52,7 @@ public class XtendCompilerMojoIT {
 		}
 	}
 
-	@Test
-	public void projectWithMultipleSourceDirectories() throws Exception {
-		verifyErrorFreeLog(ROOT + "/multisources");
-	}
-
-	@Test
-	public void simpleProject() throws Exception {
-		verifyErrorFreeLog(ROOT + "/simple");
-	}
-
-	@Test
-	public void encoding() throws Exception {
-		Verifier verifier = newVerifier(ROOT + "/encoding");
-
-		String xtendDir = verifier.getBasedir() + "/src/main/java";
-		assertFileContainsUTF16(verifier, xtendDir + "/test/XtendA.xtend", "Mühlheim-Kärlicher Bürger");
-
-		verifier.setDebug(true);
-		verifier.executeGoal("test");
-		verifier.verifyErrorFreeLog();
-
-		String gen = verifier.getBasedir() + "/src/main/generated-sources/xtend/test/XtendA.java";
-		assertFileContainsUTF16(verifier, gen, "Mühlheim-Kärlicher Bürger");
-		assertFileContainsUTF16(verifier, gen, "_builder.append(\"möchte meine \");");
-		assertFileContainsUTF16(verifier, gen, "_builder.append(\"tür ölen\", \"\");");
-	}
-
-	@Test
-	public void pluginPrefix() throws Exception {
-		verifyErrorFreeLog(ROOT + "/simple", "xtend:compile");
-	}
-
-	@Test
-	public void simpleProjectXtend2Tests() throws Exception {
-		verifyErrorFreeLog(ROOT + "/withtestsrc");
-	}
-
-	@Test
-	public void aggregation() throws Exception {
-		Verifier verifier = newVerifier(ROOT + "/aggregation");
-		verifier.setDebug(true);
-		verifier.executeGoal("test");
-		verifier.verifyErrorFreeLog();
-		//https://bugs.eclipse.org/bugs/show_bug.cgi?id=409759
-		String outputdir = verifier.getBasedir() + "/relativeoutput-module/";
-
-		verifier.assertFilePresent(outputdir + "src/main/generated-sources/xtend/test/XtendA.java");
-		verifier.assertFilePresent(outputdir + "src/main/generated-sources/xtend/test/XtendC.java");
-
-		verifier.assertFilePresent(outputdir + "src/test/generated-sources/xtend/tests/XtendA.java");
-		verifier.assertFilePresent(outputdir + "src/test/generated-sources/xtend/tests/XtendC.java");
-	}
 	
-	@Test
-	public void suppressWarningsAnnotation() throws Exception {
-		Verifier verifier = newVerifier(ROOT + "/suppress_warnings_annotation");
-		System.out.println(verifier.getLogFileName());
-		verifier.setDebug(true);
-		verifier.executeGoal("test");
-		verifier.verifyErrorFreeLog();
-		String outputdir = verifier.getBasedir() + "/";
-		assertFileDoesNotContain(verifier, outputdir + "src/main/generated-sources/xtend/test/XtendA.java", "@SuppressWarnings");
-		assertFileDoesNotContain(verifier, outputdir + "src/test/generated-sources/xtend/test/XtendB.java", "@SuppressWarnings");
-	}
-
-	@Test
-	public void macro() throws Exception {
-		verifyErrorFreeLog(ROOT + "/macros");
-	}
-
-	@Test
-	public void haltOnXtendValidationErrors() throws Exception {
-		Verifier verifier = newVerifier(ROOT + "/xtenderrors");
-		try {
-			verifier.executeGoal("verify");
-			Assert.fail("expected org.apache.maven.plugin.MojoExecutionException");
-		} catch (Exception e) {
-			verifier.verifyTextInLog("3: Superclass must be a class");
-			verifier.verifyTextInLog("BUILD FAILURE");
-		}
-	}
-
-	@Test
-	public void continueOnXtendWarnings() throws Exception {
-		Verifier verifier = newVerifier(ROOT + "/xtendwarnings");
-		verifier.executeGoal("verify");
-		verifier.verifyTextInLog("3: The import 'java.util.Collections' is never used.");
-		verifier.verifyTextInLog("[INFO] BUILD SUCCESS");
-	}
-
-	@Test
-	public void readXtendPrefs() throws Exception {
-		Verifier verifier = newVerifier(ROOT + "/xtend-prefs");
-		verifier.setDebug(true);
-		verifier.executeGoal("test");
-		verifier.verifyErrorFreeLog();
-		String xtendOutputDirFromPrefs = "generated-sources/xtend-from-pref";
-
-		String xtendGenDir = verifier.getBasedir() + "/src/main/" + xtendOutputDirFromPrefs;
-		verifier.assertFilePresent(xtendGenDir + "/test/XtendA.java");
-		verifier.assertFilePresent(xtendGenDir + "/test/XtendC.java");
-
-		String xtendTestGenDir = verifier.getBasedir() + "/src/test/" + xtendOutputDirFromPrefs;
-		verifier.assertFilePresent(xtendTestGenDir + "/tests/XtendA.java");
-		verifier.assertFilePresent(xtendTestGenDir + "/tests/XtendC.java");
-	}
-
-	@Test
-	public void readXtendPrefsUnused() throws Exception {
-		Verifier verifier = newVerifier(ROOT + "/xtend-prefs-unused");
-		verifier.setDebug(true);
-		verifier.executeGoal("test");
-		verifier.verifyErrorFreeLog();
-		String pomsOutputDir = "xtend-dir-from-pom";
-
-		String xtendGenDir = verifier.getBasedir() + "/src/main/" + pomsOutputDir;
-		verifier.assertFilePresent(xtendGenDir + "/test/XtendA.java");
-		verifier.assertFilePresent(xtendGenDir + "/test/XtendC.java");
-
-		String xtendTestGenDir = verifier.getBasedir() + "/src/test/" + pomsOutputDir;
-		verifier.assertFilePresent(xtendTestGenDir + "/tests/XtendA.java");
-		verifier.assertFilePresent(xtendTestGenDir + "/tests/XtendC.java");
-	}
-
-	@Test
-	public void readSymlinks() throws Exception {
-		String root = ResourceExtractor.simpleExtractResources(getClass(), ROOT).getAbsolutePath();
-		File link = new File(root + "/symlinks/src/main/java");
-		File link2 = new File(root + "/symlinks/src/test/java");
-		createSymLink(root + "/multisources/src/main/java/", link.getAbsolutePath());
-		createSymLink(root + "/multisources/src/test/java/", link2.getAbsolutePath());
-		try {
-			Verifier verifier = newVerifier(ROOT + "/symlinks");
-			verifier.setDebug(true);
-			verifier.executeGoal("test");
-			verifier.verifyErrorFreeLog();
-			String outputdir = verifier.getBasedir();
-
-			verifier.assertFilePresent(outputdir + "/src/main/generated-sources/xtend/test/XtendA.java");
-			verifier.assertFilePresent(outputdir + "/src/main/generated-sources/xtend/test/XtendC.java");
-			verifier.assertFilePresent(outputdir + "/src/main/generated-sources/xtend/test/.XtendA.java._trace");
-			verifier.assertFilePresent(outputdir + "/src/main/generated-sources/xtend/test/.XtendC.java._trace");
-
-			verifier.assertFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/FooClass.java");
-			verifier.assertFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/FooTest.java");
-			verifier.assertFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/.FooClass.java._trace");
-			verifier.assertFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/.FooTest.java._trace");
-		} finally {
-			link.delete();
-			link2.delete();
-		}
-	}
-
 	private void verifyErrorFreeLog(String pathToTestProject) throws IOException, VerificationException {
 		verifyErrorFreeLog(pathToTestProject, "verify");
 	}
@@ -220,6 +70,7 @@ public class XtendCompilerMojoIT {
 		String localRepo = Paths.get("../.m2/repository/").toAbsolutePath().normalize().toString();
 		verifier.setLocalRepo(localRepo);
 		verifier.setDebug(true);
+		verifier.setMavenDebug(true);
 		// verifier.setDebugJvm(true);
 		// verifier.setForkJvm(false);
 		return verifier;
