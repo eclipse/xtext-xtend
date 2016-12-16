@@ -7,6 +7,16 @@
  */
 package org.eclipse.xtend.idea.navigation;
 
+import com.google.common.base.Objects;
+import com.intellij.openapi.editor.CaretModel;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.impl.DebugUtil;
+import junit.framework.TestCase;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -20,6 +30,9 @@ import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend.idea.navigation.NavigationTestData;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.psi.PsiEObject;
+import org.eclipse.xtext.psi.PsiEObjectIdentifier;
+import org.eclipse.xtext.psi.PsiNamedEObject;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -806,69 +819,107 @@ public class XtendNavigationTest extends LightXtendTest {
   }
   
   protected <T extends Object> T testNavigateTo(final String relativePath, final String fileText, final Class<T> expectedType) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nTextRange cannot be resolved."
-      + "\nThe method openFileInEditor(String, String) from the type XtendNavigationTest refers to the missing type Object"
-      + "\nThe method findNavigationElement(TextRange) from the type XtendNavigationTest refers to the missing type Object"
-      + "\nThe method assertReference(int, Class<T>, PsiElement) from the type XtendNavigationTest refers to the missing type PsiElement");
+    T _xblockexpression = null;
+    {
+      final NavigationTestData navigationTestData = new NavigationTestData(fileText);
+      String _model = navigationTestData.getModel();
+      this.openFileInEditor(relativePath, _model);
+      int _navigationElementStartOffset = navigationTestData.getNavigationElementStartOffset();
+      int _navigationElementEndOffset = navigationTestData.getNavigationElementEndOffset();
+      TextRange _textRange = new TextRange(_navigationElementStartOffset, _navigationElementEndOffset);
+      final PsiElement navigationElement = this.findNavigationElement(_textRange);
+      int _referenceOffset = navigationTestData.getReferenceOffset();
+      _xblockexpression = this.<T>assertReference(_referenceOffset, expectedType, navigationElement);
+    }
+    return _xblockexpression;
   }
   
-  protected <T extends Object> T assertReference(final int referenceOffset, final Class<T> expectedType, final /* PsiElement */Object expectedNavigationElement) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field myFixture is undefined"
-      + "\nThe method or field myFixture is undefined"
-      + "\nThe method assertNotNull(Object) is undefined"
-      + "\nThe method assertEquals(Object, PsiElement, Object) is undefined"
-      + "\nThe method or field DebugUtil is undefined"
-      + "\nThe method or field file is undefined"
-      + "\nThe method assertTrue(String, boolean) is undefined"
-      + "\neditor cannot be resolved"
-      + "\ncaretModel cannot be resolved"
-      + "\nmoveToOffset cannot be resolved"
-      + "\nelementAtCaret cannot be resolved"
-      + "\nnavigationElement cannot be resolved"
-      + "\n!= cannot be resolved"
-      + "\npsiToString cannot be resolved");
+  protected <T extends Object> T assertReference(final int referenceOffset, final Class<T> expectedType, final PsiElement expectedNavigationElement) {
+    T _xblockexpression = null;
+    {
+      Editor _editor = this.myFixture.getEditor();
+      CaretModel _caretModel = _editor.getCaretModel();
+      _caretModel.moveToOffset(referenceOffset);
+      final PsiElement targetElement = this.myFixture.getElementAtCaret();
+      TestCase.assertNotNull(targetElement);
+      final PsiElement actualNavigationElement = targetElement.getNavigationElement();
+      boolean _notEquals = (!Objects.equal(expectedNavigationElement, actualNavigationElement));
+      if (_notEquals) {
+        PsiFile _file = this.getFile();
+        String _psiToString = DebugUtil.psiToString(_file, true, true);
+        TestCase.assertEquals(_psiToString, expectedNavigationElement, actualNavigationElement);
+      }
+      final EObject result = ((PsiEObject) targetElement).getEObject();
+      Class<? extends EObject> _class = result.getClass();
+      String _plus = (_class + " is not assignable from ");
+      String _plus_1 = (_plus + expectedType);
+      Class<? extends EObject> _class_1 = result.getClass();
+      boolean _isAssignableFrom = expectedType.isAssignableFrom(_class_1);
+      TestCase.assertTrue(_plus_1, _isAssignableFrom);
+      _xblockexpression = ((T) result);
+    }
+    return _xblockexpression;
   }
   
-  protected Object findNavigationElement(final /* TextRange */Object range) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field file is undefined"
-      + "\nThe method assertNotNull(Object) is undefined"
-      + "\nThe method assertEquals(Object, Object) is undefined"
-      + "\nThe method assertNotNull(Object) is undefined"
-      + "\nThe method assertEquals(Object, Object) is undefined"
-      + "\nfindElementAt cannot be resolved"
-      + "\nstartOffset cannot be resolved"
-      + "\nfindPsiNamedEObject cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\nnavigationElement cannot be resolved"
-      + "\ntextRange cannot be resolved"
-      + "\n!= cannot be resolved"
-      + "\nparent cannot be resolved"
-      + "\nnavigationElement cannot be resolved");
+  protected PsiElement findNavigationElement(final TextRange range) {
+    PsiElement _xblockexpression = null;
+    {
+      PsiFile _file = this.getFile();
+      int _startOffset = range.getStartOffset();
+      PsiElement element = _file.findElementAt(_startOffset);
+      TestCase.assertNotNull(element);
+      final PsiElement namedEObject = this.findPsiNamedEObject(element, range);
+      if ((namedEObject != null)) {
+        PsiElement _navigationElement = namedEObject.getNavigationElement();
+        TestCase.assertEquals(namedEObject, _navigationElement);
+        return namedEObject;
+      }
+      while ((!Objects.equal(element.getTextRange(), range))) {
+        {
+          PsiElement _parent = element.getParent();
+          element = _parent;
+          TestCase.assertNotNull(element);
+        }
+      }
+      PsiElement _navigationElement_1 = element.getNavigationElement();
+      TestCase.assertEquals(element, _navigationElement_1);
+      _xblockexpression = element;
+    }
+    return _xblockexpression;
   }
   
-  protected /* PsiElement */Object findPsiNamedEObject(final /* PsiElement */Object element, final /* TextRange */Object identifierRange) {
-    throw new Error("Unresolved compilation problems:"
-      + "\n=== cannot be resolved"
-      + "\nnameIdentifier cannot be resolved"
-      + "\n!== cannot be resolved"
-      + "\ntextRange cannot be resolved"
-      + "\n== cannot be resolved"
-      + "\nparent cannot be resolved"
-      + "\nfindPsiNamedEObject cannot be resolved");
+  protected PsiElement findPsiNamedEObject(final PsiElement element, final TextRange identifierRange) {
+    if ((element == null)) {
+      return null;
+    }
+    if ((element instanceof PsiNamedEObject)) {
+      final PsiEObjectIdentifier nameIdentifier = ((PsiNamedEObject)element).getNameIdentifier();
+      if ((nameIdentifier != null)) {
+        PsiNamedEObject _xifexpression = null;
+        TextRange _textRange = nameIdentifier.getTextRange();
+        boolean _equals = Objects.equal(_textRange, identifierRange);
+        if (_equals) {
+          _xifexpression = ((PsiNamedEObject)element);
+        } else {
+          _xifexpression = null;
+        }
+        return _xifexpression;
+      }
+    }
+    PsiElement _parent = element.getParent();
+    return this.findPsiNamedEObject(_parent, identifierRange);
   }
   
-  protected Object openFileInEditor(final String relativePath, final String fileText) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field myFixture is undefined"
-      + "\nThe method or field myFixture is undefined"
-      + "\nThe method or field myFixture is undefined"
-      + "\naddFileToProject cannot be resolved"
-      + "\ntestHighlighting cannot be resolved"
-      + "\nvirtualFile cannot be resolved"
-      + "\nopenFileInEditor cannot be resolved"
-      + "\nvirtualFile cannot be resolved");
+  protected PsiFile openFileInEditor(final String relativePath, final String fileText) {
+    PsiFile _xblockexpression = null;
+    {
+      final PsiFile xtendFile = this.myFixture.addFileToProject(relativePath, fileText);
+      VirtualFile _virtualFile = xtendFile.getVirtualFile();
+      this.myFixture.testHighlighting(true, true, true, _virtualFile);
+      VirtualFile _virtualFile_1 = xtendFile.getVirtualFile();
+      this.myFixture.openFileInEditor(_virtualFile_1);
+      _xblockexpression = xtendFile;
+    }
+    return _xblockexpression;
   }
 }

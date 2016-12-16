@@ -7,11 +7,17 @@
  */
 package org.eclipse.xtend.core.idea.structureview;
 
+import com.intellij.ide.util.treeView.smartTree.ActionPresentation;
+import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
+import com.intellij.ide.util.treeView.smartTree.Filter;
+import com.intellij.ide.util.treeView.smartTree.TreeElement;
+import org.eclipse.xtend.core.idea.structureview.XtendFeatureTreeElement;
+
 /**
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class SyntheticMemberFilter /* implements Filter  */{
+public class SyntheticMemberFilter implements Filter {
   public final static String ID = "SHOW_NO_SYNTHETIC";
   
   @Override
@@ -20,10 +26,15 @@ public class SyntheticMemberFilter /* implements Filter  */{
   }
   
   @Override
-  public Object isVisible(final /* TreeElement */Object treeNode) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nsynthetic cannot be resolved"
-      + "\n! cannot be resolved");
+  public boolean isVisible(final TreeElement treeNode) {
+    boolean _xifexpression = false;
+    if ((treeNode instanceof XtendFeatureTreeElement)) {
+      boolean _isSynthetic = ((XtendFeatureTreeElement)treeNode).isSynthetic();
+      _xifexpression = (!_isSynthetic);
+    } else {
+      _xifexpression = true;
+    }
+    return _xifexpression;
   }
   
   @Override
@@ -32,8 +43,7 @@ public class SyntheticMemberFilter /* implements Filter  */{
   }
   
   @Override
-  public Object getPresentation() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nActionPresentationData cannot be resolved.");
+  public ActionPresentation getPresentation() {
+    return new ActionPresentationData("Show Synthetic Members", null, null);
   }
 }
