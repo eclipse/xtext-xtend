@@ -1331,6 +1331,17 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		renameXtendElement(editor, xtendModel.indexOf("bar"), "baz");
 		assertDocumentContains(editor, "import static extension java.util.Collections.*");
 	}
+	@Test
+	public void testBug489208() throws Exception {
+		String xtendModel = "class FooBug489208 {new(BarBug489208 bar) {}}\n" +
+				"class BarBug489208 { public val f1 = new FooBug489208(this) {} public val f2 = new FooBug489208(this) {} public val f3 = new FooBug489208(this) {}}";
+			IFile xtendClass = testHelper.createFile("Foo.xtend", xtendModel);
+			final XtextEditor editor = openEditorSafely(xtendClass);
+			renameXtendElement(editor, xtendModel.indexOf("BarBug489208", 20), "BazBug489208");
+		assertDocumentContains(editor, "public val f1 = new FooBug489208(this) {}");
+		assertDocumentContains(editor, "public val f2 = new FooBug489208(this) {}");
+		assertDocumentContains(editor, "public val f3 = new FooBug489208(this) {}");
+	}
 
 	protected void assertDocumentContains(XtextEditor editor, String expectedContent) throws CoreException {
 		String editorContent = editor.getDocument().get();
