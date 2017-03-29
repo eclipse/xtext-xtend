@@ -22,6 +22,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 
 /**
  * @author Miro Spoenemann - Initial contribution and API
+ * @author Stephane Galland - https://github.com/eclipse/xtext-xtend/issues/191
  */
 @InjectWith(Java8RuntimeInjectorProvider) 
 class Java8ValidationTest extends AbstractXtendTestCase {
@@ -425,4 +426,130 @@ class Java8ValidationTest extends AbstractXtendTestCase {
 			"The enclosing type does not extend or implement the interface List")
 	}
 	
+	/**
+	private static class ResolvedByAbstractType01 {
+		class A<T> extends java.util.AbstractCollection<T> implements java.util.Set<T> {
+			public java.util.Iterator<T> iterator() {
+				return null;
+			}
+			public int size() {
+				return 0;
+			}
+		}
+		class Test {
+			public void test(java.util.AbstractCollection<?> a) {
+				a.spliterator();
+			}
+			public void test(A<?> a) {
+				a.spliterator();
+			}
+		}
+	}
+	*/
+	@Test
+	def void testResolvedByAbstractType01() {
+		file('''
+			import java.util.Iterator
+			import java.util.Set
+			import java.util.AbstractCollection
+			class A<T> extends AbstractCollection<T> implements Set<T> {
+			  override Iterator<T> iterator() {
+			    null
+			  }
+			  override int size() {
+			    0
+			  }
+			}
+		''').assertNoErrors()
+	}
+
+	/**
+	private static class ResolvedByAbstractType02 {
+		abstract class B<T> extends java.util.AbstractCollection<T> {
+			public java.util.Spliterator<T> splititerator() {
+				return null;
+			}
+		}
+		class A<T> extends B<T> implements java.util.Set<T> {
+			public java.util.Iterator<T> iterator() {
+				return null;
+			}
+			public int size() {
+				return 0;
+			}
+		}
+		class Test {
+			public void test(java.util.AbstractCollection<?> a) {
+				a.spliterator();
+			}
+			public void test(A<?> a) {
+				a.spliterator();
+			}
+		}
+	}
+	*/
+	@Test
+	def void testResolvedByAbstractType02() {
+		file('''
+			import java.util.Iterator
+			import java.util.Set
+			import java.util.AbstractCollection
+			abstract class B<T> extends AbstractCollection<T> {
+			  def java.util.Spliterator<T> splititrator() {
+			    null
+			  }
+			}
+			class A<T> extends B<T> implements Set<T> {
+			  override Iterator<T> iterator() {
+			    null
+			  }
+			  override int size() {
+			    0
+			  }
+			}
+		''').assertNoErrors()
+	}
+
+	/**
+	private static class ResolvedByAbstractType03 {
+		interface I<T> extends java.util.Set<T> {
+			
+		}
+		class A<T> extends java.util.AbstractCollection<T> implements I<T> {
+			public java.util.Iterator<T> iterator() {
+				return null;
+			}
+			public int size() {
+				return 0;
+			}
+		}
+		class Test {
+			public void test(java.util.AbstractCollection<?> a) {
+				a.spliterator();
+			}
+			public void test(A<?> a) {
+				a.spliterator();
+			}
+		}
+	}
+	*/
+	@Test
+	def void testResolvedByAbstractType03() {
+		file('''
+			import java.util.Iterator
+			import java.util.Set
+			import java.util.AbstractCollection
+			interface I<T> extends Set<T> {
+			}
+			class A<T> extends AbstractCollection<T> implements I<T> {
+			  override Iterator<T> iterator() {
+			    null
+			  }
+			  override int size {
+			    0
+			  }
+			}
+		''').assertNoErrors()
+	}
+
 }
