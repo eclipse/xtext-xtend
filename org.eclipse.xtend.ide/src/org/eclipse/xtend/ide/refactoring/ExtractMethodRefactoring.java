@@ -331,6 +331,10 @@ public class ExtractMethodRefactoring extends Refactoring {
 		try {
 			Set<String> calledExternalFeatureNames = newHashSet();
 			returnType = calculateReturnType(resolvedTypes);
+			if (returnType == null) {
+				StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(typeComputationServices, xtendClass);
+				returnType = owner.newReferenceTo(Void.TYPE);
+			}
 			if (returnType != null && !equal("void", returnType.getIdentifier()))
 				returnExpression = lastExpression;
 			boolean isReturnAllowed = isEndOfOriginalMethod(); 
