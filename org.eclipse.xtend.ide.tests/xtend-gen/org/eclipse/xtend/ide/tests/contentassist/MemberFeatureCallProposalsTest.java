@@ -9,8 +9,8 @@ package org.eclipse.xtend.ide.tests.contentassist;
 
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.junit4.Flaky;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.testing.Flaky;
 import org.junit.Test;
 
 /**
@@ -38,8 +38,7 @@ public class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBu
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("em", 2, "empty");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("em", 2, "empty");
   }
   
   @Flaky
@@ -63,8 +62,7 @@ public class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBu
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
   }
   
   @Flaky
@@ -88,8 +86,7 @@ public class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBu
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
   }
   
   @Flaky
@@ -113,7 +110,6 @@ public class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBu
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
-    _append.assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
+    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
   }
 }

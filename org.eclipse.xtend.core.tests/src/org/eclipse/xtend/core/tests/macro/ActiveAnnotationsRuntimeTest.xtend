@@ -15,7 +15,7 @@ import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.testing.InjectWith
-import org.eclipse.xtext.junit4.TemporaryFolder
+import org.eclipse.xtend.core.tests.util.TemporaryFolder
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.XtextResource
@@ -25,7 +25,7 @@ import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.workspace.FileProjectConfig
 import org.eclipse.xtext.workspace.ProjectConfigAdapter
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
+import org.eclipse.xtext.xbase.testing.CompilationTestHelper
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -284,7 +284,7 @@ class DelegatingClassloader extends ClassLoader {
 	
 	override findClass(String name) throws ClassNotFoundException {
 		val result = classFinder.getCompiledClass(name)
-		if (result != null)
+		if (result !== null)
 			return result
 		super.findClass(name)
 	}

@@ -947,8 +947,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			      public void m() {
 			      }
 			    };
-			    ArrayList<__C_1> _newArrayList = CollectionLiterals.<__C_1>newArrayList(___C_1);
-			    return CollectionLiterals.<ArrayList<__C_1>>newArrayList(_newArrayList);
+			    return CollectionLiterals.<ArrayList<__C_1>>newArrayList(CollectionLiterals.<__C_1>newArrayList(___C_1));
 			  }
 			}
 		''')
@@ -1957,8 +1956,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			            public Integer apply() {
 			              int _xtrycatchfinallyexpression = (int) 0;
 			              try {
-			                String _substring = s.substring(1);
-			                _xtrycatchfinallyexpression = _substring.length();
+			                _xtrycatchfinallyexpression = s.substring(1).length();
 			              } catch (final Throwable _t) {
 			                if (_t instanceof Exception) {
 			                  final Exception e = (Exception)_t;

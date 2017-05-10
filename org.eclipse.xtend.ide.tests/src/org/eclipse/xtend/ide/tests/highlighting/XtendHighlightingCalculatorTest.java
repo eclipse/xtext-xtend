@@ -15,10 +15,10 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingCalculator;
 import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles;
+import org.eclipse.xtend.ide.tests.AbstractXtendTestCase;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.resource.XtextResource;
@@ -219,6 +219,18 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 				"      «IF true»\r\n" + 
 				"««« comment\r\n" + 
 				"      «ENDIF»\r\n" + 
+				"'''");
+	}
+	
+	@Test public void testXtextXtendIssue184() {
+		// this should not cause an exception
+		highlight(
+				"'''\r\n" + 
+				"		TODO i am no todo\r\n" + 
+				"		«««		TODO xxxxxxx\r\n" + 
+				"lala TODO i am no todo\r\n" + 
+				"«««		TODO2 xxxxxxx22\r\n" + 
+				"lala TODO i am no todo\r\n" + 
 				"'''");
 	}
 	
@@ -733,7 +745,16 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expectAbsolute(model.indexOf("1"), 1, HighlightingStyles.NUMBER_ID);
 		highlight(model);
 	}
-
+	
+	@Test
+	public void testIssue49() {
+		String model =
+			"new() {\n    val x = '''\n        demo\n    '''\n}";
+		expectInsignificant(model.indexOf("demo")-8, 8);
+		expectInsignificant(model.indexOf("demo")+5, 4);
+		highlight(model);
+	}
+	
 	protected void highlight(String functionBody) {
 		try {
 			EObject model = member(functionBody);

@@ -12,12 +12,10 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
@@ -45,7 +43,6 @@ import org.eclipse.xtext.common.types.JvmCharAnnotationValue;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
-import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -60,7 +57,6 @@ import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -80,20 +76,18 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   protected JvmOperation findOperation(final String name) {
     ConditionUtils.checkJavaIdentifier(name, "name");
     final JvmAnnotationType annotationType = this.delegate.getAnnotation();
-    Iterable<JvmOperation> _declaredOperations = annotationType.getDeclaredOperations();
     final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
       String _simpleName = it.getSimpleName();
       return Boolean.valueOf(Objects.equal(_simpleName, name));
     };
-    final JvmOperation jvmOperation = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function);
-    boolean _equals = Objects.equal(jvmOperation, null);
-    if (_equals) {
+    final JvmOperation jvmOperation = IterableExtensions.<JvmOperation>findFirst(annotationType.getDeclaredOperations(), _function);
+    if ((jvmOperation == null)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("The annotation property \'");
-      _builder.append(name, "");
+      _builder.append(name);
       _builder.append("\' is not declared on the annotation type \'");
       String _identifier = annotationType.getIdentifier();
-      _builder.append(_identifier, "");
+      _builder.append(_identifier);
       _builder.append("\'.");
       throw new IllegalArgumentException(_builder.toString());
     }
@@ -106,12 +100,10 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   }
   
   protected boolean remove(final JvmOperation op) {
-    EList<JvmAnnotationValue> _explicitValues = this.delegate.getExplicitValues();
-    Iterator<JvmAnnotationValue> _iterator = _explicitValues.iterator();
     final Predicate<JvmAnnotationValue> _function = (JvmAnnotationValue it) -> {
-      return (Objects.equal(op, it.getOperation()) || (Objects.equal(it.getOperation(), null) && Objects.equal(op.getSimpleName(), "value")));
+      return (Objects.equal(op, it.getOperation()) || ((it.getOperation() == null) && Objects.equal(op.getSimpleName(), "value")));
     };
-    return Iterators.<JvmAnnotationValue>removeIf(_iterator, _function);
+    return Iterators.<JvmAnnotationValue>removeIf(this.delegate.getExplicitValues().iterator(), _function);
   }
   
   protected JvmOperation findOperation(final String name, final boolean mustBeArray) {
@@ -233,8 +225,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   }
   
   protected void _internalSet(final String name, final Object values, final boolean mustBeArray) {
-    Class<?> _class = values.getClass();
-    String _canonicalName = _class.getCanonicalName();
+    String _canonicalName = values.getClass().getCanonicalName();
     String _plus = ("Cannot set annotation values of type " + _canonicalName);
     throw new IllegalArgumentException(_plus);
   }
@@ -246,8 +237,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _internalSet(final String name, final String[] values, final boolean mustBeArray) {
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
-    String _name = String.class.getName();
-    this.setValues(name, values, _name, mustBeArray);
+    this.setValues(name, values, String.class.getName(), mustBeArray);
   }
   
   protected void _internalSet(final String name, final Boolean value, final boolean mustBeArray) {
@@ -344,8 +334,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _internalSet(final String name, final TypeReference[] values, final boolean mustBeArray) {
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
-    String _name = TypeReference.class.getName();
-    this.setValues(name, values, _name, mustBeArray);
+    this.setValues(name, values, TypeReference.class.getName(), mustBeArray);
   }
   
   protected void _internalSet(final String name, final EnumerationValueDeclaration[] values, final boolean mustBeArray) {
@@ -394,8 +383,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     newValue.setOperation(op);
     this.setValue(newValue, values, componentType, mustBeArray);
     this.remove(op);
-    EList<JvmAnnotationValue> _explicitValues = this.delegate.getExplicitValues();
-    _explicitValues.add(newValue);
+    this.delegate.getExplicitValues().add(newValue);
   }
   
   protected JvmAnnotationValue createAnnotationValue(final JvmOperation op, final Object values) {
@@ -420,33 +408,37 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
         _matched=true;
         JvmAnnotationValue _switchResult_1 = null;
         String _simpleName = ((JvmPrimitiveType)type).getSimpleName();
-        switch (_simpleName) {
-          case "boolean":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
-            break;
-          case "double":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue();
-            break;
-          case "float":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmFloatAnnotationValue();
-            break;
-          case "long":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmLongAnnotationValue();
-            break;
-          case "int":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
-            break;
-          case "short":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmShortAnnotationValue();
-            break;
-          case "char":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmCharAnnotationValue();
-            break;
-          case "byte":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmByteAnnotationValue();
-            break;
-          default:
-            throw new IllegalStateException(("Unknown type: " + type));
+        if (_simpleName != null) {
+          switch (_simpleName) {
+            case "boolean":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
+              break;
+            case "double":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue();
+              break;
+            case "float":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmFloatAnnotationValue();
+              break;
+            case "long":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmLongAnnotationValue();
+              break;
+            case "int":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
+              break;
+            case "short":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmShortAnnotationValue();
+              break;
+            case "char":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmCharAnnotationValue();
+              break;
+            case "byte":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmByteAnnotationValue();
+              break;
+            default:
+              throw new IllegalStateException(("Unknown type: " + type));
+          }
+        } else {
+          throw new IllegalStateException(("Unknown type: " + type));
         }
         _switchResult = _switchResult_1;
       }
@@ -501,18 +493,14 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   }
   
   protected void _setValue(final JvmAnnotationValue it, final Object value, final String componentType, final boolean mustBeArray) {
-    boolean _equals = Objects.equal(componentType, null);
-    if (_equals) {
-      Class<?> _class = value.getClass();
-      String _name = _class.getName();
-      this.throwNotApplicable(it, _name);
+    if ((componentType == null)) {
+      this.throwNotApplicable(it, value.getClass().getName());
     }
     boolean _or = false;
     if (mustBeArray) {
       _or = true;
     } else {
-      JvmOperation _operation = it.getOperation();
-      JvmTypeReference _returnType = _operation.getReturnType();
+      JvmTypeReference _returnType = it.getOperation().getReturnType();
       JvmType _type = null;
       if (_returnType!=null) {
         _type=_returnType.getType();
@@ -521,8 +509,8 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
       if (_type!=null) {
         _eClass=_type.eClass();
       }
-      boolean _equals_1 = Objects.equal(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE);
-      _or = _equals_1;
+      boolean _equals = Objects.equal(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE);
+      _or = _equals;
     }
     if (_or) {
       this.throwNotApplicable(it, (componentType + "[]"));
@@ -532,11 +520,10 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmTypeAnnotationValue it, final TypeReference[] value, final String componentType, final boolean mustBeArray) {
     EList<JvmTypeReference> _values = it.getValues();
-    Iterable<TypeReferenceImpl> _filter = Iterables.<TypeReferenceImpl>filter(((Iterable<?>)Conversions.doWrapArray(value)), TypeReferenceImpl.class);
     final Function1<TypeReferenceImpl, JvmTypeReference> _function = (TypeReferenceImpl it_1) -> {
       return this.compilationUnit.toJvmTypeReference(it_1);
     };
-    Iterable<JvmTypeReference> _map = IterableExtensions.<TypeReferenceImpl, JvmTypeReference>map(_filter, _function);
+    Iterable<JvmTypeReference> _map = IterableExtensions.<TypeReferenceImpl, JvmTypeReference>map(Iterables.<TypeReferenceImpl>filter(((Iterable<?>)Conversions.doWrapArray(value)), TypeReferenceImpl.class), _function);
     Iterables.<JvmTypeReference>addAll(_values, _map);
   }
   
@@ -546,9 +533,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
       boolean _matched = false;
       if (enumValue instanceof JvmEnumerationValueDeclarationImpl) {
         _matched=true;
-        EList<JvmEnumerationLiteral> _values = it.getValues();
-        JvmEnumerationLiteral _delegate = ((JvmEnumerationValueDeclarationImpl)enumValue).getDelegate();
-        _values.add(_delegate);
+        it.getValues().add(((JvmEnumerationValueDeclarationImpl)enumValue).getDelegate());
       }
       if (!_matched) {
         if (enumValue instanceof XtendEnumerationValueDeclarationImpl) {
@@ -565,10 +550,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
       boolean _matched = false;
       if (annotationValue instanceof JvmAnnotationReferenceImpl) {
         _matched=true;
-        EList<JvmAnnotationReference> _values = it.getValues();
-        JvmAnnotationReference _delegate = ((JvmAnnotationReferenceImpl)annotationValue).getDelegate();
-        JvmAnnotationReference _cloneWithProxies = EcoreUtil2.<JvmAnnotationReference>cloneWithProxies(_delegate);
-        _values.add(_cloneWithProxies);
+        it.getValues().add(EcoreUtil2.<JvmAnnotationReference>cloneWithProxies(((JvmAnnotationReferenceImpl)annotationValue).getDelegate()));
       }
       if (!_matched) {
         if (annotationValue instanceof XtendAnnotationReferenceImpl) {
@@ -580,9 +562,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   }
   
   protected void _setValue(final JvmCustomAnnotationValue it, final XtendAnnotationReferenceImpl value, final String componentType, final boolean mustBeArray) {
-    EList<EObject> _values = it.getValues();
-    XAnnotation _delegate = value.getDelegate();
-    _values.add(_delegate);
+    it.getValues().add(value.getDelegate());
   }
   
   protected void _setValue(final JvmStringAnnotationValue it, final String[] value, final String componentType, final boolean mustBeArray) {
@@ -791,12 +771,10 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   }
   
   protected void checkType(final JvmAnnotationValue it, final String componentType, final boolean mustBeArray) {
-    boolean _equals = Objects.equal(componentType, null);
-    if (_equals) {
+    if ((componentType == null)) {
       return;
     }
-    JvmOperation _operation = it.getOperation();
-    JvmTypeReference _returnType = _operation.getReturnType();
+    JvmTypeReference _returnType = it.getOperation().getReturnType();
     JvmType _type = null;
     if (_returnType!=null) {
       _type=_returnType.getType();
@@ -810,27 +788,23 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
       if (returnType!=null) {
         _eClass=returnType.eClass();
       }
-      boolean _equals_1 = Objects.equal(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE);
-      _or = _equals_1;
+      boolean _equals = Objects.equal(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE);
+      _or = _equals;
     }
     if (_or) {
-      String _annotationValueTypeName = this.getAnnotationValueTypeName(returnType);
-      ConditionUtils.checkTypeName(_annotationValueTypeName, (componentType + "[]"));
+      ConditionUtils.checkTypeName(this.getAnnotationValueTypeName(returnType), (componentType + "[]"));
     } else {
-      String _annotationValueTypeName_1 = this.getAnnotationValueTypeName(returnType);
-      ConditionUtils.checkTypeName(_annotationValueTypeName_1, componentType);
+      ConditionUtils.checkTypeName(this.getAnnotationValueTypeName(returnType), componentType);
     }
   }
   
   protected void throwNotApplicable(final JvmAnnotationValue it, final String valueType) {
-    JvmOperation _operation = it.getOperation();
-    JvmTypeReference _returnType = _operation.getReturnType();
+    JvmTypeReference _returnType = it.getOperation().getReturnType();
     JvmType _type = null;
     if (_returnType!=null) {
       _type=_returnType.getType();
     }
-    String _annotationValueTypeName = this.getAnnotationValueTypeName(_type);
-    String _isNotApplicableMessage = ConditionUtils.isNotApplicableMessage(valueType, _annotationValueTypeName);
+    String _isNotApplicableMessage = ConditionUtils.isNotApplicableMessage(valueType, this.getAnnotationValueTypeName(_type));
     throw new IllegalArgumentException(_isNotApplicableMessage);
   }
   
@@ -841,17 +815,21 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
       _identifier=type.getIdentifier();
     }
     final String result = _identifier;
-    switch (result) {
-      case "java.lang.Class":
-        _switchResult = TypeReference.class.getName();
-        break;
-      case "java.lang.Class[]":
-        String _name = TypeReference.class.getName();
-        _switchResult = (_name + "[]");
-        break;
-      default:
-        _switchResult = result;
-        break;
+    if (result != null) {
+      switch (result) {
+        case "java.lang.Class":
+          _switchResult = TypeReference.class.getName();
+          break;
+        case "java.lang.Class[]":
+          String _name = TypeReference.class.getName();
+          _switchResult = (_name + "[]");
+          break;
+        default:
+          _switchResult = result;
+          break;
+      }
+    } else {
+      _switchResult = result;
     }
     return _switchResult;
   }

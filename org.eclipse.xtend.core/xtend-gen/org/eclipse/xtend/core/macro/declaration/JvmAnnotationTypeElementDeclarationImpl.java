@@ -7,41 +7,57 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import com.google.common.base.Preconditions;
+import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeElementDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
-import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 
 @SuppressWarnings("all")
 public class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclarationImpl<JvmOperation> implements AnnotationTypeElementDeclaration {
   @Override
   public Object getDefaultValue() {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    JvmOperation _delegate = this.getDelegate();
-    JvmAnnotationValue _defaultValue = _delegate.getDefaultValue();
-    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-    TypeReferences _typeReferences = _compilationUnit_1.getTypeReferences();
-    JvmOperation _delegate_1 = this.getDelegate();
-    JvmTypeReference _returnType = _delegate_1.getReturnType();
-    boolean _isArray = _typeReferences.isArray(_returnType);
-    return _compilationUnit.translateAnnotationValue(_defaultValue, _isArray);
+    return this.getCompilationUnit().translateAnnotationValue(this.getDelegate().getDefaultValue(), this.getCompilationUnit().getTypeReferences().isArray(this.getDelegate().getReturnType()));
   }
   
   @Override
   public TypeReference getType() {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    JvmOperation _delegate = this.getDelegate();
-    JvmTypeReference _returnType = _delegate.getReturnType();
-    return _compilationUnit.toTypeReference(_returnType);
+    return this.getCompilationUnit().toTypeReference(this.getDelegate().getReturnType());
   }
   
   @Override
   public Expression getDefaultValueExpression() {
     return null;
+  }
+  
+  public void setDefaultValueExpression(final Expression body) {
+    this.checkMutable();
+    if ((body == null)) {
+      this.getCompilationUnit().getJvmTypesBuilder().removeExistingBody(this.getDelegate());
+    } else {
+      this.getCompilationUnit().getJvmTypesBuilder().setBody(this.getDelegate(), ((ExpressionImpl) body).getDelegate());
+    }
+  }
+  
+  public void setDefaultValueExpression(final CompilationStrategy compilationStrategy) {
+    this.checkMutable();
+    Preconditions.checkArgument((compilationStrategy != null), "compilationStrategy cannot be null");
+    this.getCompilationUnit().setCompilationStrategy(this.getDelegate(), compilationStrategy);
+  }
+  
+  public void setDefaultValueExpression(final StringConcatenationClient compilationTemplate) {
+    this.checkMutable();
+    Preconditions.checkArgument((compilationTemplate != null), "compilationTemplate cannot be null");
+    this.getCompilationUnit().setCompilationTemplate(this.getDelegate(), compilationTemplate);
+  }
+  
+  public void setType(final TypeReference type) {
+    this.checkMutable();
+    Preconditions.checkArgument((type != null), "returnType cannot be null");
+    this.getDelegate().setReturnType(this.getCompilationUnit().toJvmTypeReference(type));
   }
 }

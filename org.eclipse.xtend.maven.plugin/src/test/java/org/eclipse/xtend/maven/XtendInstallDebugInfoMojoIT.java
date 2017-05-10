@@ -1,11 +1,9 @@
 package org.eclipse.xtend.maven;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
-import org.apache.maven.it.util.ResourceExtractor;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,12 +28,12 @@ public class XtendInstallDebugInfoMojoIT {
 				"// test {\n" + 
 				"  package test; // XtendA$1.class\n" + 
 				"  class XtendA$1 {\n" + 
-				"    void <init>() { // XtendA.java:16\n" + 
-				"      // XtendA.java:16 -> XtendA.xtend:6\n" + 
+				"    void <init>() { // XtendA.java:13\n" + 
+				"      // XtendA.java:13 -> XtendA.xtend:6\n" + 
 				"      void this;\n" + 
 				"    }\n" + 
-				"    void apply() { // XtendA.java:18\n" + 
-				"      // XtendA.java:18 -> XtendA.xtend:6\n" + 
+				"    void apply() { // XtendA.java:15\n" + 
+				"      // XtendA.java:15 -> XtendA.xtend:6\n" + 
 				"      void this;\n" + 
 				"      void it;\n" + 
 				"    }\n" + 
@@ -43,14 +41,11 @@ public class XtendInstallDebugInfoMojoIT {
 				"  \n" + 
 				"  package test; // XtendA.class\n" + 
 				"  class XtendA {\n" + 
-				"    void <init>() { // XtendA.java:13\n" + 
-				"      // XtendA.java:14 -> XtendA.xtend:5\n" + 
-				"      // XtendA.java:15:23 -> XtendA.xtend:6\n" + 
+				"    void <init>() { // XtendA.java:11\n" + 
+				"      // XtendA.java:12 -> XtendA.xtend:5\n" + 
+				"      // XtendA.java:13:18 -> XtendA.xtend:6\n" + 
 				"      void this;\n" + 
-				"      void _newArrayList;\n" + 
 				"      void _function;\n" + 
-				"      void _map;\n" + 
-				"      void _join;\n" + 
 				"    }\n" + 
 				"  }\n" + 
 				"  \n" + 
@@ -127,9 +122,7 @@ public class XtendInstallDebugInfoMojoIT {
 				"  class XtendA {\n" + 
 				"    void <init>() { // XtendA.xtend:5\n" + 
 				"      void this;\n" + 
-				"      void _newArrayList;\n" + 
 				"      void _function;\n" + 
-				"      void _map;\n" + 
 				"      void myvar;\n" + 
 				"    }\n" + 
 				"  }\n" + 
@@ -169,13 +162,12 @@ public class XtendInstallDebugInfoMojoIT {
 				"        void this;\n" + 
 				"      }\n" + 
 				"      void test2() { // XtendA.java:9\n" + 
-				"        // XtendA.java:9:10 -> XtendA.xtend:6\n" + 
+				"        // XtendA.java:9 -> XtendA.xtend:6\n" + 
 				"        void this;\n" + 
 				"        void s;\n" + 
-				"        void _foo;\n" + 
 				"      }\n" + 
-				"      void newJavaB() { // XtendA.java:14\n" + 
-				"        // XtendA.java:14 -> XtendA.xtend:10\n" + 
+				"      void newJavaB() { // XtendA.java:13\n" + 
+				"        // XtendA.java:13 -> XtendA.xtend:10\n" + 
 				"        void this;\n" + 
 				"      }\n" + 
 				"    }\n" + 
@@ -221,10 +213,8 @@ public class XtendInstallDebugInfoMojoIT {
 				"        void this;\n" + 
 				"      }\n" + 
 				"      void assertTrue() { // FooTest.java:11\n" + 
-				"        // FooTest.java:11:13 -> FooTest.xtend:11\n" + 
+				"        // FooTest.java:11 -> FooTest.xtend:11\n" + 
 				"        void this;\n" + 
-				"        void _fooClass;\n" + 
-				"        void _count;\n" + 
 				"      }\n" + 
 				"    }\n" + 
 				"  }\n" + 
@@ -248,10 +238,6 @@ public class XtendInstallDebugInfoMojoIT {
 	}
 
 	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
-		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
-		Verifier verifier = new Verifier(testDir.getAbsolutePath());
-		String localRepo = new File("../local-maven-repository/").getAbsolutePath();
-		verifier.setLocalRepo(localRepo);
-		return verifier;
+		return MavenVerifierUtil.newVerifier(pathToTestProject);
 	}
 }

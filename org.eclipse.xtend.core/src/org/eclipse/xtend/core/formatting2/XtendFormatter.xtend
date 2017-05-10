@@ -24,12 +24,14 @@ import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.annotations.formatting2.XbaseWithAnnotationsFormatter
 
 import static org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys.*
@@ -47,10 +49,10 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 	def dispatch void format(XtendFile xtendFile, extension IFormattableDocument format) {
 		xtendFile.prepend[noSpace]
 		val pkg = xtendFile.regionFor.feature(XTEND_FILE__PACKAGE)
-		if(pkg != null) {
+		if(pkg !== null) {
 			pkg.prepend[oneSpace]
 			val pkgSemicolon = pkg.immediatelyFollowing.keyword(";")
-			if (pkgSemicolon != null) {
+			if (pkgSemicolon !== null) {
 				pkg.append[noSpace]
 				pkgSemicolon.append(blankLinesAfterPackageDecl)
 			} else {
@@ -211,7 +213,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		val close = func.regionFor.keyword(")")
 		func.returnType.append[oneSpace]
 		open.prepend[noSpace]
-		if (func.expression != null)
+		if (func.expression !== null)
 			close.append(bracesInNewLine)
 		formatCommaSeparatedList(func.parameters, open, close, format)
 		func.returnType.format
@@ -219,9 +221,10 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 	}
 
 	def dispatch void format(XtendField field, extension IFormattableDocument document) {
+		field.regionFor.keyword("extension").append[oneSpace]
 		formatAnnotations(field, document, newLineAfterFieldAnnotations)
 		formatModifiers(field, document)
-		if (field.name != null)
+		if (field.name !== null)
 			field.type.append[oneSpace]
 		field.regionFor.keyword("=").prepend[oneSpace].append[oneSpace]
 		field.type.format
@@ -229,10 +232,21 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 	}
 
 	def dispatch void format(XtendParameter param, extension IFormattableDocument format) {
+		param.regionFor.keyword("extension").append[oneSpace]
 		formatAnnotations(param, format, newLineAfterParameterAnnotations)
 		param.parameterType.format
 		val nameNode = param.regionFor.feature(XTEND_PARAMETER__NAME)
 		nameNode.prepend[oneSpace]
+	}
+
+	override dispatch void format(XVariableDeclaration expr, extension IFormattableDocument format) {
+		expr.regionFor.keyword("extension").append[oneSpace]
+		super._format(expr,format)
+	}
+
+	override dispatch void format(JvmFormalParameter expr, extension IFormattableDocument format) {
+		expr.regionFor.keyword("extension").append[oneSpace]
+		super._format(expr, format)
 	}
 
 	def dispatch void format(RichString rs, extension IFormattableDocument format) {
@@ -260,8 +274,34 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 			!expr.nextHiddenRegion.immediatelyPreceding.keyword("}").previousHiddenRegion.multiline
 	}
 
+	override protected void formatBodyInline(XExpression expr, boolean forceMultiline, extension IFormattableDocument doc) {
+		if (expr === null)
+			return;
+		if (expr instanceof XBlockExpression && (!(expr instanceof RichString) || !forceMultiline)) {
+			expr.prepend(bracesInNewLine).append(bracesInNewLine)
+		} else if (forceMultiline || expr.previousHiddenRegion.isMultiline) {
+			expr.prepend[newLine].surround[indent].append[newLine]
+		} else {
+			expr.surround[oneSpace]
+		}
+		expr.format
+	}
+
+	override protected void formatBody(XExpression expr, boolean forceMultiline, extension IFormattableDocument doc) {
+		if (expr === null)
+			return;
+		if (expr instanceof XBlockExpression && (!(expr instanceof RichString) || !forceMultiline)) {
+			expr.prepend(bracesInNewLine)
+		} else if (forceMultiline || expr.previousHiddenRegion.isMultiline) {
+			expr.prepend[newLine].surround[indent]
+		} else {
+			expr.prepend[oneSpace]
+		}
+		expr.format
+	}
+
 	override protected builder(List<XExpression> params) {
-		if (params.last != null) {
+		if (params.last !== null) {
 			val grammarElement = params.last.grammarElement
 			if (grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0 ||
 				grammarElement == XFeatureCallAccess.featureCallArgumentsXClosureParserRuleCall_4_0 ||

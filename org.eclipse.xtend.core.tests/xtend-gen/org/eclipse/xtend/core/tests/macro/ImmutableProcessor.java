@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
@@ -29,9 +28,7 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
           for (final MutableFieldDeclaration f : fields) {
             {
               f.markAsInitializedBy(it);
-              String _simpleName = f.getSimpleName();
-              TypeReference _type = f.getType();
-              it.addParameter(_simpleName, _type);
+              it.addParameter(f.getSimpleName(), f.getType());
             }
           }
           final CompilationStrategy _function_1 = (CompilationStrategy.CompilationContext it_1) -> {
@@ -40,10 +37,10 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
               for(final MutableFieldDeclaration f_1 : fields) {
                 _builder.append("this.");
                 String _simpleName = f_1.getSimpleName();
-                _builder.append(_simpleName, "");
+                _builder.append(_simpleName);
                 _builder.append(" = ");
                 String _simpleName_1 = f_1.getSimpleName();
-                _builder.append(_simpleName_1, "");
+                _builder.append(_simpleName_1);
                 _builder.append(";");
                 _builder.newLineIfNotEmpty();
               }
@@ -56,18 +53,16 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
         for (final MutableFieldDeclaration f : fields) {
           {
             f.setFinal(true);
-            String _simpleName = f.getSimpleName();
-            String _firstUpper = StringExtensions.toFirstUpper(_simpleName);
+            String _firstUpper = StringExtensions.toFirstUpper(f.getSimpleName());
             final String getterName = ("get" + _firstUpper);
             final Procedure1<MutableMethodDeclaration> _function_1 = (MutableMethodDeclaration it) -> {
               f.markAsRead();
-              TypeReference _type = f.getType();
-              it.setReturnType(_type);
+              it.setReturnType(f.getType());
               final CompilationStrategy _function_2 = (CompilationStrategy.CompilationContext it_1) -> {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("return ");
-                String _simpleName_1 = f.getSimpleName();
-                _builder.append(_simpleName_1, "");
+                String _simpleName = f.getSimpleName();
+                _builder.append(_simpleName);
                 _builder.append(";");
                 _builder.newLineIfNotEmpty();
                 return _builder;
@@ -78,10 +73,8 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
           }
         }
         final Procedure1<MutableMethodDeclaration> _function_1 = (MutableMethodDeclaration it) -> {
-          TypeReference _primitiveInt = context.getPrimitiveInt();
-          it.setReturnType(_primitiveInt);
-          AnnotationReference _newAnnotationReference = context.newAnnotationReference(Override.class);
-          it.addAnnotation(_newAnnotationReference);
+          it.setReturnType(context.getPrimitiveInt());
+          it.addAnnotation(context.newAnnotationReference(Override.class));
           final CompilationStrategy _function_2 = (CompilationStrategy.CompilationContext it_1) -> {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("final int prime = 31;");
@@ -105,65 +98,64 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
                   if (_equals) {
                     _builder.append("result = prime * result + (");
                     String _simpleName = f_1.getSimpleName();
-                    _builder.append(_simpleName, "");
+                    _builder.append(_simpleName);
                     _builder.append(" ? 1231 : 1237);");
                     _builder.newLineIfNotEmpty();
                   } else {
-                    TypeReference _primitiveInt_1 = context.getPrimitiveInt();
+                    TypeReference _primitiveInt = context.getPrimitiveInt();
                     TypeReference _primitiveChar = context.getPrimitiveChar();
                     TypeReference _primitiveByte = context.getPrimitiveByte();
                     TypeReference _primitiveShort = context.getPrimitiveShort();
-                    TypeReference _type_1 = f_1.getType();
-                    boolean _contains = Collections.<TypeReference>unmodifiableSet(CollectionLiterals.<TypeReference>newHashSet(_primitiveInt_1, _primitiveChar, _primitiveByte, _primitiveShort)).contains(_type_1);
+                    boolean _contains = Collections.<TypeReference>unmodifiableSet(CollectionLiterals.<TypeReference>newHashSet(_primitiveInt, _primitiveChar, _primitiveByte, _primitiveShort)).contains(f_1.getType());
                     if (_contains) {
                       _builder.append("result = prime * result + ");
                       String _simpleName_1 = f_1.getSimpleName();
-                      _builder.append(_simpleName_1, "");
+                      _builder.append(_simpleName_1);
                       _builder.append(";");
                       _builder.newLineIfNotEmpty();
                     } else {
                       TypeReference _primitiveLong = context.getPrimitiveLong();
-                      TypeReference _type_2 = f_1.getType();
-                      boolean _equals_1 = Objects.equal(_primitiveLong, _type_2);
+                      TypeReference _type_1 = f_1.getType();
+                      boolean _equals_1 = Objects.equal(_primitiveLong, _type_1);
                       if (_equals_1) {
                         _builder.append("result = prime * result + (int) (");
                         String _simpleName_2 = f_1.getSimpleName();
-                        _builder.append(_simpleName_2, "");
+                        _builder.append(_simpleName_2);
                         _builder.append(" ^ (");
                         String _simpleName_3 = f_1.getSimpleName();
-                        _builder.append(_simpleName_3, "");
+                        _builder.append(_simpleName_3);
                         _builder.append(" >>> 32));");
                         _builder.newLineIfNotEmpty();
                       } else {
                         TypeReference _primitiveFloat = context.getPrimitiveFloat();
-                        TypeReference _type_3 = f_1.getType();
-                        boolean _equals_2 = Objects.equal(_primitiveFloat, _type_3);
+                        TypeReference _type_2 = f_1.getType();
+                        boolean _equals_2 = Objects.equal(_primitiveFloat, _type_2);
                         if (_equals_2) {
                           _builder.append("result = prime * result + Float.floatToIntBits(");
                           String _simpleName_4 = f_1.getSimpleName();
-                          _builder.append(_simpleName_4, "");
+                          _builder.append(_simpleName_4);
                           _builder.append(");");
                           _builder.newLineIfNotEmpty();
                         } else {
                           TypeReference _primitiveDouble = context.getPrimitiveDouble();
-                          TypeReference _type_4 = f_1.getType();
-                          boolean _equals_3 = Objects.equal(_primitiveDouble, _type_4);
+                          TypeReference _type_3 = f_1.getType();
+                          boolean _equals_3 = Objects.equal(_primitiveDouble, _type_3);
                           if (_equals_3) {
                             _builder.append("result = prime * result + (int) (Double.doubleToLongBits(");
                             String _simpleName_5 = f_1.getSimpleName();
-                            _builder.append(_simpleName_5, "");
+                            _builder.append(_simpleName_5);
                             _builder.append(") ^ (Double.doubleToLongBits(");
                             String _simpleName_6 = f_1.getSimpleName();
-                            _builder.append(_simpleName_6, "");
+                            _builder.append(_simpleName_6);
                             _builder.append(") >>> 32));");
                             _builder.newLineIfNotEmpty();
                           } else {
                             _builder.append("result = prime * result + ((");
                             String _simpleName_7 = f_1.getSimpleName();
-                            _builder.append(_simpleName_7, "");
+                            _builder.append(_simpleName_7);
                             _builder.append("== null) ? 0 : ");
                             String _simpleName_8 = f_1.getSimpleName();
-                            _builder.append(_simpleName_8, "");
+                            _builder.append(_simpleName_8);
                             _builder.append(".hashCode());");
                             _builder.newLineIfNotEmpty();
                           }

@@ -7,6 +7,74 @@ import org.junit.Test
 class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 
 	@Test
+	def testBug402917_01() {
+		assertFormatted(
+			'''
+			package foo
+			
+			class Dully {
+			
+				@Deprecated extension IntegerExtensions y
+				@Deprecated extension IntegerExtensions x
+			
+				def all(@Deprecated extension IntegerExtensions x) {
+					val extension IntegerExtensions foo = null
+					val c = [ extension IntegerExtensions p |
+						123.bitwiseAnd(1)
+					]
+				}
+			}
+			'''
+		)
+	}
+
+	@Test
+	def testBug402917_02() {
+		assertFormatted(
+			'''
+			package foo
+			
+			class Dully {
+			
+				@Deprecated
+				extension IntegerExtensions y
+				@Deprecated extension IntegerExtensions x
+			
+				def all(@Deprecated extension IntegerExtensions x) {
+					val extension IntegerExtensions foo = null
+					val c = [ extension IntegerExtensions p |
+						123.bitwiseAnd(1)
+					]
+				}
+			
+				def all2(extension @Deprecated IntegerExtensions x) {
+				}
+			}
+			''',
+			'''
+			package foo
+			
+			class Dully {
+			
+				@Deprecated 
+				extension 
+				IntegerExtensions y
+				@Deprecated   extension    IntegerExtensions x
+			
+				def all(@Deprecated   extension    IntegerExtensions x) {
+					val extension    IntegerExtensions foo = null
+					val c = [ extension    IntegerExtensions p |
+						123.bitwiseAnd(1)
+					]
+				}
+				def all2(   extension  @Deprecated  IntegerExtensions x) {
+				}	
+			}
+			'''
+		)
+	}
+
+	@Test
 	def testBug398718(){
 		assertFormatted('''
 			package foo
@@ -224,6 +292,72 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 					def void format() {
 						mmmmmmmmmmmmmmmcontainsBlockExprmmmmmmmexprcasesemptymmmmexprmmdefaultmmmmmmmm &&
 							mexprmcasesmexists[multiline] && mexprmmdefaultmmultilineOrInNewLine
+					}
+				}
+			'''
+		]
+	}
+	
+	@Test def bug403823() {
+		tester.assertFormatted [
+			preferences[
+				put(FormatterPreferenceKeys.maxLineWidth, 120)
+			]
+			toBeFormatted = '''
+				class Foo {
+					def void format(String a, String b, String c) {
+						if (a != b)
+							«"'"»«"'"»«"'"»(«"\u00AB"»c«"\u00BB"»)«"'"»«"'"»«"'"»
+						else
+							''
+					}
+				}
+			'''
+		]
+	}
+	
+	@Test def bug403823_1() {
+		tester.assertFormatted [
+			preferences[
+				put(FormatterPreferenceKeys.maxLineWidth, 120)
+			]
+			toBeFormatted = '''
+				class Foo {
+					def void format(String a, String b, String c) {
+						if (a != b) «"'"»«"'"»«"'"»(«"\u00AB"»c«"\u00BB"»)«"'"»«"'"»«"'"» else ''
+					}
+				}
+			'''
+		]
+	}
+	
+	@Test def bug403340() {
+		tester.assertFormatted [
+			preferences[
+				put(FormatterPreferenceKeys.maxLineWidth, 120)
+			]
+			toBeFormatted = '''
+				class Foo {
+					def void format(String v1, String v2) {
+						if (v1 === v2)
+							«"'"»«"'"»«"'"»Same«"'"»«"'"»«"'"»
+						else
+							«"'"»«"'"»«"'"»Not the Same«"'"»«"'"»«"'"»
+					}
+				}
+			'''
+		]
+	}
+	
+	@Test def bug403340_1() {
+		tester.assertFormatted [
+			preferences[
+				put(FormatterPreferenceKeys.maxLineWidth, 120)
+			]
+			toBeFormatted = '''
+				class Foo {
+					def void format(String v1, String v2) {
+						if (v1 === v2) «"'"»«"'"»«"'"»Same«"'"»«"'"»«"'"» else «"'"»«"'"»«"'"»Not the Same«"'"»«"'"»«"'"»
 					}
 				}
 			'''

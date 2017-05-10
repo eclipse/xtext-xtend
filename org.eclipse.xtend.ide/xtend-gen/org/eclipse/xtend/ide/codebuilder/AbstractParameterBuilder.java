@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.common.base.Objects;
 import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
@@ -41,14 +40,11 @@ public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
     {
       this.appendModifiers(appendable);
       if (this.varArgsFlag) {
-        LightweightTypeReference _componentType = ((ArrayTypeReference) this.type).getComponentType();
-        ISourceAppender _appendType = this.appendType(appendable, _componentType, "Object");
-        _appendType.append("...");
+        this.appendType(appendable, ((ArrayTypeReference) this.type).getComponentType(), "Object").append("...");
       } else {
         this.appendType(appendable, this.type, "Object");
       }
-      ISourceAppender _append = appendable.append(" ");
-      _xblockexpression = _append.append(this.name);
+      _xblockexpression = appendable.append(" ").append(this.name);
     }
     return _xblockexpression;
   }
@@ -57,7 +53,7 @@ public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
   
   @Override
   public boolean isValid() {
-    return (((!Objects.equal(this.type, null)) && ((!this.varArgsFlag) || (this.type instanceof ArrayTypeReference))) && super.isValid());
+    return (((this.type != null) && ((!this.varArgsFlag) || (this.type instanceof ArrayTypeReference))) && super.isValid());
   }
   
   @Override

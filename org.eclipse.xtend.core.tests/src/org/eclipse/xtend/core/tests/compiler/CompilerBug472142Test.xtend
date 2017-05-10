@@ -109,11 +109,8 @@ class CompilerBug472142Test extends AbstractXtendCompilerTest {
 			      if (_equals) {
 			        StringConcatenation _builder = new StringConcatenation();
 			        _builder.append("s2");
-			        List<CharSequence> _all = this.all("s", _builder.toString());
-			        List<CharSequence> _subList = _all.subList(1, 1);
-			        CharSequence _head = IterableExtensions.<CharSequence>head(_subList);
-			        String _ext = this.ext(((String) _head));
-			        this.mySeq = _ext;
+			        CharSequence _head = IterableExtensions.<CharSequence>head(this.all("s", _builder.toString()).subList(1, 1));
+			        this.mySeq = this.ext(((String) _head));
 			      }
 			      _xblockexpression = this.mySeq;
 			    }
@@ -156,11 +153,8 @@ class CompilerBug472142Test extends AbstractXtendCompilerTest {
 			  public boolean m() {
 			    StringConcatenation _builder = new StringConcatenation();
 			    _builder.append("s2");
-			    List<CharSequence> _all = this.all("s", _builder.toString());
-			    List<CharSequence> _subList = _all.subList(1, 1);
-			    CharSequence _head = IterableExtensions.<CharSequence>head(_subList);
-			    boolean _ext = this.ext((_head instanceof String));
-			    return this.b = _ext;
+			    CharSequence _head = IterableExtensions.<CharSequence>head(this.all("s", _builder.toString()).subList(1, 1));
+			    return this.b = this.ext((_head instanceof String));
 			  }
 			  
 			  public List<CharSequence> all(final String s, final String s2) {

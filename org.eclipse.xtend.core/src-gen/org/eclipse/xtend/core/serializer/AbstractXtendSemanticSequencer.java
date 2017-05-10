@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010-2017 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -1262,7 +1262,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTypeReferenceNoTypeArgsAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_1(), semanticObject.getType());
+		feeder.accept(grammarAccess.getTypeReferenceNoTypeArgsAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_1(), semanticObject.eGet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, false));
 		feeder.finish();
 	}
 	
@@ -1584,16 +1584,10 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *     XtendEnumLiteral returns XtendEnumLiteral
 	 *
 	 * Constraint:
-	 *     name=ValidID
+	 *     (annotations+=XAnnotation* name=ValidID)
 	 */
 	protected void sequence_XtendEnumLiteral(ISerializationContext context, XtendEnumLiteral semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, XtendPackage.Literals.XTEND_ENUM_LITERAL__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XtendPackage.Literals.XTEND_ENUM_LITERAL__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getXtendEnumLiteralAccess().getNameValidIDParserRuleCall_0(), semanticObject.getName());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

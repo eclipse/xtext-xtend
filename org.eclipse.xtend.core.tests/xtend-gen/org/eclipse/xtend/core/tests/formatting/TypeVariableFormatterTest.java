@@ -28,7 +28,7 @@ public class TypeVariableFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.newLine();
     _builder.append("class Foo");
-    _builder.append(string, "");
+    _builder.append(string);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
@@ -37,8 +37,7 @@ public class TypeVariableFormatterTest extends AbstractXtendFormatterTest {
   }
   
   public void assertTypeParam(final CharSequence toBeFormatted) {
-    CharSequence _paramToFile = this.paramToFile(toBeFormatted);
-    this.assertFormatted(_paramToFile);
+    this.assertFormatted(this.paramToFile(toBeFormatted));
   }
   
   @Test

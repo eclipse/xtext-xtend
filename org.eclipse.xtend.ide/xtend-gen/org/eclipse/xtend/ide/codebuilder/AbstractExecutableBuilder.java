@@ -7,9 +7,7 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -20,7 +18,6 @@ import org.eclipse.xtend.ide.codebuilder.AbstractParameterBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
 import org.eclipse.xtend.ide.codebuilder.VariableNameAcceptor;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
@@ -67,20 +64,13 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   public ISourceAppender appendBody(final ISourceAppender appendable, final String statementSeparator) {
     ISourceAppender _xblockexpression = null;
     {
-      ISourceAppender _append = appendable.append(" {");
-      ISourceAppender _increaseIndentation = _append.increaseIndentation();
-      _increaseIndentation.newLine();
-      boolean _notEquals = (!Objects.equal(this.bodyGenerator, null));
-      if (_notEquals) {
+      appendable.append(" {").increaseIndentation().newLine();
+      if ((this.bodyGenerator != null)) {
         this.bodyGenerator.apply(appendable);
       } else {
-        String _defaultBody = this.defaultBody();
-        appendable.append(_defaultBody);
+        appendable.append(this.defaultBody());
       }
-      ISourceAppender _append_1 = appendable.append(statementSeparator);
-      ISourceAppender _decreaseIndentation = _append_1.decreaseIndentation();
-      ISourceAppender _newLine = _decreaseIndentation.newLine();
-      _xblockexpression = _newLine.append("}");
+      _xblockexpression = appendable.append(statementSeparator).decreaseIndentation().newLine().append("}");
     }
     return _xblockexpression;
   }
@@ -103,13 +93,10 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     {
       boolean _isEmpty = this.parameterBuilders.isEmpty();
       if (_isEmpty) {
-        ArrayList<AbstractParameterBuilder> _newArrayList = CollectionLiterals.<AbstractParameterBuilder>newArrayList();
-        this.parameterBuilders = _newArrayList;
+        this.parameterBuilders = CollectionLiterals.<AbstractParameterBuilder>newArrayList();
       }
-      JvmDeclaredType _owner = this.getOwner();
-      final AbstractParameterBuilder builder = this._codeBuilderFactory.createParameterBuilder(_owner);
-      EObject _context = this.getContext();
-      builder.setContext(_context);
+      final AbstractParameterBuilder builder = this._codeBuilderFactory.createParameterBuilder(this.getOwner());
+      builder.setContext(this.getContext());
       this.parameterBuilders.add(builder);
       _xblockexpression = builder;
     }
@@ -134,15 +121,11 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
           final AbstractParameterBuilder parameterBuilder = this.parameterBuilders.get((i).intValue());
           final VariableNameAcceptor acceptor = new VariableNameAcceptor(notAllowed);
           String _name = parameterBuilder.getName();
-          boolean _equals = Objects.equal(_name, null);
-          if (_equals) {
-            LightweightTypeReference _type = parameterBuilder.getType();
-            String _identifier = _type.getIdentifier();
-            EObject _context = this.getContext();
-            this._jdtVariableCompletions.getVariableProposals(_identifier, _context, 
+          boolean _tripleEquals = (_name == null);
+          if (_tripleEquals) {
+            this._jdtVariableCompletions.getVariableProposals(parameterBuilder.getType().getIdentifier(), this.getContext(), 
               JdtVariableCompletions.VariableType.PARAMETER, notAllowed, acceptor);
-            String _variableName = acceptor.getVariableName();
-            parameterBuilder.setName(_variableName);
+            parameterBuilder.setName(acceptor.getVariableName());
           }
           parameterBuilder.build(appendable);
           int _size_1 = this.parameterBuilders.size();
@@ -168,8 +151,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
         do {
           {
             final LightweightTypeReference typeRef = iterator.next();
-            boolean _notEquals = (!Objects.equal(typeRef, null));
-            if (_notEquals) {
+            if ((typeRef != null)) {
               this.appendType(appendable, typeRef, "Exception");
             }
             boolean _hasNext_1 = iterator.hasNext();

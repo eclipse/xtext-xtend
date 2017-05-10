@@ -90,8 +90,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public String n() {
-			    String[] _m = this.m(Collections.<String[]>unmodifiableList(CollectionLiterals.<String[]>newArrayList()));
-			    return _m[5];
+			    return this.m(Collections.<String[]>unmodifiableList(CollectionLiterals.<String[]>newArrayList()))[5];
 			  }
 			}
 		''')
@@ -133,8 +132,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''','''
-			import java.util.Iterator;
-			
 			@SuppressWarnings("all")
 			public class Bug {
 			  public <T extends Object> void m(final T t) {
@@ -144,9 +141,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public void n(final Iterable<String> it) {
-			    Iterator<String> _iterator = it.iterator();
-			    String _next = _iterator.next();
-			    this.m(_next);
+			    this.m(it.iterator().next());
 			  }
 			}
 		''')
@@ -173,8 +168,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public void n(final Iterable<String> it) {
-			    String _head = IterableExtensions.<String>head(it);
-			    this.m(_head);
+			    this.m(IterableExtensions.<String>head(it));
 			  }
 			}
 		''')
@@ -352,8 +346,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public void m() {
 			    A a = null;
 			    if ((a instanceof B)) {
-			      A _get = ((B)a).get();
-			      a = _get;
+			      a = ((B)a).get();
 			    }
 			  }
 			}
@@ -384,8 +377,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public void m() {
 			    A a = null;
 			    while ((a instanceof B)) {
-			      A _get = ((B)a).get();
-			      a = _get;
+			      a = ((B)a).get();
 			    }
 			  }
 			}
@@ -897,7 +889,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Collections;
-			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -910,8 +901,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			        return it.toString();
 			      }
 			    };
-			    List<String> _map = ListExtensions.<Integer, String>map(Collections.<Integer>unmodifiableList(CollectionLiterals.<Integer>newArrayList(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3))), _function);
-			    _map.toString();
+			    ListExtensions.<Integer, String>map(Collections.<Integer>unmodifiableList(CollectionLiterals.<Integer>newArrayList(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3))), _function).toString();
 			  }
 			}
 		''')
@@ -933,7 +923,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import org.eclipse.xtext.common.types.JvmType;
 			import org.eclipse.xtext.common.types.JvmTypeReference;
 			import org.eclipse.xtext.xbase.compiler.ErrorSafeExtensions;
 			import org.eclipse.xtext.xbase.compiler.LoopParams;
@@ -954,9 +943,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    };
 			    final Procedure2<JvmTypeReference, ITreeAppendable> _function_1 = new Procedure2<JvmTypeReference, ITreeAppendable>() {
 			      public void apply(final JvmTypeReference it, final ITreeAppendable app) {
-			        ITreeAppendable _trace = app.trace(it);
-			        JvmType _type = it.getType();
-			        _trace.append(_type);
+			        app.trace(it).append(it.getType());
 			      }
 			    };
 			    this._errorSafeExtensions.<JvmTypeReference>forEachSafely(it, refs, _function, _function_1);
@@ -1055,7 +1042,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import java.util.Collection;
 			import java.util.List;
 			import java.util.Map;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -1066,9 +1052,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  private List<String> list = CollectionLiterals.<String>newArrayList();
 			  
 			  public List<String> doSomething(final Map<String, String> mapping) {
-			    Collection<String> _values = mapping.values();
-			    List<String> _sort = IterableExtensions.<String>sort(_values);
-			    return this.list = _sort;
+			    return this.list = IterableExtensions.<String>sort(mapping.values());
 			  }
 			}
 		''')
@@ -1627,13 +1611,12 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			        return null;
 			      }
 			    };
-			    Iterable<?> _flatMap = this.<String, Object>flatMap(iterable, _function);
 			    final Function1<Object, Integer> _function_1 = new Function1<Object, Integer>() {
 			      public Integer apply(final Object it) {
 			        return Integer.valueOf(it.hashCode());
 			      }
 			    };
-			    return IterableExtensions.sortBy(_flatMap, _function_1);
+			    return IterableExtensions.sortBy(this.<String, Object>flatMap(iterable, _function), _function_1);
 			  }
 			  
 			  public <A extends Object, B extends Object> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {
@@ -1666,13 +1649,12 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			        return it;
 			      }
 			    };
-			    Iterable<? extends String> _flatMap = this.<String, String>flatMap(iterable, _function);
 			    final Function1<String, Integer> _function_1 = new Function1<String, Integer>() {
 			      public Integer apply(final String it) {
 			        return Integer.valueOf(it.hashCode());
 			      }
 			    };
-			    IterableExtensions.sortBy(_flatMap, _function_1);
+			    IterableExtensions.sortBy(this.<String, String>flatMap(iterable, _function), _function_1);
 			  }
 			  
 			  public <A extends Object, B extends Object> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {
@@ -1705,13 +1687,12 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			        return it.toUpperCase();
 			      }
 			    };
-			    Iterable<? extends String> _flatMap = this.<String, String>flatMap(iterable, _function);
 			    final Function1<String, Integer> _function_1 = new Function1<String, Integer>() {
 			      public Integer apply(final String it) {
 			        return Integer.valueOf(it.length());
 			      }
 			    };
-			    IterableExtensions.sortBy(_flatMap, _function_1);
+			    IterableExtensions.sortBy(this.<String, String>flatMap(iterable, _function), _function_1);
 			  }
 			  
 			  public <A extends Object, B extends Object> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {
@@ -1734,21 +1715,17 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 		''', '''
 			import java.util.HashMap;
 			import java.util.Map;
-			import java.util.Set;
 			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class MyMap<K extends Object, V extends Object> extends HashMap<K, V> {
 			  public void putAll(final Map<? extends K, ? extends V> t) {
-			    Set<? extends Map.Entry<? extends K, ? extends V>> _entrySet = t.entrySet();
 			    final Consumer<Map.Entry<? extends K, ? extends V>> _function = new Consumer<Map.Entry<? extends K, ? extends V>>() {
 			      public void accept(final Map.Entry<? extends K, ? extends V> it) {
-			        K _key = it.getKey();
-			        V _value = it.getValue();
-			        MyMap.this.put(_key, _value);
+			        MyMap.this.put(it.getKey(), it.getValue());
 			      }
 			    };
-			    _entrySet.forEach(_function);
+			    t.entrySet().forEach(_function);
 			  }
 			}
 		''')
@@ -1793,9 +1770,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  private final T _weight;
 			  
 			  public int compareTo(final Weight w) {
-			    T _weight = this.getWeight();
-			    Comparable _weight_1 = w.getWeight();
-			    return _weight.compareTo(_weight_1);
+			    return this.getWeight().compareTo(w.getWeight());
 			  }
 			  
 			  public Weight(final T weight) {
@@ -1866,9 +1841,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  private final T _weight;
 			  
 			  public int compareTo(final Weight<T> w) {
-			    T _weight = this.getWeight();
-			    T _weight_1 = w.getWeight();
-			    return _weight.compareTo(_weight_1);
+			    return this.getWeight().compareTo(w.getWeight());
 			  }
 			  
 			  public Weight(final T weight) {
@@ -1939,9 +1912,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  private final T _weight;
 			  
 			  public int compareTo(final Weight<T> w) {
-			    T _weight = this.getWeight();
-			    T _weight_1 = w.getWeight();
-			    return _weight.compareTo(_weight_1);
+			    return this.getWeight().compareTo(w.getWeight());
 			  }
 			  
 			  public Weight(final T weight) {
@@ -2012,9 +1983,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  private final T _weight;
 			  
 			  public int compareTo(final Weight w) {
-			    T _weight = this.getWeight();
-			    Comparable _weight_1 = w.getWeight();
-			    return _weight.compareTo(_weight_1);
+			    return this.getWeight().compareTo(w.getWeight());
 			  }
 			  
 			  public Weight(final T weight) {
@@ -2350,7 +2319,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import com.google.common.util.concurrent.ListenableFuture;
-			import com.google.common.util.concurrent.ListeningExecutorService;
 			import com.google.common.util.concurrent.MoreExecutors;
 			import java.util.concurrent.Callable;
 			import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -2360,8 +2328,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  private final Function0<? extends O> operation = null;
 			  
 			  public ListenableFuture<O> run() {
-			    ListeningExecutorService _sameThreadExecutor = MoreExecutors.sameThreadExecutor();
-			    final ListenableFuture<O> result = _sameThreadExecutor.<O>submit(new Callable<O>() {
+			    final ListenableFuture<O> result = MoreExecutors.sameThreadExecutor().<O>submit(new Callable<O>() {
 			        public O call() {
 			          return Foo.this.operation.apply();
 			        }
@@ -2675,8 +2642,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				    {
 				      final Amount<Length> w = Amount.<Length>valueOf(100, SI.MILLIMETER);
 				      final Amount<Length> h = Amount.<Length>valueOf(50, SI.MILLIMETER);
-				      Amount<Length> _plus = w.plus(h);
-				      final Amount<Length> perim = _plus.times(2);
+				      final Amount<Length> perim = w.plus(h).times(2);
 				      _xblockexpression = InputOutput.<Amount<Length>>println(perim);
 				    }
 				    return _xblockexpression;
@@ -3011,8 +2977,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public void test() {
 			    final Object header = this.unboundedMockHeaderAccess.getHeader();
 			    final IExpectationSetters<Object> exp1 = Y.<Object>expect(header);
-			    Object _header = this.unboundedMockHeaderAccess.getHeader();
-			    final IExpectationSetters<Object> exp2 = Y.<Object>expect(_header);
+			    final IExpectationSetters<Object> exp2 = Y.<Object>expect(this.unboundedMockHeaderAccess.getHeader());
 			  }
 			}
 		''')

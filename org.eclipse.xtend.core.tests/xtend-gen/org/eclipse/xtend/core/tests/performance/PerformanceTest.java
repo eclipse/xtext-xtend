@@ -9,13 +9,11 @@ package org.eclipse.xtend.core.tests.performance;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.performance.GeneratorConfig;
 import org.eclipse.xtend.core.tests.performance.XtendFileGenerator;
-import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -24,7 +22,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Ignore;
-import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -34,9 +31,6 @@ import org.junit.Test;
 public class PerformanceTest extends AbstractXtendTestCase {
   @Inject
   private XtendFileGenerator fileGenerator;
-  
-  @Rule
-  public final StopwatchRule rule = new StopwatchRule(true);
   
   /**
    * Sven 2013-01-24 (old typesystem)
@@ -505,12 +499,10 @@ public class PerformanceTest extends AbstractXtendTestCase {
       final int num = 50;
       final Map<String, ? extends CharSequence> map = this.fileGenerator.getDependencies();
       final List<String> files = CollectionLiterals.<String>newArrayList();
-      Collection<? extends CharSequence> _values = map.values();
       final Function1<CharSequence, String> _function = (CharSequence it) -> {
         return it.toString();
       };
-      Iterable<String> _map = IterableExtensions.map(_values, _function);
-      Iterables.<String>addAll(files, _map);
+      Iterables.<String>addAll(files, IterableExtensions.map(map.values(), _function));
       final GeneratorConfig config = new GeneratorConfig();
       config.packageName = "generated";
       config.noTypeInference = false;
@@ -518,9 +510,7 @@ public class PerformanceTest extends AbstractXtendTestCase {
       for (final Integer i : _upTo) {
         {
           config.className = ("MyGeneratedType" + i);
-          CharSequence _contents = this.fileGenerator.getContents(config);
-          String _string = _contents.toString();
-          files.add(_string);
+          files.add(this.fileGenerator.getContents(config).toString());
         }
       }
       final Stopwatches.StoppedTask task = Stopwatches.forTask("PerformanceTest.doCompile");

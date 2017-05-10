@@ -18,7 +18,6 @@ import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.util.Triple
 import org.eclipse.xtext.util.Tuples
-import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
@@ -185,7 +184,7 @@ class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<JvmTypeP
 			}
 			try {
 				val mappedReference = getTypeParameterMapping().get(type);
-				if (mappedReference != null) {
+				if (mappedReference !== null) {
 					return mappedReference.typeReference.accept(this, visiting)
 				} else {
 					val result = new SimpleUnboundTypeReference(owner, type, new Object)

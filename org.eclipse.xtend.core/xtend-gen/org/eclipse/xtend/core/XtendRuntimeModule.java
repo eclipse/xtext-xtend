@@ -5,9 +5,6 @@ package org.eclipse.xtend.core;
 
 import com.google.inject.Binder;
 import com.google.inject.Provider;
-import com.google.inject.binder.AnnotatedBindingBuilder;
-import com.google.inject.binder.LinkedBindingBuilder;
-import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import org.eclipse.xtend.core.AbstractXtendRuntimeModule;
 import org.eclipse.xtend.core.compiler.UnicodeAwarePostProcessor;
@@ -45,6 +42,7 @@ import org.eclipse.xtend.core.resource.XtendResourceDescriptionStrategy;
 import org.eclipse.xtend.core.scoping.AnonymousClassConstructorScopes;
 import org.eclipse.xtend.core.scoping.XtendImportedNamespaceScopeProvider;
 import org.eclipse.xtend.core.serializer.XtendSerializerScopeProvider;
+import org.eclipse.xtend.core.tasks.XtendTaskFinder;
 import org.eclipse.xtend.core.tasks.XtendTaskTagProvider;
 import org.eclipse.xtend.core.typesystem.LocalClassAwareTypeNames;
 import org.eclipse.xtend.core.typesystem.TypeDeclarationAwareBatchTypeResolver;
@@ -86,6 +84,7 @@ import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
+import org.eclipse.xtext.tasks.ITaskFinder;
 import org.eclipse.xtext.tasks.ITaskTagProvider;
 import org.eclipse.xtext.validation.CompositeEValidator;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
@@ -131,17 +130,12 @@ public class XtendRuntimeModule extends AbstractXtendRuntimeModule {
   
   @Override
   public void configureIScopeProviderDelegate(final Binder binder) {
-    AnnotatedBindingBuilder<IScopeProvider> _bind = binder.<IScopeProvider>bind(IScopeProvider.class);
-    Named _named = Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE);
-    LinkedBindingBuilder<IScopeProvider> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.to(XtendImportedNamespaceScopeProvider.class);
+    binder.<IScopeProvider>bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(XtendImportedNamespaceScopeProvider.class);
   }
   
   @Override
   public void configureSerializerIScopeProvider(final Binder binder) {
-    AnnotatedBindingBuilder<IScopeProvider> _bind = binder.<IScopeProvider>bind(IScopeProvider.class);
-    LinkedBindingBuilder<IScopeProvider> _annotatedWith = _bind.annotatedWith(SerializerScopeProviderBinding.class);
-    _annotatedWith.to(
+    binder.<IScopeProvider>bind(IScopeProvider.class).annotatedWith(SerializerScopeProviderBinding.class).to(
       XtendSerializerScopeProvider.class);
   }
   
@@ -240,10 +234,7 @@ public class XtendRuntimeModule extends AbstractXtendRuntimeModule {
   @Override
   public void configure(final Binder binder) {
     super.configure(binder);
-    AnnotatedBindingBuilder<Boolean> _bind = binder.<Boolean>bind(boolean.class);
-    Named _named = Names.named(CompositeEValidator.USE_EOBJECT_VALIDATOR);
-    LinkedBindingBuilder<Boolean> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.toInstance(Boolean.valueOf(false));
+    binder.<Boolean>bind(boolean.class).annotatedWith(Names.named(CompositeEValidator.USE_EOBJECT_VALIDATOR)).toInstance(Boolean.valueOf(false));
   }
   
   @Override
@@ -261,8 +252,7 @@ public class XtendRuntimeModule extends AbstractXtendRuntimeModule {
    */
   @Override
   public void configureIResourceDescriptions(final Binder binder) {
-    AnnotatedBindingBuilder<IResourceDescriptions> _bind = binder.<IResourceDescriptions>bind(IResourceDescriptions.class);
-    _bind.to(EagerResourceSetBasedResourceDescriptions.class);
+    binder.<IResourceDescriptions>bind(IResourceDescriptions.class).to(EagerResourceSetBasedResourceDescriptions.class);
   }
   
   public Class<? extends IDValueConverter> bindIDValueConverter() {
@@ -297,15 +287,11 @@ public class XtendRuntimeModule extends AbstractXtendRuntimeModule {
   
   @Override
   public void configureRuntimeLexer(final Binder binder) {
-    AnnotatedBindingBuilder<Lexer> _bind = binder.<Lexer>bind(Lexer.class);
-    Named _named = Names.named(LexerBindings.RUNTIME);
-    LinkedBindingBuilder<Lexer> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.to(DisabledAntlrLexer.class);
-    AnnotatedBindingBuilder<DisabledAntlrLexer> _bind_1 = binder.<DisabledAntlrLexer>bind(DisabledAntlrLexer.class);
+    binder.<Lexer>bind(Lexer.class).annotatedWith(Names.named(LexerBindings.RUNTIME)).to(DisabledAntlrLexer.class);
     final Provider<DisabledAntlrLexer> _function = () -> {
       return new DisabledAntlrLexer(null);
     };
-    _bind_1.toProvider(_function);
+    binder.<DisabledAntlrLexer>bind(DisabledAntlrLexer.class).toProvider(_function);
   }
   
   public Class<? extends XbaseValueConverterService.IntUnderscoreValueConverter> bindIntUnderscoreValueConverter() {
@@ -376,5 +362,9 @@ public class XtendRuntimeModule extends AbstractXtendRuntimeModule {
   
   public Class<? extends IShouldGenerate> bindIShouldGenerate() {
     return IShouldGenerate.Always.class;
+  }
+  
+  public Class<? extends ITaskFinder> bindITaskFinder() {
+    return XtendTaskFinder.class;
   }
 }

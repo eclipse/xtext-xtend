@@ -3,7 +3,6 @@
  */
 package org.eclipse.xtend.core.tests.smoke;
 
-import com.google.common.base.Objects;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -16,17 +15,16 @@ public class Case_9 extends Case_8 {
   protected CharSequence _generateTypeRef(final ENamedElement c) {
     CharSequence _xifexpression = null;
     EObject _eContainer = c.eContainer();
-    boolean _notEquals = (!Objects.equal(_eContainer, null));
-    if (_notEquals) {
-      EObject _eContainer_1 = c.eContainer();
-      _xifexpression = this.generateTypeRef(_eContainer_1);
+    boolean _tripleNotEquals = (_eContainer != null);
+    if (_tripleNotEquals) {
+      _xifexpression = this.generateTypeRef(c.eContainer());
     } else {
       CharSequence _xifexpression_1 = null;
       boolean _eIsProxy = c.eIsProxy();
       if (_eIsProxy) {
         StringConcatenation _builder = new StringConcatenation();
         String _name = c.getName();
-        _builder.append(_name, "");
+        _builder.append(_name);
         _xifexpression_1 = _builder;
       } else {
         StringConcatenation _builder_1 = new StringConcatenation();
@@ -38,8 +36,7 @@ public class Case_9 extends Case_8 {
   }
   
   protected CharSequence _generateTypeRef(final EObject o) {
-    EObject _eContainer = o.eContainer();
-    return this.generateTypeRef(_eContainer);
+    return this.generateTypeRef(o.eContainer());
   }
   
   @Override

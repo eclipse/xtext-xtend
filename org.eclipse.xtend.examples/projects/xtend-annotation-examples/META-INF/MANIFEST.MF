@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Active Annotations Example
 Bundle-SymbolicName: xtend-annotation-examples
-Bundle-Version: 2.11.0.qualifier
+Bundle-Version: 2.12.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xtend.lib,
  com.google.guava;bundle-version="[14.0.0,19.0.0)",
@@ -11,8 +11,7 @@ Require-Bundle: org.eclipse.xtend.lib,
  org.eclipse.xtend.core,
  org.eclipse.xtext,
  org.apache.log4j;bundle-version="1.2.15",
- org.eclipse.xtext.xbase.junit,
- org.eclipse.xtext.junit4,
+ org.eclipse.xtext.xbase.testing,
  org.eclipse.jdt.core,
  org.eclipse.emf.codegen;bundle-version="2.10.0",
  org.objectweb.asm;bundle-version="5.0.1";resolution:=optional
@@ -20,4 +19,5 @@ Export-Package: extract,
  i18n,
  lazy,
  observables
+Bundle-Vendor: Eclipse Xtext
 

@@ -20,7 +20,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.append("import com.google.common.annotations.*");
     _builder.newLine();
     _builder.newLine();
-    _builder.append(ann, "");
+    _builder.append(ann);
     _builder.newLineIfNotEmpty();
     _builder.append("class bar {");
     _builder.newLine();
@@ -30,9 +30,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   }
   
   protected void assertFormattedAnnotation(final CharSequence expectation, final CharSequence actual) {
-    CharSequence _file = this.toFile(expectation);
-    CharSequence _file_1 = this.toFile(actual);
-    this.assertFormatted(_file, _file_1);
+    this.assertFormatted(this.toFile(expectation), this.toFile(actual));
   }
   
   @Test

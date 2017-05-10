@@ -2,15 +2,18 @@
  * Base project version and versions of common dependencies.
  */
 
-version = '2.11.0-SNAPSHOT'
+version = '2.12.0-SNAPSHOT'
 
 ext.versions = [
 	'xtext': version,
-	'ideaVersion' : project.hasProperty('ideaEAP') ? "LATEST-EAP-SNAPSHOT" : "145.972.3",
-	'ideaGradlePluginVersion' : '1.0.0-RC6',
-	'jdtCore': '[3.6.0,4)',
+	'xtext_gradle_plugin': '1.0.17',
+	'idea' : project.hasProperty('ideaEAP') ? 'LATEST-EAP-SNAPSHOT' : '145.972.3',
+	'jdtCore': '3.12.2',
+	'jdtCompilerApt': '1.2.100',
 	'emfMwe2': '2.9.0.201605261059',
+	'emfEcore': '[2.10.2,3)',
 	'xpand': '2.0.0',
+	'guice': '3.0',
 	'asm': '5.0.1',
 	'ant': '[1.7,2)'
 ]

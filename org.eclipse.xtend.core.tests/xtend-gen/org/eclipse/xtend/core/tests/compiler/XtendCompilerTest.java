@@ -9,9 +9,6 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -24,6 +21,8 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class XtendCompilerTest extends AbstractXtendCompilerTest {
+  private static String RS = "\'\'\'";
+  
   @Inject
   protected IFilePostProcessor postProcessor;
   
@@ -499,8 +498,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import java.util.HashSet;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Set;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.common.types.JvmTypeParameter;");
@@ -533,10 +530,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public LightweightTypeReference substitute(final LightweightTypeReference original) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("HashSet<JvmTypeParameter> _newHashSet = CollectionLiterals.<JvmTypeParameter>newHashSet();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, _newHashSet);");
+    _builder_1.append("return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, CollectionLiterals.<JvmTypeParameter>newHashSet());");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -2832,6 +2826,142 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testEnumIssue165() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("enum Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("* This is FOO");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("FOO,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("* This is BAR");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("BAR,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("* This is BAZ");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("BAZ");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public enum Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("* This is FOO");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("FOO,");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("* This is BAR");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("BAR,");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("* This is BAZ");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("BAZ;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testEnum476555() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("enum Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Deprecated FOO, @SuppressWarnings(\"just-a-test\") BAR, BAZ");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public enum Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Deprecated");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("FOO,");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@SuppressWarnings(\"just-a-test\")");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("BAR,");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("BAZ;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testEnumBug428707() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("enum E {");
@@ -3065,7 +3195,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("for(final char it_1 : _charArray) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("_builder.append(it_1, \"\");");
+    _builder_1.append("_builder.append(it_1);");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_builder.newLineIfNotEmpty();");
@@ -5644,8 +5774,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.io.IOException;");
     _builder_1.newLine();
-    _builder_1.append("import java.util.ArrayList;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Collections;");
     _builder_1.newLine();
     _builder_1.append("import java.util.List;");
@@ -5673,9 +5801,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("try {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(\"file1.ext\");");
-    _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.append("final Function1<String, File> _function = new Function1<String, File>() {");
     _builder_1.newLine();
     _builder_1.append("        ");
@@ -5685,10 +5810,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("try {");
     _builder_1.newLine();
     _builder_1.append("            ");
-    _builder_1.append("File _file = new File(f);");
-    _builder_1.newLine();
-    _builder_1.append("            ");
-    _builder_1.append("return _file.getCanonicalFile();");
+    _builder_1.append("return new File(f).getCanonicalFile();");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("} catch (Throwable _e) {");
@@ -5706,7 +5828,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xtrycatchfinallyexpression = ListExtensions.<String, File>map(_newArrayList, _function);");
+    _builder_1.append("_xtrycatchfinallyexpression = ListExtensions.<String, File>map(CollectionLiterals.<String>newArrayList(\"file1.ext\"), _function);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("} catch (final Throwable _t) {");
@@ -5763,8 +5885,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import java.util.ArrayList;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Map;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
@@ -5787,9 +5907,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Map<Object, String> bar() {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Function1<String, Object> _function = new Function1<String, Object>() {");
@@ -5819,7 +5936,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return IterableExtensions.<Object, String>toMap(_newArrayList, _function);");
+    _builder_1.append("return IterableExtensions.<Object, String>toMap(CollectionLiterals.<String>newArrayList(), _function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -8742,10 +8859,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public void test(final String x, final String y, final int integer) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Foo _foo = new Foo();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("_foo.test(this.foo, Foo.FOO, Integer.MAX_VALUE);");
+    _builder_1.append("new Foo().test(this.foo, Foo.FOO, Integer.MAX_VALUE);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -9162,10 +9276,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public String client(final CharSequence c) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("CharSequence _m = this.m();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return this.client(_m);");
+    _builder_1.append("return this.client(this.m());");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -9492,10 +9603,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("_builder.append(\"SomeString\");");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("String _println = InputOutput.<String>println(_builder.toString());");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("System.out.println(_println);");
+    _builder.append("System.out.println(InputOutput.<String>println(_builder.toString()));");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");
@@ -9504,6 +9612,206 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.newLine();
     this.assertCompilesTo(
       "class Foo { def test(){ System::out.println(println(\'\'\'SomeString\'\'\')) } }", _builder);
+  }
+  
+  @Test
+  public void testRichStringMemberFeatureCall_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void bar () {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("x = ");
+    _builder.append(XtendCompilerTest.RS, "\t\t");
+    _builder.append("Hello World");
+    _builder.append(XtendCompilerTest.RS, "\t\t");
+    _builder.append(".toString");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void setX (String s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("StringConcatenation _builder = new StringConcatenation();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("_builder.append(\"Hello World\");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.setX(_builder.toString());");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void setX(final String s) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testRichStringMemberFeatureCall_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void bar () {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("x = ");
+    _builder.append(XtendCompilerTest.RS, "\t\t");
+    _builder.append("Hello World");
+    _builder.append(XtendCompilerTest.RS, "\t\t");
+    _builder.append(".toString.trim");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void setX (String s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("StringConcatenation _builder = new StringConcatenation();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("_builder.append(\"Hello World\");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.setX(_builder.toString().trim());");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void setX(final String s) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testRichStringEmptyEmission_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
+    _builder.append("public class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public CharSequence test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("StringConcatenation _builder = new StringConcatenation();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("_builder.append(\"Hello \");");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("_builder.append(\"World!\");");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return _builder;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertCompilesTo(
+      "class Foo { def test() \'\'\'Hello «null»World!\'\'\' }", _builder);
+  }
+  
+  @Test
+  public void testRichStringEmptyEmission_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
+    _builder.append("public class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public CharSequence test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("StringConcatenation _builder = new StringConcatenation();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("_builder.append(\"Hello \");");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("_builder.append(\"World!\");");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return _builder;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertCompilesTo(
+      "class Foo { def test() \'\'\'Hello «\"\"»World!\'\'\' }", _builder);
   }
   
   @Test
@@ -9868,29 +10176,16 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
       _builder_2.append("}");
       _builder_2.newLine();
       final String expectedBazClass = _builder_2.toString();
-      String _string = input.toString();
-      final XtendFile file = this.file(_string, true);
-      Resource _eResource = file.eResource();
-      EList<EObject> _contents = _eResource.getContents();
-      Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
-      final JvmDeclaredType barType = IterableExtensions.<JvmDeclaredType>head(_filter);
-      Resource _eResource_1 = file.eResource();
-      EList<EObject> _contents_1 = _eResource_1.getContents();
-      Iterable<JvmDeclaredType> _filter_1 = Iterables.<JvmDeclaredType>filter(_contents_1, JvmDeclaredType.class);
-      final JvmDeclaredType bazType = IterableExtensions.<JvmDeclaredType>last(_filter_1);
+      final XtendFile file = this.file(input.toString(), true);
+      final JvmDeclaredType barType = IterableExtensions.<JvmDeclaredType>head(Iterables.<JvmDeclaredType>filter(file.eResource().getContents(), JvmDeclaredType.class));
+      final JvmDeclaredType bazType = IterableExtensions.<JvmDeclaredType>last(Iterables.<JvmDeclaredType>filter(file.eResource().getContents(), JvmDeclaredType.class));
       final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(barType);
       CharSequence barJavaCode = this.generator.generateType(barType, generatorConfig);
-      CharSequence _postProcess = this.postProcessor.postProcess(null, barJavaCode);
-      barJavaCode = _postProcess;
+      barJavaCode = this.postProcessor.postProcess(null, barJavaCode);
       CharSequence bazJavaCode = this.generator.generateType(bazType, generatorConfig);
-      CharSequence _postProcess_1 = this.postProcessor.postProcess(null, bazJavaCode);
-      bazJavaCode = _postProcess_1;
-      String _string_1 = expectedBarClass.toString();
-      String _string_2 = barJavaCode.toString();
-      XtendCompilerTest.assertEquals(_string_1, _string_2);
-      String _string_3 = expectedBazClass.toString();
-      String _string_4 = bazJavaCode.toString();
-      XtendCompilerTest.assertEquals(_string_3, _string_4);
+      bazJavaCode = this.postProcessor.postProcess(null, bazJavaCode);
+      XtendCompilerTest.assertEquals(expectedBarClass.toString(), barJavaCode.toString());
+      XtendCompilerTest.assertEquals(expectedBazClass.toString(), bazJavaCode.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -10271,10 +10566,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public Object bar() throws Throwable {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("String _string = new String();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("Object _get = this._reflectExtensions.<Object>get(_string, \"toString\");");
+    _builder_1.append("Object _get = this._reflectExtensions.<Object>get(new String(), \"toString\");");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("Object _get_1 = null;");
@@ -10335,10 +10627,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("String _elvis = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Foo _foo = new Foo();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("String _field = _foo.field;");
+    _builder_1.append("String _field = new Foo().field;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("String _string = null;");

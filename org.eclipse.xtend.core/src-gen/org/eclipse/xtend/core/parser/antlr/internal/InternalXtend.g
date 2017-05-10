@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010-2017 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -4167,21 +4167,42 @@ ruleXtendEnumLiteral returns [EObject current=null]
 }:
 	(
 		(
-			{
-				newCompositeNode(grammarAccess.getXtendEnumLiteralAccess().getNameValidIDParserRuleCall_0());
-			}
-			lv_name_0_0=ruleValidID
-			{
-				if ($current==null) {
-					$current = createModelElementForParent(grammarAccess.getXtendEnumLiteralRule());
+			(
+				{
+					newCompositeNode(grammarAccess.getXtendEnumLiteralAccess().getAnnotationsXAnnotationParserRuleCall_0_0());
 				}
-				set(
-					$current,
-					"name",
-					lv_name_0_0,
-					"org.eclipse.xtend.core.Xtend.ValidID");
-				afterParserOrEnumRuleCall();
-			}
+				lv_annotations_0_0=ruleXAnnotation
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getXtendEnumLiteralRule());
+					}
+					add(
+						$current,
+						"annotations",
+						lv_annotations_0_0,
+						"org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations.XAnnotation");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getXtendEnumLiteralAccess().getNameValidIDParserRuleCall_1_0());
+				}
+				lv_name_1_0=ruleValidID
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getXtendEnumLiteralRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtend.core.Xtend.ValidID");
+					afterParserOrEnumRuleCall();
+				}
+			)
 		)
 	)
 ;

@@ -14,11 +14,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.jvmmodel.AnonymousClassUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -59,8 +57,6 @@ import org.eclipse.xtext.xbase.scoping.batch.ConstructorTypeScopeWrapper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
-import org.eclipse.xtext.xtype.XtypePackage;
-
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -113,7 +109,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 				if (resourceDescription != null) {
 					typeScope = new LocalResourceFilteringTypeScope(typeScope, resourceDescription);
 				}
-				RecordingTypeScope recordingTypeScope = new RecordingTypeScope(typeScope, getImportedNamesSet(resource));
+				RecordingTypeScope recordingTypeScope = new RecordingTypeScope(typeScope, getImportedNamesSet(resource), getQualifiedNameConverter());
 				//TODO this scope doesn't support binary syntax for inner types. It should be a KnownTypes scope which doesn't allow simple names
 				// Unfortunately I cannot use a RecordingTypeScope as a parent as it is not compatible...
 				IScope scope = SelectableBasedScope.createScope(recordingTypeScope, getAllDescriptions(resource), reference.getEReferenceType(), false);
@@ -131,7 +127,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 					if (resourceDescription != null) {
 						typeScope = new LocalResourceFilteringTypeScope(typeScope, resourceDescription);
 					}
-					RecordingTypeScope recordingTypeScope = new RecordingTypeScope(typeScope, getImportedNamesSet(resource));
+					RecordingTypeScope recordingTypeScope = new RecordingTypeScope(typeScope, getImportedNamesSet(resource), getQualifiedNameConverter());
 					AbstractScope rootTypeScope = getRootTypeScope(xtendFile, recordingTypeScope);
 					AbstractScope importScope = getImportScope(xtendFile.getImportSection(), rootTypeScope, recordingTypeScope);
 					AbstractScope localTypes = getResourceTypeScope(xtendFile.eResource(), xtendFile.getPackage(), importScope);

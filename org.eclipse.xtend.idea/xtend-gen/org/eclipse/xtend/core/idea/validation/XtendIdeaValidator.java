@@ -9,10 +9,8 @@ package org.eclipse.xtend.core.idea.validation;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.JavaDirectoryService;
@@ -20,15 +18,10 @@ import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiManager;
-import com.intellij.psi.PsiPackage;
-import com.intellij.psi.search.GlobalSearchScope;
 import java.util.Collections;
 import java.util.List;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.XAnnotationExtensions;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -80,47 +73,40 @@ public class XtendIdeaValidator extends AbstractDeclarativeValidator {
   }
   
   protected boolean isSameModule(final XAnnotation annotation, final JvmType annotationType) {
-    Application _application = ApplicationManager.getApplication();
     final Computable<Boolean> _function = () -> {
       final Module module = this.getModule(annotation);
-      Project _project = module.getProject();
-      final JavaPsiFacade psiFacade = JavaPsiFacade.getInstance(_project);
-      String _qualifiedName = annotationType.getQualifiedName();
-      GlobalSearchScope _moduleScope = module.getModuleScope();
-      PsiClass _findClass = psiFacade.findClass(_qualifiedName, _moduleScope);
-      return Boolean.valueOf((!Objects.equal(_findClass, null)));
+      final JavaPsiFacade psiFacade = JavaPsiFacade.getInstance(module.getProject());
+      PsiClass _findClass = psiFacade.findClass(annotationType.getQualifiedName(), module.getModuleScope());
+      return Boolean.valueOf((_findClass != null));
     };
-    return (_application.<Boolean>runReadAction(_function)).booleanValue();
+    return (ApplicationManager.getApplication().<Boolean>runReadAction(_function)).booleanValue();
   }
   
   protected Module getModule(final EObject object) {
-    Resource _eResource = object.eResource();
-    ResourceSet _resourceSet = _eResource.getResourceSet();
-    return ModuleProvider.findModule(_resourceSet);
+    return ModuleProvider.findModule(object.eResource().getResourceSet());
   }
   
   @Check
   public void checkFileNameConventions(final XtendFile xtendFile) {
     String expectedPackage = this.getExpectedPackageName(xtendFile);
-    boolean _equals = Objects.equal(expectedPackage, null);
-    if (_equals) {
+    if ((expectedPackage == null)) {
       return;
     }
     String declaredPackage = xtendFile.getPackage();
-    if ((expectedPackage.isEmpty() && Objects.equal(declaredPackage, null))) {
+    if ((expectedPackage.isEmpty() && (declaredPackage == null))) {
       return;
     }
-    boolean _equals_1 = Objects.equal(expectedPackage, declaredPackage);
-    if (_equals_1) {
+    boolean _equals = Objects.equal(expectedPackage, declaredPackage);
+    if (_equals) {
       return;
     }
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("The declared package \'");
     String _notNull = Strings.notNull(declaredPackage);
-    _builder.append(_notNull, "");
+    _builder.append(_notNull);
     _builder.append("\' does not match the expected package \'");
     String _notNull_1 = Strings.notNull(expectedPackage);
-    _builder.append(_notNull_1, "");
+    _builder.append(_notNull_1);
     _builder.append("\'");
     this.error(_builder.toString(), 
       XtendPackage.Literals.XTEND_FILE__PACKAGE, 
@@ -129,20 +115,12 @@ public class XtendIdeaValidator extends AbstractDeclarativeValidator {
   }
   
   protected String getExpectedPackageName(final XtendFile xtendFile) {
-    Application _application = ApplicationManager.getApplication();
     final Computable<String> _function = () -> {
-      Resource _eResource = xtendFile.eResource();
-      URI _uRI = _eResource.getURI();
-      final VirtualFile file = VirtualFileURIUtil.getVirtualFile(_uRI);
-      Module _module = this.getModule(xtendFile);
-      Project _project = _module.getProject();
-      PsiManager _instance = PsiManager.getInstance(_project);
-      VirtualFile _parent = file.getParent();
-      final PsiDirectory psiDirectory = _instance.findDirectory(_parent);
+      final VirtualFile file = VirtualFileURIUtil.getVirtualFile(xtendFile.eResource().getURI());
+      final PsiDirectory psiDirectory = PsiManager.getInstance(this.getModule(xtendFile).getProject()).findDirectory(file.getParent());
       final JavaDirectoryService javaDirectoryService = JavaDirectoryService.getInstance();
-      PsiPackage _package = javaDirectoryService.getPackage(psiDirectory);
-      return _package.getQualifiedName();
+      return javaDirectoryService.getPackage(psiDirectory).getQualifiedName();
     };
-    return _application.<String>runReadAction(_function);
+    return ApplicationManager.getApplication().<String>runReadAction(_function);
   }
 }

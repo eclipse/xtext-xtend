@@ -2272,10 +2272,7 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("ArrayList<__C_1> _newArrayList = CollectionLiterals.<__C_1>newArrayList(___C_1);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return CollectionLiterals.<ArrayList<__C_1>>newArrayList(_newArrayList);");
+    _builder_1.append("return CollectionLiterals.<ArrayList<__C_1>>newArrayList(CollectionLiterals.<__C_1>newArrayList(___C_1));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -4643,10 +4640,7 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("try {");
     _builder_1.newLine();
     _builder_1.append("                ");
-    _builder_1.append("String _substring = s.substring(1);");
-    _builder_1.newLine();
-    _builder_1.append("                ");
-    _builder_1.append("_xtrycatchfinallyexpression = _substring.length();");
+    _builder_1.append("_xtrycatchfinallyexpression = s.substring(1).length();");
     _builder_1.newLine();
     _builder_1.append("              ");
     _builder_1.append("} catch (final Throwable _t) {");

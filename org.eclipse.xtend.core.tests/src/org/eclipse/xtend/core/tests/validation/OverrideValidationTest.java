@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.tests.validation;
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
+import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
@@ -225,6 +226,21 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	@Test public void testObsoleteOverride_0() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { override bar() {true} }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OBSOLETE_OVERRIDE);
+	}
+	
+	@Test public void testObsoleteOverrideAnnotation_0() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { @Override def bar() {true} }");
+		helper.assertError(xtendClass.getMembers().get(0).getAnnotations().get(0), XANNOTATION, OBSOLETE_ANNOTATION_OVERRIDE);
+	}
+
+	@Test public void testObsoleteOverrideAnnotation_1() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { @Override override string() { null}}");
+		helper.assertWarning(xtendClass.getMembers().get(0).getAnnotations().get(0), XANNOTATION, OBSOLETE_ANNOTATION_OVERRIDE);
+	}
+	
+	@Test public void testObsoleteOverrideAnnotation_2() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { @Override def string() { null}}");
+		helper.assertNoErrors(xtendClass.getMembers().get(0).getAnnotations().get(0), XANNOTATION, OBSOLETE_ANNOTATION_OVERRIDE);
 	}
 
 	@Test public void testObsoleteOverride_1() throws Exception {
@@ -934,9 +950,19 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		XtendClass xtendClass = clazz("class Foo { val foo = new Bar(new Object()) { } } class Bar { new(int x) {} }");
 		helper.assertError(xtendClass, XbasePackage.Literals.XCONSTRUCTOR_CALL, INCOMPATIBLE_TYPES);
 	}
-
+	
 	@Test public void testAnonymousClassConstructorVisibility() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { val foo = new Bar() { } } class Bar { private new() {} }");
 		helper.assertError(xtendClass, XCONSTRUCTOR_CALL, FEATURE_NOT_VISIBLE);
+	}
+	
+	@Test public void testSynchronized_1() throws Exception{
+		XtendClass xtendClass = clazz("class Foo extends Bar { override myMethod() {1} } class Bar { def synchronized int myMethod() {0} }");
+		helper.assertWarning(xtendClass, XTEND_FUNCTION, MISSING_SYNCHRONIZED);
+	}
+	
+	@Test public void testSynchronized_2() throws Exception{
+		XtendClass xtendClass = clazz("class Foo extends Bar { override synchronized myMethod() {1} } class Bar { def synchronized int myMethod() {0} }");
+		helper.assertNoWarnings(xtendClass, XTEND_FUNCTION, MISSING_SYNCHRONIZED);
 	}
 }

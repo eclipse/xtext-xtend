@@ -1,8 +1,7 @@
 package org.eclipse.xtend.core.tests.macro;
 
-import com.google.common.base.Objects;
 import java.net.URL;
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
+import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
 
 @SuppressWarnings("all")
 public class DelegatingClassloader extends ClassLoader {
@@ -15,8 +14,7 @@ public class DelegatingClassloader extends ClassLoader {
   
   @Override
   protected URL findResource(final String name) {
-    ClassLoader _classLoader = this.classFinder.getClassLoader();
-    final URL result = _classLoader.getResource(name);
+    final URL result = this.classFinder.getClassLoader().getResource(name);
     URL _elvis = null;
     if (result != null) {
       _elvis = result;
@@ -32,8 +30,7 @@ public class DelegatingClassloader extends ClassLoader {
     Class<?> _xblockexpression = null;
     {
       final Class<?> result = this.classFinder.getCompiledClass(name);
-      boolean _notEquals = (!Objects.equal(result, null));
-      if (_notEquals) {
+      if ((result != null)) {
         return result;
       }
       _xblockexpression = super.findClass(name);

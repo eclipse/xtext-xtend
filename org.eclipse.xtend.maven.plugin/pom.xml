@@ -2,16 +2,20 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.eclipse.xtext</groupId>
-		<artifactId>org.eclipse.xtext.parent</artifactId>
-		<version>2.11.0-SNAPSHOT</version>
-		<relativePath>../org.eclipse.xtext.parent</relativePath>
+		<groupId>org.eclipse.xtend</groupId>
+		<artifactId>org.eclipse.xtend.maven.parent</artifactId>
+		<version>2.12.0-SNAPSHOT</version>
+		<relativePath>../releng/org.eclipse.xtend.maven.parent</relativePath>
 	</parent>
-	<artifactId>xtend-maven-plugin</artifactId>
+	
 	<groupId>org.eclipse.xtend</groupId>
+	<version>2.12.0-SNAPSHOT</version>
+	<artifactId>xtend-maven-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
 	
-	<url>http://xtend-lang.org</url>
+	<properties>
+		<root-dir>${basedir}/..</root-dir>
+	</properties>
 	
 	<dependencies>
 		<dependency>
@@ -22,27 +26,27 @@
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
 			<artifactId>org.eclipse.xtend.core</artifactId>
-			<version>[${project.version}]</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
-			<version>[${project.version}]</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.util</artifactId>
-			<version>[${project.version}]</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.smap</artifactId>
-			<version>[${project.version}]</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
 			<artifactId>org.eclipse.xtend.lib</artifactId>
-			<version>[${project.version}]</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
@@ -208,7 +212,13 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.10</version>
 				<configuration>
-					<argLine>-Xmx1024m -XX:MaxPermSize=512m</argLine>
+					<argLine>-Xmx1024m -XX:MaxPermSize=512m -DgradleMavenRepo=${gradleMavenRepo}</argLine>
+					<systemPropertyVariables>
+						<property>
+							<name>gradleMavenRepo</name>
+							<value>${gradleMavenRepo}</value>
+						</property>
+					</systemPropertyVariables>
 				</configuration>
 				<executions>
 					<execution>

@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.tests.validation;
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*;
@@ -511,6 +510,16 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_WRONG_TARGET);
 	}
 	
+	@Test public void testAnnotationTarget_11() throws Exception {
+		XtendAnnotationType annotationType = annotationType("annotation A { @testdata.Annotation6 String value = 'Issue206'}");
+		helper.assertNoErrors(annotationType);
+	}
+	
+	@Test public void testAnnotationTarget_12() throws Exception {
+		XtendClass clazz = clazz("class C { @testdata.Annotation6 String value = 'Issue206'}");
+		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_WRONG_TARGET);
+	}
+	
 	@Test public void testMultipleAnnotations_00() throws Exception {
 		XtendClass clazz = clazz("@testdata.Annotation4 @testdata.Annotation4  class X { }");
 		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_MULTIPLE, "@Annotation4");
@@ -950,7 +959,6 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ "class Foo extends Bar {}"
 				+ "class Bar extends Baz {}"
 				+ "class Baz extends Foo {}").getXtendTypes().iterator();
-		waitForBuild();
 		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
 		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
 		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
@@ -1274,7 +1282,6 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		Iterator<XtendFile> iter = files(false, 
 				 "package test class Bar extends XXX { def dispatch foo(Boolean bar) {} def static dispatch foo(Double bar) {} }"
 				,"package test class XXX { def static dispatch foo(String bar) {} def static dispatch foo(Float bar) {}}").iterator();
-		waitForBuild();
 		helper.assertError(iter.next(), XTEND_FUNCTION, DISPATCH_FUNCTIONS_STATIC_EXPECTED, "must", "be", "static");
 	}
 	
@@ -1282,7 +1289,6 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		Iterator<XtendFile> iter = files(false, 
 				"package test class Bar extends XXX { def dispatch foo(Boolean bar) {} def static dispatch foo(Double bar) {} }"
 				,"package test class XXX { def dispatch foo(String bar) {} def dispatch foo(Float bar) {}}").iterator();
-		waitForBuild();
 		helper.assertError(iter.next(), XTEND_FUNCTION, DISPATCH_FUNCTIONS_NON_STATIC_EXPECTED, "must", "not", "be", "static");
 	}
 	
@@ -1464,6 +1470,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertWarning(clazz, XTEND_FUNCTION, UNUSED_PRIVATE_MEMBER, "method","foo(String, Integer)","never", "used");
 	}
 	
+	@Test public void testUnusedFunction_1() throws Exception {
+		XtendClass clazz = clazz("class X { def private void foo(String a, Integer b) {foo(a,b)} }");
+		helper.assertWarning(clazz, XTEND_FUNCTION, UNUSED_PRIVATE_MEMBER, "method","foo(String, Integer)","never", "used");
+	}
+	
 	@Test public void testSyntheticallyUsedFunction() throws Exception {
 		XtendClass clazz = clazz("class X { def private String foo() {} def bar(){}}");
 		JvmDeclaredType jvmType = (JvmDeclaredType) clazz.eResource().getContents().get(1);
@@ -1491,7 +1502,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testUsedFunction() throws Exception {
-		XtendClass clazz = clazz("abstract class X { def private String foo() def bar(){foo}}");
+		XtendClass clazz = clazz("abstract class X { def protected String foo() def bar(){foo}}");
 		helper.assertNoIssues(clazz.eContainer());
 	}
 	
@@ -3027,5 +3038,19 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 			"	}"+
 			"}");
 		helper.assertNoIssues(file);
+	}
+	
+	@Test public void testOverridingBug515801() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo implements int {"+
+					"override void doSth(Object obj){ "+
+					"}"+
+				"}");
+		List<Issue> issues = helper.validate(clazz);
+		for (Issue issue : issues) {
+			if (issue.getMessage() != null && issue.getMessage().contains("Error executing EValidator")) {
+				fail(issue.getMessage());
+			}
+		}
 	}
 }

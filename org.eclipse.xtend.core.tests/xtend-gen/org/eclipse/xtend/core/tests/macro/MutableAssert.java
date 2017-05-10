@@ -17,7 +17,7 @@ import org.junit.Assert;
 public class MutableAssert extends Assert {
   public static void assertValidQualifiedName(final String name, final String expectedQualifiedName, final Procedure1<? super String> codeToTest) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(name, "");
+    _builder.append(name);
     _builder.append(" has to be a valid qualified name");
     final String message = _builder.toString();
     final Procedure0 _function = () -> {
@@ -45,7 +45,7 @@ public class MutableAssert extends Assert {
   
   public static void assertValidJavaIdentifier(final String name, final Procedure1<? super String> codeToTest) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(name, "");
+    _builder.append(name);
     _builder.append(" has to be a valid java identifier");
     final String message = _builder.toString();
     final Procedure0 _function = () -> {
@@ -67,8 +67,7 @@ public class MutableAssert extends Assert {
     T _xblockexpression = null;
     {
       final T t = MutableAssert.<T>assertThrowable(clazz, codeToTest);
-      String _message = t.getMessage();
-      Assert.assertEquals(message, _message);
+      Assert.assertEquals(message, t.getMessage());
       _xblockexpression = t;
     }
     return _xblockexpression;
@@ -82,9 +81,7 @@ public class MutableAssert extends Assert {
       } catch (final Throwable _t) {
         if (_t instanceof Throwable) {
           final Throwable e = (Throwable)_t;
-          String _message = e.getMessage();
-          Class<? extends Throwable> _class = e.getClass();
-          Assert.assertEquals(_message, clazz, _class);
+          Assert.assertEquals(e.getMessage(), clazz, e.getClass());
           return ((T) e);
         } else {
           throw Exceptions.sneakyThrow(_t);
@@ -93,7 +90,7 @@ public class MutableAssert extends Assert {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("an instance of the ");
       String _name = clazz.getName();
-      _builder.append(_name, "");
+      _builder.append(_name);
       _builder.append(" class had to be thrown");
       Assert.fail(_builder.toString());
       _xblockexpression = null;

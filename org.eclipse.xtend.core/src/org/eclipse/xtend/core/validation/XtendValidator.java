@@ -8,12 +8,15 @@
 package org.eclipse.xtend.core.validation;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Lists.transform;
 import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.util.JavaVersion.*;
 import static org.eclipse.xtext.util.Strings.*;
+import static org.eclipse.xtext.util.Strings.isEmpty;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
@@ -378,8 +381,12 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		if (targets.isEmpty())
 			return;
 		final EObject eContainer = getContainingAnnotationTarget(annotation);
+		Class<? extends EObject> clazz = eContainer.getClass();
+		if (eContainer instanceof XtendField && eContainer.eContainer() instanceof XtendAnnotationType) {
+			clazz = XtendFunction.class;
+		}
 		for (Entry<Class<?>, Collection<ElementType>> mapping : targetInfos.asMap().entrySet()) {
-			if (mapping.getKey().isInstance(eContainer)) {
+			if (mapping.getKey().isAssignableFrom(clazz)) {
 				targets.retainAll(mapping.getValue());
 				if (targets.isEmpty()) {
 					error("The annotation @" + annotation.getAnnotationType().getSimpleName()
@@ -1010,6 +1017,12 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 					if (function.isOverride()) {
 						error("The method "+ operation.getSimpleSignature() +" of type "+getDeclaratorName(operation.getDeclaration())+" must override a superclass method.", 
 								function, XTEND_MEMBER__MODIFIERS, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
+					} else {
+						for (XAnnotation anno : function.getAnnotations()) {
+							if (anno != null && anno.getAnnotationType() != null && Override.class.getName().equals(anno.getAnnotationType().getIdentifier())) {
+								error("Superfluous @Override annotation", anno, null, OBSOLETE_ANNOTATION_OVERRIDE);
+							}
+						}
 					}
 				}
 			} else if (flaggedOperations.add(sourceElement)) {
@@ -1039,6 +1052,9 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 				} else if (details.contains(OverrideCheckDetails.RETURN_MISMATCH)) {
 					error("The return type is incompatible with " + inherited.getSimpleSignature(), sourceElement,
 							returnTypeFeature(sourceElement), INCOMPATIBLE_RETURN_TYPE);
+				} else if (details.contains(OverrideCheckDetails.SYNCHRONIZED_MISMATCH)) {
+					warning("The overridden method is synchronized, the current one is not synchronized.", sourceElement,
+							nameFeature(sourceElement), MISSING_SYNCHRONIZED);
 				}
 			}
 		}
@@ -1057,6 +1073,13 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 					error("The method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(resolved) + 
 							" shadows the method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(inherited) + 
 							", but does not override it.", function, XTEND_FUNCTION__NAME, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
+				}
+			}
+			if (function.isOverride()) {
+				for (XAnnotation anno : function.getAnnotations()) {
+					if (anno != null && anno.getAnnotationType() != null && Override.class.getName().equals(anno.getAnnotationType().getIdentifier())) {
+						warning("Superfluous @Override annotation", anno, null, OBSOLETE_ANNOTATION_OVERRIDE);
+					}
 				}
 			}
 		}
@@ -2029,6 +2052,12 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 				int finalIndex = method.getModifiers().indexOf("final");
 				if(finalIndex != -1) 
 					error("Abstract method " + method.getName() + " cannot be final", XTEND_MEMBER__MODIFIERS, finalIndex, INVALID_MODIFIER);
+				int privateIndex = method.getModifiers().indexOf("private");
+				if(privateIndex != -1) 
+					error("Abstract method " + method.getName() + " cannot be private", XTEND_MEMBER__MODIFIERS, privateIndex, INVALID_MODIFIER);
+				int staticIndex = method.getModifiers().indexOf("static");
+				if(staticIndex != -1) 
+					error("Abstract method " + method.getName() + " cannot be static", XTEND_MEMBER__MODIFIERS, staticIndex, INVALID_MODIFIER);
 			}
 		} else if (method.getDeclaringType() instanceof XtendInterface) {
 			// The validator for interface methods is created lazily when the generator configuration is loaded

@@ -12,6 +12,140 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
   @Test
+  public void testBug402917_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Dully {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Deprecated extension IntegerExtensions y");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Deprecated extension IntegerExtensions x");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def all(@Deprecated extension IntegerExtensions x) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val extension IntegerExtensions foo = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val c = [ extension IntegerExtensions p |");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("123.bitwiseAnd(1)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void testBug402917_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Dully {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Deprecated");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension IntegerExtensions y");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Deprecated extension IntegerExtensions x");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def all(@Deprecated extension IntegerExtensions x) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val extension IntegerExtensions foo = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val c = [ extension IntegerExtensions p |");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("123.bitwiseAnd(1)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def all2(extension @Deprecated IntegerExtensions x) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Dully {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@Deprecated ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("extension ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("IntegerExtensions y");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@Deprecated   extension    IntegerExtensions x");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def all(@Deprecated   extension    IntegerExtensions x) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val extension    IntegerExtensions foo = null");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val c = [ extension    IntegerExtensions p |");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("123.bitwiseAnd(1)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("]");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def all2(   extension  @Deprecated  IntegerExtensions x) {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBug398718() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -58,7 +192,6 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _decode = this.decode(_builder);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package foo");
     _builder_1.newLine();
@@ -100,8 +233,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    String _decode_1 = this.decode(_builder_1);
-    this.assertFormatted(_decode, _decode_1);
+    this.assertFormatted(this.decode(_builder), this.decode(_builder_1));
   }
   
   @Test
@@ -417,6 +549,177 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
       _builder.append("\t\t\t");
       _builder.append("mexprmcasesmexists[multiline] && mexprmmdefaultmmultilineOrInNewLine");
       _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      it.setToBeFormatted(_builder);
+    };
+    this.tester.assertFormatted(_function);
+  }
+  
+  @Test
+  public void bug403823() {
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(120));
+      };
+      it.preferences(_function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void format(String a, String b, String c) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (a != b)");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("(");
+      _builder.append("«", "\t\t\t");
+      _builder.append("c");
+      _builder.append("»", "\t\t\t");
+      _builder.append(")");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.append("else");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("\'\'");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      it.setToBeFormatted(_builder);
+    };
+    this.tester.assertFormatted(_function);
+  }
+  
+  @Test
+  public void bug403823_1() {
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(120));
+      };
+      it.preferences(_function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void format(String a, String b, String c) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (a != b) ");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("(");
+      _builder.append("«", "\t\t");
+      _builder.append("c");
+      _builder.append("»", "\t\t");
+      _builder.append(")");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append(" else \'\'");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      it.setToBeFormatted(_builder);
+    };
+    this.tester.assertFormatted(_function);
+  }
+  
+  @Test
+  public void bug403340() {
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(120));
+      };
+      it.preferences(_function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void format(String v1, String v2) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (v1 === v2)");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("Same");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.append("else");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("Not the Same");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.append("\'", "\t\t\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      it.setToBeFormatted(_builder);
+    };
+    this.tester.assertFormatted(_function);
+  }
+  
+  @Test
+  public void bug403340_1() {
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(120));
+      };
+      it.preferences(_function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void format(String v1, String v2) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (v1 === v2) ");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("Same");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append(" else ");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("Not the Same");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.append("\'", "\t\t");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();

@@ -10,9 +10,9 @@ package org.eclipse.xtend.ide.tests.refactoring;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.TextSelection;
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.refactoring.XtendExpressionUtil;
+import org.eclipse.xtend.ide.tests.AbstractXtendTestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -106,8 +106,7 @@ public class XtendExpressionUtilTest extends AbstractXtendTestCase {
     int _offset_1 = selectedRegion.getOffset();
     int _length = selectedRegion.getLength();
     int _plus = (_offset_1 + _length);
-    String _substring = cleanedModel.substring(_offset, _plus);
-    Assert.assertEquals(expectedSelection, _substring);
+    Assert.assertEquals(expectedSelection, cleanedModel.substring(_offset, _plus));
   }
   
   protected XtendFile parse(final CharSequence string) {

@@ -1,7 +1,9 @@
-bin/
-.gradle/
+/.m2/
 build/
+bin/
 target/
+.gradle/
 *._trace
 *.xtendbin
 org.eclipse.buildship.core.prefs
+/.DS_Store

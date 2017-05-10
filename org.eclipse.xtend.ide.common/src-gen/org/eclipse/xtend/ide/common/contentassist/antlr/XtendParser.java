@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010-2017 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,16 +8,12 @@
 package org.eclipse.xtend.ide.common.contentassist.antlr;
 
 import com.google.inject.Inject;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendParser;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractPartialContentAssistParser;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 
 public class XtendParser extends AbstractPartialContentAssistParser {
 
@@ -209,6 +205,7 @@ public class XtendParser extends AbstractPartialContentAssistParser {
 					put(grammarAccess.getParameterizedTypeReferenceWithTypeArgsAccess().getGroup_1_4_0_0(), "rule__ParameterizedTypeReferenceWithTypeArgs__Group_1_4_0_0__0");
 					put(grammarAccess.getParameterizedTypeReferenceWithTypeArgsAccess().getGroup_1_4_2(), "rule__ParameterizedTypeReferenceWithTypeArgs__Group_1_4_2__0");
 					put(grammarAccess.getParameterizedTypeReferenceWithTypeArgsAccess().getGroup_1_4_2_2(), "rule__ParameterizedTypeReferenceWithTypeArgs__Group_1_4_2_2__0");
+					put(grammarAccess.getXtendEnumLiteralAccess().getGroup(), "rule__XtendEnumLiteral__Group__0");
 					put(grammarAccess.getCreateExtensionInfoAccess().getGroup(), "rule__CreateExtensionInfo__Group__0");
 					put(grammarAccess.getCreateExtensionInfoAccess().getGroup_1(), "rule__CreateExtensionInfo__Group_1__0");
 					put(grammarAccess.getParameterAccess().getGroup(), "rule__Parameter__Group__0");
@@ -578,7 +575,8 @@ public class XtendParser extends AbstractPartialContentAssistParser {
 					put(grammarAccess.getParameterizedTypeReferenceWithTypeArgsAccess().getTypeAssignment_1_4_1(), "rule__ParameterizedTypeReferenceWithTypeArgs__TypeAssignment_1_4_1");
 					put(grammarAccess.getParameterizedTypeReferenceWithTypeArgsAccess().getArgumentsAssignment_1_4_2_1(), "rule__ParameterizedTypeReferenceWithTypeArgs__ArgumentsAssignment_1_4_2_1");
 					put(grammarAccess.getParameterizedTypeReferenceWithTypeArgsAccess().getArgumentsAssignment_1_4_2_2_1(), "rule__ParameterizedTypeReferenceWithTypeArgs__ArgumentsAssignment_1_4_2_2_1");
-					put(grammarAccess.getXtendEnumLiteralAccess().getNameAssignment(), "rule__XtendEnumLiteral__NameAssignment");
+					put(grammarAccess.getXtendEnumLiteralAccess().getAnnotationsAssignment_0(), "rule__XtendEnumLiteral__AnnotationsAssignment_0");
+					put(grammarAccess.getXtendEnumLiteralAccess().getNameAssignment_1(), "rule__XtendEnumLiteral__NameAssignment_1");
 					put(grammarAccess.getCreateExtensionInfoAccess().getNameAssignment_1_0(), "rule__CreateExtensionInfo__NameAssignment_1_0");
 					put(grammarAccess.getCreateExtensionInfoAccess().getCreateExpressionAssignment_2(), "rule__CreateExtensionInfo__CreateExpressionAssignment_2");
 					put(grammarAccess.getParameterAccess().getAnnotationsAssignment_0(), "rule__Parameter__AnnotationsAssignment_0");
@@ -780,18 +778,7 @@ public class XtendParser extends AbstractPartialContentAssistParser {
 		}
 		return nameMappings.get(element);
 	}
-
-	@Override
-	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
-		try {
-			InternalXtendParser typedParser = (InternalXtendParser) parser;
-			typedParser.entryRuleFile();
-			return typedParser.getFollowElements();
-		} catch(RecognitionException ex) {
-			throw new RuntimeException(ex);
-		}
-	}
-
+			
 	@Override
 	protected String[] getInitialHiddenTokens() {
 		return new String[] { "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT" };

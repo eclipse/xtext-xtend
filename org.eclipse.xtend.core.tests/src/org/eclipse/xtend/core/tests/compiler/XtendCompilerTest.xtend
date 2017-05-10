@@ -13,7 +13,7 @@ import org.eclipse.xtext.generator.IFilePostProcessor
 import org.junit.Test
 
 class XtendCompilerTest extends AbstractXtendCompilerTest {
-
+	static String RS = "'''";
 	@Inject protected IFilePostProcessor postProcessor
 
 	@Test
@@ -241,7 +241,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.HashSet;
 			import java.util.Set;
 			import org.eclipse.xtext.common.types.JvmTypeParameter;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -256,8 +255,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public LightweightTypeReference substitute(final LightweightTypeReference original) {
-			    HashSet<JvmTypeParameter> _newHashSet = CollectionLiterals.<JvmTypeParameter>newHashSet();
-			    return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, _newHashSet);
+			    return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, CollectionLiterals.<JvmTypeParameter>newHashSet());
 			  }
 			  
 			  protected Set<JvmTypeParameter> createVisiting() {
@@ -1236,6 +1234,64 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test def testEnumIssue165() {
+		'''
+			enum Foo {
+				/**
+				 * This is FOO
+				 */
+				FOO,
+				
+				/**
+				 * This is BAR
+				 */
+				BAR,
+				
+				/**
+				 * This is BAZ
+				 */
+				BAZ
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public enum Foo {
+			  /**
+			   * This is FOO
+			   */
+			  FOO,
+			  
+			  /**
+			   * This is BAR
+			   */
+			  BAR,
+			  
+			  /**
+			   * This is BAZ
+			   */
+			  BAZ;
+			}
+		''')
+	}
+	
+	@Test def testEnum476555() {
+		'''
+			enum Foo {
+				@Deprecated FOO, @SuppressWarnings("just-a-test") BAR, BAZ
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public enum Foo {
+			  @Deprecated
+			  FOO,
+			  
+			  @SuppressWarnings("just-a-test")
+			  BAR,
+			  
+			  BAZ;
+			}
+		''')
+	}
+	
 	@Test def testEnumBug428707() {
 		'''
 			enum E {
@@ -1347,7 +1403,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    {
 			      char[] _charArray = it.toCharArray();
 			      for(final char it_1 : _charArray) {
-			        _builder.append(it_1, "");
+			        _builder.append(it_1);
 			        _builder.newLineIfNotEmpty();
 			      }
 			    }
@@ -2418,7 +2474,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''','''
 			import java.io.File;
 			import java.io.IOException;
-			import java.util.ArrayList;
 			import java.util.Collections;
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -2431,18 +2486,16 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public List<File> bar() {
 			    List<File> _xtrycatchfinallyexpression = null;
 			    try {
-			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("file1.ext");
 			      final Function1<String, File> _function = new Function1<String, File>() {
 			        public File apply(final String f) {
 			          try {
-			            File _file = new File(f);
-			            return _file.getCanonicalFile();
+			            return new File(f).getCanonicalFile();
 			          } catch (Throwable _e) {
 			            throw Exceptions.sneakyThrow(_e);
 			          }
 			        }
 			      };
-			      _xtrycatchfinallyexpression = ListExtensions.<String, File>map(_newArrayList, _function);
+			      _xtrycatchfinallyexpression = ListExtensions.<String, File>map(CollectionLiterals.<String>newArrayList("file1.ext"), _function);
 			    } catch (final Throwable _t) {
 			      if (_t instanceof IOException) {
 			        final IOException o = (IOException)_t;
@@ -2467,7 +2520,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			 }
 			}
 		'''.assertCompilesTo('''
-			import java.util.ArrayList;
 			import java.util.Map;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -2479,7 +2531,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public abstract Object getFoo(final String x) throws Exception;
 			  
 			  public Map<Object, String> bar() {
-			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
 			    final Function1<String, Object> _function = new Function1<String, Object>() {
 			      public Object apply(final String it) {
 			        try {
@@ -2489,7 +2540,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        }
 			      }
 			    };
-			    return IterableExtensions.<Object, String>toMap(_newArrayList, _function);
+			    return IterableExtensions.<Object, String>toMap(CollectionLiterals.<String>newArrayList(), _function);
 			  }
 			}
 		''')
@@ -3893,8 +3944,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  private String foo = "Holla";
 			  
 			  public void test(final String x, final String y, final int integer) {
-			    Foo _foo = new Foo();
-			    _foo.test(this.foo, Foo.FOO, Integer.MAX_VALUE);
+			    new Foo().test(this.foo, Foo.FOO, Integer.MAX_VALUE);
 			  }
 			}
 		''')
@@ -4096,8 +4146,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class B extends A {
 			  public String client(final CharSequence c) {
-			    CharSequence _m = this.m();
-			    return this.client(_m);
+			    return this.client(this.m());
 			  }
 			  
 			  public CharSequence m() {
@@ -4277,13 +4326,107 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				  public void test() {
 				    StringConcatenation _builder = new StringConcatenation();
 				    _builder.append("SomeString");
-				    String _println = InputOutput.<String>println(_builder.toString());
-				    System.out.println(_println);
+				    System.out.println(InputOutput.<String>println(_builder.toString()));
 				  }
 				}
 			''')
 	}
+	
+	@Test
+	def testRichStringMemberFeatureCall_01 () {
+		'''
+			class Foo {
+				def void bar () {
+					x = «RS»Hello World«RS».toString
+				}
+				
+				def void setX (String s) {
+					
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtend2.lib.StringConcatenation;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void bar() {
+			    StringConcatenation _builder = new StringConcatenation();
+			    _builder.append("Hello World");
+			    this.setX(_builder.toString());
+			  }
+			  
+			  public void setX(final String s) {
+			  }
+			}
+		''')
+	}
 
+	@Test
+	def testRichStringMemberFeatureCall_02 () {
+		'''
+			class Foo {
+				def void bar () {
+					x = «RS»Hello World«RS».toString.trim
+				}
+				
+				def void setX (String s) {
+					
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtend2.lib.StringConcatenation;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void bar() {
+			    StringConcatenation _builder = new StringConcatenation();
+			    _builder.append("Hello World");
+			    this.setX(_builder.toString().trim());
+			  }
+			  
+			  public void setX(final String s) {
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testRichStringEmptyEmission_01 () {
+		assertCompilesTo(
+			"class Foo { def test() '''Hello «null»World!''' }",
+			'''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public CharSequence test() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    _builder.append("Hello ");
+				    _builder.append("World!");
+				    return _builder;
+				  }
+				}
+			''')
+	}
+	@Test
+	def testRichStringEmptyEmission_02 () {
+		assertCompilesTo(
+			"class Foo { def test() '''Hello «\"\"»World!''' }",
+			'''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public CharSequence test() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    _builder.append("Hello ");
+				    _builder.append("World!");
+				    return _builder;
+				  }
+				}
+			''')
+	}
+	
 	@Test
 	def compileClassWithFileHeader(){
 		assertCompilesTo(
@@ -4689,8 +4832,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					  private ReflectExtensions _reflectExtensions;
 					  
 					  public Object bar() throws Throwable {
-					    String _string = new String();
-					    Object _get = this._reflectExtensions.<Object>get(_string, "toString");
+					    Object _get = this._reflectExtensions.<Object>get(new String(), "toString");
 					    Object _get_1 = null;
 					    if (_get!=null) {
 					      _get_1=this._reflectExtensions.<Object>get(_get, "substring");
@@ -4717,8 +4859,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					  
 					  public String bar(final String str) {
 					    String _elvis = null;
-					    Foo _foo = new Foo();
-					    String _field = _foo.field;
+					    String _field = new Foo().field;
 					    String _string = null;
 					    if (_field!=null) {
 					      _string=_field.toString();

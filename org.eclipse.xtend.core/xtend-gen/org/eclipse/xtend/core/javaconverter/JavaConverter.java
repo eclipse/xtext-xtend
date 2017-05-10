@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.javaconverter;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
@@ -45,13 +44,11 @@ public class JavaConverter {
     
     public static JavaConverter.ConversionResult create(final JavaASTFlattener flattener) {
       final JavaConverter.ConversionResult result = new JavaConverter.ConversionResult();
-      String _result = flattener.getResult();
-      result.xtendCode = _result;
+      result.xtendCode = flattener.getResult();
       List<String> _problems = flattener.getProblems();
-      boolean _notEquals = (!Objects.equal(_problems, null));
-      if (_notEquals) {
-        List<String> _problems_1 = flattener.getProblems();
-        result.problems = _problems_1;
+      boolean _tripleNotEquals = (_problems != null);
+      if (_tripleNotEquals) {
+        result.problems = flattener.getProblems();
       }
       return result;
     }
@@ -90,9 +87,7 @@ public class JavaConverter {
     try {
       final ASTParserFactory.ASTParserWrapper parser = this.astParserFactory.createJavaParser(cu);
       final ASTNode root = parser.createAST();
-      String _source = cu.getSource();
-      String _targetLevel = parser.getTargetLevel();
-      return this.executeAstFlattener(_source, root, _targetLevel, false);
+      return this.executeAstFlattener(cu.getSource(), root, parser.getTargetLevel(), false);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -107,12 +102,10 @@ public class JavaConverter {
   public JavaConverter.ConversionResult toXtend(final String unitName, final String javaSrc) {
     JavaConverter.ConversionResult _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(unitName, null);
-      if (_equals) {
+      if ((unitName == null)) {
         throw new IllegalArgumentException();
       }
-      ASTParserFactory.ASTParserWrapper _createJavaParser = this.astParserFactory.createJavaParser(null);
-      _xblockexpression = this.internalToXtend(unitName, javaSrc, null, _createJavaParser);
+      _xblockexpression = this.internalToXtend(unitName, javaSrc, null, this.astParserFactory.createJavaParser(null));
     }
     return _xblockexpression;
   }
@@ -127,12 +120,10 @@ public class JavaConverter {
   public JavaConverter.ConversionResult toXtend(final String unitName, final String javaSrc, final Object classPathContext) {
     JavaConverter.ConversionResult _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(unitName, null);
-      if (_equals) {
+      if ((unitName == null)) {
         throw new IllegalArgumentException();
       }
-      ASTParserFactory.ASTParserWrapper _createJavaParser = this.astParserFactory.createJavaParser(classPathContext);
-      _xblockexpression = this.internalToXtend(unitName, javaSrc, null, _createJavaParser);
+      _xblockexpression = this.internalToXtend(unitName, javaSrc, null, this.astParserFactory.createJavaParser(classPathContext));
     }
     return _xblockexpression;
   }
@@ -143,22 +134,20 @@ public class JavaConverter {
    * @param targetElement Used to determinate javaCode conversion type
    * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
    */
-  public String toXtend(final String javaCode, final String[] javaImports, final EObject targetElement, final Object classPathContext) {
+  public String toXtend(final String javaSrc, final String[] javaImports, final EObject targetElement, final Object classPathContext) {
     boolean forceStatement = this.shouldForceStatementMode(targetElement);
-    JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> parseResult = this.codeAnalyzer.determinateJavaType(javaCode);
+    JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> parseResult = this.codeAnalyzer.determinateJavaType(javaSrc);
     if ((parseResult == null)) {
-      return javaCode;
+      return javaSrc;
     }
     JavaConverter.ConversionResult conversionResult = null;
     if ((forceStatement || (parseResult.getType() < ASTParser.K_CLASS_BODY_DECLARATIONS))) {
       int _type = parseResult.getType();
       boolean _tripleEquals = (_type == ASTParser.K_EXPRESSION);
       if (_tripleEquals) {
-        JavaConverter.ConversionResult _expressionToXtend = this.expressionToXtend(javaCode, classPathContext);
-        conversionResult = _expressionToXtend;
+        conversionResult = this.expressionToXtend(javaSrc, classPathContext);
       } else {
-        JavaConverter.ConversionResult _statementToXtend = this.statementToXtend(javaCode, classPathContext);
-        conversionResult = _statementToXtend;
+        conversionResult = this.statementToXtend(javaSrc, classPathContext);
       }
     } else {
       String[] _xifexpression = null;
@@ -167,22 +156,18 @@ public class JavaConverter {
       } else {
         _xifexpression = null;
       }
-      JavaConverter.ConversionResult _bodyDeclarationToXtend = this.bodyDeclarationToXtend(javaCode, _xifexpression, classPathContext);
-      conversionResult = _bodyDeclarationToXtend;
+      conversionResult = this.bodyDeclarationToXtend(javaSrc, _xifexpression, classPathContext);
     }
     return conversionResult.getXtendCode();
   }
   
   /**
    * @param javaSrc Java class source code as String
-   * @param project JavaProject where the java source code comes from. If project is <code>null</code>, the parser will be<br>
-   * 			 configured with the system class loader to resolve bindings.
    * @param imports imports to use
    * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
    */
   public JavaConverter.ConversionResult bodyDeclarationToXtend(final String javaSrc, final String[] imports, final Object classPathContext) {
-    ASTParserFactory.ASTParserWrapper _createJavaParser = this.astParserFactory.createJavaParser(classPathContext);
-    return this.internalToXtend(null, javaSrc, imports, _createJavaParser);
+    return this.internalToXtend(null, javaSrc, imports, this.astParserFactory.createJavaParser(classPathContext));
   }
   
   /**
@@ -191,16 +176,13 @@ public class JavaConverter {
    */
   public JavaConverter.ConversionResult statementToXtend(final String javaSrc, final Object classPathContext) {
     final ASTParserFactory.ASTParserWrapper parser = this.astParserFactory.createJavaParser(classPathContext);
-    char[] _charArray = javaSrc.toCharArray();
-    parser.setSource(_charArray);
+    parser.setSource(javaSrc.toCharArray());
     parser.setKind(ASTParser.K_STATEMENTS);
     final ASTNode root = parser.createAST();
     if ((root instanceof Block)) {
-      String _targetLevel = parser.getTargetLevel();
-      return this.executeAstFlattener(javaSrc, root, _targetLevel, true);
+      return this.executeAstFlattener(javaSrc, root, parser.getTargetLevel(), true);
     }
-    String _targetLevel_1 = parser.getTargetLevel();
-    return this.executeAstFlattener(javaSrc, root, _targetLevel_1, false);
+    return this.executeAstFlattener(javaSrc, root, parser.getTargetLevel(), false);
   }
   
   /**
@@ -209,12 +191,10 @@ public class JavaConverter {
    */
   public JavaConverter.ConversionResult expressionToXtend(final String javaSrc, final Object classPathContext) {
     final ASTParserFactory.ASTParserWrapper parser = this.astParserFactory.createJavaParser(classPathContext);
-    char[] _charArray = javaSrc.toCharArray();
-    parser.setSource(_charArray);
+    parser.setSource(javaSrc.toCharArray());
     parser.setKind(ASTParser.K_EXPRESSION);
     final ASTNode root = parser.createAST();
-    String _targetLevel = parser.getTargetLevel();
-    return this.executeAstFlattener(javaSrc, root, _targetLevel, false);
+    return this.executeAstFlattener(javaSrc, root, parser.getTargetLevel(), false);
   }
   
   /**
@@ -226,19 +206,17 @@ public class JavaConverter {
    */
   private JavaConverter.ConversionResult internalToXtend(final String unitName, final String javaSrc, final String[] imports, final ASTParserFactory.ASTParserWrapper parser) {
     final StringBuilder javaSrcBuilder = new StringBuilder();
-    boolean _notEquals = (!Objects.equal(imports, null));
-    if (_notEquals) {
+    if ((imports != null)) {
       final Consumer<String> _function = (String it) -> {
         javaSrcBuilder.append((("import " + it) + ";"));
       };
       ((List<String>)Conversions.doWrapArray(imports)).forEach(_function);
     }
-    boolean _equals = Objects.equal(unitName, null);
-    if (_equals) {
+    if ((unitName == null)) {
       parser.setUnitName("MISSING");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class MISSING { ");
-      _builder.append(javaSrc, "");
+      _builder.append(javaSrc);
       _builder.append(" }");
       javaSrcBuilder.append(_builder);
     } else {
@@ -247,11 +225,9 @@ public class JavaConverter {
     }
     parser.setKind(ASTParser.K_COMPILATION_UNIT);
     final String preparedJavaSrc = javaSrcBuilder.toString();
-    char[] _charArray = preparedJavaSrc.toCharArray();
-    parser.setSource(_charArray);
+    parser.setSource(preparedJavaSrc.toCharArray());
     final ASTNode result = parser.createAST();
-    String _targetLevel = parser.getTargetLevel();
-    return this.executeAstFlattener(preparedJavaSrc, result, _targetLevel, false);
+    return this.executeAstFlattener(preparedJavaSrc, result, parser.getTargetLevel(), false);
   }
   
   /**

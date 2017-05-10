@@ -7,13 +7,11 @@
  */
 package org.eclipse.xtend.core.idea.highlighting;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.lexer.LexerBase;
 import com.intellij.lexer.LexerPosition;
 import com.intellij.psi.tree.IElementType;
 import java.util.Collections;
-import java.util.Map;
 import java.util.Set;
 import org.antlr.runtime.CommonToken;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
@@ -107,8 +105,7 @@ public class XtendHighlightingLexer extends LexerBase {
       _hasNext=_currentRichTextToken.hasNext();
     }
     if (_hasNext) {
-      XtendHighlightingLexer.RichTextToken _currentRichTextToken_1 = this.getCurrentRichTextToken();
-      _currentRichTextToken_1.advance();
+      this.getCurrentRichTextToken().advance();
     } else {
       this._currentRichTextToken = null;
       this.delegate.advance();
@@ -116,24 +113,18 @@ public class XtendHighlightingLexer extends LexerBase {
   }
   
   public XtendHighlightingLexer.RichTextToken getCurrentRichTextToken() {
-    boolean _equals = Objects.equal(this._currentRichTextToken, null);
-    if (_equals) {
+    if ((this._currentRichTextToken == null)) {
       CommonToken _currentToken = this.delegate.getCurrentToken();
-      boolean _notEquals = (!Objects.equal(_currentToken, null));
-      if (_notEquals) {
-        Map<Integer, String> _tokenDefMap = this._antlrTokenDefProvider.getTokenDefMap();
-        CommonToken _currentToken_1 = this.delegate.getCurrentToken();
-        int _type = _currentToken_1.getType();
-        final String tokenID = _tokenDefMap.get(Integer.valueOf(_type));
+      boolean _tripleNotEquals = (_currentToken != null);
+      if (_tripleNotEquals) {
+        final String tokenID = this._antlrTokenDefProvider.getTokenDefMap().get(Integer.valueOf(this.delegate.getCurrentToken().getType()));
         boolean _contains = XtendHighlightingLexer.TOKEN_TYPE_NAMES_CONTAINING_GUILLEMETS.contains(tokenID);
         if (_contains) {
           int _tokenStart = this.delegate.getTokenStart();
           int _tokenEnd = this.delegate.getTokenEnd();
           int _tokenStart_1 = this.delegate.getTokenStart();
           int _minus = (_tokenEnd - _tokenStart_1);
-          IElementType _tokenType = this.delegate.getTokenType();
-          XtendHighlightingLexer.RichTextToken _createRichTextToken = this.createRichTextToken(tokenID, _tokenStart, _minus, _tokenType);
-          this._currentRichTextToken = _createRichTextToken;
+          this._currentRichTextToken = this.createRichTextToken(tokenID, _tokenStart, _minus, this.delegate.getTokenType());
         }
       }
     }
@@ -155,12 +146,10 @@ public class XtendHighlightingLexer extends LexerBase {
   public int getTokenEnd() {
     int _xifexpression = (int) 0;
     XtendHighlightingLexer.RichTextToken _currentRichTextToken = this.getCurrentRichTextToken();
-    boolean _notEquals = (!Objects.equal(_currentRichTextToken, null));
-    if (_notEquals) {
-      XtendHighlightingLexer.RichTextToken _currentRichTextToken_1 = this.getCurrentRichTextToken();
-      int _tokenOffset = _currentRichTextToken_1.getTokenOffset();
-      XtendHighlightingLexer.RichTextToken _currentRichTextToken_2 = this.getCurrentRichTextToken();
-      int _tokenLength = _currentRichTextToken_2.getTokenLength();
+    boolean _tripleNotEquals = (_currentRichTextToken != null);
+    if (_tripleNotEquals) {
+      int _tokenOffset = this.getCurrentRichTextToken().getTokenOffset();
+      int _tokenLength = this.getCurrentRichTextToken().getTokenLength();
       _xifexpression = (_tokenOffset + _tokenLength);
     } else {
       _xifexpression = this.delegate.getTokenEnd();
@@ -172,10 +161,9 @@ public class XtendHighlightingLexer extends LexerBase {
   public int getTokenStart() {
     int _xifexpression = (int) 0;
     XtendHighlightingLexer.RichTextToken _currentRichTextToken = this.getCurrentRichTextToken();
-    boolean _notEquals = (!Objects.equal(_currentRichTextToken, null));
-    if (_notEquals) {
-      XtendHighlightingLexer.RichTextToken _currentRichTextToken_1 = this.getCurrentRichTextToken();
-      _xifexpression = _currentRichTextToken_1.getTokenOffset();
+    boolean _tripleNotEquals = (_currentRichTextToken != null);
+    if (_tripleNotEquals) {
+      _xifexpression = this.getCurrentRichTextToken().getTokenOffset();
     } else {
       _xifexpression = this.delegate.getTokenStart();
     }
@@ -186,10 +174,9 @@ public class XtendHighlightingLexer extends LexerBase {
   public IElementType getTokenType() {
     IElementType _xifexpression = null;
     XtendHighlightingLexer.RichTextToken _currentRichTextToken = this.getCurrentRichTextToken();
-    boolean _notEquals = (!Objects.equal(_currentRichTextToken, null));
-    if (_notEquals) {
-      XtendHighlightingLexer.RichTextToken _currentRichTextToken_1 = this.getCurrentRichTextToken();
-      _xifexpression = _currentRichTextToken_1.getTokenType();
+    boolean _tripleNotEquals = (_currentRichTextToken != null);
+    if (_tripleNotEquals) {
+      _xifexpression = this.getCurrentRichTextToken().getTokenType();
     } else {
       _xifexpression = this.delegate.getTokenType();
     }
@@ -223,39 +210,43 @@ public class XtendHighlightingLexer extends LexerBase {
       it.tokenType = tokenType;
     };
     final XtendHighlightingLexer.RichTextToken result = ObjectExtensions.<XtendHighlightingLexer.RichTextToken>operator_doubleArrow(_richTextToken, _function);
-    switch (id) {
-      case "RULE_RICH_TEXT_START":
-        result.delimiter = false;
-        result.offsets = new int[] { tokenOffset, ((tokenOffset + tokenLength) - 1) };
-        result.lengths = new int[] { (tokenLength - 1), 1 };
-        break;
-      case "RULE_RICH_TEXT_INBETWEEN":
-        result.delimiter = true;
-        if ((tokenLength == 2)) {
-          result.offsets = new int[] { tokenOffset };
-          result.lengths = new int[] { tokenLength };
-        } else {
-          result.offsets = new int[] { tokenOffset, (tokenOffset + 1), ((tokenOffset + tokenLength) - 1) };
-          result.lengths = new int[] { 1, (tokenLength - 2), 1 };
-        }
-        break;
-      case "RULE_RICH_TEXT_END":
-        result.delimiter = true;
-        result.offsets = new int[] { tokenOffset, (tokenOffset + 1) };
-        result.lengths = new int[] { 1, (tokenLength - 1) };
-        break;
-      case "RULE_COMMENT_RICH_TEXT_END":
-        result.delimiter = true;
-        result.offsets = new int[] { tokenOffset, (tokenOffset + 2) };
-        result.lengths = new int[] { 2, (tokenLength - 2) };
-        break;
-      case "RULE_COMMENT_RICH_TEXT_INBETWEEN":
-        result.delimiter = true;
-        result.offsets = new int[] { tokenOffset, (tokenOffset + 2), ((tokenOffset + tokenLength) - 1) };
-        result.lengths = new int[] { 2, (tokenLength - 3), 1 };
-        break;
-      default:
-        throw new IllegalArgumentException(id);
+    if (id != null) {
+      switch (id) {
+        case "RULE_RICH_TEXT_START":
+          result.delimiter = false;
+          result.offsets = new int[] { tokenOffset, ((tokenOffset + tokenLength) - 1) };
+          result.lengths = new int[] { (tokenLength - 1), 1 };
+          break;
+        case "RULE_RICH_TEXT_INBETWEEN":
+          result.delimiter = true;
+          if ((tokenLength == 2)) {
+            result.offsets = new int[] { tokenOffset };
+            result.lengths = new int[] { tokenLength };
+          } else {
+            result.offsets = new int[] { tokenOffset, (tokenOffset + 1), ((tokenOffset + tokenLength) - 1) };
+            result.lengths = new int[] { 1, (tokenLength - 2), 1 };
+          }
+          break;
+        case "RULE_RICH_TEXT_END":
+          result.delimiter = true;
+          result.offsets = new int[] { tokenOffset, (tokenOffset + 1) };
+          result.lengths = new int[] { 1, (tokenLength - 1) };
+          break;
+        case "RULE_COMMENT_RICH_TEXT_END":
+          result.delimiter = true;
+          result.offsets = new int[] { tokenOffset, (tokenOffset + 2) };
+          result.lengths = new int[] { 2, (tokenLength - 2) };
+          break;
+        case "RULE_COMMENT_RICH_TEXT_INBETWEEN":
+          result.delimiter = true;
+          result.offsets = new int[] { tokenOffset, (tokenOffset + 2), ((tokenOffset + tokenLength) - 1) };
+          result.lengths = new int[] { 2, (tokenLength - 3), 1 };
+          break;
+        default:
+          throw new IllegalArgumentException(id);
+      }
+    } else {
+      throw new IllegalArgumentException(id);
     }
     return result;
   }

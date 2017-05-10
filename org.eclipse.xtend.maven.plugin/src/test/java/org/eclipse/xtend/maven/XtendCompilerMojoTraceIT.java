@@ -3,6 +3,7 @@ package org.eclipse.xtend.maven;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
@@ -79,10 +80,6 @@ public class XtendCompilerMojoTraceIT {
 	}
 
 	private Verifier newVerifier(String pathToTestProject, boolean debugMode) throws IOException, VerificationException {
-		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
-		Verifier verifier = new Verifier(testDir.getAbsolutePath(), debugMode);
-		String localRepo = new File("../local-maven-repository/").getAbsolutePath();
-		verifier.setLocalRepo(localRepo);
-		return verifier;
+		return MavenVerifierUtil.newVerifier(pathToTestProject);
 	}
 }

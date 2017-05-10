@@ -47,6 +47,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XListLiteral;
+import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -57,6 +58,7 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.Lists;
@@ -313,7 +315,13 @@ public class XtendCompiler extends XbaseCompiler {
 		@Override
 		public void acceptExpression(XExpression expression, CharSequence indentation) {
 			currentAppendable = null;
-			writeExpression(expression, indentation, false);
+			if (!isEmptyEmission(expression)) {
+				writeExpression(expression, indentation, false);
+			}
+		}
+		
+		private boolean isEmptyEmission(XExpression expression) {
+			return expression instanceof XStringLiteral && StringExtensions.isNullOrEmpty(((XStringLiteral)expression).getValue()) || expression instanceof XNullLiteral;
 		}
 
 		protected void writeExpression(XExpression expression, CharSequence indentation, boolean immediate) {
@@ -328,9 +336,14 @@ public class XtendCompiler extends XbaseCompiler {
 				else
 					tracingAppendable.append(".append(");
 				internalToJavaExpression(expression, tracingAppendable);
-				tracingAppendable.append(", \"");
-				tracingAppendable.append(Strings.convertToJavaString(indentation.toString(), false));
-				tracingAppendable.append("\");");
+
+				String javaIndentation = Strings.convertToJavaString(indentation.toString(), false);
+				if (immediate || !javaIndentation.isEmpty()) {
+					tracingAppendable.append(", \"");
+					tracingAppendable.append(javaIndentation);
+					tracingAppendable.append("\"");
+				}
+				tracingAppendable.append(");");
 			}
 		}
 

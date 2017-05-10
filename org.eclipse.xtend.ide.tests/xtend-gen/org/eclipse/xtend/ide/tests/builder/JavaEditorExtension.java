@@ -7,16 +7,12 @@
  */
 package org.eclipse.xtend.ide.tests.builder;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.ArrayList;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -41,8 +37,7 @@ public class JavaEditorExtension {
   private WorkbenchTestHelper _workbenchTestHelper;
   
   public ITextEditor reconcile(final String fileName, final String oldText, final String newText) {
-    ITextEditor _openJavaEditor = this.openJavaEditor(fileName);
-    return this.reconcile(_openJavaEditor, oldText, newText);
+    return this.reconcile(this.openJavaEditor(fileName), oldText, newText);
   }
   
   public ITextEditor reconcile(final ITextEditor editor, final String oldText, final String newText) {
@@ -55,8 +50,7 @@ public class JavaEditorExtension {
   public ITextEditor reconcile(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
     ITextEditor _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(consumer, null);
-      if (_equals) {
+      if ((consumer == null)) {
         return editor;
       }
       final Procedure0 _function = () -> {
@@ -76,12 +70,10 @@ public class JavaEditorExtension {
     ITextEditor _xblockexpression = null;
     {
       final Procedure0 _function = () -> {
-        boolean _notEquals = (!Objects.equal(consumer, null));
-        if (_notEquals) {
+        if ((consumer != null)) {
           consumer.apply(editor);
         }
-        boolean _saveEditor = this._workbenchTestHelper.saveEditor(editor, false);
-        Assert.assertTrue(_saveEditor);
+        Assert.assertTrue(this._workbenchTestHelper.saveEditor(editor, false));
       };
       this.waitForPostChangeEvent(_function);
       _xblockexpression = editor;
@@ -97,12 +89,10 @@ public class JavaEditorExtension {
     ITextEditor _xblockexpression = null;
     {
       final Procedure0 _function = () -> {
-        boolean _notEquals = (!Objects.equal(consumer, null));
-        if (_notEquals) {
+        if ((consumer != null)) {
           consumer.apply(editor);
         }
-        boolean _closeEditor = this._workbenchTestHelper.closeEditor(editor, false);
-        Assert.assertTrue(_closeEditor);
+        Assert.assertTrue(this._workbenchTestHelper.closeEditor(editor, false));
       };
       this.waitForPostChangeEvent(_function);
       _xblockexpression = editor;
@@ -124,7 +114,7 @@ public class JavaEditorExtension {
       if ((JavaEditorExtension.VERBOSE).booleanValue()) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("start waiting for an element changed event: ");
-        _builder.append(eventMask, "");
+        _builder.append(eventMask);
         InputOutput.<String>println(_builder.toString());
       }
       final ArrayList<Boolean> changed = CollectionLiterals.<Boolean>newArrayList(Boolean.valueOf(false));
@@ -150,7 +140,7 @@ public class JavaEditorExtension {
       if ((JavaEditorExtension.VERBOSE).booleanValue()) {
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("end waiting for an element changed event: ");
-        _builder_1.append(eventMask, "");
+        _builder_1.append(eventMask);
         _xifexpression = InputOutput.<String>println(_builder_1.toString());
       }
       _xblockexpression = _xifexpression;
@@ -160,8 +150,7 @@ public class JavaEditorExtension {
   
   public ITextEditor openJavaEditor(final String fileName) {
     try {
-      IFile _file = this._workbenchTestHelper.getFile(fileName);
-      return this._workbenchTestHelper.openLikeTextEditor(_file);
+      return this._workbenchTestHelper.openLikeTextEditor(this._workbenchTestHelper.getFile(fileName));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -171,13 +160,9 @@ public class JavaEditorExtension {
     try {
       ITextEditor _xblockexpression = null;
       {
-        IDocumentProvider _documentProvider = editor.getDocumentProvider();
-        IEditorInput _editorInput = editor.getEditorInput();
-        final IDocument document = _documentProvider.getDocument(_editorInput);
+        final IDocument document = editor.getDocumentProvider().getDocument(editor.getEditorInput());
         final String model = document.get();
-        int _indexOf = model.indexOf(oldText);
-        int _length = oldText.length();
-        document.replace(_indexOf, _length, newText);
+        document.replace(model.indexOf(oldText), oldText.length(), newText);
         _xblockexpression = editor;
       }
       return _xblockexpression;

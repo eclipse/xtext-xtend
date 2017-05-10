@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.findReferences;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 import java.util.Set;
@@ -68,27 +67,22 @@ public class XtendReferenceFinder extends ReferenceFinder {
     if ((resourceAccess == null)) {
       return;
     }
-    Declarators.DeclaratorsData _declaratorData = this.declarators.getDeclaratorData(targetURIs, resourceAccess);
-    final Set<QualifiedName> names = _declaratorData.getDeclaratorNames();
+    final Set<QualifiedName> names = this.declarators.getDeclaratorData(targetURIs, resourceAccess).getDeclaratorNames();
     boolean _isCanceled = monitor.isCanceled();
     if (_isCanceled) {
       throw new OperationCanceledException();
     }
-    Iterable<QualifiedName> _importedNames = resourceDescription.getImportedNames();
-    final Set<QualifiedName> importedNames = IterableExtensions.<QualifiedName>toSet(_importedNames);
+    final Set<QualifiedName> importedNames = IterableExtensions.<QualifiedName>toSet(resourceDescription.getImportedNames());
     final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
       return Boolean.valueOf(importedNames.contains(it));
     };
     boolean _exists = IterableExtensions.<QualifiedName>exists(names, _function);
     if (_exists) {
-      URI _uRI = resourceDescription.getURI();
       final IUnitOfWork<Object, ResourceSet> _function_1 = (ResourceSet it) -> {
-        URI _uRI_1 = resourceDescription.getURI();
-        Resource _resource = it.getResource(_uRI_1, true);
-        this.findReferences(targetURIs, _resource, acceptor, monitor);
+        this.findReferences(targetURIs, it.getResource(resourceDescription.getURI(), true), acceptor, monitor);
         return null;
       };
-      resourceAccess.<Object>readOnly(_uRI, _function_1);
+      resourceAccess.<Object>readOnly(resourceDescription.getURI(), _function_1);
     }
   }
   
@@ -112,7 +106,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
     }
     if (!_matched_1) {
       if (sourceCandidate instanceof XFeatureCall) {
-        if ((Objects.equal(((XFeatureCall)sourceCandidate).getActualReceiver(), null) && ((XFeatureCall)sourceCandidate).isStatic())) {
+        if (((((XFeatureCall)sourceCandidate).getActualReceiver() == null) && ((XFeatureCall)sourceCandidate).isStatic())) {
           _matched_1=true;
           this.addReferenceToTypeFromStaticImport(((XAbstractFeatureCall)sourceCandidate), targetURIs, acceptor);
         }
@@ -147,11 +141,10 @@ public class XtendReferenceFinder extends ReferenceFinder {
   }
   
   protected void addReferenceToFeatureFromStaticImport(final XImportDeclaration importDeclaration, final Predicate<URI> targetURISet, final IReferenceFinder.Acceptor acceptor) {
-    Iterable<JvmFeature> _allFeatures = this._staticallyImportedMemberProvider.getAllFeatures(importDeclaration);
     final Consumer<JvmFeature> _function = (JvmFeature it) -> {
       this.addReferenceIfTarget(it, targetURISet, importDeclaration, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, acceptor);
     };
-    _allFeatures.forEach(_function);
+    this._staticallyImportedMemberProvider.getAllFeatures(importDeclaration).forEach(_function);
   }
   
   protected void addReferenceToTypeFromStaticImport(final XAbstractFeatureCall sourceCandidate, final Predicate<URI> targetURISet, final IReferenceFinder.Acceptor acceptor) {
