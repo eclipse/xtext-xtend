@@ -1,6 +1,6 @@
 package org.eclipse.xtend.ide.tests.contentassist;
 
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
 
 import java.io.InputStream;
 import java.util.Arrays;

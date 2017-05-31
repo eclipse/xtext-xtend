@@ -17,7 +17,7 @@ import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 
