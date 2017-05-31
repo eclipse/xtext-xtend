@@ -18,14 +18,14 @@ import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.util.internal.Stopwatches
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
