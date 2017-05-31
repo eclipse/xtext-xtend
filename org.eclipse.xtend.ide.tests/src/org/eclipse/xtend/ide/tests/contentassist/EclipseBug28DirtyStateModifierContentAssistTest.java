@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.xtext.junit4.internal.LineDelimiters;
+import org.eclipse.xtext.ui.testing.util.LineDelimiters;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;

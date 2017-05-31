@@ -12,7 +12,6 @@ import org.eclipse.core.resources.IResource
 import org.eclipse.core.resources.IncrementalProjectBuilder
 import org.eclipse.core.runtime.CoreException
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
-import org.eclipse.xtext.junit4.internal.StopwatchRule
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Rule
@@ -26,6 +25,7 @@ import org.eclipse.xtext.util.internal.Stopwatches
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil
+import org.eclipse.xtend.ide.tests.StopwatchRule
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

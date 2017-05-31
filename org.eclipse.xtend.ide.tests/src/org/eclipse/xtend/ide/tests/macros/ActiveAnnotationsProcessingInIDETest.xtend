@@ -15,7 +15,7 @@ import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
 import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.xtext.junit4.internal.StopwatchRule
+import org.eclipse.xtend.ide.tests.StopwatchRule
 import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner

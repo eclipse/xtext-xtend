@@ -12,7 +12,7 @@ import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
-import org.eclipse.xtext.junit4.internal.StopwatchRule
+import org.eclipse.xtend.ide.tests.StopwatchRule
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
 import org.junit.Ignore
