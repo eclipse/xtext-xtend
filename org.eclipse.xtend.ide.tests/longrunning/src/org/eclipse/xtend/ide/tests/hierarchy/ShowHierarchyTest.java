@@ -24,7 +24,7 @@ import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
+import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.xbase.ui.editor.AbstractJvmElementHandler;
 import org.junit.Test;
@@ -98,8 +98,8 @@ public class ShowHierarchyTest extends AbstractEditorTest {
 	}
 	
 	private TestingTypeHierarchyHandler invokeTestingHandler(XtextEditor xtextEditor, String commandID) throws Exception {
-		IHandlerService handlerService = (IHandlerService) xtextEditor.getSite().getService(IHandlerService.class);
-		final ICommandService commandService = (ICommandService) xtextEditor.getSite()
+		IHandlerService handlerService = xtextEditor.getSite().getService(IHandlerService.class);
+		final ICommandService commandService = xtextEditor.getSite()
 				.getService(ICommandService.class);
 		Command command = commandService.getCommand("org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy");
 		TestingTypeHierarchyHandler testingHandler = new TestingTypeHierarchyHandler();
