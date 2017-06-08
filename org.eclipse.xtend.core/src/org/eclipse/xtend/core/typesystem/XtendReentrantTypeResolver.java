@@ -51,6 +51,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
@@ -59,6 +60,8 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Procedures;
@@ -93,6 +96,7 @@ import com.google.inject.Inject;
  * parameter types as well as adding extension fields to the scope.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Stephane Galland
  */
 public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTypeResolver {
 
@@ -372,6 +376,9 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 	
 	@Inject
 	private OverrideTester overrideTester;
+
+	@Inject
+	private IGeneratorConfigProvider generatorConfigProvider;
 
 	@Override
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
@@ -890,6 +897,11 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		EObject containingStructure = getNearestClosureOrTypeDeclaration(featureCall, resolvedTypes);
 		if (containingStructure != null && !EcoreUtil.isAncestor(containingStructure, variable)) {
 			if (containingStructure instanceof XClosure) {
+				final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(
+						EcoreUtil.getRootContainer(containingStructure));
+				if (generatorConfig != null && generatorConfig.getJavaSourceVersion().isAtLeast(JavaVersion.JAVA8)) {
+					return null;
+				}
 				return String.format(
 						"Cannot %srefer to the non-final variable %s inside a lambda expression",
 						getImplicitlyMessagePart(featureCall),
