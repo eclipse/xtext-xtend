@@ -10,6 +10,7 @@ ext.versions = [
 	'idea' : project.hasProperty('ideaEAP') ? 'LATEST-EAP-SNAPSHOT' : '145.972.3',
 	'jdtCore': '3.12.2',
 	'jdtCompilerApt': '1.2.100',
+	'eclipseCore': '3.12.0',
 	'emfMwe2': '2.9.0.201605261059',
 	'emfEcore': '[2.10.2,3)',
 	'xpand': '2.0.0',
