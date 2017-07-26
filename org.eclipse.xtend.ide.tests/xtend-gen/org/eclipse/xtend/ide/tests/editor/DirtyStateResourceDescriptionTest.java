@@ -13,6 +13,7 @@ import com.google.inject.Provider;
 import java.util.Collections;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.core.resource.XtendResourceDescriptionStrategy;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -54,6 +55,10 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     Assert.assertNotNull(textHash);
     boolean _equals = Objects.equal("", textHash);
     Assert.assertFalse(_equals);
+    final String sig = IterableExtensions.<IEObjectDescription>head(d.getExportedObjects()).getUserData(XtendResourceDescriptionStrategy.SIGNATURE_HASH_KEY);
+    Assert.assertNotNull(sig);
+    boolean _equals_1 = Objects.equal("", sig);
+    Assert.assertFalse(_equals_1);
   }
   
   @Test
