@@ -17,6 +17,7 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.ui.editor.DirtyStateResourceDescription
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.Test
+import org.eclipse.xtend.core.resource.XtendResourceDescriptionStrategy
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -39,6 +40,9 @@ class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
 		val textHash = d.exportedObjects.head.getUserData(DirtyStateResourceDescription.Manager.TEXT_HASH)
 		assertNotNull(textHash)
 		assertFalse('' == textHash)
+		val sig = d.exportedObjects.head.getUserData(XtendResourceDescriptionStrategy.SIGNATURE_HASH_KEY)
+		assertNotNull(sig)
+		assertFalse('' == sig)
 	}
 	
 	@Test
