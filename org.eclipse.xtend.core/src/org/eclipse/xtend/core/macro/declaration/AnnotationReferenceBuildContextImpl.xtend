@@ -56,7 +56,7 @@ class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildCon
 		val annotationType = delegate.annotation
 		val jvmOperation = annotationType.declaredOperations.findFirst[simpleName == name]
 		if (jvmOperation === null) {
-			throw new IllegalArgumentException('''The annotation property '«name»' is not declared on the annotation type '«annotationType.identifier»'.''')
+			throw new IllegalArgumentException('''The annotation property 'Â«nameÂ»' is not declared on the annotation type 'Â«annotationType.identifierÂ»'.''')
 		}
 		return jvmOperation
 	}
@@ -486,7 +486,7 @@ class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildCon
 	}
 	
 	protected def getAnnotationValueTypeName(JvmType type) {
-		switch result: type?.identifier {
+		switch result: type?.identifier?.replace("$", ".") {
 			case 'java.lang.Class': TypeReference.name
 			case 'java.lang.Class[]': TypeReference.name + "[]"
 			default: result
