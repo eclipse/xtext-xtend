@@ -131,7 +131,13 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 					// thus we load it as a resource and take the raw path to find the location in the file system
 					val IResource library = projectToUse.workspaceRoot.findMember(path)
 					url = if (library !== null) {
-						library.rawLocationURI.toURL
+						try {
+							// this fails if rawLocationURI protocol is not valid, so at least ignore that libraries
+							library.rawLocationURI.toURL
+						} catch (Exception ex){
+							LOG.warn("Can not load library with uri:" + library.rawLocationURI)
+							null
+						}
 					} else {
 						// otherwise we use the path itself
 						path.toFile().toURI().toURL()
