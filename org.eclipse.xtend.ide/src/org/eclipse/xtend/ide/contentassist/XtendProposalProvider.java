@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.Flags;
@@ -27,7 +28,9 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
@@ -617,6 +620,25 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	public void completeXSwitchExpression_Default(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
+	}
+	
+	@Override
+	public void complete_CommonModifier(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.complete_CommonModifier(model, ruleCall, context, acceptor);
+		if (model instanceof XtendFunction) {
+			EList<String> modifiers = ((XtendFunction) model).getModifiers();
+			Alternatives alternatives = grammarAccess.getCommonModifierAccess().getAlternatives();
+			if (alternatives != null) {
+				for (AbstractElement e : alternatives.getElements()) {
+					if (e instanceof Keyword) {
+						if (!modifiers.contains(((Keyword) e).getValue())) {
+							completeKeyword((Keyword) e, context, acceptor);
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	@Override
