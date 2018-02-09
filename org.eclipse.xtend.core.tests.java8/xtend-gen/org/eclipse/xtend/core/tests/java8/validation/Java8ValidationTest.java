@@ -23,6 +23,7 @@ import org.junit.Test;
 
 /**
  * @author Miro Spoenemann - Initial contribution and API
+ * @author Stephane Galland - https://github.com/eclipse/xtext-xtend/issues/191
  */
 @InjectWith(Java8RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
@@ -818,6 +819,205 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       this._validationTestHelper.assertError(this.file(_builder.toString()), XbasePackage.Literals.XMEMBER_FEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, 
         "The enclosing type does not extend or implement the interface List");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  /**
+   * private static class ResolvedByAbstractType01 {
+   * class A<T> extends java.util.AbstractCollection<T> implements java.util.Set<T> {
+   * public java.util.Iterator<T> iterator() {
+   * return null;
+   * }
+   * public int size() {
+   * return 0;
+   * }
+   * }
+   * class Test {
+   * public void test(java.util.AbstractCollection<?> a) {
+   * a.spliterator();
+   * }
+   * public void test(A<?> a) {
+   * a.spliterator();
+   * }
+   * }
+   * }
+   */
+  @Test
+  public void testResolvedByAbstractType01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import java.util.Iterator");
+      _builder.newLine();
+      _builder.append("import java.util.Set");
+      _builder.newLine();
+      _builder.append("import java.util.AbstractCollection");
+      _builder.newLine();
+      _builder.append("class A<T> extends AbstractCollection<T> implements Set<T> {");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("override Iterator<T> iterator() {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("null");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("override int size() {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("0");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  /**
+   * private static class ResolvedByAbstractType02 {
+   * abstract class B<T> extends java.util.AbstractCollection<T> {
+   * public java.util.Spliterator<T> splititerator() {
+   * return null;
+   * }
+   * }
+   * class A<T> extends B<T> implements java.util.Set<T> {
+   * public java.util.Iterator<T> iterator() {
+   * return null;
+   * }
+   * public int size() {
+   * return 0;
+   * }
+   * }
+   * class Test {
+   * public void test(java.util.AbstractCollection<?> a) {
+   * a.spliterator();
+   * }
+   * public void test(A<?> a) {
+   * a.spliterator();
+   * }
+   * }
+   * }
+   */
+  @Test
+  public void testResolvedByAbstractType02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import java.util.Iterator");
+      _builder.newLine();
+      _builder.append("import java.util.Set");
+      _builder.newLine();
+      _builder.append("import java.util.AbstractCollection");
+      _builder.newLine();
+      _builder.append("abstract class B<T> extends AbstractCollection<T> {");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("def java.util.Spliterator<T> splititrator() {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("null");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class A<T> extends B<T> implements Set<T> {");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("override Iterator<T> iterator() {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("null");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("override int size() {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("0");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  /**
+   * private static class ResolvedByAbstractType03 {
+   * interface I<T> extends java.util.Set<T> {
+   * 
+   * }
+   * class A<T> extends java.util.AbstractCollection<T> implements I<T> {
+   * public java.util.Iterator<T> iterator() {
+   * return null;
+   * }
+   * public int size() {
+   * return 0;
+   * }
+   * }
+   * class Test {
+   * public void test(java.util.AbstractCollection<?> a) {
+   * a.spliterator();
+   * }
+   * public void test(A<?> a) {
+   * a.spliterator();
+   * }
+   * }
+   * }
+   */
+  @Test
+  public void testResolvedByAbstractType03() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import java.util.Iterator");
+      _builder.newLine();
+      _builder.append("import java.util.Set");
+      _builder.newLine();
+      _builder.append("import java.util.AbstractCollection");
+      _builder.newLine();
+      _builder.append("interface I<T> extends Set<T> {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class A<T> extends AbstractCollection<T> implements I<T> {");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("override Iterator<T> iterator() {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("null");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("override int size {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("0");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertNoErrors(this.file(_builder.toString()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
