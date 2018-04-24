@@ -34,7 +34,7 @@
 		  and also to deploy the artifacts produced in this build.
 		 -->
 		<gradleMavenRepo>file:${root-dir}/build/maven-repository</gradleMavenRepo>
-		<branch_url_segment>master</branch_url_segment>
+		<branch_url_segment>milestone_2.14.0.RC1</branch_url_segment>
 	</properties>
 	
 	<build>
