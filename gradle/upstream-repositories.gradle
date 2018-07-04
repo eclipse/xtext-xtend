@@ -29,8 +29,8 @@ repositories {
     maven { url "http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/$MVN_REPOPATH" }
     maven { url jenkinsPipelineRepo('xtext-lib','autodetect') }
     maven { url jenkinsPipelineRepo('xtext-core','autodetect') }
-    maven { url jenkinsPipelineRepo('xtext-extras','autodetect') }
-    maven { url jenkinsPipelineRepo('xtext-eclipse','autodetect') }
+    maven { url jenkinsPipelineRepo('xtext-extras','sz_issue397') }
+    maven { url jenkinsPipelineRepo('xtext-eclipse','sz_issue397') }
   } else {
     mavenLocal()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }

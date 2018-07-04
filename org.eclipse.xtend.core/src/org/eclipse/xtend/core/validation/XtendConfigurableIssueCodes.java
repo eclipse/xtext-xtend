@@ -8,6 +8,8 @@
 package org.eclipse.xtend.core.validation;
 
 
+import static org.eclipse.xtend.core.validation.IssueCodes.*;
+
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.util.IAcceptor;
