@@ -62,15 +62,15 @@ public class ExamplesTest extends AbstractSwtBotTest {
 
 	@Test
 	public void xtendIntroductoryExamples() throws Exception {
-		standartXtendExample("Xtend Introductory Examples", "xtend-examples");
+		standardXtendExample("Xtend Introductory Examples", "xtend-examples");
 	}
 
 	@Test
 	public void xtendSolutionsForEuler() throws Exception {
-		standartXtendExample("Xtend Solutions for Euler", "xtend-euler");
+		standardXtendExample("Xtend Solutions for Euler", "xtend-euler");
 	}
 
-	private void standartXtendExample(String exampleLabel, String projectName) throws Exception {
+	private void standardXtendExample(String exampleLabel, String projectName) throws Exception {
 		// create example projects
 		mainMenu().openNewProjectWizard().selectXtendExample(exampleLabel).finish();
 		waitForBuild();
