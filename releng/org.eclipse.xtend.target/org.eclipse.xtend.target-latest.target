@@ -89,6 +89,9 @@
 		<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.api.tools.ee.feature.feature.group" version="0.0.0"/>
+		<!-- Workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=538737 -->
+		<unit id="org.eclipse.equinox.ds" version="0.0.0"/>
+		<!-- End Workaround -->
 		<repository location="http://download.eclipse.org/eclipse/updates/4.10-I-builds"/>
 	</location>
 
