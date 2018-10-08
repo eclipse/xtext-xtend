@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -86,6 +86,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -149,6 +150,9 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 	
 	@Inject
 	private OperationCanceledManager operationCanceledManager;
+	
+	@Inject
+	private OverrideHelper overrideHelper;
 	
 	private GeneratorConfig generatorConfig;
 	
@@ -598,6 +602,13 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 			sourceName = "_" + sourceName;
 		}
 		operation.setSimpleName(sourceName);
+		if(source.isOverride() && source.getDeclaredVisibility() == null) {
+			JvmOperation jvmOperation = associations.getDirectlyInferredOperation(source);
+			JvmOperation overriddenJvmOperation = overrideHelper.findOverriddenOperation(jvmOperation);
+			if(overriddenJvmOperation != null) {
+				visibility = overriddenJvmOperation.getVisibility();
+			}
+		}
 		operation.setVisibility(visibility);
 		operation.setStatic(source.isStatic());
 		if (!operation.isAbstract() && !operation.isStatic() && container.isInterface())
