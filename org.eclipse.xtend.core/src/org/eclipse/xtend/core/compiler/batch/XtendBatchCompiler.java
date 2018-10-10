@@ -648,7 +648,7 @@ public class XtendBatchCompiler {
 			commandLine.add("-cp \"" + Joiner.on(File.pathSeparator).join(classPathEntries) + "\"");
 		}
 		commandLine.add("-d \"" + classDirectory.toString() + "\"");
-		commandLine.add("-" + getComplianceLevel());
+		commandLine.add("-" + getJavaSourceVersion());
 		commandLine.add("-proceedOnError");
 		if (encodingProvider.getDefaultEncoding() != null) {
 			commandLine.add("-encoding \"" + encodingProvider.getDefaultEncoding() + "\"");
