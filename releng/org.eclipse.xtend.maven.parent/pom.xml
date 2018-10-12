@@ -35,7 +35,7 @@
 		  and also to deploy the artifacts produced in this build.
 		 -->
 		<gradleMavenRepo>file:${root-dir}/build/maven-repository</gradleMavenRepo>
-		<branch_url_segment>master</branch_url_segment>
+		<branch_url_segment>milestone_2.16.0.M1</branch_url_segment>
 		<JENKINS_URL>http://services.typefox.io/open-source/jenkins</JENKINS_URL>
 	</properties>
 	
