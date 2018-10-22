@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.preferences;
 
-import static org.eclipse.xtext.ui.swtbot.testing.api.EclipseAPI.*;
+import static org.eclipse.xtext.swtbot.testing.api.EclipseAPI.*;
 
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
-import org.eclipse.xtext.ui.swtbot.testing.AbstractSwtBotTest;
-import org.eclipse.xtext.ui.swtbot.testing.api.PreferencesDialogAPI;
-import org.eclipse.xtext.ui.swtbot.testing.api.XtendFormatterPreferenceEditDialogAPI;
+import org.eclipse.xtext.swtbot.testing.AbstractSwtBotTest;
+import org.eclipse.xtext.swtbot.testing.api.PreferencesDialogAPI;
+import org.eclipse.xtext.swtbot.testing.api.XtendFormatterPreferenceEditDialogAPI;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
