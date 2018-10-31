@@ -70,7 +70,7 @@ public class JavaIDValueConverter extends IDValueConverter {
 		if (idx < 0) {
 			return identifier;
 		}
-		GracefulJavaStringConverter converter = createConverter();
+		Implementation converter = new Implementation();
 		String result = converter.convertFromJavaString(identifier, idx);
 		if (converter.error) {
 			throw new ValueConverterWithValueException("Illegal escape sequence in identifier '" + identifier + "'", node, result, null);
@@ -84,15 +84,11 @@ public class JavaIDValueConverter extends IDValueConverter {
 		return result;
 	}
 
-	protected static GracefulJavaStringConverter createConverter() {
-		return new GracefulJavaStringConverter();
-	}
-	
-	protected static class GracefulJavaStringConverter extends JavaStringConverter {
+	protected static class Implementation extends JavaStringConverter {
 		boolean error = false;
 		boolean badChar = false;
 		
-		protected GracefulJavaStringConverter() {}
+		protected Implementation() {}
 		
 		/**
 		 * Converts a string with valid or invalid escape sequences to a semantic value.
@@ -106,15 +102,15 @@ public class JavaIDValueConverter extends IDValueConverter {
 		}
 		
 		@Override
+		protected boolean isInvalidUnicodeEscapeSequence(String string, int index) {
+			return super.isInvalidUnicodeEscapeSequence(string, index) || !isHexSequence(string, index, 4);
+		}
+		
+		@Override
 		protected int handleInvalidUnicodeEscapeSequnce(String string, int index, StringBuilder result) {
 			result.append('u');
 			error = true;
 			return index;
-		}
-		
-		@Override
-		protected boolean isInvalidUnicodeEscapeSequence(String string, int index) {
-			return super.isInvalidUnicodeEscapeSequence(string, index) || !isHexSequence(string, index, 4);
 		}
 		
 		@Override
@@ -148,39 +144,6 @@ public class JavaIDValueConverter extends IDValueConverter {
 			return super.validate(result, c);
 		}
 		
-		private boolean isHexSequence(String in, int off, int chars) {
-			for(int i = off; i < in.length() && i < off + chars; i++) {
-				char c = in.charAt(i);
-				switch (c) {
-					case '0':
-					case '1':
-					case '2':
-					case '3':
-					case '4':
-					case '5':
-					case '6':
-					case '7':
-					case '8':
-					case '9':
-					case 'a':
-					case 'b':
-					case 'c':
-					case 'd':
-					case 'e':
-					case 'f':
-					case 'A':
-					case 'B':
-					case 'C':
-					case 'D':
-					case 'E':
-					case 'F':
-						continue;
-					default:
-						return false;
-				}
-			}
-			return true;
-		}
 	}
 	
 }
