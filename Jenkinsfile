@@ -45,8 +45,8 @@ node {
 			targetfiles="$(find releng -type f -iname '*.target')"
 			for targetfile in $targetfiles
 			do
-				echo "Redirecting target platforms in $targetfile to $branchname"
-				sed_inplace "s?<repository location=\\".*/job/\\([^/]*\\)/job/[^/]*/?<repository location=\\"$JENKINS_URL/job/\\1/job/$escapedBranch/?" $targetfile
+				echo "Redirecting target platforms in $targetfile to $JENKINS_URL"
+				sed_inplace "s?<repository location=\\".*/job/\\([^/]*\\)/job/\\([^/]*\\)/?<repository location=\\"$JENKINS_URL/job/\\1/job/\\2/?" $targetfile
 			done
 		'''
 	}
