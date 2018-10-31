@@ -70,7 +70,7 @@ public class JavaIDValueConverter extends IDValueConverter {
 		if (idx < 0) {
 			return identifier;
 		}
-		GracefulJavaStringConverter converter = new GracefulJavaStringConverter();
+		GracefulJavaStringConverter converter = createConverter();
 		String result = converter.convertFromJavaString(identifier, idx);
 		if (converter.error) {
 			throw new ValueConverterWithValueException("Illegal escape sequence in identifier '" + identifier + "'", node, result, null);
@@ -82,6 +82,10 @@ public class JavaIDValueConverter extends IDValueConverter {
 				throw new ValueConverterWithValueException("Illegal character in identifier '" + identifier + "'", node, null, null);
 		}
 		return result;
+	}
+
+	protected static GracefulJavaStringConverter createConverter() {
+		return new GracefulJavaStringConverter();
 	}
 	
 	protected static class GracefulJavaStringConverter extends JavaStringConverter {
