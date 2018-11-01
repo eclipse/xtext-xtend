@@ -64,7 +64,12 @@ public class JavaIDValueConverter extends IDValueConverter {
 	public static boolean isValidIdentifierPart(char c) {
 		return Character.isJavaIdentifierPart(c);
 	}
-
+	
+	/**
+	 * Converts a string with valid or invalid escape sequences to a semantic value.
+	 * If the escape sequences are invalid, a {@link ValueConverterException} is thrown
+	 * with detailed information about the broken character combination.
+	 */
 	public static String convertFromJavaIdentifier(String identifier, INode node) {
 		int idx = identifier.indexOf('\\');
 		if (idx < 0) {
@@ -90,11 +95,6 @@ public class JavaIDValueConverter extends IDValueConverter {
 		
 		protected Implementation() {}
 		
-		/**
-		 * Converts a string with valid or invalid escape sequences to a semantic value.
-		 * If the escape sequences are invalid, a {@link ValueConverterException} is thrown
-		 * with detailed information about the broken character combination.
-		 */
 		public String convertFromJavaString(String identifier, int firstEscapeSequence) throws ValueConverterException {
 			StringBuilder result = new StringBuilder(identifier.length());
 			result.append(identifier, 0, firstEscapeSequence);
