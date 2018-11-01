@@ -102,12 +102,7 @@ public class JavaIDValueConverter extends IDValueConverter {
 		}
 		
 		@Override
-		protected boolean isInvalidUnicodeEscapeSequence(String string, int index) {
-			return super.isInvalidUnicodeEscapeSequence(string, index) || !isHexSequence(string, index, 4);
-		}
-		
-		@Override
-		protected int handleInvalidUnicodeEscapeSequnce(String string, int index, StringBuilder result) {
+		protected int handleInvalidUnicodeEscapeSequence(String string, int index, StringBuilder result) {
 			result.append('u');
 			error = true;
 			return index;
