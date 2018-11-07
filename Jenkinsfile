@@ -26,14 +26,6 @@ node {
 		}
 
 		sh '''
-			branchname=${1:-master}
-			
-			escaped() {
-				echo $branchname | sed 's/\\//%252F/g'
-			}
-			
-			escapedBranch=$(escaped)
-			
 			sed_inplace() {
 				if [[ "$OSTYPE" == "darwin"* ]]; then
 					sed -i '' "$@"
