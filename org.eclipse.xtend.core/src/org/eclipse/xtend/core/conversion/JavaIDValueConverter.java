@@ -124,7 +124,7 @@ public class JavaIDValueConverter extends IDValueConverter {
 		}
 		
 		@Override
-		protected boolean validate(StringBuilder result, char c) {
+		protected boolean validate(char c, StringBuilder result) {
 			if (result.length() == 0) {
 				if (!isValidIdentifierStart(c)) {
 					badChar = true;
@@ -136,7 +136,7 @@ public class JavaIDValueConverter extends IDValueConverter {
 					return false;
 				}
 			}
-			return super.validate(result, c);
+			return super.validate(c, result);
 		}
 		
 	}
