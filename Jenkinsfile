@@ -4,6 +4,12 @@ node {
 		disableConcurrentBuilds(),
 		parameters([
 			choice(choices: 'oxygen\nphoton\nr201809\nlatest', description: 'Which Target Platform should be used?', name: 'target_platform')
+		]),
+		pipelineTriggers([
+			upstream(
+				threshold: 'SUCCESS',
+				upstreamProjects: 'xtext-eclipse/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
+			)
 		])
 	])
 	
@@ -54,7 +60,7 @@ node {
 	dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
 	
 	stage('Maven Plugin Build') {
-		sh "${mvnHome}/bin/mvn -f maven-pom.xml --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -DJENKINS_URL=$JENKINS_URL -Dmaven.test.failure.ignore=true -Dmaven.repo.local=${WORKSPACE}/.m2/repository -DgradleMavenRepo=file:${WORKSPACE}/build/maven-repository/ -DtestSettingsXML=${WORKSPACE}/org.eclipse.xtend.maven.plugin/src/test/resources/settings.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean deploy"
+		sh "${mvnHome}/bin/mvn -f maven-pom.xml --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -DJENKINS_URL=$JENKINS_URL -Dmaven.test.failure.ignore=true -Dit-archetype-tests-skip=true -Dmaven.repo.local=${WORKSPACE}/.m2/repository -DgradleMavenRepo=file:${WORKSPACE}/build/maven-repository/ -DtestSettingsXML=${WORKSPACE}/org.eclipse.xtend.maven.plugin/src/test/resources/settings.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean deploy"
 	}
 	
 	stage('Maven Tycho Build') {
