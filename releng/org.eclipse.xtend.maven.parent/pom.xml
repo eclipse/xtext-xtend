@@ -27,7 +27,7 @@
 		  and also to deploy the artifacts produced in this build.
 		 -->
 		<gradleMavenRepo>file:${root-dir}/build/maven-repository</gradleMavenRepo>
-		<upstreamBranch>master</upstreamBranch>
+		<upstreamBranch>cd_java11</upstreamBranch>
 		<JENKINS_URL>http://services.typefox.io/open-source/jenkins</JENKINS_URL>
 	</properties>
 
