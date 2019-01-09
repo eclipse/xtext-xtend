@@ -56,7 +56,7 @@
 			<id>central-real</id>
 			<releases>
 				<enabled>true</enabled>
-				<updatePolicy>alwaysas</updatePolicy>
+				<updatePolicy>always</updatePolicy>
 			</releases>
 			<snapshots>
 				<enabled>true</enabled>
