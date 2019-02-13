@@ -64,6 +64,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.ICompositeModification;
+import org.eclipse.xtext.ui.editor.model.edit.ICompositeModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
@@ -687,46 +688,22 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		});
 	}
 	
+<<<<<<< HEAD
 	@Fix(IssueCodes.MODIFIER_DOES_NOT_MATCH_TYPENAME)
 	public void addModifierAccordingToTypename(final Issue issue, IssueResolutionAcceptor acceptor) {
-		String label = "Add missing abstract modifier.";
-		String description = "Add the abstract modifier to match naming conventions for the "
-				+ "type name. Delete final modifier if necessary.";
-		String image = null;
-
-		acceptor.accept(issue, label, description, image, new ISemanticModification() {
-			@Override
-			public void apply(EObject element, IModificationContext context) throws Exception {
-				if (element instanceof XtendClass) {
-					int index = 0;
-					List<String> modifiers = ((XtendClass) element).getModifiers();
-					boolean modExist = !modifiers.isEmpty();
-
-					//remove final modifier if present, as type cannot be both final and abstract
-					modifiers.remove("final");
-
-					//add abstract
-					if (modifiers.contains("public") || modifiers.contains("package")) {
-						index++;
-					}
-					if (modExist) {
-						modifiers.add(index, "abstract");
-					} else {
-						// workaround for bug 721 - fallback to textual modification
-						internalDoAddAbstractKeyword(element, context);
-					}
-				}
-			}
-		});
-	}
-	
+=======
 	@Fix(IssueCodes.MODIFIER_DOES_NOT_MATCH_TYPENAME) 
 	public void addModifierAccordingToTypename(final Issue issue, IssueResolutionAcceptor acceptor){
+>>>>>>> 75c8c68a4... Provide Quickfix for issue #719
 		String label = "Add missing abstract modifier.";
 		String description = "Add the abstract modifier to match naming conventions for the "
 				+ "type name. Delete final modifier if necessary.";
 		String image = null;
+<<<<<<< HEAD
+
+=======
 		
+>>>>>>> 75c8c68a4... Provide Quickfix for issue #719
 		acceptor.accept(issue, label, description, image, new ISemanticModification() {
 			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
@@ -737,7 +714,11 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 
 					//remove final modifier if present, as type cannot be both final and abstract
 					modifiers.remove("final");
+<<<<<<< HEAD
+
+=======
 					
+>>>>>>> 75c8c68a4... Provide Quickfix for issue #719
 					//add abstract
 					if (modifiers.contains("public") || modifiers.contains("package")) {
 						index++;
@@ -745,7 +726,11 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 					if (modExist) {
 						modifiers.add(index, "abstract");
 					} else {
+<<<<<<< HEAD
+						// workaround for bug 721 - fallback to textual modification
+=======
 						//use existent method to add abstract modifier, if modifier list is empty, to prevent wrong insertion
+>>>>>>> 75c8c68a4... Provide Quickfix for issue #719
 						internalDoAddAbstractKeyword(element, context);
 					}
 				}

@@ -2170,6 +2170,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	}
 
 	@Check
+<<<<<<< HEAD
 	protected void checkModifierMatchesTypename(XtendClass xtendClass) {
 		String name = xtendClass.getName();
 		if (name != null) {
@@ -2177,6 +2178,13 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 				addIssue("The class" + name + "is not declared abstract.", xtendClass, XTEND_TYPE_DECLARATION__NAME, -1,
 						MODIFIER_DOES_NOT_MATCH_TYPENAME);
 			}
+=======
+	protected void checkModifierMatchesClassname(XtendClass xtendClass) {
+		String name = xtendClass.getName();
+		if (name.startsWith("Abstract") && !xtendClass.isAbstract()) {
+			warning("Your class is named " + name + ", but not declared abstract.", XTEND_TYPE_DECLARATION__NAME, -1,
+					MODIFIER_DOES_NOT_MATCH_TYPENAME);
+>>>>>>> c041cb882... Solved Issue #719
 		}
 	}
 
