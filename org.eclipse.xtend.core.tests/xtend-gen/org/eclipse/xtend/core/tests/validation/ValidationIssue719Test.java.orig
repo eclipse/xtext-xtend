@@ -7,11 +7,7 @@
  */
 package org.eclipse.xtend.core.tests.validation;
 
-<<<<<<< HEAD
 import com.google.inject.Inject;
-=======
-import javax.inject.Inject;
->>>>>>> 0d6e6dc9f... Extended Junit Test for Issue 719 solution
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -24,11 +20,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 
 /**
-<<<<<<< HEAD
  * @author Eva Poell - Initial contribution
-=======
- * @author Eva Pöll - Initial contribution
->>>>>>> 0d6e6dc9f... Extended Junit Test for Issue 719 solution
  */
 @SuppressWarnings("all")
 public class ValidationIssue719Test extends AbstractXtendTestCase {
@@ -48,12 +40,7 @@ public class ValidationIssue719Test extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-<<<<<<< HEAD
       this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
-=======
-      final XtendFile file = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertNoIssues(file);
->>>>>>> 0d6e6dc9f... Extended Junit Test for Issue 719 solution
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -75,12 +62,11 @@ public class ValidationIssue719Test extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final XtendFile file = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertWarning(file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.MODIFIER_DOES_NOT_MATCH_TYPENAME, "not declared abstract");
+      this._validationTestHelper.assertWarning(this._parseHelper.parse(_builder), XtendPackage.Literals.XTEND_CLASS, IssueCodes.MODIFIER_DOES_NOT_MATCH_TYPENAME, "not declared abstract");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
->>>>>>> 0d6e6dc9f... Extended Junit Test for Issue 719 solution
+>>>>>>> 578ab1986... Fix invalid index
   }
   
   @Test
@@ -99,17 +85,15 @@ public class ValidationIssue719Test extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final XtendFile file = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertWarning(file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.MODIFIER_DOES_NOT_MATCH_TYPENAME, "not declared abstract");
+      this._validationTestHelper.assertWarning(this._parseHelper.parse(_builder), XtendPackage.Literals.XTEND_CLASS, IssueCodes.MODIFIER_DOES_NOT_MATCH_TYPENAME, "not declared abstract");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
->>>>>>> 0d6e6dc9f... Extended Junit Test for Issue 719 solution
+>>>>>>> 578ab1986... Fix invalid index
   }
   
   @Test
   public void namedAndNotDeclaredAbstractFinal() {
-<<<<<<< HEAD
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("final class AbstractC {");
     _builder.newLine();
@@ -153,17 +137,16 @@ public class ValidationIssue719Test extends AbstractXtendTestCase {
   
   private void warn(final CharSequence input) {
     try {
+<<<<<<< HEAD
       this._validationTestHelper.assertWarning(this._parseHelper.parse(input), XtendPackage.Literals.XTEND_CLASS, IssueCodes.MODIFIER_DOES_NOT_MATCH_TYPENAME, "not declared abstract");
 =======
-    try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("final class AbstractC {");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final XtendFile file = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertWarning(file, XtendPackage.Literals.XTEND_CLASS, IssueCodes.MODIFIER_DOES_NOT_MATCH_TYPENAME, "not declared abstract");
->>>>>>> 0d6e6dc9f... Extended Junit Test for Issue 719 solution
+      this._validationTestHelper.assertWarning(this._parseHelper.parse(_builder), XtendPackage.Literals.XTEND_CLASS, IssueCodes.MODIFIER_DOES_NOT_MATCH_TYPENAME, "not declared abstract");
+>>>>>>> 578ab1986... Fix invalid index
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

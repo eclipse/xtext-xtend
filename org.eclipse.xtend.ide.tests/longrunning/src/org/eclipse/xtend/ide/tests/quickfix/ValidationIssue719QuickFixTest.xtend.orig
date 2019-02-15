@@ -7,18 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.quickfix
 
-<<<<<<< HEAD
-=======
-import javax.inject.Inject
->>>>>>> 75c8c68a4... Provide Quickfix for issue #719
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.testing.AbstractQuickfixTest
-<<<<<<< HEAD
-=======
-import org.junit.After
->>>>>>> 75c8c68a4... Provide Quickfix for issue #719
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,17 +20,12 @@ import static org.eclipse.xtend.core.validation.IssueCodes.MODIFIER_DOES_NOT_MAT
 import static extension org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.createJavaProject
 
 /**
-<<<<<<< HEAD
  * @author Eva Poell - Initial contribution
-=======
- * @author epoell - Initial contribution and API
->>>>>>> 75c8c68a4... Provide Quickfix for issue #719
  */
 @RunWith(XtextRunner)
 @InjectWith(XtendIDEInjectorProvider)
 class ValidationIssue719QuickFixTest extends AbstractQuickfixTest {
 
-<<<<<<< HEAD
 	@Before
 	def void setup() {
 		// Xbase-based languages require java project
@@ -184,78 +171,4 @@ class ValidationIssue719QuickFixTest extends AbstractQuickfixTest {
 
 		input.testQuickfixesOn(issueCode, new Quickfix(fixlabel, fixdescription, result.toString))
 	}
-=======
-	@Inject extension QuickfixTestBuilder builder
-
-	val resultSimple = '''
-		abstract class AbstractSample {
-		}
-	'''
-	val resultPackage = '''
-		package abstract class AbstractSample {
-		}
-	'''
-	val issueCode = MODIFIER_DOES_NOT_MATCH_TYPENAME
-	val fixlabel = "Add missing abstract modifier.";
-	val fixdescription = "Add the abstract modifier to match naming conventions for the " +
-		"type name. Delete final modifier if necessary.";
-
-	def private internTestQuickFixSimple(String input) {
-		testQuickfixesOn(input, issueCode, new Quickfix(fixlabel, fixdescription, resultSimple))
-	}
-
-	def private internTestQuickFixPackage(String input) {
-		testQuickfixesOn(input, issueCode, new Quickfix(fixlabel, fixdescription, resultPackage))
-	}
-
-	@Before
-	def void setup() {
-		/*
-		 * Xbase-based languages require java project
-		 */
-		projectName.createJavaProject
-	}
-
-	@After
-	override tearDown() {
-		builder.tearDown
-	}
-
-	@Test
-	def add_abstract_simple() {
-		val input = '''
-			class AbstractSample {
-			}
-		'''
-		internTestQuickFixSimple(input)
-	}
-
-	@Test
-	def add_abstract_final_simple() {
-		val input = '''
-			final class AbstractSample {
-			}
-		'''
-		internTestQuickFixSimple(input)
-	}
-
-	@Test
-	def add_abstract_package() {
-		val input = '''
-			package class AbstractSample {
-			}
-		'''
-		internTestQuickFixPackage(input)
-	}
-
-	@Test
-	def add_abstract_package_final() {
-		val input = '''
-			package final class AbstractSample {
-			}
-		'''
-		internTestQuickFixPackage(input)
-	}
-
->>>>>>> 75c8c68a4... Provide Quickfix for issue #719
 }

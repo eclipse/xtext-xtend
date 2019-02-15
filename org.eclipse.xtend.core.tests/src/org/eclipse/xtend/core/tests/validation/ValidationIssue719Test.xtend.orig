@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.validation
 
-<<<<<<< HEAD
 import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
@@ -20,19 +19,6 @@ import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
 
 /**
  * @author Eva Poell - Initial contribution
-=======
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import javax.inject.Inject
-import org.junit.Test
-import org.eclipse.xtext.testing.util.ParseHelper
-import org.eclipse.xtext.testing.validation.ValidationTestHelper
-import org.eclipse.xtend.core.xtend.XtendFile
-import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
-import static org.eclipse.xtend.core.validation.IssueCodes.*
-
-/**
- * @author Eva Pöll - Initial contribution
->>>>>>> 0d6e6dc9f... Extended Junit Test for Issue 719 solution
  */
 class ValidationIssue719Test extends AbstractXtendTestCase {
 	@Inject extension ValidationTestHelper
@@ -40,27 +26,22 @@ class ValidationIssue719Test extends AbstractXtendTestCase {
 
 	@Test
 	def void namedAndDeclaredAbstract() {
-<<<<<<< HEAD
 		'''
 			abstract class AbstractC {
 			}
 		'''.parse.assertNoIssues
-=======
-		val file = '''
-			abstract class AbstractC {
-			}
-		'''.parse
-		file.assertNoIssues
->>>>>>> 0d6e6dc9f... Extended Junit Test for Issue 719 solution
 	}
 
 	@Test
 	def void namedAndNotDeclaredAbstract() {
-<<<<<<< HEAD
 		'''
 			class AbstractC {
 			}
+<<<<<<< HEAD
 		'''.warn()
+=======
+		'''.parse.assertWarning(XTEND_CLASS, MODIFIER_DOES_NOT_MATCH_TYPENAME, "not declared abstract")
+>>>>>>> 578ab1986... Fix invalid index
 	}
 
 	@Test
@@ -68,7 +49,11 @@ class ValidationIssue719Test extends AbstractXtendTestCase {
 		'''
 			package class AbstractC {
 			}
+<<<<<<< HEAD
 		'''.warn()
+=======
+		'''.parse.assertWarning(XTEND_CLASS, MODIFIER_DOES_NOT_MATCH_TYPENAME, "not declared abstract")
+>>>>>>> 578ab1986... Fix invalid index
 	}
 
 	@Test
@@ -76,6 +61,7 @@ class ValidationIssue719Test extends AbstractXtendTestCase {
 		'''
 			final class AbstractC {
 			}
+<<<<<<< HEAD
 		'''.warn()
 	}
 	
@@ -103,29 +89,7 @@ class ValidationIssue719Test extends AbstractXtendTestCase {
 	def private warn(CharSequence input) {
 		input.parse.assertWarning(XTEND_CLASS, MODIFIER_DOES_NOT_MATCH_TYPENAME, "not declared abstract")
 =======
-		val file = '''
-			class AbstractC {
-			}
-		'''.parse
-		file.assertWarning(XTEND_CLASS, MODIFIER_DOES_NOT_MATCH_TYPENAME, "not declared abstract");
-	}
-	
-	@Test
-	def void namedAndNotDeclaredAbstractPackage() {
-		val file = '''
-			package class AbstractC {
-			}
-		'''.parse
-		file.assertWarning(XTEND_CLASS, MODIFIER_DOES_NOT_MATCH_TYPENAME, "not declared abstract");
-	}
-	
-	@Test
-	def void namedAndNotDeclaredAbstractFinal() {
-		val file = '''
-			final class AbstractC {
-			}
-		'''.parse
-		file.assertWarning(XTEND_CLASS, MODIFIER_DOES_NOT_MATCH_TYPENAME, "not declared abstract");
->>>>>>> 0d6e6dc9f... Extended Junit Test for Issue 719 solution
+		'''.parse.assertWarning(XTEND_CLASS, MODIFIER_DOES_NOT_MATCH_TYPENAME, "not declared abstract")
+>>>>>>> 578ab1986... Fix invalid index
 	}
 }

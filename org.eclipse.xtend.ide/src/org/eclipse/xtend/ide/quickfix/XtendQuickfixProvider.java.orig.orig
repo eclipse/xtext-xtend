@@ -64,7 +64,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.ICompositeModification;
-import org.eclipse.xtext.ui.editor.model.edit.ICompositeModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
@@ -713,14 +712,18 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 					if (modExist) {
 						modifiers.add(index, "abstract");
 					} else {
-						//use existent method to add abstract modifier, if modifier list is empty, to prevent wrong insertion
+						// workaround for bug 721 - fallback to textual modification
 						internalDoAddAbstractKeyword(element, context);
 					}
 				}
 			}
 		});
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> 64daf3d70... Rebase von Branch 'ep_issue397' auf '30dc686c5'
 	@Fix(IssueCodes.INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION)
 	public void changeJUnitMethodReturnTypeToVoid(final Issue issue, IssueResolutionAcceptor acceptor) {
 		// use the same label, description and image
@@ -764,7 +767,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 			for (ILeafNode leafNode : clazzNode.getLeafNodes()) {
 				if (leafNode.getText().equals("class")) {
 					offset = leafNode.getOffset();
-					break;
 				}
 			}
 			ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) clazz.eResource(),
