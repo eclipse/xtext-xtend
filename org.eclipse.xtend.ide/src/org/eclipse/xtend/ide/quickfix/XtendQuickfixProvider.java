@@ -64,7 +64,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.ICompositeModification;
-import org.eclipse.xtext.ui.editor.model.edit.ICompositeModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
@@ -856,86 +855,9 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 				
 				return partString;
 			}
-			
-			//Remember
-			/*
-			 * if (expString.endsWith(")")) outerBracketsSet = true;
-			 * 
-			 * if (!condString.contains("(")) {
-					condString = "("+condString+")";
-				}
-				
-				//else-clause can be left out
-			 */
-				
-//			private void delete() {
-//				IXtextDocument xtextDocument = context.getXtextDocument();
-//				//stop before NullpointerExceptions are thrown
-//				if (xtextDocument == null || element == null || !(element instanceof XExpression))
-//					return;
-//
-//				//Collect length and text of all parts of the if statement
-//				XIfExpression exp = (XIfExpression) element;
-//				XExpression thenPart = exp.getThen();
-//				XExpression elsePart = exp.getElse();
-//				boolean outerBracketsSet = false;
-//				
-//				//TODO would be nice to apply recoursively, ie if then part is a ternary expressio, too
-//				//my attempts failed as I did not get hands on the updated text => offset trouble
-//				
-//				ICompositeNode expNode = NodeModelUtils.findActualNodeFor(exp);
-//				if (expNode == null)
-//					throw new IllegalStateException("Node to refactor may not be null");
-//				ITextRegion expRegion = expNode.getTextRegion();
-//				int expOffset = expRegion.getOffset();
-//				int expLength = expRegion.getLength();
-//				String expString = xtextDocument.get(expOffset, expLength);
-//				if (expString.endsWith(")")) outerBracketsSet = true;
-//				
-//				ICompositeNode condNode = NodeModelUtils.findActualNodeFor(exp.getIf());
-//				if (condNode == null)
-//					throw new IllegalStateException("Node to refactor may not be null");
-//				ITextRegion condRegion = condNode.getTextRegion();
-//				int condOffset = condRegion.getOffset();
-//				int condLength = condRegion.getLength();
-//				String condString = xtextDocument.get(condOffset, condLength);
-//				if (!condString.contains("(")) {
-//					condString = "("+condString+")";
-//				}
-//				
-//				ICompositeNode thenNode = NodeModelUtils.findActualNodeFor(thenPart);
-//				if (thenNode == null)
-//					throw new IllegalStateException("Node to refactor may not be null");
-//				ITextRegion thenRegion = thenNode.getTextRegion();
-//				int thenOffset = thenRegion.getOffset();
-//				int thenLength = thenRegion.getLength();
-//				String thenString = xtextDocument.get(thenOffset, thenLength);
-//				
-//				//else-clause can be left out
-//				String elseString = "";
-//				if (elsePart != null) {
-//					ICompositeNode elseNode = NodeModelUtils.findActualNodeFor(elsePart);
-//					if (elseNode == null)
-//						throw new IllegalStateException("Node to refactor may not be null");
-//					ITextRegion elseRegion = elseNode.getTextRegion();
-//					int elseOffset = elseRegion.getOffset();
-//					int elseLength = elseRegion.getLength();
-//					elseString = xtextDocument.get(elseOffset, elseLength);
-//				}
-//				
-//				//Combine them to a inline ifExpression
-//				String ifExpString = "if " + condString + " " + thenString;
-//				if (elsePart != null)
-//					ifExpString += " else " + elseString;
-//				if (outerBracketsSet)
-//					ifExpString = "("+ifExpString+")";
-//
-//				//replace ternary expression with inline if
-//				xtextDocument.replace(expOffset, expLength, ifExpString);
-//			}
 		});
 	}
-	
+
 	protected void internalDoAddAbstractKeyword(EObject element, IModificationContext context)
 			throws BadLocationException {
 		if (element instanceof XtendFunction) {
