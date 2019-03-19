@@ -28,8 +28,11 @@ import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.JavaVersion;
+import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.SeverityConverter;
+import org.eclipse.xtext.xbase.testing.JavaVersionModule;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.io.CharStreams;
@@ -44,9 +47,14 @@ public class RuntimeTestSetup extends XtendStandaloneSetup {
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new XtendRuntimeTestModule());
+		return Guice.createInjector(Modules2.mixin(new XtendRuntimeTestModule() {
+			@Override
+			public ClassLoader bindClassLoaderToInstance() {
+				return RuntimeTestSetup.class.getClassLoader();
+			}
+		}, new JavaVersionModule(JavaVersion.JAVA5)));
 	}
-	
+
 	/**
 	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */

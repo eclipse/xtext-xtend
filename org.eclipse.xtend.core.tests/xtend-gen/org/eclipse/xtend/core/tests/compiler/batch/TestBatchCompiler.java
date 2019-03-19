@@ -90,6 +90,7 @@ public class TestBatchCompiler {
       this.batchCompiler.setDeleteTempDirectory(true);
       this.batchCompiler.setUseCurrentClassLoaderAsParent(true);
       this.batchCompiler.setCurrentClassLoader(this.getClass().getClassLoader());
+      this.batchCompiler.setGenerateGeneratedAnnotation(true);
       new File(TestBatchCompiler.OUTPUT_DIRECTORY).mkdir();
       File _file = new File(TestBatchCompiler.OUTPUT_DIRECTORY);
       Files.cleanFolder(_file, null, true, false);
@@ -736,6 +737,7 @@ public class TestBatchCompiler {
     this.batchCompiler.setGenerateGeneratedAnnotation(true);
     this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
     Assert.assertTrue(this.batchCompiler.compile());
+    System.err.println(this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java")));
     Assert.assertTrue(this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java")).contains("@Generated"));
   }
   

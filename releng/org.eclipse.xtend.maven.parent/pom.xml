@@ -309,7 +309,7 @@
 				</repository>
 				<repository>
 					<id>xtext-extras-from-jenkins</id>
-					<url>${JENKINS_URL}/job/xtext-extras/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>${JENKINS_URL}/job/xtext-extras/job/cd_extras_issue113/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 			</repositories>
 		</profile>

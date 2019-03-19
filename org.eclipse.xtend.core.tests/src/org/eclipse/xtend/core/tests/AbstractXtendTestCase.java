@@ -34,9 +34,11 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.LazyStringInputStream;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
@@ -125,6 +127,8 @@ public abstract class AbstractXtendTestCase extends Assert {
 	
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
+	
+	@Inject protected IGeneratorConfigProvider generatorConfigProvider;
 
 	protected XtendClass clazz(String string) throws Exception {
 		return (XtendClass) file(string).getXtendTypes().get(0);
@@ -136,6 +140,10 @@ public abstract class AbstractXtendTestCase extends Assert {
 	
 	protected XtendFile file(String string, boolean validate) throws Exception {
 		return file(string, validate, true);
+	}
+	
+	protected JavaVersion getJavaVersion() {
+		return JavaVersion.JAVA5;
 	}
 
 	protected XtendFile file(String string, boolean validate, boolean shouldBeSyntacticallyValid) throws Exception {

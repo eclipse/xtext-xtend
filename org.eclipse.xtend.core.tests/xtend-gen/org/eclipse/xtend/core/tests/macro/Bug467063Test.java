@@ -8,14 +8,20 @@
  */
 package org.eclipse.xtend.core.tests.macro;
 
+import org.eclipse.xtend.core.tests.Java8RuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.util.JavaVersion;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Christian Dietrich - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(Java8RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class Bug467063Test extends AbstractActiveAnnotationTest {
   @Test

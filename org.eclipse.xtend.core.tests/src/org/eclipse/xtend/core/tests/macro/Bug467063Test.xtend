@@ -8,19 +8,25 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.macro
 
+import org.eclipse.xtend.core.tests.Java8RuntimeInjectorProvider
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
-import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
-import org.junit.Test
-import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.TransformationContext
+import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.util.JavaVersion
+import org.junit.Test
+import org.junit.runner.RunWith
 
 /**
  * @author Christian Dietrich - Initial contribution and API
  */
+@RunWith(XtextRunner)
+@InjectWith(Java8RuntimeInjectorProvider)
 class Bug467063Test extends AbstractActiveAnnotationTest {
 	
 	@Test def void testAddInterfaceWithDefaultMethod() {
