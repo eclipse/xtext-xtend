@@ -305,28 +305,24 @@ class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class FooClass {
 			  public void fooMethod() {
-			    try {
-			      try (final FileReader a = new Function0<FileReader>() {
-			        public FileReader apply() {
-			          try {
-			            File _file = new File("\\home/docs/text.txt");
-			              return new FileReader(_file);
-			            } catch (Throwable _e) {
-			              throw Exceptions.sneakyThrow(_e);
-			            }
-			          }
-			        }.apply()) {
-			          a.read();
-			        } catch (final Throwable _t) {
-			          if (_t instanceof IOException) {
-			            final IOException e = (IOException)_t;
-			            e.fillInStackTrace();
-			          } else {
-			            throw Exceptions.sneakyThrow(_t);
-			          }
+			    try (final FileReader a = new Function0<FileReader>() {
+			      public FileReader apply() {
+			        try {
+			          File _file = new File("\\home/docs/text.txt");
+			          return new FileReader(_file);
+			        } catch (Throwable _e) {
+			          throw Exceptions.sneakyThrow(_e);
 			        }
-			    } catch (Throwable _e) {
-			      throw Exceptions.sneakyThrow(_e);]
+			      }
+			    }.apply()) {
+			      a.read();
+			    } catch (final Throwable _t) {
+			      if (_t instanceof IOException) {
+			        final IOException e = (IOException)_t;
+			        e.fillInStackTrace();
+			      } else {
+			        throw Exceptions.sneakyThrow(_t);
+			      }]
 			    }
 			  }
 			}
