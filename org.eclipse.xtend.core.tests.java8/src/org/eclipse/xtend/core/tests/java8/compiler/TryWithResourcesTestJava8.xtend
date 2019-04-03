@@ -171,8 +171,8 @@ class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
         final int x = (1 + 1);
         a.read();
       }
-      try (final StringReader x_1 = new StringReader(this.s)) {
-        x_1.close();
+      try (final StringReader x = new StringReader(this.s)) {
+        x.close();
       }
 		''')
 	}
@@ -322,7 +322,7 @@ class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
 			        e.fillInStackTrace();
 			      } else {
 			        throw Exceptions.sneakyThrow(_t);
-			      }]
+			      }
 			    }
 			  }
 			}

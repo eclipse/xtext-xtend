@@ -314,10 +314,10 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("try (final StringReader x_1 = new StringReader(this.s)) {");
+    _builder_1.append("try (final StringReader x = new StringReader(this.s)) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("x_1.close();");
+    _builder_1.append("x.close();");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -632,7 +632,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.append("throw Exceptions.sneakyThrow(_t);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("}]");
+    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
