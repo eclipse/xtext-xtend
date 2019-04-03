@@ -2227,17 +2227,13 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	
 	@Check
 	public void checkTernaryExpressionUsed(XIfExpression exp) {
-		if (exp == null)
-			return;
-
-		//Check if this expression is nested in another already marked ternary expression
-		EObject container = exp.eContainer();
-		if (container instanceof XIfExpression && ((XIfExpression) container).isConditionalExpression()) {
-			return;
-		}
-
-		//Raise issue
 		if (exp.isConditionalExpression()) {
+			//Check if this expression is nested in another already marked ternary expression
+			EObject container = exp.eContainer();
+			if (container instanceof XIfExpression && ((XIfExpression) container).isConditionalExpression()) {
+				return;
+			}
+			//Raise issue
 			addIssue("The ternary operator is not allowed. Use a normal if-expression.", exp, TERNARY_EXPRESSION_NOT_ALLOWED);
 		}
 	}

@@ -160,7 +160,7 @@ public class JavaASTFlattener extends ASTVisitor {
   /**
    * Sets whether conditional expressions like cond? a : b are allowed (true) or not
    */
-  private boolean conditopnalExpressionsAllowed;
+  private boolean conditionalExpressionsAllowed;
   
   /**
    * Creates a new AST printer.
@@ -795,7 +795,7 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final ConditionalExpression node) {
-    if (this.conditopnalExpressionsAllowed) {
+    if (this.conditionalExpressionsAllowed) {
       String _string = null;
       if (node!=null) {
         _string=node.toString();
@@ -2572,6 +2572,6 @@ public class JavaASTFlattener extends ASTVisitor {
   }
   
   public boolean allowConditionalExpressions(final boolean allow) {
-    return this.conditopnalExpressionsAllowed = allow;
+    return this.conditionalExpressionsAllowed = allow;
   }
 }

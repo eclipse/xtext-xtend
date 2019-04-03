@@ -134,7 +134,7 @@ class JavaASTFlattener extends ASTVisitor {
 	String targetApiLevel
 	
 	/** Sets whether conditional expressions like cond? a : b are allowed (true) or not */
-	boolean conditopnalExpressionsAllowed
+	boolean conditionalExpressionsAllowed
 		
 	/**
 	 * Creates a new AST printer.
@@ -594,7 +594,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override boolean visit(ConditionalExpression node) {
 		// Check if ternary expresseion is wanted or not
-		if (this.conditopnalExpressionsAllowed) {
+		if (this.conditionalExpressionsAllowed) {
 			// insert ternary
 			appendToBuffer(node?.toString);
 		} else {
@@ -1904,6 +1904,6 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 	
 	def allowConditionalExpressions(boolean allow) {
-		this.conditopnalExpressionsAllowed = allow
+		this.conditionalExpressionsAllowed = allow
 	}
 }
