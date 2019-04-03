@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -7,8 +8,7 @@
 		<version>2.18.0-SNAPSHOT</version>
 		<relativePath>../releng/org.eclipse.xtend.maven.parent</relativePath>
 	</parent>
-	<!-- groupId and version must be repeated for publishing
-		see https://github.com/eclipse/xtext-maven/pull/40#issuecomment-399433375 -->
+	<!-- groupId and version must be repeated for publishing see https://github.com/eclipse/xtext-maven/pull/40#issuecomment-399433375 -->
 	<groupId>org.eclipse.xtend</groupId>
 	<version>2.18.0-SNAPSHOT</version>
 	<artifactId>xtend-archetype</artifactId>
@@ -57,16 +57,20 @@
 				<artifactId>maven-archetype-plugin</artifactId>
 				<configuration>
 					<skip>${it-archetype-tests-skip}</skip>
-					<debug>true</debug>
 				</configuration>
+				<!-- 
 				<executions>
 					<execution>
 						<goals>
 							<goal>integration-test</goal>
 						</goals>
-						<configuration><debug>true</debug></configuration>
+						<configuration>
+							<debug>true</debug>
+							<settingsFile>src/test/resources/settings.xm</settingsFile>
+						</configuration>
 					</execution>
 				</executions>
+				 -->
 			</plugin>
 		</plugins>
 	</build>
@@ -76,6 +80,26 @@
 			<groupId>org.eclipse.xtend</groupId>
 			<artifactId>xtend-maven-plugin</artifactId>
 			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.shared</groupId>
+			<artifactId>maven-verifier</artifactId>
+			<version>1.6</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-model</artifactId>
+			<version>3.6.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

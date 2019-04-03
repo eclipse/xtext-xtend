@@ -16,7 +16,7 @@ mvn \
   -DJENKINS_URL=$JENKINS_URL \
   -DWORKSPACE=$WORKSPACE \
   -Dmaven.test.failure.ignore=true \
-  -Dit-archetype-tests-skip=true \
+  -Dit-archetype-tests-skip=false \
   -Dmaven.repo.local=$WORKSPACE/.m2/repository \
   -DgradleMavenRepo=file:${WORKSPACE}/build/maven-repository/ \
   -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
