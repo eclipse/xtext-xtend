@@ -5,7 +5,7 @@ import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.File;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -95,7 +95,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
       String _plus = ((projectName + "/src/") + _key);
       final File file = new File(this.workspaceRoot, _plus);
       file.getParentFile().mkdirs();
-      Files.asCharSink(file, Charset.defaultCharset()).write(fileRepresentation.getValue());
+      Files.asCharSink(file, StandardCharsets.ISO_8859_1).write(fileRepresentation.getValue());
       return URI.createFileURI(file.getPath());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

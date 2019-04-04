@@ -32,6 +32,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import java.nio.charset.StandardCharsets
 
 @RunWith(XtextRunner)
 @InjectWith(RuntimeInjectorProvider)
@@ -66,7 +67,7 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 	protected def URI copyToDisk(String projectName, Pair<String,String> fileRepresentation) {
 		val file = new File(workspaceRoot, projectName+"/src/"+fileRepresentation.key)
 		file.parentFile.mkdirs
-		Files.asCharSink(file, Charset.defaultCharset).write(fileRepresentation.value)
+		Files.asCharSink(file, StandardCharsets.ISO_8859_1).write(fileRepresentation.value)
 		return URI.createFileURI(file.path)
 	}
 
