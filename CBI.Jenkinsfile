@@ -52,7 +52,7 @@ spec:
   }
 
   // https://jenkins.io/doc/book/pipeline/syntax/#triggers
-  triggers {
+  triggers {    upstream(upstreamProjects: 'xtext-eclipse', threshold: hudson.model.Result.SUCCESS) 
     pollSCM('H/5 * * * *')
   }
 
