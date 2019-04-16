@@ -65,16 +65,16 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			finally
 				if(br !== null)
 					br.close()
-		'''.test2(
-		'''      StringReader _stringReader = new StringReader(this.s);
-      final BufferedReader br = new BufferedReader(_stringReader);
-      try {
-        br.readLine();
-      } finally {
-        if ((br != null)) {
-          br.close();
-        }
-      }
+		'''.test2('''
+			StringReader _stringReader = new StringReader(this.s);
+			final BufferedReader br = new BufferedReader(_stringReader);
+			try {
+			  br.readLine();
+			} finally {
+			  if ((br != null)) {
+			    br.close();
+			  }
+			}
 		''')
 	}
 
@@ -83,14 +83,14 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 		'''
 			try (val a = new StringReader(s))
 			a.read
-		'''.test1(
-		'''      StringReader a = null;
-      try {
-        a = new StringReader(this.s);
-        a.read();
-      } finally {
-        if (a != null) a.close();
-      }
+		'''.test1('''
+			StringReader a = null;
+			try {
+			  a = new StringReader(this.s);
+			  a.read();
+			} finally {
+			  if (a != null) a.close();
+			}
 		''')
 	}
 
@@ -101,15 +101,15 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			try(val someCloseable = array.get(0)) {
 				someCloseable.close
 			}
-		'''.test0(
-		'''      final AutoCloseable[] array = new AutoCloseable[2];
-      AutoCloseable someCloseable = null;
-      try {
-        someCloseable = array[0];
-        someCloseable.close();
-      } finally {
-        if (someCloseable != null) someCloseable.close();
-      }
+		'''.test0('''
+			final AutoCloseable[] array = new AutoCloseable[2];
+			AutoCloseable someCloseable = null;
+			try {
+			  someCloseable = array[0];
+			  someCloseable.close();
+			} finally {
+			  if (someCloseable != null) someCloseable.close();
+			}
 		''')
 	}
 
@@ -164,21 +164,22 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			try(val x = new StringReader(s)) {
 				x.close
 			}
-		'''.test1('''      StringReader a = null;
-      try {
-        a = new StringReader(this.s);
-        final int x = (1 + 1);
-        a.read();
-      } finally {
-        if (a != null) a.close();
-      }
-      StringReader x_1 = null;
-      try {
-        x_1 = new StringReader(this.s);
-        x_1.close();
-      } finally {
-        if (x_1 != null) x_1.close();
-      }
+		'''.test1('''
+			StringReader a = null;
+			try {
+			  a = new StringReader(this.s);
+			  final int x = (1 + 1);
+			  a.read();
+			} finally {
+			  if (a != null) a.close();
+			}
+			StringReader x = null;
+			try {
+			  x = new StringReader(this.s);
+			  x.close();
+			} finally {
+			  if (x != null) x.close();
+			}
 		''')
 	}
 
@@ -188,17 +189,17 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			try (val sr = new StringReader(s); val buffy = new BufferedReader(sr)) {
 				buffy.read
 			}
-		'''.test2(
-		'''      StringReader sr = null;
-      BufferedReader buffy = null;
-      try {
-        sr = new StringReader(this.s);
-        buffy = new BufferedReader(sr);
-        buffy.read();
-      } finally {
-        if (buffy != null) buffy.close();
-        if (sr != null) sr.close();
-      }
+		'''.test2('''
+			StringReader sr = null;
+			BufferedReader buffy = null;
+			try {
+			  sr = new StringReader(this.s);
+			  buffy = new BufferedReader(sr);
+			  buffy.read();
+			} finally {
+			  if (buffy != null) buffy.close();
+			  if (sr != null) sr.close();
+			}
 		''')
 	}
 
@@ -207,14 +208,14 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 		'''
 			try (val br = new BufferedReader(new StringReader(s));) 
 				br.readLine()
-		'''.test2(
-		'''      BufferedReader br = null;
-      try {
-        br = new BufferedReader(new StringReader(this.s));
-        br.readLine();
-      } finally {
-        if (br != null) br.close();
-      }
+		'''.test2('''
+			BufferedReader br = null;
+			try {
+			  br = new BufferedReader(new StringReader(this.s));
+			  br.readLine();
+			} finally {
+			  if (br != null) br.close();
+			}
 		''')
 	}
 
@@ -224,15 +225,15 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			val sr = new StringReader(s)
 			try (val br = new BufferedReader(sr);) 
 				br.readLine()
-		'''.test2(
-		'''      final StringReader sr = new StringReader(this.s);
-      BufferedReader br = null;
-      try {
-        br = new BufferedReader(sr);
-        br.readLine();
-      } finally {
-        if (br != null) br.close();
-      }
+		'''.test2('''
+			final StringReader sr = new StringReader(this.s);
+			BufferedReader br = null;
+			try {
+			  br = new BufferedReader(sr);
+			  br.readLine();
+			} finally {
+			  if (br != null) br.close();
+			}
 		''')
 	}
 
@@ -242,27 +243,27 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			try (val fr = new StringReader(if (true) s+"1" else s+"2"); val br = new BufferedReader(fr)) {
 				br.read
 			}
-		'''.test3(
-		'''      StringReader fr = null;
-      BufferedReader br = null;
-      try {
-        fr = new Function0<StringReader>() {
-          public StringReader apply() {
-            String _xifexpression = null;
-            if (true) {
-              _xifexpression = (FooClass.this.s + "1");
-            } else {
-              _xifexpression = (FooClass.this.s + "2");
-            }
-            return new StringReader(_xifexpression);
-          }
-        }.apply();
-        br = new BufferedReader(fr);
-        br.read();
-      } finally {
-        if (br != null) br.close();
-        if (fr != null) fr.close();
-      }
+		'''.test3('''
+			StringReader fr = null;
+			BufferedReader br = null;
+			try {
+			  fr = new Function0<StringReader>() {
+			    public StringReader apply() {
+			      String _xifexpression = null;
+			      if (true) {
+			        _xifexpression = (FooClass.this.s + "1");
+			      } else {
+			        _xifexpression = (FooClass.this.s + "2");
+			      }
+			      return new StringReader(_xifexpression);
+			    }
+			  }.apply();
+			  br = new BufferedReader(fr);
+			  br.read();
+			} finally {
+			  if (br != null) br.close();
+			  if (fr != null) fr.close();
+			}
 		''')
 	}
 
@@ -309,7 +310,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			          }
 			        }
 			      }.apply();
-			        a.read();
+			      a.read();
 			    } catch (final Throwable _t) {
 			      if (_t instanceof IOException) {
 			        final IOException e = (IOException)_t;
@@ -318,7 +319,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			        throw Exceptions.sneakyThrow(_t);
 			      }
 			    } finally {
-			      if (a != null) a.close(]);
+			      if (a != null) a.close();
 			    }
 			  }
 			}
@@ -330,17 +331,17 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 		'''
 			try (var r = [System.out.println("Closing")]) {
 			}
-		'''.test0(
-		'''      AutoCloseable r = null;
-      try {
-        r = new AutoCloseable() {
-          public void close() throws Exception {
-            System.out.println("Closing");
-          }
-        };
-      } finally {
-        if (r != null) r.close();
-      }
+		'''.test0('''
+			AutoCloseable r = null;
+			try {
+			  r = new AutoCloseable() {
+			    public void close() throws Exception {
+			      System.out.println("Closing");
+			    }
+			  };
+			} finally {
+			  if (r != null) r.close();
+			}
 		''')
 	}
 	
@@ -411,28 +412,24 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 
 	def private CharSequence buildXtendInput(CharSequence input, boolean needsStringReader,
 		boolean needsBufferedReader) {
-		val start = '''
+		return '''
 			package sample
 							
 			«IF needsBufferedReader»import java.io.BufferedReader«ENDIF»
 			«IF needsStringReader»import java.io.StringReader«ENDIF»
 			
 			class FooClass {
-			
-			val s = "line1\nline2\nline3"
-			
+				val s = "line1\nline2\nline3"
 				def void fooMethod() {
-		'''
-		val end = '''
+					«input»
 				}
 			}
 		'''
-		return start + input + end
 	}
 
 	def private CharSequence buildJavaOutput(CharSequence expected, boolean needsStringReader,
 		boolean needsBufferedReader, boolean needsFunc0) {
-		val start = '''
+		return '''
 			package sample;
 			
 			«IF needsBufferedReader»import java.io.BufferedReader;«ENDIF»
@@ -446,14 +443,12 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			  
 			  public void fooMethod() {
 			    try {
-		'''
-		val end = '''
+			      «expected»
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
 			    }
 			  }
 			}
 		'''
-		return start + expected + end
 	}
 }
