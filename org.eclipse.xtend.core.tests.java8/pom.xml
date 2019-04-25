@@ -8,44 +8,38 @@
 		<version>2.19.0-SNAPSHOT</version>
 		<relativePath>../../xtext-eclipse/releng/org.eclipse.xtext.tycho.parent</relativePath>
 	</parent>
-	<packaging>eclipse-plugin</packaging>
-	<artifactId>org.eclipse.xtend.examples</artifactId>
+	<artifactId>org.eclipse.xtend.core.tests.java8</artifactId>
 	<groupId>org.eclipse.xtend</groupId>
+	<packaging>eclipse-plugin</packaging>
 
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 	<build>
+		<testSourceDirectory>src,xtend-gen</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>3.0.0</version>
-				<configuration>
-					<filesets>
-						<fileset>
-							<directory>${project.basedir}/contents</directory>
-							<includes>
-								<include>*.zip</include>
-							</includes>
-							<excludes>
-								<exclude>.gitignore</exclude>
-							</excludes>
-						</fileset>
-					</filesets>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.8</version>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.1</version>
 				<executions>
 					<execution>
-						<phase>generate-sources</phase>
+						<id>test</id>
+						<phase>test</phase>
 						<configuration>
-							<target>
-								<ant antfile="${basedir}/build.xml"
-									target="zip_all_examples" />
-							</target>
+							<testSourceDirectory>src,xtend-gen</testSourceDirectory>
+							<testClassesDirectory>target/classes</testClassesDirectory>
+							<failIfNoTests>true</failIfNoTests>
+							<includes>
+								<include>**/*Test.java</include>
+							</includes>
 						</configuration>
 						<goals>
-							<goal>run</goal>
+							<goal>test</goal>
 						</goals>
 					</execution>
 				</executions>

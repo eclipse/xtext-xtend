@@ -1061,7 +1061,8 @@ public class BuildAffectionTest {
     final StringBuilder logs = new StringBuilder();
     final IBuildLogger _function = (Object it) -> {
       String _trim = it.toString().trim();
-      String _plus = (_trim + "\n");
+      String _lineSeparator = System.lineSeparator();
+      String _plus = (_trim + _lineSeparator);
       logs.append(_plus);
     };
     ((XtextBuildConsole.Logger) this.logger).registerDelegate(_function);

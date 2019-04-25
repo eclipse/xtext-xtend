@@ -23,10 +23,9 @@ public class AutoEditInMethodBodyTest extends AutoEditTest {
 		return super.openEditor(PREFIX + string + SUFFIX);
 	}
 	
-	
 	@Override
-	protected void assertState(String string, XtextEditor editor) {
-		super.assertState(PREFIX + string + SUFFIX, editor);
+	protected void assertState(XtextEditor editor, String string, String content) {
+		super.assertState(editor, PREFIX + string + SUFFIX, content);
 	}
 	
 }

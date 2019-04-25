@@ -1084,7 +1084,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				public String loadingURI = "classpath:/"
 					+ (someVar + "LoadingResourceWithError").replace('.', '/')
 					+ ".xtexterror";
-			'''))
+			''').toUnixLineSeparator)
 	}
 
 	@Test def void testRichStringSpecialCase() throws Exception {
