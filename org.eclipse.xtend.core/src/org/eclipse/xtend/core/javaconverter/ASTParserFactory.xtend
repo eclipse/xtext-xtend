@@ -16,10 +16,7 @@ import org.eclipse.xtext.common.types.descriptions.ClasspathScanner
 /** 
  * @author dhuebner - Initial contribution and API
  */
-class ASTParserFactory {
-
-	@Inject
-	ClasspathScanner classpathScanner = new ClasspathScanner()
+abstract class ASTParserFactory {
 
 	protected final String minParserApiLevel = "1.6"
 
@@ -54,24 +51,7 @@ class ASTParserFactory {
 	/**
 	 * @param context Contextual object from where to get the classpath entries (e.g. IProject or Module or <code>null</code>)
 	 */
-	def ASTParserWrapper createJavaParser(Object context) {
-		var targetJavaVersion = System.getProperty("java.specification.version");
-		if (targetJavaVersion === null) {
-			targetJavaVersion = minParserApiLevel
-		}
-		val parser = createDefaultJavaParser(targetJavaVersion)
-		provideCustomEnvironment(parser)
-		return new ASTParserWrapper(targetJavaVersion, parser)
-	}
-
-	/**
-	 * Will be called when the environment can not be derived from a context in {@link #createJavaParser(Object)} 
-	 * {@link ASTParser#setEnvironment(String[], String[], String[], boolean)}
-	 */
-	protected def provideCustomEnvironment(ASTParser parser) {
-		val String[] cpEntries = classpathScanner.getSystemClasspath()
-		parser.setEnvironment(cpEntries, null, null, true)
-	}
+	def abstract ASTParserWrapper createJavaParser(Object context);
 
 	@Data
 	static class ASTParserWrapper {

@@ -37,7 +37,7 @@ public class EclipseASTParserFactory extends ASTParserFactory {
       }
       return new ASTParserFactory.ASTParserWrapper(projlevel, parser);
     }
-    return super.createJavaParser(context);
+    throw new IllegalStateException("did not find java project");
   }
   
   public void tweakOptions(final ASTParser parser, final IJavaProject project) {

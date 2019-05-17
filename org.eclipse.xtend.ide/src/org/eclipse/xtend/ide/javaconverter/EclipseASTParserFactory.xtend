@@ -34,7 +34,7 @@ class EclipseASTParserFactory extends org.eclipse.xtend.core.javaconverter.ASTPa
 			}
 			return new ASTParserWrapper(projlevel, parser)
 		}
-		return super.createJavaParser(context)
+		throw new IllegalStateException("did not find java project")
 	}
 
 	def tweakOptions(ASTParser parser, IJavaProject project) {

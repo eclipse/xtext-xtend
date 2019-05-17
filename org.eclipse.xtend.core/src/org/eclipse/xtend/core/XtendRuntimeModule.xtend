@@ -20,6 +20,8 @@ import org.eclipse.xtend.core.findReferences.XtendReferenceFinder
 import org.eclipse.xtend.core.imports.XtendImportedTypesUsageCollector
 import org.eclipse.xtend.core.imports.XtendImportsConfiguration
 import org.eclipse.xtend.core.imports.XtendTypeUsageCollector
+import org.eclipse.xtend.core.javaconverter.ASTParserFactory
+import org.eclipse.xtend.core.javaconverter.ClasspathScannerASTParserFactory
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer
 import org.eclipse.xtend.core.linking.RuntimeLinker
@@ -41,6 +43,7 @@ import org.eclipse.xtend.core.resource.XtendResourceDescriptionStrategy
 import org.eclipse.xtend.core.scoping.AnonymousClassConstructorScopes
 import org.eclipse.xtend.core.scoping.XtendImportedNamespaceScopeProvider
 import org.eclipse.xtend.core.serializer.XtendSerializerScopeProvider
+import org.eclipse.xtend.core.tasks.XtendTaskFinder
 import org.eclipse.xtend.core.tasks.XtendTaskTagProvider
 import org.eclipse.xtend.core.typesystem.LocalClassAwareTypeNames
 import org.eclipse.xtend.core.typesystem.TypeDeclarationAwareBatchTypeResolver
@@ -81,6 +84,7 @@ import org.eclipse.xtext.resource.persistence.IResourceStorageFacade
 import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
 import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding
+import org.eclipse.xtext.tasks.ITaskFinder
 import org.eclipse.xtext.tasks.ITaskTagProvider
 import org.eclipse.xtext.validation.CompositeEValidator
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider
@@ -104,8 +108,6 @@ import org.eclipse.xtext.xbase.typesystem.util.HumanReadableTypeNames
 import org.eclipse.xtext.xbase.util.XExpressionHelper
 import org.eclipse.xtext.xbase.validation.EarlyExitValidator
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder
-import org.eclipse.xtext.tasks.ITaskFinder
-import org.eclipse.xtend.core.tasks.XtendTaskFinder
 
 /** 
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -332,5 +334,9 @@ class XtendRuntimeModule extends AbstractXtendRuntimeModule {
 
 	def Class<? extends ITaskFinder> bindITaskFinder() {
 		return XtendTaskFinder
+	}
+	
+	def Class<? extends ASTParserFactory> bindASTParserFactory() {
+		return ClasspathScannerASTParserFactory
 	}
 }

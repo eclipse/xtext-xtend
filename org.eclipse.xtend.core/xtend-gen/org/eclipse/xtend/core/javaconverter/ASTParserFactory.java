@@ -7,13 +7,11 @@
  */
 package org.eclipse.xtend.core.javaconverter;
 
-import com.google.inject.Inject;
 import java.util.Hashtable;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtext.common.types.descriptions.ClasspathScanner;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
@@ -22,7 +20,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * @author dhuebner - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class ASTParserFactory {
+public abstract class ASTParserFactory {
   @Data
   public static class ASTParserWrapper {
     private final String targetLevel;
@@ -103,9 +101,6 @@ public class ASTParserFactory {
     }
   }
   
-  @Inject
-  private ClasspathScanner classpathScanner = new ClasspathScanner();
-  
   protected final String minParserApiLevel = "1.6";
   
   protected final ASTParser createDefaultJavaParser(final String javaVersion) {
@@ -156,22 +151,5 @@ public class ASTParserFactory {
   /**
    * @param context Contextual object from where to get the classpath entries (e.g. IProject or Module or <code>null</code>)
    */
-  public ASTParserFactory.ASTParserWrapper createJavaParser(final Object context) {
-    String targetJavaVersion = System.getProperty("java.specification.version");
-    if ((targetJavaVersion == null)) {
-      targetJavaVersion = this.minParserApiLevel;
-    }
-    final ASTParser parser = this.createDefaultJavaParser(targetJavaVersion);
-    this.provideCustomEnvironment(parser);
-    return new ASTParserFactory.ASTParserWrapper(targetJavaVersion, parser);
-  }
-  
-  /**
-   * Will be called when the environment can not be derived from a context in {@link #createJavaParser(Object)}
-   * {@link ASTParser#setEnvironment(String[], String[], String[], boolean)}
-   */
-  protected void provideCustomEnvironment(final ASTParser parser) {
-    final String[] cpEntries = this.classpathScanner.getSystemClasspath();
-    parser.setEnvironment(cpEntries, null, null, true);
-  }
+  public abstract ASTParserFactory.ASTParserWrapper createJavaParser(final Object context);
 }

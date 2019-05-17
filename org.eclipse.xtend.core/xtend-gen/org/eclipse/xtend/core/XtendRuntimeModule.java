@@ -21,6 +21,8 @@ import org.eclipse.xtend.core.findReferences.XtendReferenceFinder;
 import org.eclipse.xtend.core.imports.XtendImportedTypesUsageCollector;
 import org.eclipse.xtend.core.imports.XtendImportsConfiguration;
 import org.eclipse.xtend.core.imports.XtendTypeUsageCollector;
+import org.eclipse.xtend.core.javaconverter.ASTParserFactory;
+import org.eclipse.xtend.core.javaconverter.ClasspathScannerASTParserFactory;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
 import org.eclipse.xtend.core.linking.RuntimeLinker;
@@ -360,5 +362,9 @@ public class XtendRuntimeModule extends AbstractXtendRuntimeModule {
   
   public Class<? extends ITaskFinder> bindITaskFinder() {
     return XtendTaskFinder.class;
+  }
+  
+  public Class<? extends ASTParserFactory> bindASTParserFactory() {
+    return ClasspathScannerASTParserFactory.class;
   }
 }
