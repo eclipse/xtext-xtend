@@ -4,7 +4,8 @@ node {
 		disableConcurrentBuilds(),
 		parameters([
 			choice(choices: 'oxygen\nphoton\nr201809\nr201812\nr201903\nlatest', description: 'Which Target Platform should be used?', name: 'target_platform')
-		])
+				, pipelineTriggers([upstream(threshold: 'SUCCESS', upstreamProjects: 'xtext-eclipse/milestone_2.18.0.Beta')])
+	])
 	])
 	
 	stage('Checkout') {
