@@ -213,12 +213,12 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 		textWidget.setForeground(
 				getColorFromStore(store, 
 						AbstractTextEditor.PREFERENCE_COLOR_FOREGROUND_SYSTEM_DEFAULT, 
-						SWT.COLOR_WIDGET_FOREGROUND, 
+						SWT.COLOR_WIDGET_FOREGROUND,
 						AbstractTextEditor.PREFERENCE_COLOR_FOREGROUND));
 		textWidget.setBackground(
 				getColorFromStore(store, 
 						AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND_SYSTEM_DEFAULT, 
-						SWT.COLOR_INFO_BACKGROUND, 
+						SWT.COLOR_WIDGET_BACKGROUND,
 						AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND));
 
 		lineNumberRulerColumn.setForeground(
