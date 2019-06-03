@@ -5,6 +5,7 @@ node {
 		parameters([
 			choice(choices: 'oxygen\nphoton\nr201809\nr201812\nr201903\nlatest', description: 'Which Target Platform should be used?', name: 'target_platform')
 		])
+		, pipelineTriggers([upstream(threshold: 'SUCCESS', upstreamProjects: 'xtext-eclipse/release_2.18.0')])
 	])
 	
 	stage('Checkout') {
