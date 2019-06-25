@@ -25,10 +25,9 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 	}
 	
 	@Override
-	protected void assertState(String string, XtextEditor editor) {
-		super.assertState(PREFIX + string + SUFFIX, editor);
+	protected void assertState(XtextEditor editor, String string, String content) {
+		super.assertState(editor, PREFIX + string + SUFFIX, content);
 	}
-	
 	
 	@Override
 	@Test public void testIndentationEdit_2() throws Exception {

@@ -496,7 +496,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 	public void testWindowsLineDelimiter() throws Exception {
 		XtextEditor editor = openEditor("'''|'''");
 		pasteText(editor, "\r\n");
-		assertState("'''" + "\r\n" + "|'''", editor);
+		assertStateOriginalDelimiters("'''" + "\r\n" + "|'''", editor);
 	}
 	
 	@Test public void testBug342030_01() throws Exception {

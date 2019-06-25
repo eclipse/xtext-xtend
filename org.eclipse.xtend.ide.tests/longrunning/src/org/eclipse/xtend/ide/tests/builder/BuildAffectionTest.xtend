@@ -657,7 +657,7 @@ class BuildAffectionTest {
 	private def assertBuildLogs(CharSequence expected) {
 		val logs = new StringBuilder;
 		(logger as XtextBuildConsole.Logger).registerDelegate[
-			logs.append(toString.trim + '\n')
+			logs.append(toString.trim + System.lineSeparator)
 		]
 		autoBuild
 		assertTrue(logs.toString.trim, logs.toString.trim.matches(expected.toString.trim))
