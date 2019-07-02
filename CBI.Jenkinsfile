@@ -121,7 +121,7 @@ spec:
     }
 
     stage('Maven Build & Test') {
-      stages { // TODO use of parallel { here kills Tycho process with OOM
+      parallel {
         stage('Maven Plugin Build') {
           steps {
             sh """
