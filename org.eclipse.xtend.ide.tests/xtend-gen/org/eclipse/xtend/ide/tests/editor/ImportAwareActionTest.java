@@ -13,6 +13,7 @@ import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.ITextOperationTarget;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
+import org.eclipse.xtext.ui.editor.model.PartitioningKey;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditorMessages;
 import org.eclipse.xtext.xbase.ui.editor.actions.ImportsAwareClipboardAction;
@@ -47,7 +48,7 @@ public class ImportAwareActionTest extends AbstractXtendUITestCase {
     this.document = this.<XtextDocument>get(XtextDocument.class);
     IDocumentPartitioner partitioner = this.<IDocumentPartitioner>get(IDocumentPartitioner.class);
     partitioner.connect(this.document);
-    this.document.setDocumentPartitioner(partitioner);
+    this.document.setDocumentPartitioner(this.<PartitioningKey>get(PartitioningKey.class).getPartitioning(), partitioner);
   }
   
   @Override

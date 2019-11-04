@@ -19,6 +19,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+import org.eclipse.xtext.ui.editor.model.PartitioningKey
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -28,6 +29,8 @@ class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestCase{
 	@Inject extension WorkbenchTestHelper
 
 	@Inject SyncUtil syncUtil;
+	
+	@Inject PartitioningKey partitioningKey
 
 	@Before def void start() {
 		closeWelcomePage
@@ -89,7 +92,7 @@ class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestCase{
 		syncUtil.waitForReconciler(dirtyEditor)
 		val sourceViewer = editorForCompletion.internalSourceViewer
 		val contentAssistant = editorForCompletion.getXtextSourceViewerConfiguration().getContentAssistant(sourceViewer);
-		val contentType = editorForCompletion.document.getContentType(cursorPosition);
+		val contentType = editorForCompletion.document.getContentType(partitioningKey.partitioning, cursorPosition, false);
 		val processor = contentAssistant.getContentAssistProcessor(contentType);
 		if (processor !== null) {
 			return processor.computeCompletionProposals(sourceViewer, cursorPosition);

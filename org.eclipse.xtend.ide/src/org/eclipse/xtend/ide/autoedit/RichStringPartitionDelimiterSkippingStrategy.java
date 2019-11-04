@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.autoedit;
 
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.BadPartitioningException;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITypedRegion;
@@ -22,9 +23,9 @@ public class RichStringPartitionDelimiterSkippingStrategy extends AbstractEditSt
 
 	@Override
 	protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
-			throws BadLocationException {
+			throws BadLocationException, BadPartitioningException {
 		if (command.length == 0 && command.text.length() == 1) {
-			ITypedRegion partition = document.getPartition(command.offset);
+			ITypedRegion partition = getDocumentUtil().getPartition(document, command.offset);
 			String partitionContent = document.get(partition.getOffset(), partition.getLength());
 			int relativeOffset = command.offset - partition.getOffset();
 			if (relativeOffset < partition.getLength() - partitionDelimiter.length()) {

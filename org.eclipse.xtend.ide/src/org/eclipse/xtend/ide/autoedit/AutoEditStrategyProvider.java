@@ -10,6 +10,7 @@ package org.eclipse.xtend.ide.autoedit;
 import static org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper.*;
 
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.BadPartitioningException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.formatting.IIndentationInformation;
@@ -87,7 +88,7 @@ public class AutoEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 		}
 		
 		@Override
-		protected IRegion findStartTerminal(IDocument document, int offset) throws BadLocationException {
+		protected IRegion findStartTerminal(IDocument document, int offset) throws BadLocationException, BadPartitioningException {
 			IRegion result = super.findStartTerminal(document, offset);
 			if (result == null)
 				return result;

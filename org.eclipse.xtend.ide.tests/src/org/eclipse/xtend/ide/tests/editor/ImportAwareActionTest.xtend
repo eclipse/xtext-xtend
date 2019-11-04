@@ -17,6 +17,7 @@ import java.util.ResourceBundle
 import org.eclipse.jface.text.IDocument
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditorMessages
 import org.eclipse.jface.text.ITextOperationTarget
+import org.eclipse.xtext.ui.editor.model.PartitioningKey
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -29,7 +30,7 @@ class ImportAwareActionTest extends AbstractXtendUITestCase {
 		document = get(XtextDocument)
 		var IDocumentPartitioner partitioner = get(IDocumentPartitioner)
 		partitioner.connect(document)
-		document.setDocumentPartitioner(partitioner)
+		document.setDocumentPartitioner(get(PartitioningKey).getPartitioning(), partitioner);
 	}
 
 	override void tearDown() throws Exception {

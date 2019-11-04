@@ -12,6 +12,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
+import org.eclipse.xtext.ui.editor.model.PartitioningKey;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper;
 import org.junit.Test;
@@ -29,7 +30,7 @@ public class PartitionTest extends AbstractXtendUITestCase {
 		document = get(XtextDocument.class);
 		IDocumentPartitioner partitioner = get(IDocumentPartitioner.class);
 		partitioner.connect(document);
-		document.setDocumentPartitioner(partitioner);
+		document.setDocumentPartitioner(get(PartitioningKey.class).getPartitioning(), partitioner);
 	}
 	
 	@Override
@@ -51,7 +52,7 @@ public class PartitionTest extends AbstractXtendUITestCase {
 				"	'''	\n" + 
 				"}";
 		document.set(input);
-		ITypedRegion[] partitions = document.getDocumentPartitioner().computePartitioning(0, input.length());
+		ITypedRegion[] partitions = document.getDocumentPartitioner(get(PartitioningKey.class).getPartitioning()).computePartitioning(0, input.length());
 		assertEquals(3, partitions.length);
 		ITypedRegion first = partitions[0];
 		assertEquals(0, first.getOffset());
@@ -81,7 +82,7 @@ public class PartitionTest extends AbstractXtendUITestCase {
 				"}";
 		document.set(input);
 		document.replace(input.indexOf("\t\tYours"), 0, "ллл");
-		ITypedRegion[] partitions = document.getDocumentPartitioner().computePartitioning(0, input.length()  + 3 /*ллл*/);
+		ITypedRegion[] partitions = document.getDocumentPartitioner(get(PartitioningKey.class).getPartitioning()).computePartitioning(0, input.length()  + 3 /*ллл*/);
 		assertEquals(4, partitions.length);
 		ITypedRegion first = partitions[0];
 		assertEquals(0, first.getOffset());
@@ -116,7 +117,7 @@ public class PartitionTest extends AbstractXtendUITestCase {
 		document.set(input);
 		document.replace(input.indexOf("\t\tYours"), 0, "ллл");
 		document.replace(input.indexOf("Joe") + 3 /*ллл*/, 0, "\t");
-		ITypedRegion[] partitions = document.getDocumentPartitioner().computePartitioning(0, input.length()  + 4 /*ллл + \t*/);
+		ITypedRegion[] partitions = document.getDocumentPartitioner(get(PartitioningKey.class).getPartitioning()).computePartitioning(0, input.length()  + 4 /*ллл + \t*/);
 		assertEquals(4, partitions.length);
 		ITypedRegion first = partitions[0];
 		assertEquals(0, first.getOffset());
@@ -140,7 +141,7 @@ public class PartitionTest extends AbstractXtendUITestCase {
 	@Test public void testJavaDoc_ML_COMMENTPartitions() throws BadLocationException {
 		String input = "/* some comment */class Foo {}";
 		document.set(input);
-		ITypedRegion[] partitions = document.getDocumentPartitioner().computePartitioning(0, input.length());
+		ITypedRegion[] partitions = document.getDocumentPartitioner(get(PartitioningKey.class).getPartitioning()).computePartitioning(0, input.length());
 		assertEquals(2, partitions.length);
 		assertEquals("__comment", partitions[0].getType());
 		document.replace(input.indexOf("/* some comment */"), "/* some comment */".length(), "/** some comment */");

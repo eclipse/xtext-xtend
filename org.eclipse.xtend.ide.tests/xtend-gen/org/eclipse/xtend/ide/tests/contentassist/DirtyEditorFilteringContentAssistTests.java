@@ -19,6 +19,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.PartitioningKey;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -42,6 +43,9 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
   
   @Inject
   private SyncUtil syncUtil;
+  
+  @Inject
+  private PartitioningKey partitioningKey;
   
   @Before
   public void start() {
@@ -156,14 +160,18 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
   }
   
   public ICompletionProposal[] computeCompletionProposals(final XtextEditor editorForCompletion, final XtextEditor dirtyEditor, final int cursorPosition) throws BadLocationException {
-    this.syncUtil.waitForReconciler(dirtyEditor);
-    final ISourceViewer sourceViewer = editorForCompletion.getInternalSourceViewer();
-    final IContentAssistant contentAssistant = editorForCompletion.getXtextSourceViewerConfiguration().getContentAssistant(sourceViewer);
-    final String contentType = editorForCompletion.getDocument().getContentType(cursorPosition);
-    final IContentAssistProcessor processor = contentAssistant.getContentAssistProcessor(contentType);
-    if ((processor != null)) {
-      return processor.computeCompletionProposals(sourceViewer, cursorPosition);
+    try {
+      this.syncUtil.waitForReconciler(dirtyEditor);
+      final ISourceViewer sourceViewer = editorForCompletion.getInternalSourceViewer();
+      final IContentAssistant contentAssistant = editorForCompletion.getXtextSourceViewerConfiguration().getContentAssistant(sourceViewer);
+      final String contentType = editorForCompletion.getDocument().getContentType(this.partitioningKey.getPartitioning(), cursorPosition, false);
+      final IContentAssistProcessor processor = contentAssistant.getContentAssistProcessor(contentType);
+      if ((processor != null)) {
+        return processor.computeCompletionProposals(sourceViewer, cursorPosition);
+      }
+      return null;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    return null;
   }
 }
