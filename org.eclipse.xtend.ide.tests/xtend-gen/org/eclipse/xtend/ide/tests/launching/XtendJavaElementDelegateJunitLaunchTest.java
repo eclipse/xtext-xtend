@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2019, 2020 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,6 +11,8 @@ import com.google.inject.Inject;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IPackageFragment;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.launching.XtendJavaElementDelegateJunitLaunch;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -25,6 +27,7 @@ import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch;
 import org.junit.Assert;
 import org.junit.Before;
@@ -280,6 +283,58 @@ public class XtendJavaElementDelegateJunitLaunchTest extends AbstractEditorTest 
     this.noJunitTestClassIsRecognized(_builder);
   }
   
+  @Test
+  public void package_in_source_folder_is_mapped_to_package_in_xtend_gen_folder001() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class FooTest {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Test def void test() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    IFile _dslFile = this.dslFile(_builder);
+    Pair<String, String> _mappedTo = Pair.<String, String>of("/XtendJavaElementDelegateJunitLaunchTest/src/foo", "/XtendJavaElementDelegateJunitLaunchTest/xtend-gen/foo");
+    this.assertPackageMapping(_dslFile, _mappedTo);
+  }
+  
+  @Test
+  public void package_in_source_folder_is_mapped_to_package_in_xtend_gen_folder002() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class FooTest {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Test def void test() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    IFile _dslFile = this.dslFile("foo/bar", _builder);
+    Pair<String, String> _mappedTo = Pair.<String, String>of("/XtendJavaElementDelegateJunitLaunchTest/src/foo/bar", "/XtendJavaElementDelegateJunitLaunchTest/xtend-gen/foo/bar");
+    this.assertPackageMapping(_dslFile, _mappedTo);
+  }
+  
+  private void assertPackageMapping(final IFile dslFile, final Pair<String, String> expectedMapping) {
+    final String expectedSourcePackagePath = expectedMapping.getKey();
+    final String expectedMappedPackagePath = expectedMapping.getValue();
+    final IJavaElement javaElement = JavaCore.create(dslFile.getParent());
+    final IPackageFragment sourcePackage = ((IPackageFragment) javaElement);
+    Assert.assertEquals(expectedSourcePackagePath, sourcePackage.getPath().toString());
+    this.launcher.initializeWith(sourcePackage);
+    final IJavaElement mappedPackage = this.launcher.<IJavaElement>getAdapter(IJavaElement.class);
+    Assert.assertNotNull("The package in the source folder is mapped to null!", mappedPackage);
+    Assert.assertEquals(expectedMappedPackagePath, mappedPackage.getPath().toString());
+  }
+  
   private void junitTestClassIsRecognized(final CharSequence text) {
     this.junitTestClassIsRecognized(text, "FooTest");
   }
@@ -293,10 +348,14 @@ public class XtendJavaElementDelegateJunitLaunchTest extends AbstractEditorTest 
   }
   
   private IFile dslFile(final CharSequence text) {
+    return this.dslFile("foo", text);
+  }
+  
+  private IFile dslFile(final String packageName, final CharSequence text) {
     try {
       IFile _xblockexpression = null;
       {
-        final IFile file = IResourcesSetupUtil.createFile(this.getProjectName(), "src/foo/FooTest", this._fileExtensionProvider.getPrimaryFileExtension(), this.getContent(text));
+        final IFile file = IResourcesSetupUtil.createFile(this.getProjectName(), (("src/" + packageName) + "/FooTest"), this._fileExtensionProvider.getPrimaryFileExtension(), this.getContent(text));
         final IProject project = file.getProject();
         boolean _hasNature = project.hasNature(XtextProjectHelper.NATURE_ID);
         boolean _not = (!_hasNature);

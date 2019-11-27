@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2019, 2020 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,6 +10,8 @@ package org.eclipse.xtend.ide.tests.launching
 import com.google.inject.Inject
 import org.eclipse.core.resources.IFile
 import org.eclipse.jdt.core.IJavaElement
+import org.eclipse.jdt.core.IPackageFragment
+import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.ide.launching.XtendJavaElementDelegateJunitLaunch
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
 import org.eclipse.xtext.resource.FileExtensionProvider
@@ -162,6 +164,47 @@ class XtendJavaElementDelegateJunitLaunchTest extends AbstractEditorTest {
 		'''.noJunitTestClassIsRecognized
 	}
 
+	@Test def package_in_source_folder_is_mapped_to_package_in_xtend_gen_folder001() {
+		'''
+			package foo
+			
+			class FooTest {
+				
+				@Test def void test() {}
+			}
+		'''.dslFile.assertPackageMapping(
+			"/XtendJavaElementDelegateJunitLaunchTest/src/foo" -> "/XtendJavaElementDelegateJunitLaunchTest/xtend-gen/foo"
+		)
+	}
+
+	@Test def package_in_source_folder_is_mapped_to_package_in_xtend_gen_folder002() {
+		"foo/bar".dslFile('''
+			package foo.bar
+			
+			class FooTest {
+				
+				@Test def void test() {}
+			}
+		''').assertPackageMapping(
+			"/XtendJavaElementDelegateJunitLaunchTest/src/foo/bar" -> "/XtendJavaElementDelegateJunitLaunchTest/xtend-gen/foo/bar"
+		)
+	}
+
+	private def assertPackageMapping(IFile dslFile, Pair<String,String> expectedMapping) {
+		val expectedSourcePackagePath = expectedMapping.key
+		val expectedMappedPackagePath = expectedMapping.value
+
+		val javaElement = JavaCore.create(dslFile.parent)
+		val sourcePackage = javaElement as IPackageFragment 
+		assertEquals(expectedSourcePackagePath, sourcePackage.path.toString)
+
+		launcher.initializeWith(sourcePackage)
+
+		val mappedPackage = launcher.getAdapter(IJavaElement)
+		assertNotNull("The package in the source folder is mapped to null!", mappedPackage)
+		assertEquals(expectedMappedPackagePath, mappedPackage.path.toString)
+	}
+
 	private def junitTestClassIsRecognized(CharSequence text) {
 		text.junitTestClassIsRecognized("FooTest")
 	}
@@ -180,7 +223,11 @@ class XtendJavaElementDelegateJunitLaunchTest extends AbstractEditorTest {
 	}
 
 	private def IFile dslFile(CharSequence text) {
-		val file = IResourcesSetupUtil.createFile(projectName, "src/foo/FooTest", primaryFileExtension, text.content)
+		"foo".dslFile(text)
+	}
+
+	private def IFile dslFile(String packageName, CharSequence text) {
+		val file = IResourcesSetupUtil.createFile(projectName, "src/" + packageName + "/FooTest", primaryFileExtension, text.content)
 
 		/*
 		 * TODO: find a better (with good performance) solution

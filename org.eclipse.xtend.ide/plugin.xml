@@ -1036,6 +1036,11 @@
      </factory>
      <factory 
         class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
+        adaptableType="org.eclipse.jdt.core.IPackageFragment">
+        <adapter type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch"/>
+     </factory>
+     <factory 
+        class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateAdapterFactory"
         adaptableType="org.eclipse.ui.IFileEditorInput">
         <adapter type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateMainLaunch"/>
      </factory>
@@ -1071,7 +1076,10 @@
                   <count value="1"/>
                   <iterate>
                      <and>
-                       <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
+                       <or>
+               	         <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
+               	         <adapt type="org.eclipse.jdt.core.IPackageFragment"/>
+                       </or>
                        <adapt type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch">
                          <adapt type="org.eclipse.jdt.core.IJavaElement">
                             <test property="org.eclipse.jdt.core.isInJavaProject"/>
@@ -1114,7 +1122,10 @@
                   <count value="1"/>
                	  <iterate>
                	     <and>
-               	       <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
+               	       <or>
+               	         <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
+               	         <adapt type="org.eclipse.jdt.core.IPackageFragment"/>
+                       </or>
                        <adapt type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch">
                          <adapt type="org.eclipse.jdt.core.IJavaElement">
 		                   <test property="org.eclipse.jdt.core.isInJavaProjectWithNature" value="org.eclipse.pde.PluginNature"/>
