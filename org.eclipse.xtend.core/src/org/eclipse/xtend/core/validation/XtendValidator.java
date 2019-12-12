@@ -8,9 +8,10 @@
 package org.eclipse.xtend.core.validation;
 
 import static com.google.common.collect.Iterables.*;
-import static com.google.common.collect.Iterables.filter;
+import static com.google.common.collect.Iterables.concat;
+import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Lists.*;
-import static com.google.common.collect.Lists.transform;
+import static java.util.Collections.*;
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.util.JavaVersion.*;
@@ -62,9 +63,11 @@ import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -84,6 +87,7 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
+import org.eclipse.xtext.common.types.util.RawSuperTypes;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
@@ -93,6 +97,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.JavaVersion;
@@ -100,6 +105,7 @@ import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
@@ -146,6 +152,7 @@ import org.eclipse.xtext.xtype.XImportDeclaration;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableListMultimap;
@@ -234,7 +241,15 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	@Inject
 	private IGeneratorConfigProvider generatorConfigProvider;
 	
+	@Inject
+	private RawSuperTypes superTypes;
+	
 	protected final Set<String> visibilityModifers = ImmutableSet.of("public", "private", "protected", "package");
+	
+	protected final Set<String> junitAndXtextTestingPackagePrefix = ImmutableSet.of(
+		"org.junit",
+		"org.eclipse.xtext.testing"
+	);
 	
 	protected final Set<String> junitAnnotations = ImmutableSet.of(
 		// JUnit4 annotations
@@ -251,6 +266,8 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		"org.junit.jupiter.api.BeforeAll",
 		"org.junit.jupiter.api.AfterAll"
 		);
+	
+	protected final String junitRunWithAnnotationTypeName = "org.junit.runner.RunWith";
 	
 	protected final Multimap<Class<?>, ElementType> targetInfos;
 	
@@ -339,7 +356,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		 * Active annotations could also change the return type.
 		 * Checking that the JvmOperation really has a JUnit annotation.
 		 */
-		if(hasJUnitAnnotation(operation)) {
+		if(!classUsesCustomRunner(operation.getDeclaringType()) && hasJUnitAnnotation(operation)) {
 			LightweightTypeReference actualType = determineReturnType(operation);
 			if(actualType !=null && !actualType.isUnknown() && !actualType.isPrimitiveVoid()) {
 				String message = String.format("JUnit method %s() must be void but is %s.", function.getName(), actualType.getHumanReadableName());
@@ -359,6 +376,54 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	
 	private boolean hasJUnitAnnotation(JvmOperation operation) {
 		return !annotationUtil.findAnnotations(junitAnnotations, operation).isEmpty();
+	}
+	
+	protected boolean classUsesCustomRunner(JvmDeclaredType type) {
+		final XtextResource res = (XtextResource) type.eResource();
+		return res.getCache().get("usesCustomRunner" + type.toString(), res, () -> {
+			final Iterable<JvmDeclaredType> consideredTypes = concat(
+				singleton(type),
+				filter(
+					filter(superTypes.collect(type), JvmGenericType.class),
+					t -> !t.isInterface()
+				)
+			);
+			final Iterable<JvmAnnotationReference> annotationRefs = transform(
+				consideredTypes,
+				// @RunWith is a non-repeatable annotation, so take the first match if present  
+				t -> getFirst(
+					annotationUtil.findAnnotations(singleton(junitRunWithAnnotationTypeName), t),
+					null
+				)
+			);
+			final JvmAnnotationReference appliedAnnotationRef = getFirst(
+				filter(annotationRefs, Predicates.notNull()),
+				null
+			);
+			
+			if (appliedAnnotationRef == null) {
+				return false;
+				
+			} else { 
+				final Iterable<EObject> values = concat(
+					transform(
+						filter(appliedAnnotationRef.getValues(), JvmCustomAnnotationValue.class),
+						cav -> cav.getValues()
+					)
+				);
+				final Iterable<JvmIdentifiableElement> referencedElements = transform(
+					filter(values, XAbstractFeatureCall.class),
+					fc -> fc.getFeature()
+				);
+				return any(
+					referencedElements,
+					e -> e instanceof JvmType && !any(
+						junitAndXtextTestingPackagePrefix,
+						prefix -> emptyIfNull(e.getQualifiedName()).startsWith(prefix)
+					)
+				);
+			}
+		});
 	}
 	
 	protected void validateInferredType(JvmTypeReference inferredType, XtendMember member, String messagePrefix,
@@ -1041,7 +1106,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		int numUnshownOperations = operationsMissingImplementation.size() - 3;
 		if(numUnshownOperations >0)
 			errorMsg.append("\nand " +  numUnshownOperations + " more.");
-		List<String> uris = transform(operationsMissingImplementation, new Function<IResolvedOperation, String>() {
+		List<String> uris = Lists.transform(operationsMissingImplementation, new Function<IResolvedOperation, String>() {
 			@Override
 			public String apply(IResolvedOperation from) {
 				return EcoreUtil.getURI(from.getDeclaration()).toString();

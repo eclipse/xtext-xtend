@@ -11,8 +11,8 @@ import javax.inject.Inject
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
-import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
+import org.junit.FixMethodOrder
 import org.junit.Test
 
 import static org.eclipse.xtend.core.validation.IssueCodes.INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION
@@ -20,10 +20,10 @@ import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
 import static org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 
+@FixMethodOrder(JVM)
 class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
 
 	@Inject extension ValidationTestHelper
-	@Inject extension ParseHelper<XtendFile>
 
 	@Test def test001() {
 		'''
@@ -444,22 +444,552 @@ class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
 		'''.hasOneValidationIssue(XFEATURE_CALL, LINKING_DIAGNOSTIC, "The method or field foo is undefined")
 	}
 
+	@Test def test040_RunWith_Test() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.Test
+			
+			@RunWith(org.junit.runners.Parameterized)
+			class Foo {
+				
+				@Test def test() {
+				}
+			}
+		'''.hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+
+	@Test def test041_RunWith_Test() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.runners.Parameterized
+			import org.junit.Test
+			
+			@RunWith(Parameterized)
+			class Foo {
+				
+				@Test def test() {
+				}
+			}
+		'''.hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+
+	@Test def test042_RunWith_Test() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.Test
+			
+			@RunWith(org.eclipse.xtext.testing.XtextRunner)
+			class Foo {
+				
+				@Test def test() {
+				}
+			}
+		'''.hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+
+	@Test def test043_RunWith_Test() {
+		'''
+			import org.eclipse.xtext.testing.XtextRunner
+			import org.junit.runner.RunWith
+			import org.junit.Test
+			
+			@RunWith(XtextRunner)
+			class Foo {
+				
+				@Test def test() {
+				}
+			}
+		'''.hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+
+	@Test def test044_RunWith_Test() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.Test
+			
+			@RunWith(com.foo.bar.MyRunner)
+			class Foo {
+				
+				@Test def test() {
+				}
+			}
+		'''.withRunner('''
+			package com.foo.bar
+
+			class MyRunner extends org.eclipse.xtext.testing.XtextRunner {
+				new(Class<?> klass) throws org.junit.runners.model.InitializationError {
+					super(klass);
+				}
+			}
+		''').hasNoValidationIssue()
+	}
+
+	@Test def test045_RunWith_Test() {
+		'''
+			import com.foo.bar.MyRunner
+			import org.junit.runner.RunWith
+			import org.junit.Test
+			
+			@RunWith(MyRunner)
+			class Foo {
+				
+				@Test def test() {
+				}
+			}
+		'''.withRunner('''
+			package com.foo.bar
+
+			class MyRunner extends org.eclipse.xtext.testing.XtextRunner {
+				new(Class<?> klass) throws org.junit.runners.model.InitializationError {
+					super(klass);
+				}
+			}
+		''').hasNoValidationIssue()
+	}
+
+	@Test def test046_RunWith_Before() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.Before
+			
+			@RunWith(org.junit.runners.Parameterized)
+			class Foo {
+				
+				@Before def test() {
+				}
+			}
+		'''.hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+
+	@Test def test047_RunWith_Before() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.runners.Parameterized
+			import org.junit.Before
+			
+			@RunWith(Parameterized)
+			class Foo {
+				
+				@Before def test() {
+				}
+			}
+		'''.hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+
+	@Test def test048_RunWith_Before() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.Before
+			
+			@RunWith(org.eclipse.xtext.testing.XtextRunner)
+			class Foo {
+				
+				@Before def test() {
+				}
+			}
+		'''.hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+
+	@Test def test049_RunWith_Before() {
+		'''
+			import org.eclipse.xtext.testing.XtextRunner
+			import org.junit.runner.RunWith
+			import org.junit.Before
+			
+			@RunWith(XtextRunner)
+			class Foo {
+				
+				@Before def test() {
+				}
+			}
+		'''.hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+
+	@Test def test050_RunWith_Before() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.Before
+			
+			@RunWith(com.foo.bar.MyRunner)
+			class Foo {
+				
+				@Before def test() {
+				}
+			}
+		'''.withRunner('''
+			package com.foo.bar
+
+			class MyRunner extends org.eclipse.xtext.testing.XtextRunner {
+				new(Class<?> klass) throws org.junit.runners.model.InitializationError {
+					super(klass);
+				}
+			}
+		''').hasNoValidationIssue()
+	}
+
+	@Test def test051_RunWith_Before() {
+		'''
+			import com.foo.bar.MyRunner
+			import org.junit.runner.RunWith
+			import org.junit.Before
+			
+			@RunWith(MyRunner)
+			class Foo {
+				
+				@Before def test() {
+				}
+			}
+		'''.withRunner('''
+			package com.foo.bar
+
+			class MyRunner extends org.eclipse.xtext.testing.XtextRunner {
+				new(Class<?> klass) throws org.junit.runners.model.InitializationError {
+					super(klass);
+				}
+			}
+		''').hasNoValidationIssue()
+	}
+
+	@Test def test052_RunWith_After() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.After
+			
+			@RunWith(org.junit.runners.Parameterized)
+			class Foo {
+				
+				@After def test() {
+				}
+			}
+		'''.hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+	
+	@Test def test053_RunWith_After() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.runners.Parameterized
+			import org.junit.After
+			
+			@RunWith(Parameterized)
+			class Foo {
+				
+				@After def test() {
+				}
+			}
+		'''.hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+
+	@Test def test054_RunWith_After() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.After
+			
+			@RunWith(org.eclipse.xtext.testing.XtextRunner)
+			class Foo {
+				
+				@After def test() {
+				}
+			}
+		'''.hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+
+	@Test def test055_RunWith_After() {
+		'''
+			import org.eclipse.xtext.testing.XtextRunner
+			import org.junit.runner.RunWith
+			import org.junit.After
+			
+			@RunWith(XtextRunner)
+			class Foo {
+				
+				@After def test() {
+				}
+			}
+		'''.hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+
+	@Test def test056_RunWith_After() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.After
+			
+			@RunWith(com.foo.bar.MyRunner)
+			class Foo {
+				
+				@After def test() {
+				}
+			}
+		'''.withRunner('''
+			package com.foo.bar
+
+			import org.eclipse.xtext.testing.XtextRunner
+			
+			class MyRunner extends XtextRunner {
+				new(Class<?> klass) throws org.junit.runners.model.InitializationError {
+					super(klass);
+				}
+			}
+		''').hasNoValidationIssue()
+	}
+
+	@Test def test057_RunWith_After() {
+		'''
+			import com.foo.bar.MyRunner
+			import org.junit.runner.RunWith
+			import org.junit.After
+			
+			@RunWith(MyRunner)
+			class Foo {
+				
+				@After def test() {
+				}
+			}
+		'''.withRunner('''
+			package com.foo.bar
+
+			import org.eclipse.xtext.testing.XtextRunner
+			
+			class MyRunner extends XtextRunner {
+				new(Class<?> klass) throws org.junit.runners.model.InitializationError {
+					super(klass);
+				}
+			}
+		''').hasNoValidationIssue()
+	}
+
+	@Test def test060_RunWith_withSuperClass() {
+		'''
+			import org.junit.Test
+			
+			class Foo extends Bar {
+				
+				@Test def test() {
+				}
+			}
+		'''.withSuperClass('''
+			import org.junit.runner.RunWith
+			
+			@RunWith(org.junit.runners.Parameterized)
+			class Bar {
+			}
+		''').hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+
+	@Test def test061_RunWith_withSuperClass() {
+		'''
+			import org.junit.Test
+			
+			class Foo extends Bar {
+				
+				@Test def test() {
+				}
+			}
+		'''.withSuperClass('''
+			import org.junit.runner.RunWith
+			
+			@RunWith(org.eclipse.xtext.testing.XtextRunner)
+			class Bar {
+			}
+		''').hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+
+	@Test def test062_RunWith_withSuperClass() {
+		'''
+			import org.junit.Test
+			
+			class Foo extends Bar {
+				
+				@Test def test() {
+				}
+			}
+		'''.withSuperClassAndRunner('''
+			import org.junit.runner.RunWith
+			
+			@RunWith(com.foo.bar.MyRunner)
+			class Bar {
+			}
+		''', '''
+			package com.foo.bar
+
+			class MyRunner extends org.eclipse.xtext.testing.XtextRunner {
+				new(Class<?> klass) throws org.junit.runners.model.InitializationError {
+					super(null);
+				}
+			}
+		''').hasNoValidationIssue()
+	}
+
+	@Test def test063_RunWith_withSuperClass() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.Test
+			
+			@RunWith(org.junit.runners.Parameterized)
+			class Foo extends Bar {
+				
+				@Test def test() {
+				}
+			}
+		'''.withSuperClassAndRunner('''
+			import org.junit.runner.RunWith
+			
+			@RunWith(com.foo.bar.MyRunner)
+			class Bar {
+			}
+		''', '''
+			package com.foo.bar
+
+			class MyRunner extends org.eclipse.xtext.testing.XtextRunner {
+				new(Class<?> klass) throws org.junit.runners.model.InitializationError {
+					super(null);
+				}
+			}
+		''').hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+
+	@Test def test064_RunWith_withSuperClass() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.Test
+			
+			@RunWith(org.eclipse.xtext.testing.XtextRunner)
+			class Foo extends Bar {
+				
+				@Test def test() {
+				}
+			}
+		'''.withSuperClassAndRunner('''
+			import org.junit.runner.RunWith
+			
+			@RunWith(com.foo.bar.MyRunner)
+			class Bar {
+			}
+		''', '''
+			package com.foo.bar
+
+			class MyRunner extends org.eclipse.xtext.testing.XtextRunner {
+				new(Class<?> klass) throws org.junit.runners.model.InitializationError {
+					super(null);
+				}
+			}
+		''').hasOneValidationIssue("JUnit method test() must be void but is Object.")
+	}
+
+	@Test def test065_RunWith_withSuperClass() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.Test
+			
+			@RunWith(com.foo.bar.MyRunner)
+			class Foo extends Bar {
+				
+				@Test def test() {
+				}
+			}
+		'''.withSuperClassAndRunner('''
+			import org.junit.runner.RunWith
+			
+			@RunWith(org.junit.runners.Parameterized)
+			class Bar {
+			}
+		''', '''
+			package com.foo.bar
+
+			class MyRunner extends org.eclipse.xtext.testing.XtextRunner {
+				new(Class<?> klass) throws org.junit.runners.model.InitializationError {
+					super(null);
+				}
+			}
+		''').hasNoValidationIssue()
+	}
+
+	@Test def test066_RunWith_withSuperClass() {
+		'''
+			import org.junit.runner.RunWith
+			import org.junit.Test
+			
+			@RunWith(com.foo.bar.MyRunner)
+			class Foo extends Bar {
+				
+				@Test def test() {
+				}
+			}
+		'''.withSuperClassAndRunner('''
+			import org.junit.runner.RunWith
+			
+			@RunWith(org.eclipse.xtext.testing.XtextRunner)
+			class Bar {
+			}
+		''', '''
+			package com.foo.bar
+
+			class MyRunner extends org.eclipse.xtext.testing.XtextRunner {
+				new(Class<?> klass) throws org.junit.runners.model.InitializationError {
+					super(null);
+				}
+			}
+		''').hasNoValidationIssue()
+	}
+
+
 	private def void hasNoValidationIssue(CharSequence it) {
 		assertNumberOfValidationIssues(0)
 	}
 
 	private def hasOneValidationIssue(CharSequence it, String message) {
-		it.hasOneValidationIssue(XTEND_FUNCTION, INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION, message)
+		hasOneValidationIssue(XTEND_FUNCTION, INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION, message)
 	}
 
 	private def hasOneValidationIssue(CharSequence it, EClass objectType, String issueCode, String message) {
-		assertNumberOfValidationIssues(1).
-		assertError(objectType, issueCode, message)
+		toString.file.hasOneValidationIssue(objectType, issueCode, message)
 	}
 
 	private def assertNumberOfValidationIssues(CharSequence it, int expectedNumberOfIssues) {
-		val xtendFile = parse
-		expectedNumberOfIssues.assertEquals(xtendFile.validate.size)
-		xtendFile
+		toString.file.assertNumberOfValidationIssues(expectedNumberOfIssues)
 	}
+
+	private def withRunner(CharSequence it, CharSequence runnerDef) {
+		val files = files(false, runnerDef.toString, it.toString).iterator
+		val runnerIssues = files.next.validate
+		assertEquals('Runner class has issues:\n' + runnerIssues.join('\n'), 0, runnerIssues.size)
+		return files.next
+	}
+
+	private def withSuperClass(CharSequence it, CharSequence superClazzDef) {
+		val files = files(false, superClazzDef.toString, it.toString).iterator
+		val superIssues = files.next.validate
+		assertEquals('Super class has issues:\n' + superIssues.join('\n'), 0, superIssues.size)
+		return files.next
+	}
+
+	private def withSuperClassAndRunner(CharSequence it, CharSequence superClazzDef, CharSequence runnerDef) {
+		val files = files(false, runnerDef.toString, superClazzDef.toString, it.toString).iterator
+		val runnerIssues = files.next.validate
+		assertEquals('Runner class has issues:\n' + runnerIssues.join('\n'), 0, runnerIssues.size)
+		val superIssues = files.next.validate
+		assertEquals('Super class has issues:\n' + superIssues.join('\n'), 0, superIssues.size)
+		return files.next
+	}
+
+	private def void hasNoValidationIssue(XtendFile it) {
+		assertNumberOfValidationIssues(0)
+	}
+
+	private def hasOneValidationIssue(XtendFile it, String message) {
+		hasOneValidationIssue(XTEND_FUNCTION, INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION, message)
+	}
+
+	private def hasOneValidationIssue(XtendFile it, EClass objectType, String issueCode, String message) {
+		assertNumberOfValidationIssues(1)
+		assertError(objectType, issueCode, message)
+	}
+
+	private def assertNumberOfValidationIssues(XtendFile it, int expectedNumberOfIssues) {
+		val issues = validate
+		assertEquals(
+			if (!issues.empty) 'Issues:\n' + issues.join('\n'),
+			expectedNumberOfIssues, issues.size
+		)
+		it
+	}	
 }
