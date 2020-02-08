@@ -25,13 +25,13 @@ class Bug464136Test extends AbstractActiveAnnotationTest {
 			val messageJava = '''
 				Error during annotation processing:
 				java.lang.LinkageError: Just a test :-/
-					at org.eclipse.xtend.core.tests.macro.Bug464136Processor.lambda$doTransform$0(Bug464136Processor.java:21)
+					at org.eclipse.xtend.core.tests.macro.Bug464136Processor.lambda$doTransform$0(Bug464136Processor.java:22)
 			'''.toString
 			
 			val messageEclipse = '''
 				Error during annotation processing:
 				java.lang.LinkageError: Just a test :-/
-					at org.eclipse.xtend.core.tests.macro.Bug464136Processor.lambda$0(Bug464136Processor.java:21)
+					at org.eclipse.xtend.core.tests.macro.Bug464136Processor.lambda$0(Bug464136Processor.java:22)
 			'''.toString
 			if (messageJava != problems.head.message && messageEclipse != problems.head.message) {
 				fail('''
@@ -52,7 +52,7 @@ class Bug464136Test extends AbstractActiveAnnotationTest {
 }
 
 
-@Active(typeof(Bug464136Processor))
+@Active(Bug464136Processor)
 annotation Bug464136 {}
 class Bug464136Processor extends AbstractClassProcessor {
 	

@@ -40,7 +40,7 @@ public class Bug464136Test extends AbstractActiveAnnotationTest {
       _builder_1.append("java.lang.LinkageError: Just a test :-/");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("at org.eclipse.xtend.core.tests.macro.Bug464136Processor.lambda$doTransform$0(Bug464136Processor.java:21)");
+      _builder_1.append("at org.eclipse.xtend.core.tests.macro.Bug464136Processor.lambda$doTransform$0(Bug464136Processor.java:22)");
       _builder_1.newLine();
       final String messageJava = _builder_1.toString();
       StringConcatenation _builder_2 = new StringConcatenation();
@@ -49,7 +49,7 @@ public class Bug464136Test extends AbstractActiveAnnotationTest {
       _builder_2.append("java.lang.LinkageError: Just a test :-/");
       _builder_2.newLine();
       _builder_2.append("\t");
-      _builder_2.append("at org.eclipse.xtend.core.tests.macro.Bug464136Processor.lambda$0(Bug464136Processor.java:21)");
+      _builder_2.append("at org.eclipse.xtend.core.tests.macro.Bug464136Processor.lambda$0(Bug464136Processor.java:22)");
       _builder_2.newLine();
       final String messageEclipse = _builder_2.toString();
       if (((!Objects.equal(messageJava, IterableExtensions.head(problems).getMessage())) && (!Objects.equal(messageEclipse, IterableExtensions.head(problems).getMessage())))) {
