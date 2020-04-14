@@ -1,35 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>org.eclipse.xtend.maven.parent</artifactId>
 	<packaging>pom</packaging>
-	<version>2.22.0-SNAPSHOT</version>
-
+	<version>2.22.0.M1</version>
 	<properties>
 		<root-dir>${basedir}/../..</root-dir>
 		<maven.version>3.6.0</maven.version>
 		<tycho-version>1.6.0</tycho-version>
-
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
-		<maven.javadoc.opts></maven.javadoc.opts>
-		
-		<!-- 
-		  Maven repository initially produced by gradle upstream build.
-		  Used to grab the upstream maven artifacts like org.eclipse.xtend.core
-		  and also to deploy the artifacts produced in this build.
-		 -->
+		<maven.javadoc.opts/>
 		<gradleMavenRepo>file:${root-dir}/build/maven-repository</gradleMavenRepo>
-		<upstreamBranch>master</upstreamBranch>
+		<upstreamBranch>milestone_2.22.0.M1</upstreamBranch>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 	</properties>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -46,10 +34,8 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
 	<build>
 		<extensions>
-			<!-- See https://jira.codehaus.org/browse/MINSTALL-102 -->
 			<extension>
 				<groupId>org.apache.maven.archetype</groupId>
 				<artifactId>archetype-packaging</artifactId>
@@ -57,7 +43,6 @@
 			</extension>
 		</extensions>
 		<plugins>
-			<!-- See https://jira.codehaus.org/browse/MINSTALL-102 -->
 			<plugin>
 				<artifactId>maven-enforcer-plugin</artifactId>
 				<configuration>
@@ -163,8 +148,6 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.22.1</version>
 				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -189,7 +172,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore/>
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -208,7 +191,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore/>
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -227,7 +210,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore/>
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -246,7 +229,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore/>
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -263,7 +246,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -273,10 +256,8 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
 	<profiles>
 		<profile>
-			<!-- Mac OSX Jdk fails to load javadoc -->
 			<id>javadoc-location-mac</id>
 			<activation>
 				<file>
@@ -330,7 +311,6 @@
 			</repositories>
 		</profile>
 	</profiles>
-	
 	<distributionManagement>
 		<repository>
 			<id>local-repo</id>
@@ -341,24 +321,20 @@
 			<url>${gradleMavenRepo}</url>
 		</snapshotRepository>
 	</distributionManagement>
-
 	<scm>
 		<connection>scm:git:https://github.com/eclipse/xtext-xtend.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com:eclipse/xtext-xtend.git</developerConnection>
 		<url>https://github.com/eclipse/xtext-xtend.git</url>
 	</scm>
-	
 	<licenses>
 		<license>
 			<name>Eclipse Public License - v 1.0</name>
 			<url>http://www.eclipse.org/legal/epl-2.0</url>
 		</license>
 	</licenses>
-	
 	<url>http://xtend-lang.org</url>
 	<name>Xtend Maven Plugin Parent POM</name>
 	<description>Xtend is a little language that compiles into idiomatic Java source code. You can use any existing Java library seamlessly from Xtend (and vice-versa). The compiled output is readable and pretty-printed, and tends to run as fast or faster than the equivalent handwritten Java code. It's the CoffeeScript for Java.</description>
-
 	<developers>
 		<developer>
 			<id>sven.efftinge</id>
