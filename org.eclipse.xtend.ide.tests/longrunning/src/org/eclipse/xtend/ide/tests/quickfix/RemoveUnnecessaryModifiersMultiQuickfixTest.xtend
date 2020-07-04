@@ -15,7 +15,7 @@ import org.eclipse.xtext.ui.testing.AbstractMultiQuickfixTest
 import org.junit.runner.RunWith
 
 /**
- * @author xtext - Initial contribution and API
+ * @author Aaron R Miller - Initial contribution and API
  */
 @RunWith(XtextRunner)
 @InjectWith(XtendIDEInjectorProvider)
