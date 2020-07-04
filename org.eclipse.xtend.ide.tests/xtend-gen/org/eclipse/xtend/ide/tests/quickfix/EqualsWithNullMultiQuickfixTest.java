@@ -7,8 +7,6 @@
  */
 package org.eclipse.xtend.ide.tests.quickfix;
 
-import java.util.Arrays;
-import java.util.List;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -30,6 +28,8 @@ import org.junit.runner.RunWith;
 @InjectWith(XtendIDEInjectorProvider.class)
 @SuppressWarnings("all")
 public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
+  private static final String EQUALS_NULL_IN_SINGLE_EXPRESSION = "if (x == 1) e1 else if (x == 2) e2 else e2";
+  
   private XtextEditor xtextEditor;
   
   public XtextSourceViewer getSourceViewer() {
@@ -52,15 +52,14 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
   }
   
   @Test
-  public void testEqualsWithNullQuickfixInMethodBody() {
-    this.xtextEditor.getDocument().set("");
-    final ICompletionProposal[] quickAssistProposals = this.computeQuickAssistProposals(this.getDocument().getLength());
-    final List<ICompletionProposal> proposals = Arrays.<ICompletionProposal>asList(quickAssistProposals);
-    this.assertEqualsWithNullQuickfixProposals(proposals);
+  public void testEqualsWithNullQuickfixInSingleExpression() {
+    this.xtextEditor.getDocument().set(EqualsWithNullMultiQuickfixTest.EQUALS_NULL_IN_SINGLE_EXPRESSION);
+    final ICompletionProposal[] proposals = this.computeQuickAssistProposals();
+    Assert.assertEquals(2, proposals.length);
   }
   
-  public void assertEqualsWithNullQuickfixProposals(final List<ICompletionProposal> proposals) {
-    Assert.assertTrue(false);
+  public ICompletionProposal[] computeQuickAssistProposals() {
+    return this.computeQuickAssistProposals(this.xtextEditor, this.getDocument().getLength());
   }
   
   public ICompletionProposal[] computeQuickAssistProposals(final int offset) {

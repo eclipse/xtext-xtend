@@ -7,8 +7,6 @@
  */
 package org.eclipse.xtend.ide.tests.quickfix
 
-import java.util.Arrays
-import java.util.List
 import org.eclipse.jface.text.IDocument
 import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
@@ -27,12 +25,14 @@ import org.junit.runner.RunWith
 @InjectWith(XtendIDEInjectorProvider)
 class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
+	static final String EQUALS_NULL_IN_SINGLE_EXPRESSION = "if (x == 1) e1 else if (x == 2) e2 else e2"
+
 	XtextEditor xtextEditor
-	
+
 	def XtextSourceViewer getSourceViewer() {
 		return xtextEditor.getInternalSourceViewer() as XtextSourceViewer
 	}
-	
+
 	def IDocument getDocument() {
 		return getSourceViewer().getDocument()
 	}
@@ -43,22 +43,16 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 	}
 
 	@Test
-	def testEqualsWithNullQuickfixInMethodBody() {
-		xtextEditor.document.set("")
-		val quickAssistProposals = computeQuickAssistProposals(document.getLength())
-		val proposals = Arrays.asList(quickAssistProposals)
-		assertEqualsWithNullQuickfixProposals(proposals)
+	def testEqualsWithNullQuickfixInSingleExpression() {
+		xtextEditor.document.set(EQUALS_NULL_IN_SINGLE_EXPRESSION)
+		val proposals = computeQuickAssistProposals()
+		assertEquals(2, proposals.length)
 	}
 
-	def assertEqualsWithNullQuickfixProposals(List<ICompletionProposal> proposals) {
-		assertTrue(false)
-//		assertEquals(4, proposals.size());
-//		assertEquals(1, size(filter(proposals, classNameEquals("AddWordProposal"))));
-//		assertEquals(1, size(filter(proposals, classNameEquals("WordCorrectionProposal"))));
-//		assertEquals(1, size(filter(proposals, classNameEquals("DisableSpellCheckingProposal"))));
-//		assertEquals(1, size(filter(proposals, classNameEquals("WordIgnoreProposal"))));
+	def ICompletionProposal[] computeQuickAssistProposals() {
+		return computeQuickAssistProposals(xtextEditor, document.getLength())
 	}
-	
+
 	def ICompletionProposal[] computeQuickAssistProposals(int offset) {
 		return computeQuickAssistProposals(xtextEditor, offset)
 	}
