@@ -7,12 +7,9 @@
  */
 package org.eclipse.xtend.ide.tests.quickfix;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import java.util.Arrays;
+import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.quickassist.IQuickAssistAssistant;
 import org.eclipse.jface.text.quickassist.IQuickAssistProcessor;
@@ -22,6 +19,7 @@ import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.TextInvocationContext;
+import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
@@ -29,7 +27,11 @@ import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
+import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.ui.testing.AbstractMultiQuickfixTest;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.junit.Assert;
 import org.junit.Test;
@@ -42,19 +44,27 @@ import org.junit.runner.RunWith;
 @InjectWith(XtendIDEInjectorProvider.class)
 @SuppressWarnings("all")
 public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
-  private static final String MODEL_WITH_SPELLING_QUICKFIX_IN_STRINGS = "\'String Speling Error\' Foo {  } \n";
+  @Inject
+  @Extension
+  private SyncUtil _syncUtil;
   
   private static final String SINGLE_EQUALS_NULL_IN_EXPRESSION = new Function0<String>() {
     @Override
     public String apply() {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("class Foo {");
+      _builder.append("package foo {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def foo(Object x) {");
+      _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t\t");
+      _builder.append("def foo(Object x) {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
       _builder.append("return if(x == null) 0 else 1");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -70,63 +80,53 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
   @Override
   public void setUp() throws Exception {
     super.setUp();
-    IFile dslFile = this.dslFile("\n");
-    this.xtextEditor = this.openEditor(dslFile);
+    this.xtextEditor = this.openEditor(this.dslFile("\n"));
   }
   
-  @Test
-  public void testSpellingQuickfixInString() throws Exception {
-    this.xtextEditor.getDocument().set(EqualsWithNullMultiQuickfixTest.MODEL_WITH_SPELLING_QUICKFIX_IN_STRINGS);
-    ICompletionProposal[] quickAssistProposals = this.computeQuickAssistProposals(0);
-    List<ICompletionProposal> proposals = Arrays.<ICompletionProposal>asList(quickAssistProposals);
-    this.assertSpellingQuickfixProposals(proposals);
+  @Override
+  public IFile dslFile(final String projectName, final String fileName, final String fileExtension, final CharSequence content) {
+    try {
+      IFile _xblockexpression = null;
+      {
+        WorkbenchTestHelper.createPluginProject(projectName);
+        _xblockexpression = super.dslFile(projectName, ("src/foo/" + fileName), fileExtension, content);
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testSingleEqualsNullQuickfixInExpression() throws Exception {
     this.xtextEditor.getDocument().set(EqualsWithNullMultiQuickfixTest.SINGLE_EQUALS_NULL_IN_EXPRESSION);
-    ICompletionProposal[] quickAssistProposals = this.computeQuickAssistProposals(0);
-    List<ICompletionProposal> proposals = Arrays.<ICompletionProposal>asList(quickAssistProposals);
-    Assert.assertEquals(1, proposals.size());
+    this._syncUtil.waitForReconciler(this.xtextEditor);
+    int _indexOf = EqualsWithNullMultiQuickfixTest.SINGLE_EQUALS_NULL_IN_EXPRESSION.indexOf("==");
+    final int offset = (_indexOf + 1);
+    final ICompletionProposal[] proposals = this.computeQuickAssistProposals(offset);
+    Assert.assertEquals(1, ((List<ICompletionProposal>)Conversions.doWrapArray(proposals)).size());
   }
   
-  protected void assertSpellingQuickfixProposals(final List<ICompletionProposal> proposals) {
-    Assert.assertEquals(4, proposals.size());
-    Assert.assertEquals(1, Iterables.size(Iterables.<ICompletionProposal>filter(proposals, this.classNameEquals("AddWordProposal"))));
-    Assert.assertEquals(1, Iterables.size(Iterables.<ICompletionProposal>filter(proposals, this.classNameEquals("WordCorrectionProposal"))));
-    Assert.assertEquals(1, Iterables.size(Iterables.<ICompletionProposal>filter(proposals, this.classNameEquals("DisableSpellCheckingProposal"))));
-    Assert.assertEquals(1, Iterables.size(Iterables.<ICompletionProposal>filter(proposals, this.classNameEquals("WordIgnoreProposal"))));
-  }
-  
+  /**
+   * TODO This is duplicated in SpellingQuickfixTest and could possibly be refactored
+   *      into AbstractMultiQuickfixTest
+   */
   protected ICompletionProposal[] computeQuickAssistProposals(final int offset) {
-    XtextSourceViewer sourceViewer = this.getSourceViewer();
-    IReconciler _adapter = sourceViewer.<IReconciler>getAdapter(IReconciler.class);
-    XtextReconciler reconciler = ((XtextReconciler) _adapter);
+    IReconciler _adapter = this.getSourceViewer().<IReconciler>getAdapter(IReconciler.class);
+    final XtextReconciler reconciler = ((XtextReconciler) _adapter);
     IReconcilingStrategy _reconcilingStrategy = reconciler.getReconcilingStrategy("");
-    IReconcilingStrategyExtension reconcilingStrategyExtension = ((IReconcilingStrategyExtension) _reconcilingStrategy);
-    reconcilingStrategyExtension.initialReconcile();
-    IQuickAssistAssistant _quickAssistAssistant = sourceViewer.getQuickAssistAssistant();
-    QuickAssistAssistant quickAssistAssistant = ((QuickAssistAssistant) _quickAssistAssistant);
-    IQuickAssistProcessor quickAssistProcessor = quickAssistAssistant.getQuickAssistProcessor();
-    TextInvocationContext _textInvocationContext = new TextInvocationContext(sourceViewer, offset, (-1));
-    ICompletionProposal[] quickAssistProposals = quickAssistProcessor.computeQuickAssistProposals(_textInvocationContext);
-    return quickAssistProposals;
-  }
-  
-  protected IDocument getDocument() {
-    return this.getSourceViewer().getDocument();
+    final IReconcilingStrategyExtension reconcilingStrategy = ((IReconcilingStrategyExtension) _reconcilingStrategy);
+    reconcilingStrategy.initialReconcile();
+    IQuickAssistAssistant _quickAssistAssistant = this.getSourceViewer().getQuickAssistAssistant();
+    final QuickAssistAssistant quickAssistAssistant = ((QuickAssistAssistant) _quickAssistAssistant);
+    final IQuickAssistProcessor quickAssistProcessor = quickAssistAssistant.getQuickAssistProcessor();
+    XtextSourceViewer _sourceViewer = this.getSourceViewer();
+    TextInvocationContext _textInvocationContext = new TextInvocationContext(_sourceViewer, offset, (-1));
+    return quickAssistProcessor.computeQuickAssistProposals(_textInvocationContext);
   }
   
   protected XtextSourceViewer getSourceViewer() {
     ISourceViewer _internalSourceViewer = this.xtextEditor.getInternalSourceViewer();
-    XtextSourceViewer sourceViewer = ((XtextSourceViewer) _internalSourceViewer);
-    return sourceViewer;
-  }
-  
-  public Predicate<ICompletionProposal> classNameEquals(final String simpleName) {
-    final Predicate<ICompletionProposal> _function = (ICompletionProposal input) -> {
-      return input.getClass().getSimpleName().equals(simpleName);
-    };
-    return _function;
+    return ((XtextSourceViewer) _internalSourceViewer);
   }
 }
