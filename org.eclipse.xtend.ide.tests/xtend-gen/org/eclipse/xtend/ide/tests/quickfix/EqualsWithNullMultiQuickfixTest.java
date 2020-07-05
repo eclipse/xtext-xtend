@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.tests.quickfix;
 
 import com.google.inject.Inject;
+import java.util.Arrays;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -29,10 +30,9 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.ui.testing.AbstractMultiQuickfixTest;
-import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -78,33 +78,43 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
   private XtextEditor xtextEditor;
   
   @Override
-  public void setUp() throws Exception {
-    super.setUp();
-    this.xtextEditor = this.openEditor(this.dslFile("\n"));
+  public String getFileName() {
+    return "Foo";
   }
   
   @Override
-  public IFile dslFile(final String projectName, final String fileName, final String fileExtension, final CharSequence content) {
-    try {
-      IFile _xblockexpression = null;
-      {
-        WorkbenchTestHelper.createPluginProject(projectName);
-        _xblockexpression = super.dslFile(projectName, ("src/foo/" + fileName), fileExtension, content);
-      }
-      return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void setUp() throws Exception {
+    super.setUp();
+    WorkbenchTestHelper.createPluginProject(this.getProjectName());
+    this.xtextEditor = this.openEditor(this.dslFile(EqualsWithNullMultiQuickfixTest.SINGLE_EQUALS_NULL_IN_EXPRESSION));
+  }
+  
+  @Override
+  public IFile dslFile(final CharSequence content) {
+    String _projectName = this.getProjectName();
+    String _fileName = this.getFileName();
+    String _plus = ("src/foo/" + _fileName);
+    return super.dslFile(_projectName, _plus, this.getFileExtension(), content);
   }
   
   @Test
   public void testSingleEqualsNullQuickfixInExpression() throws Exception {
+    InputOutput.<String>println("==== testSingleEqualsNullQuickfixInExpression ====");
     this.xtextEditor.getDocument().set(EqualsWithNullMultiQuickfixTest.SINGLE_EQUALS_NULL_IN_EXPRESSION);
     this._syncUtil.waitForReconciler(this.xtextEditor);
+    InputOutput.<String>println("waitForReconciler complete");
     int _indexOf = EqualsWithNullMultiQuickfixTest.SINGLE_EQUALS_NULL_IN_EXPRESSION.indexOf("==");
     final int offset = (_indexOf + 1);
-    final ICompletionProposal[] proposals = this.computeQuickAssistProposals(offset);
-    Assert.assertEquals(1, ((List<ICompletionProposal>)Conversions.doWrapArray(proposals)).size());
+    final List<ICompletionProposal> proposals = Arrays.<ICompletionProposal>asList(this.computeQuickAssistProposals(offset));
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("offset = ");
+    _builder.append(offset);
+    _builder.newLineIfNotEmpty();
+    _builder.append("proposals = ");
+    _builder.append(proposals);
+    _builder.newLineIfNotEmpty();
+    InputOutput.<String>println(_builder.toString());
+    Assert.assertEquals(1, proposals.size());
   }
   
   /**

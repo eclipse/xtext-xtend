@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.tests.quickfix
 
 import com.google.inject.Inject
+import java.util.Arrays
 import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.jface.text.quickassist.QuickAssistAssistant
 import org.eclipse.jface.text.reconciler.IReconciler
@@ -32,7 +33,7 @@ import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.createPl
 @RunWith(XtextRunner)
 @InjectWith(XtendIDEInjectorProvider)
 class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
-	
+
 	@Inject extension SyncUtil
 
 	static final String SINGLE_EQUALS_NULL_IN_EXPRESSION = '''
@@ -46,25 +47,37 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 	'''
 
 	XtextEditor xtextEditor
+	
+	override String getFileName() {
+		return "Foo";
+	}
 
 	override void setUp() throws Exception {
 		super.setUp()
-		xtextEditor = openEditor(dslFile("\n"))
-	}
-	
-	override dslFile(String projectName, String fileName, String fileExtension, CharSequence content) {
+
 		projectName.createPluginProject
-		super.dslFile(projectName, "src/foo/" + fileName, fileExtension, content)
+		xtextEditor = openEditor(dslFile(SINGLE_EQUALS_NULL_IN_EXPRESSION))
+	}
+
+	override dslFile(CharSequence content) {
+		super.dslFile(getProjectName(), "src/foo/" + getFileName(), getFileExtension(), content);
 	}
 
 	@Test
 	def void testSingleEqualsNullQuickfixInExpression() throws Exception {
+		println("==== testSingleEqualsNullQuickfixInExpression ====")
 		xtextEditor.document.set(SINGLE_EQUALS_NULL_IN_EXPRESSION)
 		xtextEditor.waitForReconciler
 		
+		println("waitForReconciler complete")
+
 		val offset = SINGLE_EQUALS_NULL_IN_EXPRESSION.indexOf("==") + 1
-		val proposals = computeQuickAssistProposals(offset)
-		
+		val proposals = Arrays.asList(computeQuickAssistProposals(offset))
+		println('''
+			offset = «offset»
+			proposals = «proposals»
+		''')
+
 		// also tried these...
 		// val proposals = computeQuickAssistProposals(0)
 		// val proposals = computeQuickAssistProposals(xtextEditor, offset)
@@ -82,7 +95,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 		val reconciler = sourceViewer.getAdapter(IReconciler) as XtextReconciler
 		val reconcilingStrategy = reconciler.getReconcilingStrategy("") as IReconcilingStrategyExtension
 		reconcilingStrategy.initialReconcile()
-		
+
 		val quickAssistAssistant = sourceViewer.getQuickAssistAssistant() as QuickAssistAssistant
 		val quickAssistProcessor = quickAssistAssistant.getQuickAssistProcessor()
 		return quickAssistProcessor
