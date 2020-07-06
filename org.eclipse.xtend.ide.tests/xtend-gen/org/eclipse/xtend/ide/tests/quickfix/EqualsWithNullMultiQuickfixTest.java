@@ -36,18 +36,6 @@ import org.junit.runner.RunWith;
 @InjectWith(XtendIDEInjectorProvider.class)
 @SuppressWarnings("all")
 public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
-  private static final String MODEL_WITH_EMPTY_CLASS = new Function0<String>() {
-    @Override
-    public String apply() {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package foo");
-      _builder.newLine();
-      _builder.append("class Foo {}");
-      _builder.newLine();
-      return _builder.toString();
-    }
-  }.apply();
-  
   private static final String MODEL_WITH_EQUALS_NULL_IN_EXPRESSION = new Function0<String>() {
     @Override
     public String apply() {
@@ -132,7 +120,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
   public void setUp() throws Exception {
     super.setUp();
     WorkbenchTestHelper.createPluginProject(this.getProjectName());
-    this.xtextEditor = this.openEditor(this.dslFile(EqualsWithNullMultiQuickfixTest.MODEL_WITH_EMPTY_CLASS));
+    this.xtextEditor = this.openEditor(this.dslFile("\n"));
   }
   
   @Test

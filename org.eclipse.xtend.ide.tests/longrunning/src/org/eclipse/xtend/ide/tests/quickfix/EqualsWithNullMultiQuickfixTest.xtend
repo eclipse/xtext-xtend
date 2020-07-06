@@ -29,11 +29,6 @@ import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.createPl
 @InjectWith(XtendIDEInjectorProvider)
 class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
-	static final String MODEL_WITH_EMPTY_CLASS = '''
-		package foo
-		class Foo {}
-	'''
-
 	static final String MODEL_WITH_EQUALS_NULL_IN_EXPRESSION = '''
 		package foo
 		class Foo {
@@ -73,7 +68,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 		super.setUp()
 
 		projectName.createPluginProject()
-		xtextEditor = openEditor(dslFile(MODEL_WITH_EMPTY_CLASS))
+		xtextEditor = openEditor(dslFile("\n"))
 	}
 
 	@Test
