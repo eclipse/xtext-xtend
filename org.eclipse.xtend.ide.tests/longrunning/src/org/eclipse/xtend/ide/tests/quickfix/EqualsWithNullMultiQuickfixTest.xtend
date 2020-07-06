@@ -19,6 +19,7 @@ import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.editor.XtextEditor
 import org.eclipse.xtext.ui.editor.XtextSourceViewer
+import org.eclipse.xtext.ui.editor.quickfix.QuickAssistCompletionProposal
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
 import org.eclipse.xtext.ui.testing.AbstractMultiQuickfixTest
@@ -34,57 +35,44 @@ import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.createPl
 @InjectWith(XtendIDEInjectorProvider)
 class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
-	@Inject extension SyncUtil
-
 	static final String SINGLE_EQUALS_NULL_IN_EXPRESSION = '''
-		package foo {
-			class Foo {
-				def foo(Object x) {
-					return if(x == null) 0 else 1
-				}
+		package foo
+		class Foo {
+			def foo(Object x) {
+				return if(x == null) 0 else 1
 			}
 		}
 	'''
+	
+	@Inject extension SyncUtil
 
 	XtextEditor xtextEditor
 	
 	override String getFileName() {
-		return "Foo";
+		return "Foo"
 	}
 
 	override void setUp() throws Exception {
 		super.setUp()
 
-		projectName.createPluginProject
+		projectName.createPluginProject()
 		xtextEditor = openEditor(dslFile(SINGLE_EQUALS_NULL_IN_EXPRESSION))
 	}
 
 	override dslFile(CharSequence content) {
-		super.dslFile(getProjectName(), "src/foo/" + getFileName(), getFileExtension(), content);
+		super.dslFile(projectName, "src/foo/" + fileName, fileExtension, content);
 	}
 
 	@Test
 	def void testSingleEqualsNullQuickfixInExpression() throws Exception {
-		println("==== testSingleEqualsNullQuickfixInExpression ====")
 		xtextEditor.document.set(SINGLE_EQUALS_NULL_IN_EXPRESSION)
-		xtextEditor.waitForReconciler
+		xtextEditor.waitForReconciler()
 		
-		println("waitForReconciler complete")
-
 		val offset = SINGLE_EQUALS_NULL_IN_EXPRESSION.indexOf("==") + 1
 		val proposals = Arrays.asList(computeQuickAssistProposals(offset))
-		println('''
-			offset = «offset»
-			proposals = «proposals»
-		''')
-
-		// also tried these...
-		// val proposals = computeQuickAssistProposals(0)
-		// val proposals = computeQuickAssistProposals(xtextEditor, offset)
-		// val proposals = computeQuickAssistProposals(xtextEditor, 0)
 		
-		// TODO expected:<1> but was:<0>
 		assertEquals(1, proposals.size())
+		assertEquals(1, proposals.filter[ it instanceof QuickAssistCompletionProposal].size())
 	}
 
 	/**

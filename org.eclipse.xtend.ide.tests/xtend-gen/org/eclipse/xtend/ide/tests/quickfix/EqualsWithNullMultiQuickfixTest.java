@@ -27,12 +27,14 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
+import org.eclipse.xtext.ui.editor.quickfix.QuickAssistCompletionProposal;
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.ui.testing.AbstractMultiQuickfixTest;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,27 +46,19 @@ import org.junit.runner.RunWith;
 @InjectWith(XtendIDEInjectorProvider.class)
 @SuppressWarnings("all")
 public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
-  @Inject
-  @Extension
-  private SyncUtil _syncUtil;
-  
   private static final String SINGLE_EQUALS_NULL_IN_EXPRESSION = new Function0<String>() {
     @Override
     public String apply() {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package foo {");
+      _builder.append("package foo");
       _builder.newLine();
-      _builder.append("\t");
       _builder.append("class Foo {");
       _builder.newLine();
-      _builder.append("\t\t");
+      _builder.append("\t");
       _builder.append("def foo(Object x) {");
       _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("return if(x == null) 0 else 1");
-      _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("}");
+      _builder.append("return if(x == null) 0 else 1");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -74,6 +68,10 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
       return _builder.toString();
     }
   }.apply();
+  
+  @Inject
+  @Extension
+  private SyncUtil _syncUtil;
   
   private XtextEditor xtextEditor;
   
@@ -99,22 +97,16 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
   
   @Test
   public void testSingleEqualsNullQuickfixInExpression() throws Exception {
-    InputOutput.<String>println("==== testSingleEqualsNullQuickfixInExpression ====");
     this.xtextEditor.getDocument().set(EqualsWithNullMultiQuickfixTest.SINGLE_EQUALS_NULL_IN_EXPRESSION);
     this._syncUtil.waitForReconciler(this.xtextEditor);
-    InputOutput.<String>println("waitForReconciler complete");
     int _indexOf = EqualsWithNullMultiQuickfixTest.SINGLE_EQUALS_NULL_IN_EXPRESSION.indexOf("==");
     final int offset = (_indexOf + 1);
     final List<ICompletionProposal> proposals = Arrays.<ICompletionProposal>asList(this.computeQuickAssistProposals(offset));
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("offset = ");
-    _builder.append(offset);
-    _builder.newLineIfNotEmpty();
-    _builder.append("proposals = ");
-    _builder.append(proposals);
-    _builder.newLineIfNotEmpty();
-    InputOutput.<String>println(_builder.toString());
     Assert.assertEquals(1, proposals.size());
+    final Function1<ICompletionProposal, Boolean> _function = (ICompletionProposal it) -> {
+      return Boolean.valueOf((it instanceof QuickAssistCompletionProposal));
+    };
+    Assert.assertEquals(1, IterableExtensions.size(IterableExtensions.<ICompletionProposal>filter(proposals, _function)));
   }
   
   /**
