@@ -29,40 +29,28 @@ import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.createPl
 @InjectWith(XtendIDEInjectorProvider)
 class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
-	static final String VALID_EQUALS_NULL_IN_EXPRESSION = '''
+	static final String MODEL_WITH_EMPTY_CLASS = '''
+		package foo
+		class Foo {}
+	'''
+
+	static final String MODEL_WITH_EQUALS_NULL_IN_EXPRESSION = '''
 		package foo
 		class Foo {
-			def foo(Object x) {
-				return if(x === null) 0 else 1
+			def m(Object a, Object b, Object c) {
+				if(a == null || b == null || c === null) 0 else 1
 			}
 		}
 	'''
 
-	static final String SINGLE_EQUALS_NULL_IN_EXPRESSION = '''
+	static final String MODEL_WITH_EQUALS_NULL_IN_SWITCH = '''
 		package foo
 		class Foo {
-			def m(Object a, Object b) {
-				if(a == null || b === null) 0 else 1
-			}
-		}
-	'''
-
-	static final String MULTI_EQUALS_NULL_IN_EXPRESSION = '''
-		package foo
-		class Foo {
-			def m(Object a, Object b) {
-				if(a == null || b == null) 0 else 1
-			}
-		}
-	'''
-
-	static final String MULTI_EQUALS_NULL_IN_SWITCH = '''
-		package foo
-		class Foo {
-			def m(Object a, Object b) {
+			def m(Object a, Object b, Object c) {
 				switch true {
 					case a == null: 0
 					case b == null: 0
+					case c === null: 0
 					default: 1
 				}
 			}
@@ -85,54 +73,29 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 		super.setUp()
 
 		projectName.createPluginProject()
-		xtextEditor = openEditor(dslFile(SINGLE_EQUALS_NULL_IN_EXPRESSION))
+		xtextEditor = openEditor(dslFile(MODEL_WITH_EMPTY_CLASS))
 	}
 
 	@Test
-	def void testValidEqualsNullQuickfixInExpression() {
-		xtextEditor.document.set(VALID_EQUALS_NULL_IN_EXPRESSION)
+	def void testEqualsNullQuickfixInExpression() {
+		xtextEditor.document.set(MODEL_WITH_EQUALS_NULL_IN_EXPRESSION)
 		xtextEditor.waitForReconciler()
 
-		val offset = VALID_EQUALS_NULL_IN_EXPRESSION.indexOf("===") + 1
-		val proposals = Arrays.asList(computeQuickAssistProposals(offset))
-
-		assertEquals(0, proposals.size())
-	}
-
-	@Test
-	def void testSingleEqualsNullQuickfixInExpression() {
-		xtextEditor.document.set(SINGLE_EQUALS_NULL_IN_EXPRESSION)
-		xtextEditor.waitForReconciler()
-
-		val offset = SINGLE_EQUALS_NULL_IN_EXPRESSION.indexOf("==") + 1
+		val offset = MODEL_WITH_EQUALS_NULL_IN_EXPRESSION.indexOf("==") + 1
 		val proposals = Arrays.asList(computeQuickAssistProposals(offset))
 
 		assertEquals(1, proposals.size())
 		assertEquals(1, proposals.filter[it instanceof QuickAssistCompletionProposal].size())
 
-		// TODO Assert that proposals contain 1 marker
+		// TODO Assert that proposal contains 2 marker
 	}
 
 	@Test
-	def void testMultiEqualsNullQuickfixInExpression() {
-		xtextEditor.document.set(MULTI_EQUALS_NULL_IN_EXPRESSION)
+	def void testEqualsNullQuickfixInSwitch() {
+		xtextEditor.document.set(MODEL_WITH_EQUALS_NULL_IN_SWITCH)
 		xtextEditor.waitForReconciler()
 
-		val offset = MULTI_EQUALS_NULL_IN_EXPRESSION.indexOf("==") + 1
-		val proposals = Arrays.asList(computeQuickAssistProposals(offset))
-
-		assertEquals(1, proposals.size())
-		assertEquals(1, proposals.filter[it instanceof QuickAssistCompletionProposal].size())
-
-		// TODO Assert that proposals contain 2 markers
-	}
-
-	@Test
-	def void testMultiEqualsNullQuickfixInSwitch() {
-		xtextEditor.document.set(MULTI_EQUALS_NULL_IN_SWITCH)
-		xtextEditor.waitForReconciler()
-
-		val offset = MULTI_EQUALS_NULL_IN_SWITCH.indexOf("==") + 1
+		val offset = MODEL_WITH_EQUALS_NULL_IN_SWITCH.indexOf("==") + 1
 		val proposals = Arrays.asList(computeQuickAssistProposals(offset))
 
 		assertEquals(1, proposals.size())
