@@ -96,7 +96,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
   }
   
   @Test
-  public void testSingleEqualsNullQuickfixInExpression() throws Exception {
+  public void testSingleEqualsNullQuickfixInExpression() {
     this.xtextEditor.getDocument().set(EqualsWithNullMultiQuickfixTest.SINGLE_EQUALS_NULL_IN_EXPRESSION);
     this._syncUtil.waitForReconciler(this.xtextEditor);
     int _indexOf = EqualsWithNullMultiQuickfixTest.SINGLE_EQUALS_NULL_IN_EXPRESSION.indexOf("==");

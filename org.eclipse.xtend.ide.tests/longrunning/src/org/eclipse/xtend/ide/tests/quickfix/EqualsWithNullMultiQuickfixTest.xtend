@@ -43,11 +43,11 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 			}
 		}
 	'''
-	
+
 	@Inject extension SyncUtil
 
 	XtextEditor xtextEditor
-	
+
 	override String getFileName() {
 		return "Foo"
 	}
@@ -64,15 +64,15 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 	}
 
 	@Test
-	def void testSingleEqualsNullQuickfixInExpression() throws Exception {
+	def void testSingleEqualsNullQuickfixInExpression() {
 		xtextEditor.document.set(SINGLE_EQUALS_NULL_IN_EXPRESSION)
 		xtextEditor.waitForReconciler()
-		
+
 		val offset = SINGLE_EQUALS_NULL_IN_EXPRESSION.indexOf("==") + 1
 		val proposals = Arrays.asList(computeQuickAssistProposals(offset))
-		
+
 		assertEquals(1, proposals.size())
-		assertEquals(1, proposals.filter[ it instanceof QuickAssistCompletionProposal].size())
+		assertEquals(1, proposals.filter[it instanceof QuickAssistCompletionProposal].size())
 	}
 
 	/**
@@ -86,8 +86,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
 		val quickAssistAssistant = sourceViewer.getQuickAssistAssistant() as QuickAssistAssistant
 		val quickAssistProcessor = quickAssistAssistant.getQuickAssistProcessor()
-		return quickAssistProcessor
-				.computeQuickAssistProposals(new TextInvocationContext(sourceViewer, offset, -1))
+		return quickAssistProcessor.computeQuickAssistProposals(new TextInvocationContext(sourceViewer, offset, -1))
 	}
 
 	def protected XtextSourceViewer getSourceViewer() {
