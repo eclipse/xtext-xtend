@@ -35,6 +35,15 @@ import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.createPl
 @InjectWith(XtendIDEInjectorProvider)
 class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
+	static final String VALID_EQUALS_NULL_IN_EXPRESSION = '''
+		package foo
+		class Foo {
+			def foo(Object x) {
+				return if(x === null) 0 else 1
+			}
+		}
+	'''
+
 	static final String SINGLE_EQUALS_NULL_IN_EXPRESSION = '''
 		package foo
 		class Foo {
@@ -86,6 +95,17 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 	}
 
 	@Test
+	def void testValidEqualsNullQuickfixInExpression() {
+		xtextEditor.document.set(VALID_EQUALS_NULL_IN_EXPRESSION)
+		xtextEditor.waitForReconciler()
+
+		val offset = VALID_EQUALS_NULL_IN_EXPRESSION.indexOf("===") + 1
+		val proposals = Arrays.asList(computeQuickAssistProposals(offset))
+		
+		assertEquals(0, proposals.size())
+	}
+
+	@Test
 	def void testSingleEqualsNullQuickfixInExpression() {
 		xtextEditor.document.set(SINGLE_EQUALS_NULL_IN_EXPRESSION)
 		xtextEditor.waitForReconciler()
@@ -104,7 +124,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
 		val offset = MULTI_EQUALS_NULL_IN_EXPRESSION.indexOf("==") + 1
 		val proposals = Arrays.asList(computeQuickAssistProposals(offset))
-
+		
 		assertEquals(1, proposals.size())
 		assertEquals(1, proposals.filter[it instanceof QuickAssistCompletionProposal].size())
 	}
@@ -132,6 +152,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
 		val quickAssistAssistant = sourceViewer.getQuickAssistAssistant() as QuickAssistAssistant
 		val quickAssistProcessor = quickAssistAssistant.getQuickAssistProcessor()
+		
 		return quickAssistProcessor.computeQuickAssistProposals(new TextInvocationContext(sourceViewer, offset, -1))
 	}
 

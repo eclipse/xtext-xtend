@@ -46,6 +46,29 @@ import org.junit.runner.RunWith;
 @InjectWith(XtendIDEInjectorProvider.class)
 @SuppressWarnings("all")
 public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
+  private static final String VALID_EQUALS_NULL_IN_EXPRESSION = new Function0<String>() {
+    @Override
+    public String apply() {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def foo(Object x) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return if(x === null) 0 else 1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      return _builder.toString();
+    }
+  }.apply();
+  
   private static final String SINGLE_EQUALS_NULL_IN_EXPRESSION = new Function0<String>() {
     @Override
     public String apply() {
@@ -151,6 +174,16 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
     String _fileName = this.getFileName();
     String _plus = ("src/foo/" + _fileName);
     return super.dslFile(_projectName, _plus, this.getFileExtension(), content);
+  }
+  
+  @Test
+  public void testValidEqualsNullQuickfixInExpression() {
+    this.xtextEditor.getDocument().set(EqualsWithNullMultiQuickfixTest.VALID_EQUALS_NULL_IN_EXPRESSION);
+    this._syncUtil.waitForReconciler(this.xtextEditor);
+    int _indexOf = EqualsWithNullMultiQuickfixTest.VALID_EQUALS_NULL_IN_EXPRESSION.indexOf("===");
+    final int offset = (_indexOf + 1);
+    final List<ICompletionProposal> proposals = Arrays.<ICompletionProposal>asList(this.computeQuickAssistProposals(offset));
+    Assert.assertEquals(0, proposals.size());
   }
   
   @Test
