@@ -69,6 +69,64 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
     }
   }.apply();
   
+  private static final String MULTI_EQUALS_NULL_IN_EXPRESSION = new Function0<String>() {
+    @Override
+    public String apply() {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def foo(Object x, Object y) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return if(x == null || y == null) 0 else 1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      return _builder.toString();
+    }
+  }.apply();
+  
+  private static final String MULTI_EQUALS_NULL_IN_SWITCH = new Function0<String>() {
+    @Override
+    public String apply() {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def foo(Object x, Object y) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("switch true {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("case x == null: 0");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("case y == null: 0");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("default: 1");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      return _builder.toString();
+    }
+  }.apply();
+  
   @Inject
   @Extension
   private SyncUtil _syncUtil;
@@ -100,6 +158,34 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
     this.xtextEditor.getDocument().set(EqualsWithNullMultiQuickfixTest.SINGLE_EQUALS_NULL_IN_EXPRESSION);
     this._syncUtil.waitForReconciler(this.xtextEditor);
     int _indexOf = EqualsWithNullMultiQuickfixTest.SINGLE_EQUALS_NULL_IN_EXPRESSION.indexOf("==");
+    final int offset = (_indexOf + 1);
+    final List<ICompletionProposal> proposals = Arrays.<ICompletionProposal>asList(this.computeQuickAssistProposals(offset));
+    Assert.assertEquals(1, proposals.size());
+    final Function1<ICompletionProposal, Boolean> _function = (ICompletionProposal it) -> {
+      return Boolean.valueOf((it instanceof QuickAssistCompletionProposal));
+    };
+    Assert.assertEquals(1, IterableExtensions.size(IterableExtensions.<ICompletionProposal>filter(proposals, _function)));
+  }
+  
+  @Test
+  public void testMultiEqualsNullQuickfixInExpression() {
+    this.xtextEditor.getDocument().set(EqualsWithNullMultiQuickfixTest.MULTI_EQUALS_NULL_IN_EXPRESSION);
+    this._syncUtil.waitForReconciler(this.xtextEditor);
+    int _indexOf = EqualsWithNullMultiQuickfixTest.MULTI_EQUALS_NULL_IN_EXPRESSION.indexOf("==");
+    final int offset = (_indexOf + 1);
+    final List<ICompletionProposal> proposals = Arrays.<ICompletionProposal>asList(this.computeQuickAssistProposals(offset));
+    Assert.assertEquals(1, proposals.size());
+    final Function1<ICompletionProposal, Boolean> _function = (ICompletionProposal it) -> {
+      return Boolean.valueOf((it instanceof QuickAssistCompletionProposal));
+    };
+    Assert.assertEquals(1, IterableExtensions.size(IterableExtensions.<ICompletionProposal>filter(proposals, _function)));
+  }
+  
+  @Test
+  public void testMultiEqualsNullQuickfixInSwitch() {
+    this.xtextEditor.getDocument().set(EqualsWithNullMultiQuickfixTest.MULTI_EQUALS_NULL_IN_SWITCH);
+    this._syncUtil.waitForReconciler(this.xtextEditor);
+    int _indexOf = EqualsWithNullMultiQuickfixTest.MULTI_EQUALS_NULL_IN_SWITCH.indexOf("==");
     final int offset = (_indexOf + 1);
     final List<ICompletionProposal> proposals = Arrays.<ICompletionProposal>asList(this.computeQuickAssistProposals(offset));
     Assert.assertEquals(1, proposals.size());
