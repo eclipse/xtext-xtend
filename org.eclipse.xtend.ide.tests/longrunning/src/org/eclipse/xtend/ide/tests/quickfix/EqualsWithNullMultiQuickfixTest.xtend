@@ -10,17 +10,11 @@ package org.eclipse.xtend.ide.tests.quickfix
 import com.google.inject.Inject
 import java.util.Arrays
 import org.eclipse.jface.text.contentassist.ICompletionProposal
-import org.eclipse.jface.text.quickassist.QuickAssistAssistant
-import org.eclipse.jface.text.reconciler.IReconciler
-import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension
-import org.eclipse.jface.text.source.TextInvocationContext
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.editor.XtextEditor
-import org.eclipse.xtext.ui.editor.XtextSourceViewer
 import org.eclipse.xtext.ui.editor.quickfix.QuickAssistCompletionProposal
-import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
 import org.eclipse.xtext.ui.testing.AbstractMultiQuickfixTest
 import org.junit.Test
@@ -47,8 +41,8 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 	static final String SINGLE_EQUALS_NULL_IN_EXPRESSION = '''
 		package foo
 		class Foo {
-			def foo(Object x) {
-				return if(x == null) 0 else 1
+			def m(Object a, Object b) {
+				if(a == null || b === null) 0 else 1
 			}
 		}
 	'''
@@ -56,8 +50,8 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 	static final String MULTI_EQUALS_NULL_IN_EXPRESSION = '''
 		package foo
 		class Foo {
-			def foo(Object x, Object y) {
-				return if(x == null || y == null) 0 else 1
+			def m(Object a, Object b) {
+				if(a == null || b == null) 0 else 1
 			}
 		}
 	'''
@@ -65,10 +59,10 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 	static final String MULTI_EQUALS_NULL_IN_SWITCH = '''
 		package foo
 		class Foo {
-			def foo(Object x, Object y) {
+			def m(Object a, Object b) {
 				switch true {
-					case x == null: 0
-					case y == null: 0
+					case a == null: 0
+					case b == null: 0
 					default: 1
 				}
 			}
@@ -83,15 +77,15 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 		return "Foo"
 	}
 
+	override dslFile(CharSequence content) {
+		super.dslFile(projectName, "src/foo/" + fileName, fileExtension, content);
+	}
+
 	override void setUp() throws Exception {
 		super.setUp()
 
 		projectName.createPluginProject()
 		xtextEditor = openEditor(dslFile(SINGLE_EQUALS_NULL_IN_EXPRESSION))
-	}
-
-	override dslFile(CharSequence content) {
-		super.dslFile(projectName, "src/foo/" + fileName, fileExtension, content);
 	}
 
 	@Test
@@ -101,7 +95,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
 		val offset = VALID_EQUALS_NULL_IN_EXPRESSION.indexOf("===") + 1
 		val proposals = Arrays.asList(computeQuickAssistProposals(offset))
-		
+
 		assertEquals(0, proposals.size())
 	}
 
@@ -115,6 +109,8 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
 		assertEquals(1, proposals.size())
 		assertEquals(1, proposals.filter[it instanceof QuickAssistCompletionProposal].size())
+
+		// TODO Assert that proposals contain 1 marker
 	}
 
 	@Test
@@ -124,9 +120,11 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
 		val offset = MULTI_EQUALS_NULL_IN_EXPRESSION.indexOf("==") + 1
 		val proposals = Arrays.asList(computeQuickAssistProposals(offset))
-		
+
 		assertEquals(1, proposals.size())
 		assertEquals(1, proposals.filter[it instanceof QuickAssistCompletionProposal].size())
+
+		// TODO Assert that proposals contain 2 markers
 	}
 
 	@Test
@@ -139,24 +137,14 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
 		assertEquals(1, proposals.size())
 		assertEquals(1, proposals.filter[it instanceof QuickAssistCompletionProposal].size())
+
+		// TODO Assert that proposals contain 2 markers
 	}
 
 	/**
-	 * TODO This is duplicated in SpellingQuickfixTest and could possibly be refactored
-	 *      into AbstractMultiQuickfixTest
+	 * TODO Refactor into AbstractMultiQuickfixTest
 	 */
 	def protected ICompletionProposal[] computeQuickAssistProposals(int offset) {
-		val reconciler = sourceViewer.getAdapter(IReconciler) as XtextReconciler
-		val reconcilingStrategy = reconciler.getReconcilingStrategy("") as IReconcilingStrategyExtension
-		reconcilingStrategy.initialReconcile()
-
-		val quickAssistAssistant = sourceViewer.getQuickAssistAssistant() as QuickAssistAssistant
-		val quickAssistProcessor = quickAssistAssistant.getQuickAssistProcessor()
-		
-		return quickAssistProcessor.computeQuickAssistProposals(new TextInvocationContext(sourceViewer, offset, -1))
-	}
-
-	def protected XtextSourceViewer getSourceViewer() {
-		return xtextEditor.getInternalSourceViewer() as XtextSourceViewer
+		return computeQuickAssistProposals(xtextEditor, offset)
 	}
 }

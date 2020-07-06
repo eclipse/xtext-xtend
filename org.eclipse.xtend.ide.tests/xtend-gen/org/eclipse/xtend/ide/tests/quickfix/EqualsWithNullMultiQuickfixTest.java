@@ -12,23 +12,13 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.jface.text.quickassist.IQuickAssistAssistant;
-import org.eclipse.jface.text.quickassist.IQuickAssistProcessor;
-import org.eclipse.jface.text.quickassist.QuickAssistAssistant;
-import org.eclipse.jface.text.reconciler.IReconciler;
-import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
-import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
-import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.jface.text.source.TextInvocationContext;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.quickfix.QuickAssistCompletionProposal;
-import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.ui.testing.AbstractMultiQuickfixTest;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -78,10 +68,10 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def foo(Object x) {");
+      _builder.append("def m(Object a, Object b) {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("return if(x == null) 0 else 1");
+      _builder.append("if(a == null || b === null) 0 else 1");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -101,10 +91,10 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def foo(Object x, Object y) {");
+      _builder.append("def m(Object a, Object b) {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("return if(x == null || y == null) 0 else 1");
+      _builder.append("if(a == null || b == null) 0 else 1");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -124,16 +114,16 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def foo(Object x, Object y) {");
+      _builder.append("def m(Object a, Object b) {");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("switch true {");
       _builder.newLine();
       _builder.append("\t\t\t");
-      _builder.append("case x == null: 0");
+      _builder.append("case a == null: 0");
       _builder.newLine();
       _builder.append("\t\t\t");
-      _builder.append("case y == null: 0");
+      _builder.append("case b == null: 0");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("default: 1");
@@ -162,18 +152,18 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
   }
   
   @Override
-  public void setUp() throws Exception {
-    super.setUp();
-    WorkbenchTestHelper.createPluginProject(this.getProjectName());
-    this.xtextEditor = this.openEditor(this.dslFile(EqualsWithNullMultiQuickfixTest.SINGLE_EQUALS_NULL_IN_EXPRESSION));
-  }
-  
-  @Override
   public IFile dslFile(final CharSequence content) {
     String _projectName = this.getProjectName();
     String _fileName = this.getFileName();
     String _plus = ("src/foo/" + _fileName);
     return super.dslFile(_projectName, _plus, this.getFileExtension(), content);
+  }
+  
+  @Override
+  public void setUp() throws Exception {
+    super.setUp();
+    WorkbenchTestHelper.createPluginProject(this.getProjectName());
+    this.xtextEditor = this.openEditor(this.dslFile(EqualsWithNullMultiQuickfixTest.SINGLE_EQUALS_NULL_IN_EXPRESSION));
   }
   
   @Test
@@ -229,25 +219,9 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
   }
   
   /**
-   * TODO This is duplicated in SpellingQuickfixTest and could possibly be refactored
-   *      into AbstractMultiQuickfixTest
+   * TODO Refactor into AbstractMultiQuickfixTest
    */
   protected ICompletionProposal[] computeQuickAssistProposals(final int offset) {
-    IReconciler _adapter = this.getSourceViewer().<IReconciler>getAdapter(IReconciler.class);
-    final XtextReconciler reconciler = ((XtextReconciler) _adapter);
-    IReconcilingStrategy _reconcilingStrategy = reconciler.getReconcilingStrategy("");
-    final IReconcilingStrategyExtension reconcilingStrategy = ((IReconcilingStrategyExtension) _reconcilingStrategy);
-    reconcilingStrategy.initialReconcile();
-    IQuickAssistAssistant _quickAssistAssistant = this.getSourceViewer().getQuickAssistAssistant();
-    final QuickAssistAssistant quickAssistAssistant = ((QuickAssistAssistant) _quickAssistAssistant);
-    final IQuickAssistProcessor quickAssistProcessor = quickAssistAssistant.getQuickAssistProcessor();
-    XtextSourceViewer _sourceViewer = this.getSourceViewer();
-    TextInvocationContext _textInvocationContext = new TextInvocationContext(_sourceViewer, offset, (-1));
-    return quickAssistProcessor.computeQuickAssistProposals(_textInvocationContext);
-  }
-  
-  protected XtextSourceViewer getSourceViewer() {
-    ISourceViewer _internalSourceViewer = this.xtextEditor.getInternalSourceViewer();
-    return ((XtextSourceViewer) _internalSourceViewer);
+    return this.computeQuickAssistProposals(this.xtextEditor, offset);
   }
 }
