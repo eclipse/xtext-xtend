@@ -29,15 +29,6 @@ import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.createPl
 @InjectWith(XtendIDEInjectorProvider)
 class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
-	static final String MODEL_WITH_EQUALS_NULL_IN_EXPRESSION = '''
-		package foo
-		class Foo {
-			def m(Object a, Object b, Object c) {
-				if(a == null || b == null || c === null) 0 else 1
-			}
-		}
-	'''
-
 	static final String MODEL_WITH_EQUALS_NULL_IN_SWITCH = '''
 		package foo
 		class Foo {
@@ -73,16 +64,41 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
 	@Test
 	def void testEqualsNullQuickfixInExpression() {
-		xtextEditor.document.set(MODEL_WITH_EQUALS_NULL_IN_EXPRESSION)
-		xtextEditor.waitForReconciler()
+		val initialText = '''
+			package foo
+			class Foo {
+				def m(Object a, Object b, Object c) {
+					if(a == null || b != null || c === null) 0 else 1
+				}
+			}
+		'''
+		val initialTextWithMarkers = '''
+			package foo
+			class Foo {
+				def m(Object a, Object b, Object c) {
+					if(a <0<==>0> null || b <1<!=>1> null || c === null) 0 else 1
+				}
+			}
+			------------------------------
+			0: message=The operator '==' should be replaced by '===' when null is one of the arguments.
+			1: message=The operator '!=' should be replaced by '!==' when null is one of the arguments.
+		'''
+		val resultTextWithMarkers = '''
+			package foo
+			class Foo {
+				def m(Object a, Object b, Object c) {
+					if(a == null || b != null || c === null) 0 else 1
+				}
+			}
+			------------------------------
+			(no markers found)
+		'''
 
-		val offset = MODEL_WITH_EQUALS_NULL_IN_EXPRESSION.indexOf("==") + 1
-		val proposals = Arrays.asList(computeQuickAssistProposals(offset))
-
-		assertEquals(1, proposals.size())
-		assertEquals(1, proposals.filter[it instanceof QuickAssistCompletionProposal].size())
-
-		// TODO Assert that proposal contains 2 marker
+		// TODO...
+		// expected:<...--------------------[]
+		// 0: message=The oper...> but was:<...--------------------[---------------------------------------]
+		// 0: message=The oper...>
+		testMultiQuickfix(initialText, initialTextWithMarkers, resultTextWithMarkers)
 	}
 
 	@Test

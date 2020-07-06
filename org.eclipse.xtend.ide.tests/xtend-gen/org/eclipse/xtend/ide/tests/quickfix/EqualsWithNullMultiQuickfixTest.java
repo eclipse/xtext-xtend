@@ -36,29 +36,6 @@ import org.junit.runner.RunWith;
 @InjectWith(XtendIDEInjectorProvider.class)
 @SuppressWarnings("all")
 public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
-  private static final String MODEL_WITH_EQUALS_NULL_IN_EXPRESSION = new Function0<String>() {
-    @Override
-    public String apply() {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package foo");
-      _builder.newLine();
-      _builder.append("class Foo {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("def m(Object a, Object b, Object c) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("if(a == null || b == null || c === null) 0 else 1");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      return _builder.toString();
-    }
-  }.apply();
-  
   private static final String MODEL_WITH_EQUALS_NULL_IN_SWITCH = new Function0<String>() {
     @Override
     public String apply() {
@@ -125,16 +102,68 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
   
   @Test
   public void testEqualsNullQuickfixInExpression() {
-    this.xtextEditor.getDocument().set(EqualsWithNullMultiQuickfixTest.MODEL_WITH_EQUALS_NULL_IN_EXPRESSION);
-    this._syncUtil.waitForReconciler(this.xtextEditor);
-    int _indexOf = EqualsWithNullMultiQuickfixTest.MODEL_WITH_EQUALS_NULL_IN_EXPRESSION.indexOf("==");
-    final int offset = (_indexOf + 1);
-    final List<ICompletionProposal> proposals = Arrays.<ICompletionProposal>asList(this.computeQuickAssistProposals(offset));
-    Assert.assertEquals(1, proposals.size());
-    final Function1<ICompletionProposal, Boolean> _function = (ICompletionProposal it) -> {
-      return Boolean.valueOf((it instanceof QuickAssistCompletionProposal));
-    };
-    Assert.assertEquals(1, IterableExtensions.size(IterableExtensions.<ICompletionProposal>filter(proposals, _function)));
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(Object a, Object b, Object c) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if(a == null || b != null || c === null) 0 else 1");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String initialText = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def m(Object a, Object b, Object c) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("if(a <0<==>0> null || b <1<!=>1> null || c === null) 0 else 1");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("------------------------------");
+    _builder_1.newLine();
+    _builder_1.append("0: message=The operator \'==\' should be replaced by \'===\' when null is one of the arguments.");
+    _builder_1.newLine();
+    _builder_1.append("1: message=The operator \'!=\' should be replaced by \'!==\' when null is one of the arguments.");
+    _builder_1.newLine();
+    final String initialTextWithMarkers = _builder_1.toString();
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("package foo");
+    _builder_2.newLine();
+    _builder_2.append("class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("def m(Object a, Object b, Object c) {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("if(a == null || b != null || c === null) 0 else 1");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("------------------------------");
+    _builder_2.newLine();
+    _builder_2.append("(no markers found)");
+    _builder_2.newLine();
+    final String resultTextWithMarkers = _builder_2.toString();
+    this.testMultiQuickfix(initialText, initialTextWithMarkers, resultTextWithMarkers);
   }
   
   @Test
