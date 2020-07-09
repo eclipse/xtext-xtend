@@ -118,7 +118,6 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final String initialText = _builder.toString();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package foo");
     _builder_1.newLine();
@@ -141,7 +140,6 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_1.newLine();
     _builder_1.append("1: message=The operator \'!=\' should be replaced by \'!==\' when null is one of the arguments.");
     _builder_1.newLine();
-    final String initialTextWithMarkers = _builder_1.toString();
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("package foo");
     _builder_2.newLine();
@@ -151,19 +149,18 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_2.append("def m(Object a, Object b, Object c) {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
-    _builder_2.append("if(a == null || b != null || c === null) 0 else 1");
+    _builder_2.append("if(a === null || b !== null || c === null) 0 else 1");
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.append("}");
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    _builder_2.append("---------------------------------------------------------------------");
+    _builder_2.append("---------------------------------------------------------");
     _builder_2.newLine();
     _builder_2.append("(no markers found)");
     _builder_2.newLine();
-    final String resultTextWithMarkers = _builder_2.toString();
-    this.testMultiQuickfix(initialText, initialTextWithMarkers, resultTextWithMarkers);
+    this.testMultiQuickfix(_builder, _builder_1, _builder_2);
   }
   
   @Test

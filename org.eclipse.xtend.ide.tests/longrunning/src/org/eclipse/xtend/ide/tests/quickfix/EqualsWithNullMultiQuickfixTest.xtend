@@ -64,19 +64,19 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
 	@Test
 	def void testEqualsNullQuickfixInExpression() {
-		
+
 		// Use Xtend style API
-		////
+		// //
 		
-		val initialText = '''
+		// TODO java.lang.AssertionError: expected:<1> but was:<0>
+		'''
 			package foo
 			class Foo {
 				def m(Object a, Object b, Object c) {
 					if(a == null || b != null || c === null) 0 else 1
 				}
 			}
-		'''
-		val initialTextWithMarkers = '''
+		'''.testMultiQuickfix('''
 			package foo
 			class Foo {
 				def m(Object a, Object b, Object c) {
@@ -86,8 +86,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 			---------------------------------------------------------------------
 			0: message=The operator '==' should be replaced by '===' when null is one of the arguments.
 			1: message=The operator '!=' should be replaced by '!==' when null is one of the arguments.
-		'''
-		val resultTextWithMarkers = '''
+		''','''
 			package foo
 			class Foo {
 				def m(Object a, Object b, Object c) {
@@ -96,10 +95,8 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 			}
 			---------------------------------------------------------
 			(no markers found)
-		'''
+		''')
 
-		// TODO java.lang.AssertionError: expected:<1> but was:<0>
-		testMultiQuickfix(initialText, initialTextWithMarkers, resultTextWithMarkers)
 	}
 
 	@Test
