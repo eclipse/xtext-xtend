@@ -7,15 +7,11 @@
  */
 package org.eclipse.xtend.ide.tests.quickfix
 
-import com.google.inject.Inject
-import java.util.Arrays
-import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.editor.XtextEditor
 import org.eclipse.xtext.ui.editor.quickfix.QuickAssistCompletionProposal
-import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
 import org.eclipse.xtext.ui.testing.AbstractMultiQuickfixTest
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -43,8 +39,6 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 		}
 	'''
 
-	@Inject extension SyncUtil
-
 	XtextEditor xtextEditor
 
 	override String getFileName() {
@@ -59,7 +53,6 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 		super.setUp()
 
 		projectName.createPluginProject()
-		xtextEditor = openEditor(dslFile("\n"))
 	}
 
 	@Test
@@ -68,7 +61,6 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 		// Use Xtend style API
 		// //
 		
-		// TODO java.lang.AssertionError: expected:<1> but was:<0>
 		'''
 			package equalsnull
 			class Foo {
@@ -93,7 +85,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 					if(a === null || b !== null || c === null) 0 else 1
 				}
 			}
-			---------------------------------------------------------
+			-----------------------------------------------------------
 			(no markers found)
 		''')
 
@@ -105,21 +97,14 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 		// Use Java style API
 		// //
 		
-		xtextEditor.document.set(MODEL_WITH_EQUALS_NULL_IN_SWITCH)
-		xtextEditor.waitForReconciler()
+		xtextEditor = openEditor(dslFile(MODEL_WITH_EQUALS_NULL_IN_SWITCH))
 
 		val offset = MODEL_WITH_EQUALS_NULL_IN_SWITCH.indexOf("==") + 1
-		val proposals = Arrays.asList(computeQuickAssistProposals(offset))
+		val proposals = computeQuickAssistProposals(xtextEditor, offset)
 
 		assertEquals(1, proposals.size())
 		assertEquals(1, proposals.filter[it instanceof QuickAssistCompletionProposal].size())
 		assertEquals("Replace '==' with '===' and '!=' with '!=='", proposals.get(0).displayString)
 	}
 
-	/**
-	 * TODO Refactor into AbstractMultiQuickfixTest
-	 */
-	def protected ICompletionProposal[] computeQuickAssistProposals(int offset) {
-		return computeQuickAssistProposals(xtextEditor, offset)
-	}
 }

@@ -7,8 +7,6 @@
  */
 package org.eclipse.xtend.ide.tests.quickfix;
 
-import com.google.inject.Inject;
-import java.util.Arrays;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -19,9 +17,9 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.quickfix.QuickAssistCompletionProposal;
-import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.ui.testing.AbstractMultiQuickfixTest;
-import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -74,10 +72,6 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
     }
   }.apply();
   
-  @Inject
-  @Extension
-  private SyncUtil _syncUtil;
-  
   private XtextEditor xtextEditor;
   
   @Override
@@ -97,7 +91,6 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
   public void setUp() throws Exception {
     super.setUp();
     WorkbenchTestHelper.createPluginProject(this.getProjectName());
-    this.xtextEditor = this.openEditor(this.dslFile("\n"));
   }
   
   @Test
@@ -156,7 +149,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    _builder_2.append("---------------------------------------------------------");
+    _builder_2.append("-----------------------------------------------------------");
     _builder_2.newLine();
     _builder_2.append("(no markers found)");
     _builder_2.newLine();
@@ -165,23 +158,19 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
   
   @Test
   public void testEqualsNullQuickfixInSwitch() {
-    this.xtextEditor.getDocument().set(EqualsWithNullMultiQuickfixTest.MODEL_WITH_EQUALS_NULL_IN_SWITCH);
-    this._syncUtil.waitForReconciler(this.xtextEditor);
-    int _indexOf = EqualsWithNullMultiQuickfixTest.MODEL_WITH_EQUALS_NULL_IN_SWITCH.indexOf("==");
-    final int offset = (_indexOf + 1);
-    final List<ICompletionProposal> proposals = Arrays.<ICompletionProposal>asList(this.computeQuickAssistProposals(offset));
-    Assert.assertEquals(1, proposals.size());
-    final Function1<ICompletionProposal, Boolean> _function = (ICompletionProposal it) -> {
-      return Boolean.valueOf((it instanceof QuickAssistCompletionProposal));
-    };
-    Assert.assertEquals(1, IterableExtensions.size(IterableExtensions.<ICompletionProposal>filter(proposals, _function)));
-    Assert.assertEquals("Replace \'==\' with \'===\' and \'!=\' with \'!==\'", proposals.get(0).getDisplayString());
-  }
-  
-  /**
-   * TODO Refactor into AbstractMultiQuickfixTest
-   */
-  protected ICompletionProposal[] computeQuickAssistProposals(final int offset) {
-    return this.computeQuickAssistProposals(this.xtextEditor, offset);
+    try {
+      this.xtextEditor = this.openEditor(this.dslFile(EqualsWithNullMultiQuickfixTest.MODEL_WITH_EQUALS_NULL_IN_SWITCH));
+      int _indexOf = EqualsWithNullMultiQuickfixTest.MODEL_WITH_EQUALS_NULL_IN_SWITCH.indexOf("==");
+      final int offset = (_indexOf + 1);
+      final ICompletionProposal[] proposals = this.computeQuickAssistProposals(this.xtextEditor, offset);
+      Assert.assertEquals(1, ((List<ICompletionProposal>)Conversions.doWrapArray(proposals)).size());
+      final Function1<ICompletionProposal, Boolean> _function = (ICompletionProposal it) -> {
+        return Boolean.valueOf((it instanceof QuickAssistCompletionProposal));
+      };
+      Assert.assertEquals(1, IterableExtensions.size(IterableExtensions.<ICompletionProposal>filter(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function)));
+      Assert.assertEquals("Replace \'==\' with \'===\' and \'!=\' with \'!==\'", (proposals[0]).getDisplayString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }
