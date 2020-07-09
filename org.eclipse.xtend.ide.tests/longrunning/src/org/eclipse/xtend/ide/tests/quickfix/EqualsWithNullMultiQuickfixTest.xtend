@@ -64,6 +64,10 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
 	@Test
 	def void testEqualsNullQuickfixInExpression() {
+		
+		// Use Xtend style API
+		////
+		
 		val initialText = '''
 			package foo
 			class Foo {
@@ -79,7 +83,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 					if(a <0<==>0> null || b <1<!=>1> null || c === null) 0 else 1
 				}
 			}
-			------------------------------
+			---------------------------------------------------------------------
 			0: message=The operator '==' should be replaced by '===' when null is one of the arguments.
 			1: message=The operator '!=' should be replaced by '!==' when null is one of the arguments.
 		'''
@@ -87,22 +91,23 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 			package foo
 			class Foo {
 				def m(Object a, Object b, Object c) {
-					if(a == null || b != null || c === null) 0 else 1
+					if(a === null || b !== null || c === null) 0 else 1
 				}
 			}
-			------------------------------
+			---------------------------------------------------------
 			(no markers found)
 		'''
 
-		// TODO...
-		// expected:<...--------------------[]
-		// 0: message=The oper...> but was:<...--------------------[---------------------------------------]
-		// 0: message=The oper...>
+		// TODO java.lang.AssertionError: expected:<1> but was:<0>
 		testMultiQuickfix(initialText, initialTextWithMarkers, resultTextWithMarkers)
 	}
 
 	@Test
 	def void testEqualsNullQuickfixInSwitch() {
+		
+		// Use Java style API
+		////
+		
 		xtextEditor.document.set(MODEL_WITH_EQUALS_NULL_IN_SWITCH)
 		xtextEditor.waitForReconciler()
 
