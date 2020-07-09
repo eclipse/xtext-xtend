@@ -8,14 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.quickfix
 
-import com.google.inject.Inject
-import java.util.Arrays
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.editor.XtextEditor
 import org.eclipse.xtext.ui.editor.quickfix.QuickAssistCompletionProposal
-import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
 import org.eclipse.xtext.ui.testing.AbstractMultiQuickfixTest
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -41,8 +38,6 @@ class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQuickfixT
 		}
 	'''
 
-	@Inject extension SyncUtil
-
 	XtextEditor xtextEditor
 
 	override String getFileName() {
@@ -57,7 +52,6 @@ class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQuickfixT
 		super.setUp()
 
 		projectName.createPluginProject()
-		xtextEditor = openEditor(dslFile("\n"))
 	}
 
 	@Test
@@ -66,6 +60,7 @@ class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQuickfixT
 		// Use Xtend style API
 		// //
 		
+		// TODO java.lang.AssertionError: expected:<6> but was:<5>
 		MODEL_WITH_UNNECESSARY_MODIFIERS.testMultiQuickfix('''
 			package unnecessarymodifiers
 			<0<public>0> class Foo {
@@ -76,7 +71,6 @@ class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQuickfixT
 					}
 				}
 			}
-			----------------------------------------------------
 			----------------------------------------------------
 			0: message=The public modifier is unnecessary on class Foo
 			1: message=The private modifier is unnecessary on field A
@@ -106,8 +100,7 @@ class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQuickfixT
 		// Use Java style API
 		// //
 		
-		xtextEditor.document.set(MODEL_WITH_UNNECESSARY_MODIFIERS)
-		xtextEditor.waitForReconciler()
+		xtextEditor = openEditor(dslFile(MODEL_WITH_UNNECESSARY_MODIFIERS))
 
 		val offset = MODEL_WITH_UNNECESSARY_MODIFIERS.indexOf("==") + 1
 		val proposals = computeQuickAssistProposals(xtextEditor, offset)
@@ -115,7 +108,7 @@ class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQuickfixT
 		// TODO java.lang.AssertionError: expected:<1> but was:<0>
 		assertEquals(1, proposals.size())
 		assertEquals(1, proposals.filter[it instanceof QuickAssistCompletionProposal].size())
-		
+
 		// TODO assert proposal text...
 	}
 }

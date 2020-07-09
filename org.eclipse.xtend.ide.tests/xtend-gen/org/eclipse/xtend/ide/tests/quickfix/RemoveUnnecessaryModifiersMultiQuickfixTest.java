@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.ide.tests.quickfix;
 
-import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -19,10 +18,9 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.quickfix.QuickAssistCompletionProposal;
-import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.ui.testing.AbstractMultiQuickfixTest;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -69,10 +67,6 @@ public class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQu
     }
   }.apply();
   
-  @Inject
-  @Extension
-  private SyncUtil _syncUtil;
-  
   private XtextEditor xtextEditor;
   
   @Override
@@ -92,7 +86,6 @@ public class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQu
   public void setUp() throws Exception {
     super.setUp();
     WorkbenchTestHelper.createPluginProject(this.getProjectName());
-    this.xtextEditor = this.openEditor(this.dslFile("\n"));
   }
   
   @Test
@@ -121,8 +114,6 @@ public class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQu
     _builder.append("}");
     _builder.newLine();
     _builder.append("}");
-    _builder.newLine();
-    _builder.append("----------------------------------------------------");
     _builder.newLine();
     _builder.append("----------------------------------------------------");
     _builder.newLine();
@@ -174,15 +165,18 @@ public class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQu
   
   @Test
   public void testRemoveUnnecessaryModifiersQuickfixJava() {
-    this.xtextEditor.getDocument().set(RemoveUnnecessaryModifiersMultiQuickfixTest.MODEL_WITH_UNNECESSARY_MODIFIERS);
-    this._syncUtil.waitForReconciler(this.xtextEditor);
-    int _indexOf = RemoveUnnecessaryModifiersMultiQuickfixTest.MODEL_WITH_UNNECESSARY_MODIFIERS.indexOf("==");
-    final int offset = (_indexOf + 1);
-    final ICompletionProposal[] proposals = this.computeQuickAssistProposals(this.xtextEditor, offset);
-    Assert.assertEquals(1, ((List<ICompletionProposal>)Conversions.doWrapArray(proposals)).size());
-    final Function1<ICompletionProposal, Boolean> _function = (ICompletionProposal it) -> {
-      return Boolean.valueOf((it instanceof QuickAssistCompletionProposal));
-    };
-    Assert.assertEquals(1, IterableExtensions.size(IterableExtensions.<ICompletionProposal>filter(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function)));
+    try {
+      this.xtextEditor = this.openEditor(this.dslFile(RemoveUnnecessaryModifiersMultiQuickfixTest.MODEL_WITH_UNNECESSARY_MODIFIERS));
+      int _indexOf = RemoveUnnecessaryModifiersMultiQuickfixTest.MODEL_WITH_UNNECESSARY_MODIFIERS.indexOf("==");
+      final int offset = (_indexOf + 1);
+      final ICompletionProposal[] proposals = this.computeQuickAssistProposals(this.xtextEditor, offset);
+      Assert.assertEquals(1, ((List<ICompletionProposal>)Conversions.doWrapArray(proposals)).size());
+      final Function1<ICompletionProposal, Boolean> _function = (ICompletionProposal it) -> {
+        return Boolean.valueOf((it instanceof QuickAssistCompletionProposal));
+      };
+      Assert.assertEquals(1, IterableExtensions.size(IterableExtensions.<ICompletionProposal>filter(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function)));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }
