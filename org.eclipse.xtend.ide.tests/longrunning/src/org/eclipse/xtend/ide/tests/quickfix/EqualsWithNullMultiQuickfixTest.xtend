@@ -35,7 +35,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 			def m(Object a, Object b, Object c) {
 				switch true {
 					case a == null: 0
-					case b == null: 0
+					case b != null: 0
 					case c === null: 0
 					default: 1
 				}
@@ -104,9 +104,9 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
 	@Test
 	def void testEqualsNullQuickfixInSwitch() {
-		
+
 		// Use Java style API
-		////
+		// //
 		
 		xtextEditor.document.set(MODEL_WITH_EQUALS_NULL_IN_SWITCH)
 		xtextEditor.waitForReconciler()
@@ -116,8 +116,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
 		assertEquals(1, proposals.size())
 		assertEquals(1, proposals.filter[it instanceof QuickAssistCompletionProposal].size())
-
-		// TODO Assert that proposals contain 2 markers
+		assertEquals("Replace '==' with '===' and '!=' with '!=='", proposals.get(0).displayString)
 	}
 
 	/**

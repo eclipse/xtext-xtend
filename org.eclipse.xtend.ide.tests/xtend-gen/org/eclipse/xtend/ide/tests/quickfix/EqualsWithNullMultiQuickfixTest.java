@@ -54,7 +54,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
       _builder.append("case a == null: 0");
       _builder.newLine();
       _builder.append("\t\t\t");
-      _builder.append("case b == null: 0");
+      _builder.append("case b != null: 0");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("case c === null: 0");
@@ -178,6 +178,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
       return Boolean.valueOf((it instanceof QuickAssistCompletionProposal));
     };
     Assert.assertEquals(1, IterableExtensions.size(IterableExtensions.<ICompletionProposal>filter(proposals, _function)));
+    Assert.assertEquals("Replace \'==\' with \'===\' and \'!=\' with \'!==\'", proposals.get(0).getDisplayString());
   }
   
   /**
