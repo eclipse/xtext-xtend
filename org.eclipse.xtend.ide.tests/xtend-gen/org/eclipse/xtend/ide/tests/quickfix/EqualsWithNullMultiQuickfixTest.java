@@ -40,7 +40,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
     @Override
     public String apply() {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package foo");
+      _builder.append("package equalsnull");
       _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
@@ -89,7 +89,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
   public IFile dslFile(final CharSequence content) {
     String _projectName = this.getProjectName();
     String _fileName = this.getFileName();
-    String _plus = ("src/foo/" + _fileName);
+    String _plus = ("src/equalsnull/" + _fileName);
     return super.dslFile(_projectName, _plus, this.getFileExtension(), content);
   }
   
@@ -103,7 +103,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
   @Test
   public void testEqualsNullQuickfixInExpression() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package foo");
+    _builder.append("package equalsnull");
     _builder.newLine();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -119,7 +119,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("package foo");
+    _builder_1.append("package equalsnull");
     _builder_1.newLine();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -141,7 +141,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_1.append("1: message=The operator \'!=\' should be replaced by \'!==\' when null is one of the arguments.");
     _builder_1.newLine();
     StringConcatenation _builder_2 = new StringConcatenation();
-    _builder_2.append("package foo");
+    _builder_2.append("package equalsnull");
     _builder_2.newLine();
     _builder_2.append("class Foo {");
     _builder_2.newLine();

@@ -30,7 +30,7 @@ import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.createPl
 class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
 	static final String MODEL_WITH_EQUALS_NULL_IN_SWITCH = '''
-		package foo
+		package equalsnull
 		class Foo {
 			def m(Object a, Object b, Object c) {
 				switch true {
@@ -52,7 +52,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 	}
 
 	override dslFile(CharSequence content) {
-		super.dslFile(projectName, "src/foo/" + fileName, fileExtension, content);
+		super.dslFile(projectName, "src/equalsnull/" + fileName, fileExtension, content);
 	}
 
 	override void setUp() throws Exception {
@@ -70,14 +70,14 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 		
 		// TODO java.lang.AssertionError: expected:<1> but was:<0>
 		'''
-			package foo
+			package equalsnull
 			class Foo {
 				def m(Object a, Object b, Object c) {
 					if(a == null || b != null || c === null) 0 else 1
 				}
 			}
 		'''.testMultiQuickfix('''
-			package foo
+			package equalsnull
 			class Foo {
 				def m(Object a, Object b, Object c) {
 					if(a <0<==>0> null || b <1<!=>1> null || c === null) 0 else 1
@@ -87,7 +87,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 			0: message=The operator '==' should be replaced by '===' when null is one of the arguments.
 			1: message=The operator '!=' should be replaced by '!==' when null is one of the arguments.
 		''','''
-			package foo
+			package equalsnull
 			class Foo {
 				def m(Object a, Object b, Object c) {
 					if(a === null || b !== null || c === null) 0 else 1
