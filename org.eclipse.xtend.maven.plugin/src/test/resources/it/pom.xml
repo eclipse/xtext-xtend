@@ -98,6 +98,23 @@
 			<url>file://${nonTestMavenRepo}</url>
 		</repository>
 	</repositories>
+	<profiles>
+		<profile>
+			<id>use-pr-683</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<repositories>
+				<repository>
+					<id>xtext-extras-pr683</id>
+					<url>${JENKINS_URL}/job/xtext-extras/job/PR-683/lastSuccessfulBuild/artifact/build/maven-repository/</url>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
 	<build>
 		<pluginManagement>
 			<plugins>

@@ -314,6 +314,18 @@
 			</repositories>
 		</profile>
 		<profile>
+			<id>use-pr-683</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<repositories>
+				<repository>
+					<id>xtext-extras-pr683</id>
+					<url>${JENKINS_URL}/job/xtext-extras/job/PR-683/lastSuccessfulBuild/artifact/build/maven-repository/</url>
+				</repository>
+			</repositories>
+		</profile>
+		<profile>
 			<id>useSonatypeSnapshots</id>
 			<repositories>
 				<repository>
