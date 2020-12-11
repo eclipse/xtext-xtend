@@ -193,11 +193,11 @@ public class XtendInstallDebugInfoMojoIT {
 				"    \n" + 
 				"    package foo; // FooTest.class\n" + 
 				"    class FooTest {\n" + 
-				"      void <init>() { // FooTest.java:8\n" + 
+				"      void <init>() { // FooTest.java:7\n" + 
 				"        void this;\n" + 
 				"      }\n" + 
-				"      void assertTrue() { // FooTest.java:11\n" + 
-				"        // FooTest.java:11 -> FooTest.xtend:11\n" + 
+				"      void assertTrue() { // FooTest.java:10\n" + 
+				"        // FooTest.java:10 -> FooTest.xtend:11\n" + 
 				"        void this;\n" + 
 				"      }\n" + 
 				"    }\n" + 
