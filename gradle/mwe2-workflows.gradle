@@ -6,13 +6,13 @@ sourceSets {
 	mwe2 {}
 }
 
-eclipse.classpath.plusConfigurations += [configurations.mwe2Runtime]
+eclipse.classpath.plusConfigurations += [configurations.mwe2Implementation]
 
 dependencies {
-	mwe2Compile platform("org.eclipse.xtext:xtext-dev-bom:$versions.xtext")
-	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
-	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch"
-	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext"
+	mwe2Implementation platform("org.eclipse.xtext:xtext-dev-bom:$versions.xtext")
+	mwe2Implementation "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
+	mwe2Implementation "org.eclipse.emf:org.eclipse.emf.mwe2.launch"
+	mwe2Implementation "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext"
 }
 
 if (findProperty('compileXtend') == 'true') {
