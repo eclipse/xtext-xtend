@@ -24,7 +24,7 @@ pipeline {
   }
 
   triggers {
-    parameterizedCron(env.BRANCH_NAME == 'master' ? 'H H(0-1) * * * %TARGET_PLATFORM=latest;JDK_VERSION=adoptopenjdk-hotspot-jdk11-latest' : '')
+    parameterizedCron(env.BRANCH_NAME == 'cd_testTycho25' ? 'H 20 * * * %TARGET_PLATFORM=latest;JDK_VERSION=adoptopenjdk-hotspot-jdk11-latest' : '')
   }
 
   options {

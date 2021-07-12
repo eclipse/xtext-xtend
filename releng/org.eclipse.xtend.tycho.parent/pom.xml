@@ -33,7 +33,7 @@
 		<profile>
 			<id>latest</id>
 			<properties>
-				<tycho-version>2.4.0-SNAPSHOT</tycho-version>
+				<tycho-version>2.5.0-SNAPSHOT</tycho-version>
 				<target-platform-classifier>org.eclipse.xtend.target-latest</target-platform-classifier>
 			</properties>
 		</profile>
