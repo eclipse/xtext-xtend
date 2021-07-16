@@ -112,7 +112,7 @@
 						<!-- <forkedProcessTimeoutInSeconds>1200</forkedProcessTimeoutInSeconds> -->
 						<useUIHarness>true</useUIHarness>
 						<useUIThread>true</useUIThread>
-						<argLine>${memory-settings} ${os-jvm-flags}</argLine>
+						<argLine>${memory-settings} ${os-jvm-flags} -Dorg.eclipse.swt.graphics.Resource.reportNonDisposed=true</argLine>
 						<includes>
 							<include>**/Test*.java</include>
 							<include>**/*Test.java</include>
