@@ -407,7 +407,7 @@ public class XtendBatchCompiler {
 		File commonRoot = determineCommonRoot(outputFile, sourceFileList);
 
 		// We don't want to use root ("/") as a workspace folder, didn't we?
-		if (commonRoot == null || commonRoot.getParent() == null || commonRoot.getParentFile().getParent() == null) {
+		if (commonRoot == null || commonRoot.getParent() == null) {
 			log.error("All source folders and the output folder should have "
 					+ "a common parent non-top level folder (like project folder)");
 			for (File sourceFile : sourceFileList) {

@@ -278,15 +278,6 @@ class TestBatchCompiler {
 		assertNull(batchCompiler.outputConfiguration)
 	}
 
-	@Test def void testProjectConfigWithoutCommonWorkspaceDir() {
-		batchCompiler.sourcePath = '''/some_non_existing_folder/src'''
-		batchCompiler.outputPath = '''/some_non_existing_folder/bin'''
-
-		batchCompiler.compile
-		assertNull(batchCompiler.projectConfig)
-		assertNull(batchCompiler.outputConfiguration)
-	}
-
 	@Test def void testProjectConfigWithTopLevelCommonWorkspaceDir() {
 		batchCompiler.sourcePath = '''/tmp/prj/src'''
 		batchCompiler.outputPath = '''/tmp/prj/bin'''

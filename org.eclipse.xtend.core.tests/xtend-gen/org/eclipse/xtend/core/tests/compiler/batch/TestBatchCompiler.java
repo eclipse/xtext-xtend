@@ -430,19 +430,6 @@ public class TestBatchCompiler {
   }
   
   @Test
-  public void testProjectConfigWithoutCommonWorkspaceDir() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/some_non_existing_folder/src");
-    this.batchCompiler.setSourcePath(_builder.toString());
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("/some_non_existing_folder/bin");
-    this.batchCompiler.setOutputPath(_builder_1.toString());
-    this.batchCompiler.compile();
-    Assert.assertNull(this.batchCompiler.getProjectConfig());
-    Assert.assertNull(this.batchCompiler.getOutputConfiguration());
-  }
-  
-  @Test
   public void testProjectConfigWithTopLevelCommonWorkspaceDir() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/tmp/prj/src");
