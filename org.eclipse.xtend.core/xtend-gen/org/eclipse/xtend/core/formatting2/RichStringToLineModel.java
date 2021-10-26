@@ -33,8 +33,6 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
-  private final RichString string;
-  
   private final String document;
   
   private final ITextRegionAccess nodeModelAccess;
@@ -60,7 +58,6 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
   
   public RichStringToLineModel(final ITextRegionAccess nodeModelAccess, final RichString string) {
     this.nodeModelAccess = nodeModelAccess;
-    this.string = string;
     this.document = nodeModelAccess.regionForDocument().getText();
   }
   

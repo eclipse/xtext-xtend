@@ -224,7 +224,6 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin
  * @author Moritz Eysholdt - Initial implementation and API
  */
 class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
-	val RichString string
 	val String document
 	val ITextRegionAccess nodeModelAccess
 	@Accessors val LineModel model = new LineModel
@@ -239,7 +238,6 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 
 	new(ITextRegionAccess nodeModelAccess, RichString string) {
 		this.nodeModelAccess = nodeModelAccess
-		this.string = string
 		this.document = nodeModelAccess.regionForDocument.text
 	}
 
