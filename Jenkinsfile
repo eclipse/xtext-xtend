@@ -101,7 +101,7 @@ pipeline {
 
   post {
     always {
-      junit testResults: '**/target/surefire-reports/*.xml, **/build/test-results/test/*.xml'
+      junit testResults: 'org.eclipse.xtend.maven*/target/surefire-reports/*.xml, **/build/test-results/test/*.xml, org.eclipse.xtend.ide*/target/surefire-reports/*.xml'
     }
     success {
       archiveArtifacts artifacts: 'build/**, **/target/work/data/.metadata/.log'
