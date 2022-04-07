@@ -97,12 +97,12 @@ public class CompilerBug472602Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("private C<A> in;");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Function<A, B> f;");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public MapResult(final C<A> in, final Function<A, B> f) {");
@@ -116,7 +116,7 @@ public class CompilerBug472602Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Override");
@@ -139,12 +139,10 @@ public class CompilerBug472602Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public abstract A get();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <B extends Object> C<B> map(final Function<A, B> f) {");
@@ -217,7 +215,6 @@ public class CompilerBug472602Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("public abstract A get();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <B extends Object> C<B> map(final Function<A, B> f) {");

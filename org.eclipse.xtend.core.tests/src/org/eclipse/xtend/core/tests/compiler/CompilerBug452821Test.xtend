@@ -35,7 +35,7 @@ class CompilerBug452821Test extends AbstractXtendCompilerTest {
 			      
 			      String field;
 			    }
-			    
+			  
 			    return new __AnonymousClassTest_1("") {
 			    };
 			  }

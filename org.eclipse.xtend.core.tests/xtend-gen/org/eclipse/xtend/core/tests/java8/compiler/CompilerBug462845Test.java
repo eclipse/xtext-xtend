@@ -85,7 +85,7 @@ public class CompilerBug462845Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Iterable<String> _function = () -> {");
@@ -214,7 +214,7 @@ public class CompilerBug462845Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("__C_1 _xblockexpression = null;");
@@ -358,7 +358,7 @@ public class CompilerBug462845Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("__C_1 _xblockexpression = null;");
@@ -513,7 +513,7 @@ public class CompilerBug462845Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Iterable<String> _function = () -> {");

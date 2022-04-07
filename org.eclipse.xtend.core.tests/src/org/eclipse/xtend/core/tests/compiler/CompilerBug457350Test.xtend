@@ -151,7 +151,7 @@ class CompilerBug457350Test extends AbstractXtendCompilerTest {
 			      
 			      public abstract Object blub();
 			    }
-			    
+			  
 			    new __Test_1() {
 			      public void run() {
 			        final Runnable _function = new Runnable() {

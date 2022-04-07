@@ -71,7 +71,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> void forEach2(final Iterable<T> iterable, final Procedure1<? super T> procedure) {");
@@ -188,7 +187,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> void forEach2(final Iterable<T> iterable, final Procedure1<? super T> procedure) {");
@@ -305,7 +303,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> void forEach2(final Iterable<T> iterable, final Procedure1<? super T> procedure) {");
@@ -422,7 +419,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> void forEach2(final Iterable<T> iterable, final Procedure1<? super T> procedure) {");
@@ -539,7 +535,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> void forEach2(final Iterable<T> iterable, final Procedure1<? super T> procedure) {");
@@ -656,7 +651,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> void forEach2(final Iterable<T> iterable, final Procedure1<? super T> procedure) {");
@@ -779,7 +773,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> void forEach2(final Iterable<T> iterable, final Procedure1<? super T> procedure) {");
@@ -908,7 +901,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> void forEach2(final Iterable<T> iterable, final Procedure1<? super T> procedure) {");
@@ -1037,7 +1029,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> void forEach2(final Iterable<T> iterable, final Procedure1<? super T> procedure) {");
@@ -1172,7 +1163,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> void forEach2(final Iterable<T> iterable, final Procedure1<? super T> procedure) {");
@@ -1471,7 +1461,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private Group layer;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -1664,7 +1653,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private Group layer;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -1832,7 +1820,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private Group layer;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> void onChanged(final Change<? extends T> change) {");
@@ -1855,7 +1842,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> void forEach2(final Iterable<T> iterable, final Procedure1<? super T> procedure) {");
@@ -2591,27 +2577,27 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("public String space = null;");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public Integer newLines = null;");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int increaseIndentationChange = 0;");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int decreaseIndentationChange = 0;");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public PreferenceKey key = null;");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void cfg(final PreferenceKey key) {");
@@ -2622,7 +2608,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void newLine() {");
@@ -2633,7 +2619,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void noSpace() {");
@@ -2644,7 +2630,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void oneSpace() {");
@@ -2655,7 +2641,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void increaseIndentation() {");
@@ -2666,7 +2652,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void decreaseIndentation() {");
@@ -2677,7 +2663,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Override");
@@ -2694,7 +2680,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Inject");
@@ -2705,7 +2690,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private HiddenLeafAccess _hiddenLeafAccess;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final Procedure1<? super FormattingDataFactory.FormattingDataInit> init) {");
@@ -2734,7 +2718,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final Void key, final FormattingDataFactory.FormattingDataInit it) {");
@@ -2787,7 +2770,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final BlankLineKey key, final FormattingDataFactory.FormattingDataInit it) {");
@@ -2831,7 +2813,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final NewLineOrPreserveKey key, final FormattingDataFactory.FormattingDataInit it) {");
@@ -2908,7 +2889,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final NewLineKey key, final FormattingDataFactory.FormattingDataInit it) {");
@@ -2964,7 +2944,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataFactory.FormattingDataInit it) {");
@@ -2981,7 +2960,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final WhitespaceKey key, final FormattingDataFactory.FormattingDataInit it) {");
@@ -3034,7 +3012,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Iterable<FormattingData> newWhitespaceData(final HiddenLeafs leafs, final String space, final int increaseIndentationChange, final int decreaseIndentationChange, final boolean trace) {");
@@ -3162,7 +3139,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Iterable<FormattingData> newNewLineData(final HiddenLeafs leafs, final int minNewLines, final int maxNewLines, final int increaseIndentationChange, final int decreaseIndentationChange, final boolean trace) {");
@@ -3764,7 +3740,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> append(final INode node, final Procedure1<? super FormattingDataFactory.FormattingDataInit> init) {");
@@ -3790,7 +3765,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> prepend(final INode node, final Procedure1<? super FormattingDataFactory.FormattingDataInit> init) {");
@@ -3816,7 +3790,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> surround(final INode node, final Procedure1<? super FormattingDataFactory.FormattingDataInit> init) {");
@@ -3938,7 +3911,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> surround(final INode node, final Procedure1<? super FormattingDataFactory.FormattingDataInit> before, final Procedure1<? super FormattingDataFactory.FormattingDataInit> after) {");
@@ -4060,7 +4032,6 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataFactory.FormattingDataInit it) {");

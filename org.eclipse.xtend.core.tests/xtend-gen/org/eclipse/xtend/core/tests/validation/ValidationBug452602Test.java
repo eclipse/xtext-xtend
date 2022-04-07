@@ -50,7 +50,7 @@ public class ValidationBug452602Test extends AbstractXtendTestCase {
       _builder.append("    ");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("    ");
+      _builder.append("  ");
       _builder.newLine();
       _builder.append("    ");
       _builder.append("def boolean test(Object o) {");
@@ -97,7 +97,7 @@ public class ValidationBug452602Test extends AbstractXtendTestCase {
       _builder.append("    ");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("    ");
+      _builder.append("  ");
       _builder.newLine();
       _builder.append("    ");
       _builder.append("def boolean test(Object o) {");
@@ -150,7 +150,7 @@ public class ValidationBug452602Test extends AbstractXtendTestCase {
       _builder.append("    ");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("    ");
+      _builder.append("  ");
       _builder.newLine();
       _builder.append("    ");
       _builder.append("def boolean test() {");

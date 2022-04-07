@@ -40,7 +40,7 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder.append("\t");
     _builder.append("static class C1 extends C implements I1 {}");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("val x = #{ C0, C1 }");
@@ -65,7 +65,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface I0 extends Outer.I {");
@@ -73,7 +72,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface I1 extends Outer.I {");
@@ -81,7 +79,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C {");
@@ -89,7 +86,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C0 extends Outer.C implements Outer.I0 {");
@@ -97,7 +93,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C1 extends Outer.C implements Outer.I1 {");
@@ -105,7 +100,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final Set<? extends Class<? extends Outer.C>> x = Collections.<Class<? extends Outer.C>>unmodifiableSet(CollectionLiterals.<Class<? extends Outer.C>>newHashSet(Outer.C0.class, Outer.C1.class));");
@@ -138,7 +132,7 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder.append("\t");
     _builder.append("static class C1 extends C implements I1 {}");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("val x = #[ C0, C1 ]");
@@ -163,7 +157,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface I0 extends Outer.I {");
@@ -171,7 +164,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface I1 extends Outer.I {");
@@ -179,7 +171,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C {");
@@ -187,7 +178,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C0 extends Outer.C implements Outer.I0 {");
@@ -195,7 +185,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C1 extends Outer.C implements Outer.I1 {");
@@ -203,7 +192,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final List<? extends Class<? extends Outer.C>> x = Collections.<Class<? extends Outer.C>>unmodifiableList(CollectionLiterals.<Class<? extends Outer.C>>newArrayList(Outer.C0.class, Outer.C1.class));");
@@ -238,7 +226,7 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder.append("\t");
     _builder.append("static class C1 extends C implements I1 {}");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("val Set<? extends Class<? extends I>> w = #{ C0, C1 }");
@@ -263,7 +251,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface I0 extends Outer.I {");
@@ -271,7 +258,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface I1 extends Outer.I {");
@@ -279,7 +265,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C implements Outer.I {");
@@ -287,7 +272,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C0 extends Outer.C implements Outer.I0 {");
@@ -295,7 +279,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C1 extends Outer.C implements Outer.I1 {");
@@ -303,7 +286,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final Set<? extends Class<? extends Outer.I>> w = Collections.<Class<? extends Outer.I>>unmodifiableSet(CollectionLiterals.<Class<? extends Outer.I>>newHashSet(Outer.C0.class, Outer.C1.class));");
@@ -338,7 +320,7 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder.append("\t");
     _builder.append("static class C1 extends C implements I1 {}");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("val Set<Class<? extends I>> w = #{ C0, C1 }");
@@ -363,7 +345,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface I0 extends Outer.I {");
@@ -371,7 +352,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface I1 extends Outer.I {");
@@ -379,7 +359,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C implements Outer.I {");
@@ -387,7 +366,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C0 extends Outer.C implements Outer.I0 {");
@@ -395,7 +373,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C1 extends Outer.C implements Outer.I1 {");
@@ -403,7 +380,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final Set<Class<? extends Outer.I>> w = Collections.<Class<? extends Outer.I>>unmodifiableSet(CollectionLiterals.<Class<? extends Outer.I>>newHashSet(Outer.C0.class, Outer.C1.class));");
@@ -439,7 +415,7 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder.append("\t");
     _builder.append("static class C1 extends C implements I1 {}");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("val Set<? extends Class<? extends I>> w = #{ C0, C1 }");
@@ -464,7 +440,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface I0 extends Outer.I {");
@@ -472,7 +447,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface I1 extends Outer.I {");
@@ -480,7 +454,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C {");
@@ -488,7 +461,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C0 extends Outer.C implements Outer.I0 {");
@@ -496,7 +468,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C1 extends Outer.C implements Outer.I1 {");
@@ -504,7 +475,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final Set<? extends Class<? extends Outer.I>> w = Collections.<Class<? extends Outer.C>>unmodifiableSet(CollectionLiterals.<Class<? extends Outer.C>>newHashSet(Outer.C0.class, Outer.C1.class));");
@@ -540,7 +510,7 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder.append("\t");
     _builder.append("static class C1 extends C implements I1 {}");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("val Set<Class<? extends I>> w = #{ C0, C1 }");
@@ -565,7 +535,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface I0 extends Outer.I {");
@@ -573,7 +542,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface I1 extends Outer.I {");
@@ -581,7 +549,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C {");
@@ -589,7 +556,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C0 extends Outer.C implements Outer.I0 {");
@@ -597,7 +563,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class C1 extends Outer.C implements Outer.I1 {");
@@ -605,7 +570,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final Set<Class<? extends Outer.I>> w = Collections.<Class<? extends Outer.I>>unmodifiableSet(CollectionLiterals.<Class<? extends Outer.I>>newHashSet(Outer.C0.class, Outer.C1.class));");
@@ -641,7 +605,7 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder.append("\t");
     _builder.append("static class C1 extends C implements I1 {}");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("val Class<? extends C> x1 = C0");

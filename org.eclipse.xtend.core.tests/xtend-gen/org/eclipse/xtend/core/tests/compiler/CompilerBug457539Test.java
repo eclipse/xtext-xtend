@@ -89,7 +89,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> void forEach2(final Iterable<T> it, final Procedure1<? super T> f) {");
@@ -159,12 +158,12 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("void forEach2(final Procedure1<? super T> f);");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void add(final T t);");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("T get();");
@@ -172,7 +171,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -207,7 +205,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static <T extends Object> C.MyIterable<T> newIterable(final T... initial) {");
@@ -279,12 +276,12 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("void forEach2(final Procedure1<? super T> f);");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void add(final T t);");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("T get();");
@@ -292,7 +289,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -318,7 +314,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {");
@@ -391,12 +386,12 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("void forEach2(final Procedure1<? super T> f);");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void add(final T t);");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("T get();");
@@ -404,7 +399,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -433,7 +427,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {");
@@ -509,12 +502,12 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("void forEach2(final Procedure1<? super T> f);");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void add(final T t);");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("T get();");
@@ -522,7 +515,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -554,7 +546,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {");
@@ -630,12 +621,12 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("void forEach2(final Procedure1<? super T> f);");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void add(final T t);");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("T get();");
@@ -643,7 +634,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -681,7 +671,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {");
@@ -754,12 +743,12 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("void forEach2(final Procedure1<? super T> f);");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void add(final T t);");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("T get();");
@@ -767,7 +756,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -802,7 +790,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {");
@@ -875,12 +862,12 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("void forEach2(final Procedure1<? super T> f);");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void add(final T t);");
     _builder_1.newLine();
-    _builder_1.append("    ");
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("T get();");
@@ -888,7 +875,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -923,7 +909,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static <T extends Object> C.MyIterable<T> newIterable(final T... initial) {");
@@ -1004,7 +989,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -1039,7 +1023,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> Object m(final T a, final T b) {");
@@ -1050,7 +1033,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static <T extends Object> C.MyIterable<T> newIterable(final T... initial) {");
@@ -1108,7 +1090,6 @@ public class CompilerBug457539Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <V extends Object> void m(final C.MyIterable<? super V> list) {");

@@ -44,7 +44,7 @@ class CompilerBug462845Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    abstract class __C_1 implements Iterator<String> {
 			      Iterator<String> delegate;
 			    }
-			    
+			  
 			    final Iterable<String> _function = () -> {
 			      return null;
 			    };
@@ -94,7 +94,7 @@ class CompilerBug462845Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    abstract class __C_1 implements Iterator<String> {
 			      Iterator<String> delegate;
 			    }
-			    
+			  
 			    __C_1 _xblockexpression = null;
 			    {
 			      final Iterable<String> _function = () -> {
@@ -149,7 +149,7 @@ class CompilerBug462845Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    abstract class __C_1 implements Iterator<String> {
 			      Iterator<String> delegate;
 			    }
-			    
+			  
 			    __C_1 _xblockexpression = null;
 			    {
 			      final Iterable<String> _function = () -> {
@@ -208,7 +208,7 @@ class CompilerBug462845Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    abstract class __C_1 implements Iterator<String> {
 			      Iterator<String> delegate;
 			    }
-			    
+			  
 			    final Iterable<String> _function = () -> {
 			      return null;
 			    };
