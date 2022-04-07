@@ -178,7 +178,10 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 			
 			if (needSyntheticThisVariable(anonymousClass, it)) {
 				val thisName = childAppendable.declareSyntheticVariable('this' -> it, '_this' + it.simpleName)
-				childAppendable.newLine.append("final ").append(simpleName).append(' ').append(thisName).append(' = this;').newLine
+				childAppendable.newLine.append("final ").append(simpleName).append(' ').append(thisName).append(' = this;')
+				// avoid generating empty lines with just two spaces
+				// https://github.com/eclipse/xtext-extras/issues/772
+				childAppendable.blankLine
 			}
 			childAppendable.forEach(getAddedDeclarations(anonymousClass), [
 					separator = memberSeparator()

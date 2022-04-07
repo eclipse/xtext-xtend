@@ -274,7 +274,8 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
         String _simpleName = it.getSimpleName();
         String _plus = ("_this" + _simpleName);
         final String thisName = childAppendable.declareSyntheticVariable(_mappedTo, _plus);
-        childAppendable.newLine().append("final ").append(it.getSimpleName()).append(" ").append(thisName).append(" = this;").newLine();
+        childAppendable.newLine().append("final ").append(it.getSimpleName()).append(" ").append(thisName).append(" = this;");
+        childAppendable.blankLine();
       }
       final Procedure1<LoopParams> _function_2 = (LoopParams it_1) -> {
         it_1.setSeparator(this.memberSeparator());
