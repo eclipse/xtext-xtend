@@ -1140,39 +1140,39 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			public class FormattingDataFactory {
 			  public static class FormattingDataInit {
 			    public String space = null;
-			  
+			
 			    public Integer newLines = null;
-			  
+			
 			    public int increaseIndentationChange = 0;
-			  
+			
 			    public int decreaseIndentationChange = 0;
-			  
+			
 			    public PreferenceKey key = null;
-			  
+			
 			    public void cfg(final PreferenceKey key) {
 			      this.key = key;
 			    }
-			  
+			
 			    public void newLine() {
 			      this.newLines = Integer.valueOf(1);
 			    }
-			  
+			
 			    public void noSpace() {
 			      this.space = "";
 			    }
-			  
+			
 			    public void oneSpace() {
 			      this.space = " ";
 			    }
-			  
+			
 			    public void increaseIndentation() {
 			      this.increaseIndentationChange = (this.increaseIndentationChange + 1);
 			    }
-			  
+			
 			    public void decreaseIndentation() {
 			      this.decreaseIndentationChange = (this.decreaseIndentationChange - 1);
 			    }
-			  
+			
 			    public String toString() {
 			      return new ToStringHelper().toString(this);
 			    }

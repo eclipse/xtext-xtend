@@ -166,7 +166,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -174,27 +173,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -205,7 +199,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -219,7 +212,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -230,7 +222,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -244,7 +235,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -255,7 +245,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -269,7 +258,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -280,7 +268,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -294,7 +281,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -479,7 +465,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -487,27 +472,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -518,7 +498,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -532,7 +511,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -543,7 +521,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -557,7 +534,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -568,7 +544,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -582,7 +557,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -593,7 +567,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -607,7 +580,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -783,7 +755,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -791,27 +762,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -822,7 +788,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -836,7 +801,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -847,7 +811,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -861,7 +824,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -872,7 +834,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -886,7 +847,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -897,7 +857,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -911,7 +870,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -1089,7 +1047,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -1097,27 +1054,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -1128,7 +1080,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -1142,7 +1093,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -1153,7 +1103,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -1167,7 +1116,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -1178,7 +1126,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -1192,7 +1139,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -1203,7 +1149,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -1217,7 +1162,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -1380,7 +1324,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -1388,27 +1331,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -1419,7 +1357,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -1433,7 +1370,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -1444,7 +1380,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -1458,7 +1393,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -1469,7 +1403,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -1483,7 +1416,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -1494,7 +1426,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -1508,7 +1439,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -1730,12 +1660,10 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("private int total = 0;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private int count = 0;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public double average() {");
@@ -1764,7 +1692,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Override");
@@ -1784,7 +1711,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int combine(final Demo.Averager other) {");
@@ -1832,7 +1758,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -1840,27 +1765,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -1871,7 +1791,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -1885,7 +1804,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -1896,7 +1814,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -1910,7 +1827,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -1921,7 +1837,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -1935,7 +1850,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -1946,7 +1860,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -1960,7 +1873,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -2206,12 +2118,10 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("private int total = 0;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private int count = 0;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public double average() {");
@@ -2240,7 +2150,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Override");
@@ -2260,7 +2169,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int combine(final Demo.Averager other) {");
@@ -2308,7 +2216,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -2316,27 +2223,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -2347,7 +2249,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -2361,7 +2262,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -2372,7 +2272,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -2386,7 +2285,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -2397,7 +2295,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -2411,7 +2308,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -2422,7 +2318,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -2436,7 +2331,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -2630,7 +2524,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -2638,27 +2531,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -2669,7 +2557,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -2683,7 +2570,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -2694,7 +2580,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -2708,7 +2593,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -2719,7 +2603,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -2733,7 +2616,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -2744,7 +2626,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -2758,7 +2639,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -2937,7 +2817,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -2945,27 +2824,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -2976,7 +2850,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -2990,7 +2863,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -3001,7 +2873,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -3015,7 +2886,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -3026,7 +2896,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -3040,7 +2909,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -3051,7 +2919,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -3065,7 +2932,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -3253,7 +3119,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -3261,27 +3126,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -3292,7 +3152,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -3306,7 +3165,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -3317,7 +3175,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -3331,7 +3188,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -3342,7 +3198,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -3356,7 +3211,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -3367,7 +3221,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -3381,7 +3234,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -3570,7 +3422,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -3578,27 +3429,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -3609,7 +3455,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -3623,7 +3468,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -3634,7 +3478,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -3648,7 +3491,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -3659,7 +3501,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -3673,7 +3514,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -3684,7 +3524,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -3698,7 +3537,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -3896,7 +3734,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -3904,27 +3741,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -3935,7 +3767,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -3949,7 +3780,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -3960,7 +3790,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -3974,7 +3803,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -3985,7 +3813,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -3999,7 +3826,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -4010,7 +3836,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -4024,7 +3849,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -4215,7 +4039,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -4223,27 +4046,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -4254,7 +4072,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -4268,7 +4085,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -4279,7 +4095,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -4293,7 +4108,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -4304,7 +4118,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -4318,7 +4131,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -4329,7 +4141,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -4343,7 +4154,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -4500,7 +4310,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -4508,12 +4317,10 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -4524,7 +4331,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -4538,7 +4344,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -4712,7 +4517,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -4720,27 +4524,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -4751,7 +4550,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -4765,7 +4563,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -4776,7 +4573,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -4790,7 +4586,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -4801,7 +4596,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -4815,7 +4609,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -4826,7 +4619,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -4840,7 +4632,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -5012,7 +4803,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -5020,27 +4810,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -5051,7 +4836,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -5065,7 +4849,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -5076,7 +4859,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -5090,7 +4872,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -5101,7 +4882,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -5115,7 +4895,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -5126,7 +4905,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -5140,7 +4918,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -5312,7 +5089,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -5320,27 +5096,22 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private LocalDate birthday;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int getAge() {");
@@ -5351,7 +5122,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -5365,7 +5135,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -5376,7 +5145,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -5390,7 +5158,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setBirthday(final LocalDate birthday) {");
@@ -5401,7 +5168,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -5415,7 +5181,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -5426,7 +5191,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -5440,7 +5204,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -5588,7 +5351,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -5596,22 +5358,18 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -5625,7 +5383,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -5636,7 +5393,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -5650,7 +5406,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -5661,7 +5416,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -5675,7 +5429,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -5813,7 +5566,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("MALE,");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("FEMALE;");
@@ -5821,22 +5573,18 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Demo.Person.Sex gender;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private String emailAddress;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -5850,7 +5598,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -5861,7 +5608,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -5875,7 +5621,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setGender(final Demo.Person.Sex gender) {");
@@ -5886,7 +5631,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -5900,7 +5644,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setEmailAddress(final String emailAddress) {");
@@ -6046,12 +5789,10 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Collection<Demo.Track> tracks;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -6065,7 +5806,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -6076,7 +5816,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -6090,7 +5829,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setTracks(final Collection<Demo.Track> tracks) {");
@@ -6114,7 +5852,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("private int rating;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -6128,7 +5865,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setRating(final int rating) {");
@@ -6281,12 +6017,10 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Collection<Demo.Track> tracks;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -6300,7 +6034,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -6311,7 +6044,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -6325,7 +6057,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setTracks(final Collection<Demo.Track> tracks) {");
@@ -6349,7 +6080,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("private int rating;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -6363,7 +6093,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setRating(final int rating) {");
@@ -6518,12 +6247,10 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Collection<Demo.Track> tracks;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -6537,7 +6264,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -6548,7 +6274,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -6562,7 +6287,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setTracks(final Collection<Demo.Track> tracks) {");
@@ -6586,7 +6310,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("private int rating;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -6600,7 +6323,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setRating(final int rating) {");
@@ -6756,12 +6478,10 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Collection<Demo.Track> tracks;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -6775,7 +6495,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -6786,7 +6505,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -6800,7 +6518,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setTracks(final Collection<Demo.Track> tracks) {");
@@ -6824,7 +6541,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("private int rating;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -6838,7 +6554,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setRating(final int rating) {");
@@ -6974,12 +6689,10 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Collection<Demo.Track> tracks;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -6993,7 +6706,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -7004,7 +6716,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -7018,7 +6729,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setTracks(final Collection<Demo.Track> tracks) {");
@@ -7042,7 +6752,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("private int rating;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -7056,7 +6765,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setRating(final int rating) {");
@@ -7190,12 +6898,10 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("private Collection<Demo.Track> tracks;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -7209,7 +6915,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setName(final String name) {");
@@ -7220,7 +6925,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -7234,7 +6938,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setTracks(final Collection<Demo.Track> tracks) {");
@@ -7258,7 +6961,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("private int rating;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("@Pure");
@@ -7272,7 +6974,6 @@ public class CompilerBug458010Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void setRating(final int rating) {");

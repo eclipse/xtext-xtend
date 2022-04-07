@@ -2698,27 +2698,22 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("public String space = null;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public Integer newLines = null;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int increaseIndentationChange = 0;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public int decreaseIndentationChange = 0;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public PreferenceKey key = null;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void cfg(final PreferenceKey key) {");
@@ -2729,7 +2724,6 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void newLine() {");
@@ -2740,7 +2734,6 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void noSpace() {");
@@ -2751,7 +2744,6 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void oneSpace() {");
@@ -2762,7 +2754,6 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void increaseIndentation() {");
@@ -2773,7 +2764,6 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void decreaseIndentation() {");
@@ -2784,7 +2774,6 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public String toString() {");

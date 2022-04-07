@@ -25,7 +25,7 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 				static class C {}
 				static class C0 extends C implements I0 {}
 				static class C1 extends C implements I1 {}
-			  
+			
 			    val x = #{ C0, C1 }
 			}
 		''', '''
@@ -68,7 +68,7 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 				static class C {}
 				static class C0 extends C implements I0 {}
 				static class C1 extends C implements I1 {}
-			  
+			
 			    val x = #[ C0, C1 ]
 			}
 		''', '''
@@ -112,7 +112,7 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 				static class C implements I {}
 				static class C0 extends C implements I0 {}
 				static class C1 extends C implements I1 {}
-			  
+			
 			    val Set<? extends Class<? extends I>> w = #{ C0, C1 }
 			}
 		''', '''
@@ -156,7 +156,7 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 				static class C implements I {}
 				static class C0 extends C implements I0 {}
 				static class C1 extends C implements I1 {}
-			  
+			
 			    val Set<Class<? extends I>> w = #{ C0, C1 }
 			}
 		''', '''
@@ -201,7 +201,7 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 				static class C {}
 				static class C0 extends C implements I0 {}
 				static class C1 extends C implements I1 {}
-			  
+			
 			    val Set<? extends Class<? extends I>> w = #{ C0, C1 }
 			}
 		''', '''
@@ -246,7 +246,7 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 				static class C {}
 				static class C0 extends C implements I0 {}
 				static class C1 extends C implements I1 {}
-			  
+			
 			    val Set<Class<? extends I>> w = #{ C0, C1 }
 			}
 		''', '''
@@ -291,7 +291,7 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 				static class C {}
 				static class C0 extends C implements I0 {}
 				static class C1 extends C implements I1 {}
-			  
+			
 			    val Class<? extends C> x1 = C0
 			    val Class<? extends I> x2 = C0
 			    val x = #{ C0, C1 }

@@ -66,7 +66,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			
 			  public interface InstanceIdentifierBuilder<T extends Object> {
 			    <C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, N extends IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> container);
-			  
+			
 			    <N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<N> listItem, final K listKey);
 			  }
 			
@@ -129,9 +129,9 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			
 			  public interface InstanceIdentifierBuilder<T extends Object> {
 			    <C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, N extends IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> container);
-			  
+			
 			    <N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<N> listItem, final K listKey);
-			  
+			
 			    <C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N>, N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> listItem, final K listKey);
 			  }
 			
@@ -194,9 +194,9 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			
 			  public interface InstanceIdentifierBuilder<T extends Object> {
 			    <C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, N extends IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> container);
-			  
+			
 			    <N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N, K>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<N> listItem, final K listKey);
-			  
+			
 			    <C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N, K>, N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> listItem, final K listKey);
 			  }
 			
@@ -1229,7 +1229,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			
 			class Bug {
 			    List<String> list = newArrayList
-			  
+			
 			    def doSomething(Map<String, String> mapping) {
 			        list = mapping.values.sort
 			    }
@@ -3088,7 +3088,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			class TestError {
 			    def Void voidObjectReturned() {
 			    }
-			  
+			
 			    def void sampleMethod() {
 			        try {
 			            voidObjectReturned

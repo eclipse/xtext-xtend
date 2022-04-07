@@ -134,7 +134,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
 			    void add(final T t);
-			  
+			
 			    T get();
 			  }
 			
@@ -176,7 +176,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
 			    void add(final T t);
-			  
+			
 			    T get();
 			  }
 			
@@ -219,7 +219,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void add(final T t);
-			  
+			
 			    T get();
 			  }
 			
@@ -263,7 +263,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void add(final T t);
-			  
+			
 			    T get();
 			  }
 			
@@ -306,7 +306,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void add(final T t);
-			  
+			
 			    T get();
 			  }
 			

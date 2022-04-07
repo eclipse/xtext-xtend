@@ -1069,7 +1069,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			  public void foo() {
 			    abstract class __Foo_1 implements Runnable {
 			      final __Foo_1 _this__Foo_1 = this;
-			      
+			
 			      String x;
 			    }
 			

@@ -42,7 +42,6 @@ public class CompilerXtendIssue230Test extends AbstractXtendCompilerTest {
     _builder.append("    ");
     _builder.append("private String name;");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("@Pure");
@@ -56,7 +55,6 @@ public class CompilerXtendIssue230Test extends AbstractXtendCompilerTest {
     _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("public void setName(final String name) {");
@@ -80,7 +78,6 @@ public class CompilerXtendIssue230Test extends AbstractXtendCompilerTest {
     _builder.append("    ");
     _builder.append("private String name;");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("@Pure");
@@ -94,7 +91,6 @@ public class CompilerXtendIssue230Test extends AbstractXtendCompilerTest {
     _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("public void setName(final String name) {");

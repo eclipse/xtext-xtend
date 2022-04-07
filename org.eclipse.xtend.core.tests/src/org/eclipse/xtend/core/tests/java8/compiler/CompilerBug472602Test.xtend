@@ -49,14 +49,14 @@ class CompilerBug472602Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public abstract class C<A extends Object> {
 			  public static class MapResult<A extends Object, B extends Object> extends C<B> {
 			    private C<A> in;
-			  
+			
 			    private Function<A, B> f;
-			  
+			
 			    public MapResult(final C<A> in, final Function<A, B> f) {
 			      this.in = in;
 			      this.f = f;
 			    }
-			  
+			
 			    @Override
 			    public B get() {
 			      final A a = this.in.get();

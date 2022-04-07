@@ -82,7 +82,7 @@ class CompilerBug434424Test extends AbstractXtendCompilerTest {
 			    public String d(final CharSequence c) {
 			      return null;
 			    }
-			  
+			
 			    public static int d(final String s) {
 			      return 0;
 			    }

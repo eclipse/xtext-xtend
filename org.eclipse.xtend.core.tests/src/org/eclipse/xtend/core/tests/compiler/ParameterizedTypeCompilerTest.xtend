@@ -290,7 +290,7 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			    new(List<U> list) {
 			        super(list)
 			    }
-			  
+			
 			    override woot(List<U> list) {
 			        super.woot(list)
 			    }
@@ -317,7 +317,7 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			    new(List<U> list) {
 			        super(list)
 			    }
-			  
+			
 			    override woot(List<U> list) {
 			        super.woot(list)
 			    }

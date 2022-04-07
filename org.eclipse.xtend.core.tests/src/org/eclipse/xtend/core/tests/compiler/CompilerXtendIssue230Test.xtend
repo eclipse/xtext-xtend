@@ -50,12 +50,12 @@ class CompilerXtendIssue230Test extends AbstractXtendCompilerTest {
 		  @Accessors
 		  public static class A1 {
 		    private String name;
-		  
+		
 		    @Pure
 		    public String getName() {
 		      return this.name;
 		    }
-		  
+		
 		    public void setName(final String name) {
 		      this.name = name;
 		    }
@@ -64,12 +64,12 @@ class CompilerXtendIssue230Test extends AbstractXtendCompilerTest {
 		  @Accessors
 		  public static class A2 {
 		    private String name;
-		  
+		
 		    @Pure
 		    public String getName() {
 		      return this.name;
 		    }
-		  
+		
 		    public void setName(final String name) {
 		      this.name = name;
 		    }

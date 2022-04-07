@@ -278,7 +278,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("String getName();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void setName(final String name);");
@@ -293,7 +292,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("int getNumber();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void setNumber(final int n);");
@@ -308,7 +306,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("int getCount();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void setCount(final int c);");
@@ -539,7 +536,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("String getName();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void setName(final String name);");
@@ -554,7 +550,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("int getNumber();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void setNumber(final int n);");
@@ -569,7 +564,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("int getCount();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void setCount(final int c);");

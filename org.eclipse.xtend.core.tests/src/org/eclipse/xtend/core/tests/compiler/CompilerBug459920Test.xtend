@@ -118,19 +118,19 @@ class CompilerBug459920Test extends AbstractXtendCompilerTest {
 			public class Main {
 			  public interface Named {
 			    String getName();
-			  
+			
 			    void setName(final String name);
 			  }
 			
 			  public interface A extends Main.Named {
 			    int getNumber();
-			  
+			
 			    void setNumber(final int n);
 			  }
 			
 			  public interface B extends Main.Named {
 			    int getCount();
-			  
+			
 			    void setCount(final int c);
 			  }
 			
@@ -219,19 +219,19 @@ class CompilerBug459920Test extends AbstractXtendCompilerTest {
 			public class Main {
 			  public interface Named {
 			    String getName();
-			  
+			
 			    void setName(final String name);
 			  }
 			
 			  public interface A extends Main.Named {
 			    int getNumber();
-			  
+			
 			    void setNumber(final int n);
 			  }
 			
 			  public interface B extends Main.Named {
 			    int getCount();
-			  
+			
 			    void setCount(final int c);
 			  }
 			

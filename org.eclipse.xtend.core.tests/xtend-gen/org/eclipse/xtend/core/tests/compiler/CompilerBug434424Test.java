@@ -162,7 +162,6 @@ public class CompilerBug434424Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public static int d(final String s) {");

@@ -118,7 +118,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			    public static <T extends Object> C.MyComparator<T> comparingInt(final C.ToIntFunction<? super T> fun) {
 			      return null;
 			    }
-			  
+			
 			    public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final Function1<? super T, ? extends U> f) {
 			      return null;
 			    }
@@ -172,7 +172,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			    public static <T extends Object> C.MyComparator<T> comparingInt(final C.ToIntFunction<? super T> fun) {
 			      return null;
 			    }
-			  
+			
 			    public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final Function1<? super T, ? extends U> f) {
 			      return null;
 			    }
@@ -226,7 +226,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			    public static <T extends Object> C.MyComparator<T> comparingInt(final C.ToIntFunction<? super T> fun) {
 			      return null;
 			    }
-			  
+			
 			    public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final Function1<? super T, ? extends U> f) {
 			      return null;
 			    }
@@ -279,11 +279,11 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			    public static <T extends Object> C.MyComparator<T> comparingInt(final C.ToIntFunction<? super T> fun) {
 			      return null;
 			    }
-			  
+			
 			    public abstract <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final C.Function<? super T, ? extends U> keyExtractor, final C.MyComparator<? super U> keyComparator);
-			  
+			
 			    public abstract C.MyComparator<T> thenComparing(final C.MyComparator<? super T> other);
-			  
+			
 			    public abstract <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final C.Function<? super T, ? extends U> keyExtractor);
 			  }
 			

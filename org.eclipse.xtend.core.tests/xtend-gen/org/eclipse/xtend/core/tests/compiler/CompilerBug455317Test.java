@@ -40,7 +40,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder.append("\t");
     _builder.append("static class C1 extends C implements I1 {}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("val x = #{ C0, C1 }");
@@ -132,7 +131,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder.append("\t");
     _builder.append("static class C1 extends C implements I1 {}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("val x = #[ C0, C1 ]");
@@ -226,7 +224,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder.append("\t");
     _builder.append("static class C1 extends C implements I1 {}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("val Set<? extends Class<? extends I>> w = #{ C0, C1 }");
@@ -320,7 +317,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder.append("\t");
     _builder.append("static class C1 extends C implements I1 {}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("val Set<Class<? extends I>> w = #{ C0, C1 }");
@@ -415,7 +411,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder.append("\t");
     _builder.append("static class C1 extends C implements I1 {}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("val Set<? extends Class<? extends I>> w = #{ C0, C1 }");
@@ -510,7 +505,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder.append("\t");
     _builder.append("static class C1 extends C implements I1 {}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("val Set<Class<? extends I>> w = #{ C0, C1 }");
@@ -605,7 +599,6 @@ public class CompilerBug455317Test extends AbstractXtendCompilerTest {
     _builder.append("\t");
     _builder.append("static class C1 extends C implements I1 {}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("val Class<? extends C> x1 = C0");

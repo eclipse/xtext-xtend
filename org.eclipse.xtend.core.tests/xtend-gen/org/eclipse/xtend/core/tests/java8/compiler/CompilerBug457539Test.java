@@ -294,7 +294,6 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("void add(final T t);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("T get();");
@@ -397,7 +396,6 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("void add(final T t);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("T get();");
@@ -503,7 +501,6 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("void add(final T t);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("T get();");
@@ -612,7 +609,6 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("void add(final T t);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("T get();");
@@ -718,7 +714,6 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("    ");
     _builder_1.append("void add(final T t);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("T get();");

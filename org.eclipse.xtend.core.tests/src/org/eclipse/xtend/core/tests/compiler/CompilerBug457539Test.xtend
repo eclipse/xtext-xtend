@@ -74,9 +74,9 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
-			  
+			
 			    void add(final T t);
-			  
+			
 			    T get();
 			  }
 			
@@ -122,9 +122,9 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
-			  
+			
 			    void add(final T t);
-			  
+			
 			    T get();
 			  }
 			
@@ -167,9 +167,9 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
-			  
+			
 			    void add(final T t);
-			  
+			
 			    T get();
 			  }
 			
@@ -214,9 +214,9 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
-			  
+			
 			    void add(final T t);
-			  
+			
 			    T get();
 			  }
 			
@@ -262,9 +262,9 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
-			  
+			
 			    void add(final T t);
-			  
+			
 			    T get();
 			  }
 			
@@ -311,9 +311,9 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
-			  
+			
 			    void add(final T t);
-			  
+			
 			    T get();
 			  }
 			
@@ -359,9 +359,9 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
-			  
+			
 			    void add(final T t);
-			  
+			
 			    T get();
 			  }
 			

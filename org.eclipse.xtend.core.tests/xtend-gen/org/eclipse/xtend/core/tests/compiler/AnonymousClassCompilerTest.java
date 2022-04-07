@@ -2506,7 +2506,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("final __Foo_1 _this__Foo_1 = this;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("String x;");

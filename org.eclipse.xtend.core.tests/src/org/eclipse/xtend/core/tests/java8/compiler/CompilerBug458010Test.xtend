@@ -80,54 +80,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -203,54 +203,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -323,54 +323,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -443,54 +443,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -558,54 +558,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -694,9 +694,9 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			public class Demo {
 			  public static class Averager implements IntConsumer {
 			    private int total = 0;
-			  
+			
 			    private int count = 0;
-			  
+			
 			    public double average() {
 			      double _xifexpression = (double) 0;
 			      if ((this.count > 0)) {
@@ -706,14 +706,14 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			      }
 			      return _xifexpression;
 			    }
-			  
+			
 			    @Override
 			    public void accept(final int i) {
 			      int _tal = this.total;
 			      this.total = (_tal + i);
 			      this.count++;
 			    }
-			  
+			
 			    public int combine(final Demo.Averager other) {
 			      int _xblockexpression = (int) 0;
 			      {
@@ -730,54 +730,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -874,9 +874,9 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			public class Demo {
 			  public static class Averager implements IntConsumer {
 			    private int total = 0;
-			  
+			
 			    private int count = 0;
-			  
+			
 			    public double average() {
 			      double _xifexpression = (double) 0;
 			      if ((this.count > 0)) {
@@ -886,14 +886,14 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			      }
 			      return _xifexpression;
 			    }
-			  
+			
 			    @Override
 			    public void accept(final int i) {
 			      int _tal = this.total;
 			      this.total = (_tal + i);
 			      this.count++;
 			    }
-			  
+			
 			    public int combine(final Demo.Averager other) {
 			      int _xblockexpression = (int) 0;
 			      {
@@ -910,54 +910,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -1036,54 +1036,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -1157,54 +1157,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -1281,54 +1281,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -1405,54 +1405,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -1532,54 +1532,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -1657,54 +1657,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -1768,21 +1768,21 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    public int getAge() {
 			      return 10;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
@@ -1854,54 +1854,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -1973,54 +1973,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -2092,54 +2092,54 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private LocalDate birthday;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    public int getAge() {
 			      return Period.between(this.birthday, LocalDate.now()).getYears();
 			    }
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public LocalDate getBirthday() {
 			      return this.birthday;
 			    }
-			  
+			
 			    public void setBirthday(final LocalDate birthday) {
 			      this.birthday = birthday;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -2201,39 +2201,39 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -2291,39 +2291,39 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static class Person {
 			    public enum Sex {
 			      MALE,
-			      
+			
 			      FEMALE;
 			    }
-			  
+			
 			    private String name;
-			  
+			
 			    private Demo.Person.Sex gender;
-			  
+			
 			    private String emailAddress;
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public Demo.Person.Sex getGender() {
 			      return this.gender;
 			    }
-			  
+			
 			    public void setGender(final Demo.Person.Sex gender) {
 			      this.gender = gender;
 			    }
-			  
+			
 			    @Pure
 			    public String getEmailAddress() {
 			      return this.emailAddress;
 			    }
-			  
+			
 			    public void setEmailAddress(final String emailAddress) {
 			      this.emailAddress = emailAddress;
 			    }
@@ -2385,23 +2385,23 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  @Accessors
 			  public static class Album {
 			    private String name;
-			  
+			
 			    private Collection<Demo.Track> tracks;
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public Collection<Demo.Track> getTracks() {
 			      return this.tracks;
 			    }
-			  
+			
 			    public void setTracks(final Collection<Demo.Track> tracks) {
 			      this.tracks = tracks;
 			    }
@@ -2410,12 +2410,12 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  @Accessors
 			  public static class Track {
 			    private int rating;
-			  
+			
 			    @Pure
 			    public int getRating() {
 			      return this.rating;
 			    }
-			  
+			
 			    public void setRating(final int rating) {
 			      this.rating = rating;
 			    }
@@ -2479,23 +2479,23 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  @Accessors
 			  public static class Album {
 			    private String name;
-			  
+			
 			    private Collection<Demo.Track> tracks;
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public Collection<Demo.Track> getTracks() {
 			      return this.tracks;
 			    }
-			  
+			
 			    public void setTracks(final Collection<Demo.Track> tracks) {
 			      this.tracks = tracks;
 			    }
@@ -2504,12 +2504,12 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  @Accessors
 			  public static class Track {
 			    private int rating;
-			  
+			
 			    @Pure
 			    public int getRating() {
 			      return this.rating;
 			    }
-			  
+			
 			    public void setRating(final int rating) {
 			      this.rating = rating;
 			    }
@@ -2574,23 +2574,23 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  @Accessors
 			  public static class Album {
 			    private String name;
-			  
+			
 			    private Collection<Demo.Track> tracks;
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public Collection<Demo.Track> getTracks() {
 			      return this.tracks;
 			    }
-			  
+			
 			    public void setTracks(final Collection<Demo.Track> tracks) {
 			      this.tracks = tracks;
 			    }
@@ -2599,12 +2599,12 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  @Accessors
 			  public static class Track {
 			    private int rating;
-			  
+			
 			    @Pure
 			    public int getRating() {
 			      return this.rating;
 			    }
-			  
+			
 			    public void setRating(final int rating) {
 			      this.rating = rating;
 			    }
@@ -2670,23 +2670,23 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  @Accessors
 			  public static class Album {
 			    private String name;
-			  
+			
 			    private Collection<Demo.Track> tracks;
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public Collection<Demo.Track> getTracks() {
 			      return this.tracks;
 			    }
-			  
+			
 			    public void setTracks(final Collection<Demo.Track> tracks) {
 			      this.tracks = tracks;
 			    }
@@ -2695,12 +2695,12 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  @Accessors
 			  public static class Track {
 			    private int rating;
-			  
+			
 			    @Pure
 			    public int getRating() {
 			      return this.rating;
 			    }
-			  
+			
 			    public void setRating(final int rating) {
 			      this.rating = rating;
 			    }
@@ -2757,23 +2757,23 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  @Accessors
 			  public static class Album {
 			    private String name;
-			  
+			
 			    private Collection<Demo.Track> tracks;
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public Collection<Demo.Track> getTracks() {
 			      return this.tracks;
 			    }
-			  
+			
 			    public void setTracks(final Collection<Demo.Track> tracks) {
 			      this.tracks = tracks;
 			    }
@@ -2782,12 +2782,12 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  @Accessors
 			  public static class Track {
 			    private int rating;
-			  
+			
 			    @Pure
 			    public int getRating() {
 			      return this.rating;
 			    }
-			  
+			
 			    public void setRating(final int rating) {
 			      this.rating = rating;
 			    }
@@ -2843,23 +2843,23 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  @Accessors
 			  public static class Album {
 			    private String name;
-			  
+			
 			    private Collection<Demo.Track> tracks;
-			  
+			
 			    @Pure
 			    public String getName() {
 			      return this.name;
 			    }
-			  
+			
 			    public void setName(final String name) {
 			      this.name = name;
 			    }
-			  
+			
 			    @Pure
 			    public Collection<Demo.Track> getTracks() {
 			      return this.tracks;
 			    }
-			  
+			
 			    public void setTracks(final Collection<Demo.Track> tracks) {
 			      this.tracks = tracks;
 			    }
@@ -2868,12 +2868,12 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  @Accessors
 			  public static class Track {
 			    private int rating;
-			  
+			
 			    @Pure
 			    public int getRating() {
 			      return this.rating;
 			    }
-			  
+			
 			    public void setRating(final int rating) {
 			      this.rating = rating;
 			    }
