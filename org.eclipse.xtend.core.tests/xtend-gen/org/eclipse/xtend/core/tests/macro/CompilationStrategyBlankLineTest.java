@@ -48,7 +48,7 @@ public class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTe
       _builder_1.append("  ");
       _builder_1.append("public void blank() {");
       _builder_1.newLine();
-      _builder_1.append("  ");
+      _builder_1.append("    ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");
@@ -66,7 +66,7 @@ public class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTe
       _builder_1.append("  ");
       _builder_1.append("public void blank_2() {");
       _builder_1.newLine();
-      _builder_1.append("  ");
+      _builder_1.append("    ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");
@@ -75,7 +75,7 @@ public class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTe
       _builder_1.append("  ");
       _builder_1.append("public void blank_3() {");
       _builder_1.newLine();
-      _builder_1.append("  ");
+      _builder_1.append("    ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");

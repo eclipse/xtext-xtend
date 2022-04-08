@@ -37,7 +37,7 @@ class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTest {
 				@SuppressWarnings("all")
 				public class A {
 				  public void blank() {
-				  
+				    
 				  }
 				
 				  public void blank_1() {
@@ -45,11 +45,11 @@ class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTest {
 				  }
 				
 				  public void blank_2() {
-				  
+				    
 				  }
 				
 				  public void blank_3() {
-				  
+				    
 				  }
 				
 				  public void blank_4() {
