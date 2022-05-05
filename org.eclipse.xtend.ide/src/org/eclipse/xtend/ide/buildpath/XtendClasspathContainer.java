@@ -8,10 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.buildpath;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.FileLocator;
@@ -87,10 +89,11 @@ final public class XtendClasspathContainer implements IClasspathContainer {
 		IPath path = binFolderPath(bundle);
 		if (path == null) {
 			// common jar file case, no bin folder
-			try {
-				path = new Path(FileLocator.getBundleFile(bundle).getAbsolutePath());
-			} catch (IOException e) {
-				LOG.error("Can't resolve path '" + bundle.getSymbolicName() + "'", e); //$NON-NLS-1$ //$NON-NLS-2$
+			Optional<File> bundleFileLocation = FileLocator.getBundleFileLocation(bundle);
+			if (bundleFileLocation.isPresent()) {
+				path = new Path(bundleFileLocation.get().getAbsolutePath());
+			} else {
+				LOG.error("Can't resolve path '" + bundle.getSymbolicName() + "'", new IOException("Unable to locate the bundle file: " + bundle)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 		}
 		return path;
