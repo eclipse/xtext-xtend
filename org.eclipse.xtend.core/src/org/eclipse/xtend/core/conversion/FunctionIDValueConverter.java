@@ -17,6 +17,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
@@ -32,10 +33,10 @@ public class FunctionIDValueConverter extends AbstractValueConverter<String> {
 
 	private XtendGrammarAccess grammarAccess;
 
-	private XtendValueConverterService service;
+	private Provider<XtendValueConverterService> service;
 
 	@Inject
-	protected void setDelegate(XtendValueConverterService service, XtendGrammarAccess grammarAccess) {
+	protected void setDelegate(Provider<XtendValueConverterService> service, XtendGrammarAccess grammarAccess) {
 		this.service = service;
 		this.grammarAccess = grammarAccess;
 	}
@@ -52,7 +53,7 @@ public class FunctionIDValueConverter extends AbstractValueConverter<String> {
 	private IValueConverter<Object> getDelegate() {
 		if (delegate != null)
 			return delegate;
-		return delegate = service.getConverter(grammarAccess.getValidIDRule().getName());
+		return delegate = service.get().getConverter(grammarAccess.getValidIDRule().getName());
 	}
 
 	@Override
