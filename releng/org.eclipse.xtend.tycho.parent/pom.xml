@@ -20,6 +20,7 @@
 		<tycho.scmUrl>scm:git:https://github.com/eclipse/xtext-xtend.git</tycho.scmUrl>
 		<target-platform-classifier></target-platform-classifier>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
+		<upstreamBranch>master</upstreamBranch>
 	</properties>
 
 	<profiles>
@@ -47,9 +48,42 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<tycho-version>2.6.0</tycho-version>
 				<target-platform-classifier>org.eclipse.xtend.target-r202203</target-platform-classifier>
 			</properties>
+		</profile>
+
+		<profile>
+			<id>useJenkinsSnapshots</id>
+			<repositories>
+				<repository>
+					<id>xtext-lib-from-jenkins</id>
+					<url>${JENKINS_URL}/job/xtext-lib/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+				<repository>
+					<id>xtext-core-from-jenkins</id>
+					<url>${JENKINS_URL}/job/xtext-core/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+				<repository>
+					<id>xtext-extras-from-jenkins</id>
+					<url>${JENKINS_URL}/job/xtext-extras/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+			</repositories>
+		</profile>
+		<profile>
+			<id>useSonatypeSnapshots</id>
+			<repositories>
+				<repository>
+					<id>sonatype-snapshots</id>
+					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+					<snapshots>
+						<enabled>true</enabled>
+						<checksumPolicy>fail</checksumPolicy>
+					</snapshots>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+				</repository>
+			</repositories>
 		</profile>
 	</profiles>
 
@@ -132,6 +166,7 @@
 						<!-- Generate the source reference in the MANIFEST.MF -->
 						<generate>true</generate>
 					</sourceReferences>
+					<skipPomGeneration>true</skipPomGeneration>
 				</configuration>
 			</plugin>
 			<plugin>

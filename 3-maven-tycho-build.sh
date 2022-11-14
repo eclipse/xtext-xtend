@@ -55,6 +55,7 @@ while [ "$1" != "" ]; do
   shift
 done
 
+MVN_ARGS+=(-PuseJenkinsSnapshots)
 MVN_ARGS+=(-P$TARGET_PLATFORM)
 echo mvn -B -f tycho-pom.xml ${MVN_ARGS[@]} $@
 

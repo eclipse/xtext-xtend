@@ -81,7 +81,7 @@ pipeline {
           steps {
             sh '''
               export MAVEN_OPTS="-Xmx1500m"
-              ./2-maven-plugin-build.sh -s /home/jenkins/.m2/settings.xml --local-repository=/home/jenkins/.m2/repository
+              ./2-maven-plugin-build.sh -s /home/jenkins/.m2/settings.xml --local-repository=$WORKSPACE/.m2maven/repository
             '''
           } // END steps
         } // END stage
@@ -90,7 +90,7 @@ pipeline {
             wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
             sh """
               export MAVEN_OPTS=-Xmx1500m 
-              ./3-maven-tycho-build.sh -s /home/jenkins/.m2/settings.xml --tp=${selectedTargetPlatform()} --local-repository=/home/jenkins/.m2/repository
+              ./3-maven-tycho-build.sh -s /home/jenkins/.m2/settings.xml --tp=${selectedTargetPlatform()} --local-repository=$WORKSPACE/.m2tycho/repository
             """
             }
           }// END steps
