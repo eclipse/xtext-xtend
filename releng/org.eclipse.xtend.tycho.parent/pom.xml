@@ -134,6 +134,9 @@
 				</dependencies>
 				<configuration>
 					<format>'v'yyyyMMdd-HHmm</format>
+					<!-- required to have valid consumable Maven artifacts
+						https://github.com/eclipse/tycho/issues/781 -->
+					<skipPomGeneration>true</skipPomGeneration>
 					<sourceReferences>
 						<!-- Generate the source reference in the MANIFEST.MF -->
 						<generate>true</generate>
