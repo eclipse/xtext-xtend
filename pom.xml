@@ -14,6 +14,13 @@
 
 	<modules>
 		<module>releng/org.eclipse.xtend.tycho.parent</module>
+		<module>releng/org.eclipse.xtend.target</module>
+		<module>org.eclipse.xtend.core</module>
+	</modules>
+
+	<!-- ORIGINAL:
+	<modules>
+		<module>releng/org.eclipse.xtend.tycho.parent</module>
 		<module>releng/org.eclipse.xtend.tycho.tests.parent</module>
 		<module>releng/org.eclipse.xtend.target</module>
 		<module>releng/org.eclipse.xtend.p2-repository</module>
@@ -30,9 +37,6 @@
 		<module>org.eclipse.xtend.doc</module>
 		<module>org.eclipse.xtend.examples</module>
 	</modules>
-	
-	<build>
-		<defaultGoal>install</defaultGoal>
-	</build>
+	-->
 
 </project>
