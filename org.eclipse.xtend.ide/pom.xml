@@ -11,6 +11,8 @@
 	<packaging>eclipse-plugin</packaging>
 	<artifactId>org.eclipse.xtend.ide</artifactId>
 
+	<name>Xtend IDE</name>
+
 	<properties>
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
 		<buildId>${maven.build.timestamp}</buildId>
@@ -18,6 +20,10 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
