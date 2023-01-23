@@ -20,6 +20,9 @@
 		<tycho.scmUrl>scm:git:https://github.com/eclipse/xtext-xtend.git</tycho.scmUrl>
 		<target-platform-classifier></target-platform-classifier>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
+
+		<!-- TODO: use this one by default for the moment -->
+		<target-platform-classifier>org.eclipse.xtend.target-latest</target-platform-classifier>
 	</properties>
 
 	<profiles>
@@ -49,9 +52,6 @@
 		</profile>
 		<profile>
 			<id>r202203</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 			<properties>
 				<tycho-version>2.6.0</tycho-version>
 				<target-platform-classifier>org.eclipse.xtend.target-r202203</target-platform-classifier>
@@ -66,28 +66,6 @@
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-compiler-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<configuration>
-					<excludeResources>
-						<excludeResource>**/*.xtend</excludeResource>
-						<excludeResource>**/*.xtendbin</excludeResource>
-						<excludeResource>**/*._trace</excludeResource>
-					</excludeResources>
-					<compilerArgs>
-						<arg>-parameters</arg>
-					</compilerArgs>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>tycho-compiler-jdt</artifactId>
-						<version>${tycho-version}</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
@@ -170,47 +148,77 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>3.2.0</version>
-				<configuration>
-					<filesets>
-						<fileset>
-							<directory>${project.basedir}/target</directory>
-						</fileset>
-						<fileset>
-							<directory>${project.basedir}/xtend-gen</directory>
-							<includes>
-								<include>**/*</include>
-							</includes>
-							<excludes>
-								<exclude>.gitignore</exclude>
-							</excludes>
-						</fileset>
-					</filesets>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.xtend</groupId>
-				<artifactId>xtend-maven-plugin</artifactId>
-				<version>${xtend-maven-plugin-version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<goal>xtend-install-debug-info</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<showEmptyDirWarning>false</showEmptyDirWarning>
-					<outputDirectory>${basedir}/xtend-gen</outputDirectory>
-				</configuration>
-			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-compiler-plugin</artifactId>
+					<version>${tycho-version}</version>
+					<configuration>
+						<useProjectSettings>true</useProjectSettings>
+						<excludeResources>
+							<excludeResource>**/*.xtend</excludeResource>
+							<excludeResource>**/*.xtendbin</excludeResource>
+							<excludeResource>**/*._trace</excludeResource>
+						</excludeResources>
+						<compilerArgs>
+							<arg>-parameters</arg>
+						</compilerArgs>
+					</configuration>
+				</plugin>
+				<plugin>
+					<!--
+					This will let Tycho execute tests in "eclipse-plugin" projects
+					as JUnit tests (NOT as plug-in tests). We force the JUnitPlatform
+					to execute all tests (JUnit4 and JUnit5) with the JUnit5 engine.
+					-->
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-version}</version>
+					<!--
+					This is not needed now, but will be needed when switching to Tycho 4.0.0
+					see https://github.com/eclipse-tycho/tycho/blob/master/RELEASE_NOTES.md#using-integrationplugin-tests-with-eclipse-plugin-packaging
+					<executions>
+						<execution>
+							<id>execute-unit-tests</id>
+							<goals>
+								<goal>test</goal>
+							</goals>
+						</execution>
+					</executions>
+					-->
+					<configuration>
+						<!--
+						The Surefire Plugin excludes nested classes by default: http://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html#excludes
+						By removing all default exclusions the nested classes get executed too, JUnit 4 and JUnit 5.
+						-->
+						<excludes>
+							<exclude />
+						</excludes>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.2.0</version>
+					<configuration>
+						<filesets>
+							<fileset>
+								<directory>${project.basedir}/target</directory>
+							</fileset>
+							<fileset>
+								<directory>${project.basedir}/xtend-gen</directory>
+								<includes>
+									<include>**/*</include>
+								</includes>
+								<excludes>
+									<exclude>.gitignore</exclude>
+								</excludes>
+							</fileset>
+						</filesets>
+					</configuration>
+				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
