@@ -21,12 +21,37 @@
 		<target-platform-classifier></target-platform-classifier>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 
+		<!--
+		This is the version of the currently released latest version that we
+		use during the Maven builds for artifacts that are not in this Git repository
+		(and thus, not in this Maven reactor).
+		It is redefined in the profile "useJenkinsSnapshots" to take the same version
+		of this project.
+		-->
+		<xtext-current-release-version>2.30.0.M1</xtext-current-release-version>
+
 		<build-helper-maven-plugin-version>3.3.0</build-helper-maven-plugin-version>
 		<maven-surefire-version>3.0.0-M8</maven-surefire-version>
 
 		<!-- TODO: use this one by default for the moment -->
 		<target-platform-classifier>org.eclipse.xtend.target-latest</target-platform-classifier>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>xtext-dev-bom</artifactId>
+				<!--
+				TODO: update it
+				The dev BOM should be in the same Git repository of this one
+				-->
+				<version>${xtext-current-release-version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<profiles>
 		<profile>
