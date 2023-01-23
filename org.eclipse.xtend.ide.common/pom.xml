@@ -10,4 +10,32 @@
 	<packaging>eclipse-plugin</packaging>
 	<artifactId>org.eclipse.xtend.ide.common</artifactId>
 
+	<name>Xtend IDE Common</name>
+	<description>Additional platform-independent services for Xtend.</description>
+
+	<dependencies>
+		<!--
+		TODO: update it
+		This should be in the same Git repository of this one
+		-->
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.ide</artifactId>
+			<version>${xtext-current-release-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
