@@ -21,6 +21,9 @@
 		<target-platform-classifier></target-platform-classifier>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 
+		<build-helper-maven-plugin-version>3.3.0</build-helper-maven-plugin-version>
+		<maven-surefire-version>3.0.0-M8</maven-surefire-version>
+
 		<!-- TODO: use this one by default for the moment -->
 		<target-platform-classifier>org.eclipse.xtend.target-latest</target-platform-classifier>
 	</properties>
@@ -227,7 +230,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>3.3.0</version>
+					<version>${build-helper-maven-plugin-version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
