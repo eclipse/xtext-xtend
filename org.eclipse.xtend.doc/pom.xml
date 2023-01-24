@@ -9,4 +9,6 @@
 	</parent>
 	<packaging>eclipse-plugin</packaging>
 	<artifactId>org.eclipse.xtend.doc</artifactId>
+
+	<name>Xtend Documentation</name>
 </project>
