@@ -101,12 +101,9 @@
 				<version>${tycho-version}</version>
 				<configuration>
 					<target>
-						<artifact>
-							<groupId>org.eclipse.xtend</groupId>
-							<artifactId>org.eclipse.xtend.target</artifactId>
-							<classifier>${target-platform-classifier}</classifier>
-							<version>${project.parent.version}</version>
-						</artifact>
+						<file>
+							${project.basedir}/../releng/org.eclipse.xtend.target/${target-platform-classifier}.target
+						</file>
 					</target>
 					<environments>
 						<environment>
