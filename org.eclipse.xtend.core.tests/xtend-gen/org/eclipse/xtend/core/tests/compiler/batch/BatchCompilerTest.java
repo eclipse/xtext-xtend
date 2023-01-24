@@ -39,7 +39,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -610,7 +609,6 @@ public class BatchCompilerTest {
 
   @Test
   public void testCompileSymlinkedResource() {
-    Assume.assumeFalse(System.getProperty("os.name").toUpperCase().startsWith("WIN"));
     final String tstResources = new File("./batch-compiler-data/test-resources/").toURI().normalize().getPath();
     final File wsRootFile = new File(tstResources, "symlink-test-ws/");
     final String wsRootPath = wsRootFile.getPath();

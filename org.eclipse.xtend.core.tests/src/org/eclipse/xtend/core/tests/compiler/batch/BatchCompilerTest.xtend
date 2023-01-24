@@ -30,7 +30,6 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.util.Files.*
 import static org.junit.Assert.*
-import org.junit.Assume
 
 /**
  * Batch compiler tests.
@@ -415,9 +414,6 @@ class BatchCompilerTest {
 
 	@Test
     def void testCompileSymlinkedResource() {
-        // this test does not work on Windows because of symlink
-        Assume.assumeFalse
-            (System.getProperty("os.name").toUpperCase().startsWith("WIN"));
         val tstResources = new File("./batch-compiler-data/test-resources/").toURI().normalize().getPath()
         val wsRootFile = new File(tstResources, "symlink-test-ws/")
         val wsRootPath = wsRootFile.getPath()
