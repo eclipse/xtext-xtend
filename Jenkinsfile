@@ -95,7 +95,7 @@ pipeline {
       junit testResults: '**/target/surefire-reports/*.xml'
     }
     success {
-      archiveArtifacts artifacts: '**/target/work/data/.metadata/.log'
+      archiveArtifacts artifacts: 'build/**, **/target/work/data/.metadata/.log'
       script {
         if (params.TRIGGER_DOWNSTREAM_BUILD==true) {
           DOWNSTREAM_JOBS.split(',').each {
