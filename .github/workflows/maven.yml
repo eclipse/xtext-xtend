@@ -33,5 +33,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml', '**/*.target') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: 'Build and test'
-        run: mvn clean verify
+      - name: Build and test (headless with xvfb)
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: mvn clean verify
