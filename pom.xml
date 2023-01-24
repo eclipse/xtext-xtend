@@ -23,6 +23,7 @@
 		<module>org.eclipse.xtend.standalone</module>
 		<module>org.eclipse.xtend.core.tests</module>
 		<module>org.eclipse.xtend.ide.tests</module>
+		<module>org.eclipse.xtend.performance.tests</module>
 	</modules>
 
 	<!-- ORIGINAL:

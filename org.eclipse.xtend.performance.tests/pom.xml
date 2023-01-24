@@ -9,7 +9,7 @@
 	</parent>
 	<packaging>eclipse-test-plugin</packaging>
 
-	<groupId>org.eclipse.xtend</groupId>
+	<name>Xtend IDE Performance Tests</name>
 	<artifactId>org.eclipse.xtend.performance.tests</artifactId>
 
 </project>
