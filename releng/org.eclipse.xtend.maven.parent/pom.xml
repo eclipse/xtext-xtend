@@ -292,10 +292,6 @@
 			<id>useJenkinsSnapshots</id>
 			<repositories>
 				<repository>
-					<id>local-repo</id>
-					<url>${gradleMavenRepo}</url>
-				</repository>
-				<repository>
 					<id>lsp4j-from-jenkins</id>
 					<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository</url>
 				</repository>
