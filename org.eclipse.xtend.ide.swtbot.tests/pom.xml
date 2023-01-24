@@ -50,9 +50,9 @@
 				</configuration>
 			</plugin>
 		</plugins>
-  	</build>
+	</build>
 
-  	<profiles>
+	<profiles>
 		<profile>
 			<id>latest</id>
 			<build>
@@ -60,7 +60,6 @@
 					<plugin>
 						<groupId>org.eclipse.tycho</groupId>
 						<artifactId>target-platform-configuration</artifactId>
-						<version>${tycho-version}</version>
 						<configuration>
 							<dependency-resolution>
 								<extraRequirements>
