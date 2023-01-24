@@ -18,6 +18,8 @@
 		<module>org.eclipse.xtend.core</module>
 		<module>org.eclipse.xtend.ide.common</module>
 		<module>org.eclipse.xtend.ide</module>
+		<module>org.eclipse.xtend.ide.tests.data</module>
+		<module>org.eclipse.xtend.ide.tests</module>
 		<module>org.eclipse.xtend.core.tests</module>
 	</modules>
 

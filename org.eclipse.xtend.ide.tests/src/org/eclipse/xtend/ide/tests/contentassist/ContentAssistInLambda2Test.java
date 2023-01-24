@@ -18,7 +18,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ContentAssistInLambdaTest2 extends ContentAssistTest {
+public class ContentAssistInLambda2Test extends ContentAssistTest {
 
 	@Override
 	@Test public void testAfterBinaryOperation_10() throws Exception {
