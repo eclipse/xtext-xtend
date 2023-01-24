@@ -13,7 +13,6 @@ fi
 MVN_ARGS=(\
   --update-snapshots \
   --fae \
-  -Declipse.p2.mirrors=false \
   -DJENKINS_URL=$JENKINS_URL \
   -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
 )
@@ -55,11 +54,13 @@ while [ "$1" != "" ]; do
   shift
 done
 
+MVN_ARGS+=(-PuseJenkinsSnapshots)
 MVN_ARGS+=(-P$TARGET_PLATFORM)
-echo mvn -B -f tycho-pom.xml ${MVN_ARGS[@]} $@
+
+echo mvn -B ${MVN_ARGS[@]} $@
 
 echo "Using target platform '$TARGET_PLATFORM'"
 mvn -B \
-  -f tycho-pom.xml \
+  clean verify \
   ${MVN_ARGS[@]} \
   $@

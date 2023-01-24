@@ -66,15 +66,6 @@ pipeline {
       }
     }
 
-    stage('Gradle Build') {
-      steps {
-        sh '''
-          JAVA_OPTS="-Xmx1500m"
-          ./1-gradle-build.sh
-        '''
-      }
-    }
-
     stage('Maven Build & Test') {
       stages { // TODO use of parallel { here kills Tycho process with OOM
         stage('Maven Plugin Build') {
@@ -101,10 +92,10 @@ pipeline {
 
   post {
     always {
-      junit testResults: '**/target/surefire-reports/*.xml, **/build/test-results/test/*.xml'
+      junit testResults: '**/target/surefire-reports/*.xml'
     }
     success {
-      archiveArtifacts artifacts: 'build/**, **/target/work/data/.metadata/.log'
+      archiveArtifacts artifacts: '**/target/work/data/.metadata/.log'
       script {
         if (params.TRIGGER_DOWNSTREAM_BUILD==true) {
           DOWNSTREAM_JOBS.split(',').each {
@@ -118,7 +109,7 @@ pipeline {
       }
     }
     unsuccessful {
-      archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, build/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
+      archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
     }
     cleanup {
       script {

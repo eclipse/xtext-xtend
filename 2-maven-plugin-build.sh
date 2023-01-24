@@ -59,6 +59,8 @@ MVN_ARGS+=(-PuseJenkinsSnapshots)
 echo mvn -B -f maven-pom.xml ${MVN_ARGS[@]} $@
 
 mvn -B \
-  -f maven-pom.xml \
+  -f releng/org.eclipse.xtend.maven.releng \
+  clean deploy \
+  -DaltDeploymentRepository=local::default::file:./build/maven-repository \
   ${MVN_ARGS[@]} \
   $@
