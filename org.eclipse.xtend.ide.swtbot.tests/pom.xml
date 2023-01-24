@@ -9,7 +9,6 @@
 	</parent>
 	<packaging>eclipse-test-plugin</packaging>
 
-	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>org.eclipse.xtend.ide.swtbot.tests</artifactId>
 
 	<build>
@@ -17,7 +16,6 @@
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
-				<version>${xtend-maven-plugin-version}</version>
 				<executions>
 					<execution>
 						<goals>
