@@ -19,6 +19,7 @@
 		<sign.skip>true</sign.skip>
 		<tycho.scmUrl>scm:git:https://github.com/eclipse/xtext-xtend.git</tycho.scmUrl>
 		<target-platform-classifier></target-platform-classifier>
+		<upstreamBranch>lb_2052_maven_tycho</upstreamBranch>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 
 		<!--
@@ -84,6 +85,32 @@
 				<tycho-version>2.6.0</tycho-version>
 				<target-platform-classifier>org.eclipse.xtend.target-r202203</target-platform-classifier>
 			</properties>
+		</profile>
+		<profile>
+			<id>useJenkinsSnapshots</id>
+			<properties>
+				<!-- redefines the property for versions of artifacts not in this Git repository,
+					so that it takes the same snapshot version of this project. -->
+				<xtext-current-release-version>${project.version}</xtext-current-release-version>
+			</properties>
+			<repositories>
+				<repository>
+					<id>lsp4j-from-jenkins</id>
+					<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository</url>
+				</repository>
+				<repository>
+					<id>xtext-lib-from-jenkins</id>
+					<url>${JENKINS_URL}/job/xtext-lib/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+				<repository>
+					<id>xtext-core-from-jenkins</id>
+					<url>${JENKINS_URL}/job/xtext-core/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+				<repository>
+					<id>xtext-extras-from-jenkins</id>
+					<url>${JENKINS_URL}/job/xtext-extras/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+			</repositories>
 		</profile>
 	</profiles>
 
