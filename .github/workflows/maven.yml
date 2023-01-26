@@ -33,10 +33,13 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml', '**/*.target') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Build and test (headless with xvfb)
-        uses: GabrielBB/xvfb-action@v1
-        with:
-          run: mvn clean verify -PuseJenkinsSnapshots
+      - name: Build and test (headless with xvfb in Linux)
+        run: xvfb-run mvn clean verify -PuseJenkinsSnapshots
+        if: matrix.os == 'ubuntu-latest'
+
+      - name: Build and test (in other OSes)
+        run: mvn clean verify -PuseJenkinsSnapshots
+        if: matrix.os != 'ubuntu-latest'
 
   build-maven-artifacts:
     runs-on: ubuntu-latest
