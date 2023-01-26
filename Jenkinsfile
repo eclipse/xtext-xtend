@@ -68,14 +68,6 @@ pipeline {
 
     stage('Maven Build & Test') {
       stages { // TODO use of parallel { here kills Tycho process with OOM
-        stage('Maven Plugin Build') {
-          steps {
-            sh '''
-              export MAVEN_OPTS="-Xmx1500m"
-              ./2-maven-plugin-build.sh -s /home/jenkins/.m2/settings.xml --local-repository=/home/jenkins/.m2/repository
-            '''
-          } // END steps
-        } // END stage
         stage('Maven Tycho Build') {
           steps {
             wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
@@ -85,6 +77,14 @@ pipeline {
             """
             }
           }// END steps
+        } // END stage
+        stage('Maven Plugin Build') {
+          steps {
+            sh '''
+              export MAVEN_OPTS="-Xmx1500m"
+              ./2-maven-plugin-build.sh -s /home/jenkins/.m2/settings.xml --local-repository=/home/jenkins/.m2/repository
+            '''
+          } // END steps
         } // END stage
       } // END parallel
     } // END stage
