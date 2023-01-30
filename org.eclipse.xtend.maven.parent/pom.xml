@@ -9,7 +9,7 @@
 	<version>2.30.0-SNAPSHOT</version>
 
 	<properties>
-		<root-dir>${basedir}/../..</root-dir>
+		<root-dir>${basedir}/..</root-dir>
 		<maven.version>3.6.0</maven.version>
 		<tycho-version>2.7.4</tycho-version>
 

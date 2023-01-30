@@ -2,54 +2,609 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.eclipse.xtend</groupId>
-		<artifactId>org.eclipse.xtend.tycho.parent</artifactId>
-		<version>2.30.0-SNAPSHOT</version>
-		<relativePath>releng/org.eclipse.xtend.tycho.parent</relativePath>
-	</parent>
-
-	<artifactId>org.eclipse.xtend.root</artifactId>
+	<groupId>org.eclipse.xtext</groupId>
+	<artifactId>xtext-xtend</artifactId>
+	<version>2.30.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<modules>
-		<module>releng/org.eclipse.xtend.tycho.parent</module>
-		<module>releng/org.eclipse.xtend.target</module>
-		<module>org.eclipse.xtend.core</module>
-		<module>org.eclipse.xtend.ide.common</module>
-		<module>org.eclipse.xtend.ide</module>
-		<module>org.eclipse.xtend.ide.tests.data</module>
-		<module>org.eclipse.xtend.doc</module>
-		<module>org.eclipse.xtend.examples</module>
-		<module>org.eclipse.xtend.m2e</module>
-		<module>org.eclipse.xtend.standalone</module>
-		<module>org.eclipse.xtend.p2repository</module>
-		<module>org.eclipse.xtend.core.tests</module>
-		<module>org.eclipse.xtend.ide.tests</module>
-		<module>org.eclipse.xtend.performance.tests</module>
-		<module>org.eclipse.xtend.swtbot</module>
-		<module>org.eclipse.xtend.ide.swtbot.tests</module>
-	</modules>
+	<url>https://www.eclipse.org/Xtext/</url>
+	<licenses>
+		<license>
+			<name>Eclipse Public License, Version 2.0</name>
+			<url>http://www.eclipse.org/legal/epl-2.0</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>Sven Efftinge</name>
+			<email>sven.efftinge@typefox.io</email>
+			<organization>TypeFox</organization>
+			<organizationUrl>http://typefox.io</organizationUrl>
+		</developer>
+		<developer>
+			<name>Sebastian Benz</name>
+		</developer>
+		<developer>
+			<name>Lorenzo Bettini</name>
+			<email>lorenzo.bettini@gmail.com</email>
+			<organization>DISIA, University Firenze</organization>
+		</developer>
+		<developer>
+			<name>Michael Clay</name>
+		</developer>
+		<developer>
+			<name>Arne Deutsch</name>
+			<email>arne.deutsch@itemis.de</email>
+			<organization>itemis</organization>
+			<organizationUrl>http://www.itemis.com</organizationUrl>
+		</developer>
+		<developer>
+			<name>Christian Dietrich</name>
+			<email>christian.dietrich@itemis.de</email>
+			<organization>itemis</organization>
+			<organizationUrl>http://www.itemis.com</organizationUrl>
+		</developer>
+		<developer>
+			<name>Moritz Eysholdt</name>
+			<email>moritz.eysholdt@typefox.io</email>
+			<organization>TypeFox</organization>
+			<organizationUrl>http://typefox.io</organizationUrl>
+		</developer>
+		<developer>
+			<name>Dennis Hübner</name>
+			<email>dennis.huebner@typefox.io</email>
+			<organization>TypeFox</organization>
+			<organizationUrl>http://typefox.io</organizationUrl>
+		</developer>
+		<developer>
+			<name>Jan Köhnlein</name>
+			<email>jan.koehnlein@typefox.io</email>
+			<organization>TypeFox</organization>
+			<organizationUrl>http://typefox.io</organizationUrl>
+		</developer>
+		<developer>
+			<name>Anton Kosyakov</name>
+			<email>anton.kosyakov@typefox.io</email>
+			<organization>TypeFox</organization>
+			<organizationUrl>http://typefox.io</organizationUrl>
+		</developer>
+		<developer>
+			<name>Tamas Miklossy</name>
+			<email>miklossy@itemis.de</email>
+			<organization>itemis</organization>
+			<organizationUrl>http://www.itemis.com</organizationUrl>
+		</developer>
+		<developer>
+			<name>Stefan Oehme</name>
+		</developer>
+		<developer>
+			<name>Holger Schill</name>
+			<email>holger.schill@itemis.de</email>
+			<organization>itemis</organization>
+			<organizationUrl>http://www.itemis.com</organizationUrl>
+		</developer>
+		<developer>
+			<name>Christian Schneider</name>
+			<email>christian.schneider@typefox.io</email>
+			<organization>TypeFox</organization>
+			<organizationUrl>http://typefox.io</organizationUrl>
+		</developer>
+		<developer>
+			<name>Miro Spönemann</name>
+			<email>miro.spoenemann@typefox.io</email>
+			<organization>TypeFox</organization>
+			<organizationUrl>http://typefox.io</organizationUrl>
+		</developer>
+		<developer>
+			<name>Karsten Thoms</name>
+			<email>karsten.thoms@itemis.de</email>
+			<organization>itemis</organization>
+			<organizationUrl>http://www.itemis.com</organizationUrl>
+		</developer>
+		<developer>
+			<name>Knut Wannheden</name>
+		</developer>
+		<developer>
+			<name>Sebastian Zarnekow</name>
+			<email>sebastian.zarnekow@gmail.com</email>
+			<organization>itemis</organization>
+			<organizationUrl>http://www.itemis.com</organizationUrl>
+		</developer>
+		<developer>
+			<name>Titouan Vervack</name>
+			<email>titouan.vervack@sigasi.com</email>
+			<organization>Sigasi</organization>
+			<organizationUrl>https://www.sigasi.com</organizationUrl>
+		</developer>
+	</developers>
+	<scm>
+		<connection>scm:git:https://github.com/eclipse/xtext-xtend.git</connection>
+		<developerConnection>scm:git:https://github.com/eclipse/xtext-xtend.git</developerConnection>
+		<url>git@github.com:eclipse/xtext-xtend.git</url>
+	</scm>
 
-	<!-- ORIGINAL:
-	<modules>
-		<module>releng/org.eclipse.xtend.tycho.parent</module>
-		<module>releng/org.eclipse.xtend.tycho.tests.parent</module>
-		<module>releng/org.eclipse.xtend.target</module>
-		<module>releng/org.eclipse.xtend.p2-repository</module>
-		<module>org.eclipse.xtend.core</module>
-		<module>org.eclipse.xtend.ide</module>
-		<module>org.eclipse.xtend.ide.tests</module>
-		<module>org.eclipse.xtend.ide.tests.data</module>
-		<module>org.eclipse.xtend.ide.common</module>
-		<module>org.eclipse.xtend.m2e</module>
-		<module>org.eclipse.xtend.standalone</module>
-		<module>org.eclipse.xtend.performance.tests</module>
-		<module>org.eclipse.xtend.swtbot</module>
-		<module>org.eclipse.xtend.ide.swtbot.tests</module>
-		<module>org.eclipse.xtend.doc</module>
-		<module>org.eclipse.xtend.examples</module>
-	</modules>
-	-->
+	<properties>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>	
+		<tycho-version>2.7.5</tycho-version>
 
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
+
+		<build-helper-maven-plugin-version>3.3.0</build-helper-maven-plugin-version>
+		<maven-surefire-version>3.0.0-M8</maven-surefire-version>
+
+		<!--
+		This is the version of the currently released latest version that we
+		use during the Maven builds for artifacts that are not in this Git repository
+		(and thus, not in this Maven reactor).
+		It is redefined in the profile "useJenkinsSnapshots" to take the same version
+		of this project.
+		-->
+		<xtext-current-release-version>2.30.0.M1</xtext-current-release-version>
+
+		<!--
+		This is the version of the currently released latest version of the xtend-maven-plugin that we
+		use during the Maven builds for processing Xtend files.
+		-->
+		<xtend-maven-plugin-version>2.30.0.M1</xtend-maven-plugin-version>
+
+		<root-dir>${basedir}/..</root-dir>
+		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
+		<upstreamBranch>master</upstreamBranch>
+
+		<target-platform-classifier>xtext-latest</target-platform-classifier>
+
+		<!--
+		TODO: if we switch to a single Git repository, this should be changed
+		-->
+		<tycho.scmUrl>scm:git:https://github.com/eclipse/xtext-xtend.git</tycho.scmUrl>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>xtext-dev-bom</artifactId>
+				<!--
+				TODO: update it
+				The dev BOM should be in the same Git repository of this one
+				-->
+				<version>${xtext-current-release-version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<profiles>
+		<profile>
+			<id>useJenkinsSnapshots</id>
+			<properties>
+				<!-- redefines the property for versions of artifacts not in this Git repository,
+					so that it takes the same snapshot version of this project. -->
+				<xtext-current-release-version>${project.version}</xtext-current-release-version>
+			</properties>
+			<repositories>
+				<repository>
+					<id>lsp4j-from-jenkins</id>
+					<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository</url>
+				</repository>
+				<repository>
+					<id>xtext-lib-from-jenkins</id>
+					<url>${JENKINS_URL}/job/xtext-lib/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+				<repository>
+					<id>xtext-core-from-jenkins</id>
+					<url>${JENKINS_URL}/job/xtext-core/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+				<repository>
+					<id>xtext-extras-from-jenkins</id>
+					<url>${JENKINS_URL}/job/xtext-extras/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+				<repository>
+					<id>xtext-xtend-from-jenkins</id>
+					<url>${JENKINS_URL}/job/xtext-xtend/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+			</repositories>
+		</profile>
+		<profile>
+			<id>latest</id>
+			<properties>
+				<target-platform-classifier>xtext-latest</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>r202212</id>
+			<properties>
+				<target-platform-classifier>xtext-r202212</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>r202209</id>
+			<properties>
+				<target-platform-classifier>xtext-r202209</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>r202206</id>
+			<properties>
+				<target-platform-classifier>xtext-r202206</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>r202203</id>
+			<properties>
+				<tycho-version>2.6.0</tycho-version>
+				<target-platform-classifier>xtext-r202203</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>eclipse-sign</id>
+			<properties>
+				<!-- don't run tests while signing, to avoid failures of the shape:
+					"signer information does not match signer information of other classes in the same package" -->
+				<skipTests>true</skipTests>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.cbi.maven.plugins</groupId>
+						<artifactId>eclipse-jarsigner-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign</id>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-p2-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>p2-metadata</id>
+								<goals>
+									<goal>p2-metadata</goal>
+								</goals>
+								<phase>package</phase>
+							</execution>
+						</executions>
+						<configuration>
+							<defaultP2Metadata>false</defaultP2Metadata>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>cbi-release</id>
+					<url>https://repo.eclipse.org/content/repositories/cbi-releases/</url>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+		<profile>
+			<id>sonatype-oss-release</id>
+			<properties>
+				<skipTests>true</skipTests>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.3</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<!-- MJAVADOC-620 – Maven Javadoc Plugin fails to resolve the dependencies 
+							when used with Java 11 -->
+						<version>3.2.0</version>
+						<configuration>
+							<detectOfflineLinks>false</detectOfflineLinks>
+							<detectJavaApiLink>false</detectJavaApiLink>
+							<source>8</source>
+						</configuration>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+								<configuration>
+									<failOnError>false</failOnError>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<configuration>
+									<gpgArguments>
+										<arg>--pinentry-mode</arg>
+										<arg>loopback</arg>
+									</gpgArguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${build-helper-maven-plugin-version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>target-platform-configuration</artifactId>
+					<version>${tycho-version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-compiler-plugin</artifactId>
+					<version>${tycho-version}</version>
+					<configuration>
+						<useProjectSettings>true</useProjectSettings>
+						<excludeResources>
+							<excludeResource>**/*.xtend</excludeResource>
+							<excludeResource>**/*.xtendbin</excludeResource>
+							<excludeResource>**/*._trace</excludeResource>
+						</excludeResources>
+						<compilerArgs>
+							<arg>-parameters</arg>
+						</compilerArgs>
+					</configuration>
+				</plugin>
+				<plugin>
+					<!--
+					This will let Tycho execute tests in "eclipse-plugin" projects
+					as JUnit tests (NOT as plug-in tests). We force the JUnitPlatform
+					to execute all tests (JUnit4 and JUnit5) with the JUnit5 engine.
+					-->
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-version}</version>
+					<!--
+					This is not needed now, but will be needed when switching to Tycho 4.0.0
+					see https://github.com/eclipse-tycho/tycho/blob/master/RELEASE_NOTES.md#using-integrationplugin-tests-with-eclipse-plugin-packaging
+					<executions>
+						<execution>
+							<id>execute-unit-tests</id>
+							<goals>
+								<goal>test</goal>
+							</goals>
+						</execution>
+					</executions>
+					-->
+					<configuration>
+						<!--
+						The Surefire Plugin excludes nested classes by default: http://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html#excludes
+						By removing all default exclusions the nested classes get executed too, JUnit 4 and JUnit 5.
+						-->
+						<excludes>
+							<exclude />
+						</excludes>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.2.0</version>
+					<configuration>
+						<filesets>
+							<fileset>
+								<directory>${project.basedir}/target</directory>
+							</fileset>
+							<fileset>
+								<directory>${project.basedir}/xtend-gen</directory>
+								<includes>
+									<include>**/*</include>
+								</includes>
+								<excludes>
+									<exclude>.gitignore</exclude>
+								</excludes>
+							</fileset>
+						</filesets>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.xtend</groupId>
+					<artifactId>xtend-maven-plugin</artifactId>
+					<version>${xtend-maven-plugin-version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>compile</goal>
+								<goal>xtend-install-debug-info</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<outputDirectory>${basedir}/xtend-gen</outputDirectory>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-p2-repository-plugin</artifactId>
+					<version>${tycho-version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-p2-plugin</artifactId>
+					<version>${tycho-version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-packaging-plugin</artifactId>
+					<version>${tycho-version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-versions-plugin</artifactId>
+					<version>${tycho-version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-surefire-plugin</artifactId>
+					<version>${tycho-version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.cbi.maven.plugins</groupId>
+					<artifactId>eclipse-jarsigner-plugin</artifactId>
+					<version>1.3.4</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>feature-source</id>
+						<goals>
+							<goal>feature-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<!--
+				Required if the generated source-feature is used in an update-site or another feature.
+				It must be after tycho-source-plugin
+				-->
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-p2-metadata</id>
+						<phase>package</phase>
+						<goals>
+							<goal>p2-metadata</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<configuration>
+					<target>
+						<file>
+							${project.basedir}/../${target-platform-classifier}.target
+						</file>
+					</target>
+					<environments>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<dependencies>
+					<!-- Use jgit to resolve source references for git: type SCM -->
+					<dependency>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-sourceref-jgit</artifactId>
+						<version>${tycho-version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<format>'v'yyyyMMdd-HHmm</format>
+					<!-- required to have valid consumable Maven artifacts
+						https://github.com/eclipse/tycho/issues/781 -->
+					<skipPomGeneration>true</skipPomGeneration>
+					<sourceReferences>
+						<!-- Generate the source reference in the MANIFEST.MF -->
+						<generate>true</generate>
+					</sourceReferences>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 </project>
