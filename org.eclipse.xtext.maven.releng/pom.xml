@@ -10,6 +10,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
+		<module>..</module>
 		<module>../org.eclipse.xtend.maven.parent</module>
 		<module>../org.eclipse.xtend.core</module>
 		<module>../org.eclipse.xtend.ide.common</module>
