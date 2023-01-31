@@ -135,13 +135,12 @@
 		<maven-surefire-version>3.0.0-M8</maven-surefire-version>
 
 		<!--
-		This is the version of the currently released latest version that we
-		use during the Maven builds for artifacts that are not in this Git repository
-		(and thus, not in this Maven reactor).
-		It is redefined in the profile "useJenkinsSnapshots" to take the same version
-		of this project.
+		This assumes that the child project has the same version as the parent.
+		This is not the case only for some special cases like org.eclipse.xtext.logging
+		and org.eclipse.emf.mwe2.language.sdk.dummy: in those projects we can redefine
+		this property with ${project.parent.version}.
 		-->
-		<xtext-current-release-version>2.30.0.M1</xtext-current-release-version>
+		<xtext-dev-bom-version>${project.version}</xtext-dev-bom-version>
 
 		<!--
 		This is the version of the currently released latest version of the xtend-maven-plugin that we
@@ -170,21 +169,33 @@
 				TODO: update it
 				The dev BOM should be in the same Git repository of this one
 				-->
-				<version>${xtext-current-release-version}</version>
+				<version>${xtext-dev-bom-version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
+	<repositories>
+		<!-- Sonatype snapshots are the default for Xtext dependencies
+			of other Git repositories. Sonatype snapshots are disabled
+			when using the "useJenkinsSnapshots" profile. -->
+		<repository>
+			<id>sonatype-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+	</repositories>
+
 	<profiles>
 		<profile>
 			<id>useJenkinsSnapshots</id>
-			<properties>
-				<!-- redefines the property for versions of artifacts not in this Git repository,
-					so that it takes the same snapshot version of this project. -->
-				<xtext-current-release-version>${project.version}</xtext-current-release-version>
-			</properties>
 			<repositories>
 				<repository>
 					<id>lsp4j-from-jenkins</id>
@@ -205,6 +216,17 @@
 				<repository>
 					<id>xtext-xtend-from-jenkins</id>
 					<url>${JENKINS_URL}/job/xtext-xtend/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+				<!-- Disable sonatype snapshots -->
+				<repository>
+					<id>sonatype-snapshots</id>
+					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
 				</repository>
 			</repositories>
 		</profile>

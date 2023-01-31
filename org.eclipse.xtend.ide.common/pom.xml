@@ -14,14 +14,10 @@
 	<description>Additional platform-independent services for Xtend.</description>
 
 	<dependencies>
-		<!--
-		TODO: update it
-		This should be in the same Git repository of this one
-		-->
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.ide</artifactId>
-			<version>${xtext-current-release-version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
