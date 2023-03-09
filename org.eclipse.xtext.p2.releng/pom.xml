@@ -9,6 +9,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
+		<module>../org.eclipse.xtend.tycho.tests.parent</module>
 		<module>../org.eclipse.xtend.core</module>
 		<module>../org.eclipse.xtend.ide.common</module>
 		<module>../org.eclipse.xtend.ide</module>
