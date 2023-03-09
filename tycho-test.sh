@@ -55,6 +55,7 @@ while [ "$1" != "" ]; do
 done
 
 MVN_ARGS+=(-PuseJenkinsSnapshots)
+MVN_ARGS+=(-PbuildP2Repository)
 MVN_ARGS+=(-P$TARGET_PLATFORM)
 
 echo mvn -B -f org.eclipse.xtext.p2.releng ${MVN_ARGS[@]} $@

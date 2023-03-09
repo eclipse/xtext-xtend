@@ -86,11 +86,6 @@ pipeline {
             }
           }// END steps
         } // END stage
-        stage('Maven Tycho P2 Repo and Sign') {
-          steps {
-            sh './tycho-sign.sh'
-          }
-        }
       } // END parallel
     } // END stage
   } // END stages
