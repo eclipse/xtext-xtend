@@ -55,7 +55,7 @@ while [ "$1" != "" ]; do
 done
 
 MVN_ARGS+=(-PuseJenkinsSnapshots)
-MVN_ARGS+=(-Pjavadoc)
+# MVN_ARGS+=(-Pjavadoc)
 
 echo mvn -B -f org.eclipse.xtext.maven.releng ${MVN_ARGS[@]} $@
 
