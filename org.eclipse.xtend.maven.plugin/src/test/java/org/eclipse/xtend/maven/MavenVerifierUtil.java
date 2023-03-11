@@ -72,7 +72,10 @@ public class MavenVerifierUtil {
 
 	private static String findMaven() {
 		// TODO add more mavens here
-		String[] mavens = new String[] { System.getProperty("maven.home"), "/opt/local/share/java/maven3/" };
+		String[] mavens = new String[] { System.getProperty("maven.home"),
+				"/opt/local/share/java/maven3/",
+				"/usr/local/", "/usr/",
+				"/opt/homebrew/"};
 		for (String maven : mavens) {
 			if (new File(maven + "/bin/mvn").exists()) {
 				return maven;
