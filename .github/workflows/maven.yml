@@ -67,5 +67,4 @@ jobs:
           restore-keys: ${{ runner.os }}-maven
 
       - name: Build Maven artifacts
-        run: mvn clean install -PuseJenkinsSnapshots
-        working-directory: org.eclipse.xtext.maven.releng
+        run: ./maven-build.sh
