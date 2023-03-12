@@ -59,10 +59,13 @@ jobs:
       - name: 'Cache Maven packages'
         uses: actions/cache@v3
         with:
-          path: ~/.m2
+          path: |
+            ~/.m2
+            !**/*xtext*
+            !**/*xtend*
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml', '**/*.target') }}
           restore-keys: ${{ runner.os }}-maven
 
       - name: Build Maven artifacts
-        run: mvn clean verify -PuseJenkinsSnapshots
+        run: mvn clean install -PuseJenkinsSnapshots
         working-directory: org.eclipse.xtext.maven.releng
