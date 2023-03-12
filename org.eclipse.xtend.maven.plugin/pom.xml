@@ -12,6 +12,8 @@
 
 	<properties>
 		<root-dir>${basedir}/..</root-dir>
+		<!-- The local Maven repository for our IT tests -->
+		<localMavenRepositoryPath>${project.basedir}/target/.m2test</localMavenRepositoryPath>
 	</properties>
 
 	<dependencies>
@@ -194,7 +196,7 @@
 				<artifactId>maven-invoker-plugin</artifactId>
 				<version>3.5.0</version>
 				<configuration>
-					<localRepositoryPath>${project.basedir}/target/.m2test</localRepositoryPath>
+					<localRepositoryPath>${localMavenRepositoryPath}</localRepositoryPath>
 				</configuration>
 				<executions>
 					<execution>
@@ -220,7 +222,7 @@
 							<version>IT-SNAPSHOT</version>
 							<packaging>maven-plugin</packaging>
 							<pomFile>pom.xml</pomFile>
-							<localRepositoryPath>${project.basedir}/target/.m2test</localRepositoryPath>
+							<localRepositoryPath>${localMavenRepositoryPath}</localRepositoryPath>
 						</configuration>
 					</execution>
 				</executions>
@@ -231,7 +233,7 @@
 					<argLine>-Xmx1024m</argLine>
 					<systemPropertyVariables>
 						<testSettingsXML>${project.basedir}/src/test/resources/settings.xml</testSettingsXML>
-						<testMavenRepo>${project.basedir}/target/.m2test</testMavenRepo>
+						<testMavenRepo>${localMavenRepositoryPath}</testMavenRepo>
 					</systemPropertyVariables>
 				</configuration>
 				<executions>

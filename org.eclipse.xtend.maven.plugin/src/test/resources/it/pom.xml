@@ -51,17 +51,6 @@
 			</snapshots>
 		</pluginRepository>
 		<pluginRepository>
-			<id>central</id>
-			<url>file://${nonTestMavenRepo}</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
 			<id>central-real</id>
 			<url>https://repo.maven.apache.org/maven2</url>
 			<releases>
@@ -94,17 +83,6 @@
 				<enabled>false</enabled>
 			</snapshots>
 			<url>https://repo.maven.apache.org/maven2</url>
-		</repository>
-		<repository>
-			<id>central-real</id>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<url>file://${nonTestMavenRepo}</url>
 		</repository>
 	</repositories>
 	<build>
