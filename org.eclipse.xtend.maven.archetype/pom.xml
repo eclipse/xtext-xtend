@@ -66,15 +66,28 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<!-- IT Tests require xtend-maven-plugin is fully build -->
+	<!--
+		However, IT are disabled, so we currently disable also
+		this dependency that causes problems when Xtend Maven plugin ITs
+		have been executed.
+
+		org.osgi:org.osgi.service.prefs:jar:[1.1.0,1.2.0):
+		No versions available for org.osgi:org.osgi.service.prefs:jar:[1.1.0,1.2.0)
+
+		TODO: investigate if we can re-enabled after cleaning ITs
+		infrastructure of Xtend Maven plugin ITs.
+
 	<dependencies>
 		<dependency>
-			<!-- IT Tests require xtend-maven-plugin is fully build -->
 			<groupId>org.eclipse.xtend</groupId>
 			<artifactId>xtend-maven-plugin</artifactId>
 			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	-->
 	<profiles>
 		<profile>
 			<id>m2e-embedded</id>
