@@ -154,7 +154,7 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>create-jar</id>
+						<id>create-IT-SNAPSHOT-jar</id>
 						<phase>pre-integration-test</phase>
 						<configuration>
 							<skip>${maven.test.skip}</skip>
@@ -177,7 +177,7 @@
 						</goals>
 					</execution>
 					<execution>
-						<id>touch-jar</id>
+						<id>touch-IT-SNAPSHOT-jar</id>
 						<phase>pre-integration-test</phase>
 						<configuration>
 							<target>
@@ -200,7 +200,8 @@
 				</configuration>
 				<executions>
 					<execution>
-						<id>integration-test</id>
+						<id>install dependencies in local test repo</id>
+						<phase>pre-integration-test</phase>
 						<goals>
 							<goal>install</goal>
 						</goals>
@@ -211,6 +212,7 @@
 				<artifactId>maven-install-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>install IT-SNAPSHOT-jar in local test repo</id>
 						<phase>pre-integration-test</phase>
 						<goals>
 							<goal>install-file</goal>
