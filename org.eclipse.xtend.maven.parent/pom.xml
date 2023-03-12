@@ -34,12 +34,6 @@
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<maven.javadoc.opts></maven.javadoc.opts>
 
-		<!-- 
-		  Maven repository initially produced by gradle upstream build.
-		  Used to grab the upstream maven artifacts like org.eclipse.xtend.core
-		  and also to deploy the artifacts produced in this build.
-		 -->
-		<gradleMavenRepo>file:${root-dir}/build/maven-repository</gradleMavenRepo>
 		<upstreamBranch>lb_2052_maven_tycho</upstreamBranch>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 	</properties>

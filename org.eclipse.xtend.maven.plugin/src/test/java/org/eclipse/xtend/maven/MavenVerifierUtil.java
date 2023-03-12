@@ -26,14 +26,6 @@ public class MavenVerifierUtil {
 	public static Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(MavenVerifierUtil.class, pathToTestProject);
 		Verifier verifier = new Verifier(testDir.getAbsolutePath());
-		System.out.println("gradle: " + System.getProperty("gradleMavenRepo"));
-		for (Object iterable_element : System.getProperties().keySet()) {
-			System.out.println(iterable_element + "=" + System.getProperty(iterable_element.toString()));
-		}
-		
-		String gradleMavenRepo = System.getProperty("gradleMavenRepo");
-		Assert.assertNotNull("gradleMavenRepo is null", gradleMavenRepo);
-		verifier.setSystemProperty("gradleMavenRepo", gradleMavenRepo);
 		
 		verifier.setSystemProperty("nonTestMavenRepo", System.getProperty("maven.repo.local"));
 		verifier.setSystemProperty("WORKSPACE", System.getProperty("WORKSPACE"));

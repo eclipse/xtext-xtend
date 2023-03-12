@@ -228,9 +228,8 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<argLine>-Xmx1024m -DgradleMavenRepo=${gradleMavenRepo}</argLine>
+					<argLine>-Xmx1024m</argLine>
 					<systemPropertyVariables>
-						<gradleMavenRepo>${gradleMavenRepo}</gradleMavenRepo>
 						<testSettingsXML>${project.basedir}/src/test/resources/settings.xml</testSettingsXML>
 						<testMavenRepo>${project.basedir}/target/.m2test</testMavenRepo>
 					</systemPropertyVariables>
