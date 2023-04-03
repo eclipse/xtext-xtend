@@ -1,5 +1,11 @@
 # Eclipse Xtend
 
+## Notice
+
+The content of this repository (`xtext-xtend`) has been moved to the [Xtext Monorepo](https://github.com/eclipse/xtext/). Please refer to that repository to find the code, create issues or file pull requests.
+
+## About
+
 [Xtend](http://xtend-lang.org) is a flexible and expressive dialect of Java that compiles into readable Java source code. You can use any existing Java library seamlessly. The compiled output is readable and pretty-printed, and tends to run as fast as the equivalent handwritten Java code. Become productive and write beautiful code with powerful macros, lambdas, operator overloading, and many more modern language features.
 
 ## How To Build
